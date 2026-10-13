@@ -5,7 +5,12 @@ public interface IGameEvent { }
 public struct OnChangeGold : IGameEvent
 {
     public int Gold;
-    public OnChangeGold(int gold) => Gold = gold;
+    public int RunGold;
+    public OnChangeGold(int gold, int runGold)
+    {
+        Gold = gold;
+        RunGold = runGold;
+    }
 }
 
 public struct OnMonsterKilled : IGameEvent

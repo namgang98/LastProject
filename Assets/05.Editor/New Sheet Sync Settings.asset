@@ -28,3 +28,7 @@ MonoBehaviour:
     target: {fileID: 4900000, guid: 7de0257dd0896e144abd33eea257b650, type: 3}
   - gid: 1827646659
     target: {fileID: 4900000, guid: efb7e10e5b4368346a67c18c487f5136, type: 3}
+  - gid: '996035876 '
+    target: {fileID: 4900000, guid: 9616c488d03eb0c42ac628d35e29dd35, type: 3}
+  - gid: '748600787 '
+    target: {fileID: 4900000, guid: ba64108d8fc17c64ba9215f9bf8827d7, type: 3}

@@ -19,8 +19,6 @@ public class GoldUI : MonoBehaviour
 
     private void HandleChangeGold(OnChangeGold e)
     {
-        goldText.text = $"{e.Gold}";
+        goldText.text = e.RunGold > 0 ? $"{e.Gold} (+{e.RunGold})" : $"{e.Gold}";
     }
 }
-
-//EventManager.instance.PostNotification(new OnChangeGold(currentGold));

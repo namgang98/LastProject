@@ -16,6 +16,7 @@ public class RunController : MonoBehaviour
     private Backpack backpack;
     private SaveService saveService;
     private SaveData saveData;
+    private Wallet wallet;
     public Backpack CurrentBackpack => backpack;
     private void Awake()
     {
@@ -24,20 +25,26 @@ public class RunController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnRunEnded>(HandleRunEnded);
+        EventManager.instance.AddListener<OnMonsterKilled>(HandleMonsterKilled);
     }
 
     private void OnDisable()
     {
-        if(!EventManager.HasInstance)
+        if (!EventManager.HasInstance)
             return;
 
         EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);
+        EventManager.instance.RemoveListener<OnMonsterKilled>(HandleMonsterKilled);
     }
 
     public void StartFirstRun()
     {
         if (!saveService.TryLoad(out saveData))
             saveData = new SaveData { classId = defaultclassId };
+        
+        wallet = new Wallet(saveData.gold);
+        wallet.Changed += PostGold;
+        PostGold(wallet);
 
         if (!DataManager.instance.TryGetClass(saveData.classId, out currentClass))
         {
@@ -67,12 +74,22 @@ public class RunController : MonoBehaviour
         stage.Begin();
     }
 
-   private void HandleRunEnded(OnRunEnded e)
+    private void HandleRunEnded(OnRunEnded e)
     {
         if(e.Reason == RunEndReason.Death)
+        {
             LoseBackpack();
+            wallet.LoseRun();
+        }
+
+        wallet.CommitRun();
         Save(false);
     }
+    private void HandleMonsterKilled(OnMonsterKilled e)
+    {
+        wallet.AddRunGold(e.Monster.DropGold);
+    }
+
     private bool TryLoadBackpack()
     {
         var errors = new List<string>();
@@ -105,11 +122,13 @@ public class RunController : MonoBehaviour
        backpack = newPack;
    
     }
+
     private void Save(bool inRun)
     {
         saveData.classId = currentClass.Id;
         saveData.inRun = inRun;
         saveData.backpack = InventorySaveMapper.ToData(backpack);
+        saveData.gold = wallet.Gold;
         saveService.Save(saveData);
     }
 
@@ -117,5 +136,9 @@ public class RunController : MonoBehaviour
     {
         saveService.Delete();
         Debug.Log($"[RunController] 세이브 삭제 : {Application.persistentDataPath}", this);
+    }
+    private void PostGold(Wallet w)
+    {
+        EventManager.instance.PostNotification(new OnChangeGold(w.Gold, w.RunGold));
     }
 }

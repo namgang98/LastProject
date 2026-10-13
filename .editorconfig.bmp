@@ -1,0 +1,11 @@
+﻿root = true
+
+[*.cs]
+charset = utf-8-bom
+end_of_line = crlf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+# if( / for( / foreach( : 괄호 앞 띄어쓰기 없음 (프로젝트 규칙)
+csharp_space_after_keywords_in_control_flow_statements = false

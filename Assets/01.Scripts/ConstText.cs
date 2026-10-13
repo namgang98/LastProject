@@ -58,4 +58,9 @@ public static class AnimatorTag
     public const string Recover = "Recover";
 }
 
-        
+public static class SceneNames
+{
+    public const string Boot = "Boot";
+    public const string Village = "Village";
+    public const string Dungeon = "Dungeon";
+}

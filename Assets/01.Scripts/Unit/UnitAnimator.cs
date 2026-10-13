@@ -1,0 +1,26 @@
+﻿using UnityEngine;
+
+public abstract class UnitAnimator : MonoBehaviour
+{
+    [SerializeField] protected Animator animator;
+    
+    public virtual void AttackAni()
+    {
+        animator.SetTrigger(AnimatorTag.Attack);
+    }
+    public virtual void HurtAni()
+    {
+        animator.SetTrigger(AnimatorTag.Hurt);
+    }
+    public virtual void DeadAni()
+    {
+        animator.SetTrigger(AnimatorTag.Death);
+    }
+
+    public virtual void ResetAni()
+    {
+        animator.ResetTrigger(AnimatorTag.Hurt);
+        animator.ResetTrigger(AnimatorTag.Attack);
+        animator.SetTrigger(AnimatorTag.Recover);
+    }
+}

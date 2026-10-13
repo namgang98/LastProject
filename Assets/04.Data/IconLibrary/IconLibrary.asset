@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24daf611646058144ac4f70ccec957f9, type: 3}
+  m_Name: IconLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::IconLibrary
+  icons:
+  - {fileID: -5802078023332030697, guid: 1a7f4dbef2038124180261ad3b7217be, type: 3}
+  - {fileID: -1680223201489856565, guid: 291de09b531cff649957cfabd3248062, type: 3}
+  - {fileID: 8947075422023001466, guid: 879e5bc1b0043e64488c3def8f1e2f31, type: 3}
+  - {fileID: 8590006076290246069, guid: 9b7f862c7c42cf746906a91720edb4d5, type: 3}
+  - {fileID: 9055635551852313102, guid: ebb4fc2274345814da615dc7af4c6b9f, type: 3}
+  - {fileID: -3868598853129626123, guid: d9f8d13edcb382e42ab713494b894e52, type: 3}
+  - {fileID: 540978613864464867, guid: 9217fe3082241e44d8d1c2456975841c, type: 3}
+  - {fileID: -1288370654064475661, guid: 086460641ae7c5545875cfe1ea3e55a7, type: 3}
+  - {fileID: 2937003858113613258, guid: 2f54483c79bc7414590bbc4e1ecbeb1e, type: 3}
+  - {fileID: 1876641377808757794, guid: 5431eb6d0e8d57548a92001593ba05c0, type: 3}
+  - {fileID: 6195922311426616512, guid: 497309232d6fb8040b580dbcf31b6e9f, type: 3}
+  - {fileID: -7609632171516861410, guid: a255e4e06089402479cca7c4755a20b3, type: 3}
+  - {fileID: 3338723671902306219, guid: 62a92e94c6b2be04db76b33e29378833, type: 3}
+  - {fileID: 12184204735488363, guid: 369266957e65a9646b13980b6f5ad165, type: 3}
+  - {fileID: 1473447779972251282, guid: 678926c3f9f3e734fa9132c14685f9c1, type: 3}
+  - {fileID: -9040262219196264114, guid: 2c8b4b9b533ad3343829490ad9bcfb67, type: 3}
+  - {fileID: -567052019, guid: 21c3bd4699f83dc46bb4aca46c9ce230, type: 3}
+  - {fileID: 329865448, guid: 21c3bd4699f83dc46bb4aca46c9ce230, type: 3}
+  - {fileID: -1080213430, guid: 21c3bd4699f83dc46bb4aca46c9ce230, type: 3}
+  - {fileID: -1599163315, guid: 21c3bd4699f83dc46bb4aca46c9ce230, type: 3}
+  - {fileID: 349623108, guid: 21c3bd4699f83dc46bb4aca46c9ce230, type: 3}
+  - {fileID: -400031584, guid: 21c3bd4699f83dc46bb4aca46c9ce230, type: 3}

@@ -1,0 +1,136 @@
+﻿using UnityEngine;
+
+public interface IGameEvent { }
+
+public struct OnChangeGold : IGameEvent
+{
+    public int Gold;
+    public OnChangeGold(int gold) => Gold = gold;
+}
+
+public struct OnMonsterKilled : IGameEvent
+{
+    public Vector3 Position;
+    public MonsterInfo Monster;
+    public OnMonsterKilled(Vector3 position, MonsterInfo info)
+    { 
+        Position = position;
+        Monster = info;
+    }
+}
+
+public struct OnItemDropped : IGameEvent
+{
+    public ItemInstance Item;
+    public Vector3 Position;
+
+    public OnItemDropped(ItemInstance item, Vector3 position)
+    {
+        Item = item;
+        Position = position;
+    }
+}
+
+public struct OnPouchChanged : IGameEvent
+{
+    public Backpack Backpack;
+    public PouchInstance Pouch;
+
+    public OnPouchChanged(Backpack backpack, PouchInstance pouch)
+    {
+        Backpack = backpack;
+        Pouch = pouch;
+    }
+}
+
+public struct OnStageStarted : IGameEvent
+{
+    public int Stage;
+    public OnStageStarted(int stage) => Stage = stage;
+}
+
+public enum RunEndReason
+{
+    Death,
+    Return,
+}
+public struct OnRunEnded : IGameEvent
+{
+
+    public int Stage;
+    public RunEndReason Reason;
+
+    public OnRunEnded(int stage, RunEndReason reason)
+    {
+        Stage = stage;
+        Reason = reason;
+    }
+}
+
+public struct OnUnitDamaged : IGameEvent
+{
+    public Vector3 Position;
+    public DamageInfo Info;
+    public OnUnitDamaged(Vector3 pos, DamageInfo info)
+    {
+        Position = pos;
+        Info = info;
+    }
+}
+
+public struct OnUnitHealed : IGameEvent
+{
+    public Vector3 Position;
+    public int Value;
+
+   public OnUnitHealed(Vector3 pos, int value)
+    {
+        Position = pos;
+        Value = value;
+    }
+}
+
+public struct OnUnitBlocked : IGameEvent
+{
+    public Vector3 Position;
+
+    public OnUnitBlocked(Vector3 pos)
+    {
+        Position = pos;
+    }
+}
+
+public struct OnItemHoverEnter : IGameEvent
+{
+    public ItemInstance Item;
+    public RectTransform Target;
+
+    public OnItemHoverEnter(ItemInstance item, RectTransform target)
+    {
+        Item = item;
+        Target = target;
+    }
+}
+public struct OnItemHoverExit : IGameEvent {}
+
+public struct OnStatusApplied : IGameEvent
+{
+    public UnitHealth Target;
+    public IStatusEffect Status;
+    public OnStatusApplied(UnitHealth target, IStatusEffect status)
+    {
+        Target = target;
+        Status = status;
+    }
+
+}
+public struct OnStatusRemoved : IGameEvent
+{
+    public UnitHealth Target;
+    public DamageElement Element;
+    public OnStatusRemoved(UnitHealth target, DamageElement element)
+    {
+        Target = target;
+        Element = element;
+    }
+}

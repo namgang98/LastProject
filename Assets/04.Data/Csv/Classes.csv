@@ -1,0 +1,2 @@
+﻿id,name,maxhp,type,damagerate,cooldownrate,description
+3000,검사,100,Sword,1.3,1,검데미지 +30%

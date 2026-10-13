@@ -1,0 +1,4 @@
+﻿id,name,icon,shape,grade,sellprice,description,damagebonus,cooldownreduction,maxhp,effecttype,effectvalue,effectcooldown
+5000,힘의 반지,StrRing,X,Rare,1000,힘의 보석으로 세공한 반지,0.1,0,0,none,0,0
+5001,신속의 반지,SpeedRing,X,Rare,1000,신속의 보석으로 세공한 반지,0,0.1,0,none,0,0
+5002,수호의 반지,SaveRing,X,Epic,1000,수호의 보석으로 세공한 반지,0,0,15,Shield,1,10

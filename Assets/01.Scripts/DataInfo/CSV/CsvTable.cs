@@ -170,7 +170,7 @@ public readonly struct CsvRow
 
     public int LineNumber { get; }
 
-    // 에러 메시지용 위치 : "Weapons 5행"
+    // 에러 메시지용 위치
     public string Where => $"{table.Name} {LineNumber}행";
 
     public CsvRow(CsvTable table, string[] cells, int lineNumber)
@@ -198,5 +198,23 @@ public readonly struct CsvRow
     public bool TryGetEnum<T>(string column, out T value) where T : struct
     {
         return Enum.TryParse(GetString(column), true, out value);
+    }
+    public bool TryGetIntList(string column, char separator, out List<int> values)
+    {
+        values = new List<int>();
+        string raw = GetString(column);
+
+        if(string.IsNullOrEmpty(raw))
+            return false;
+
+        foreach(string part in raw.Split(separator))
+        {
+            if(!int.TryParse(part.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out int value))
+                return false;
+
+            values.Add(value);
+        }
+
+        return true;
     }
 }

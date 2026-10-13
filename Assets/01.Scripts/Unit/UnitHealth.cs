@@ -44,7 +44,7 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
         if(isDead || info.Amount <= 0)
             return;
 
-        if (shieldCount > 0 && !info.IsTick)
+        if(shieldCount > 0 && !info.IsTick)
         {
             shieldCount--;
             OnBlocked?.Invoke();

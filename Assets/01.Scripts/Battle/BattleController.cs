@@ -29,7 +29,7 @@ public class BattleController : MonoBehaviour
             if(!isFighting)
                 return;
         }
-            statuses.Tick(Time.deltaTime);
+        statuses.Tick(Time.deltaTime);
     }
 
     public void StartBattle(UnitController player, UnitController monster, AttackData monsterAttack)
@@ -54,7 +54,7 @@ public class BattleController : MonoBehaviour
             if(item.Info is WeaponInfo weapon)
             {
                 var data = stats.Apply(weapon.Type, weapon.Attack);
-                var weaponAction = AddAction(new AttackEffect(monster.Health, data, statuses), data.Cooldown, player.Health, player.PlayAttack);
+                var weaponAction = AddAction(new AttackEffect(monster.Health, data, statuses), data.Cooldown, player.AttackWindup, player.Health, player.PlayAttack);
                 OnActionReady?.Invoke(item, weaponAction);
                 continue;
             }
@@ -67,11 +67,11 @@ public class BattleController : MonoBehaviour
             if(effect == null)
                 continue;
 
-            var action = AddAction(effect, equip.Effect.Cooldown, player.Health, null);
+            var action = AddAction(effect, equip.Effect.Cooldown, 0f, player.Health, null);
             OnActionReady?.Invoke(item, action);
         }
 
-        AddAction(new AttackEffect(player.Health, monsterAttack, statuses), monsterAttack.Cooldown, monster.Health, monster.PlayAttack);
+        AddAction(new AttackEffect(player.Health, monsterAttack, statuses), monsterAttack.Cooldown, monster.AttackWindup, monster.Health, monster.PlayAttack);
 
         this.player.Health.OnDie += EndBattle;
         this.monster.Health.OnDie += EndBattle;
@@ -97,9 +97,9 @@ public class BattleController : MonoBehaviour
         monster.Health.OnDie -= EndBattle;
     }
 
-    private ItemAction AddAction(IBattleEffect effect, float cooldown, UnitHealth owner, Action onFired)
+    private ItemAction AddAction(IBattleEffect effect, float cooldown, float windup, UnitHealth owner, Action onFired)
     {
-        var action = new ItemAction(effect, cooldown, owner);
+        ItemAction action = new ItemAction(effect, cooldown, windup, owner);
 
         if(onFired != null)
             action.OnFired += onFired;

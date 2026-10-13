@@ -23,7 +23,7 @@ public static class SheetSync
 
         try
         {
-            foreach (var tab in settings.tabs)
+            foreach(var tab in settings.tabs)
             {
                 if(await TryDownload(settings.sheetId, tab))
                     success++;

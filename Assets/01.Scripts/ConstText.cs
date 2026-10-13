@@ -31,6 +31,9 @@
     public const string Elementchance = "elementchance";
     public const string Elementvalue = "elementvalue";
     public const string Elementduration = "elementduration";
+    public const string SetId = "setid";
+    public const string Members = "members";
+    public const string Count = "count";
 }
 
 public static class DataTag
@@ -42,6 +45,8 @@ public static class DataTag
     public const string Classes = "classes";
     public const string Armors = "armors";
     public const string Accessories = "accessories";
+    public const string Sets = "sets";
+    public const string SetBonuses = "setbonuses";
 }
 
 public static class AnimatorTag

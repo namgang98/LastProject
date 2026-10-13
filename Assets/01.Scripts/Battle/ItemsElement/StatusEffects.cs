@@ -35,18 +35,18 @@ public class StatusEffects
 
     public void Tick(float dt)
     {
-        for (int i = list.Count - 1; i >= 0; i--)
+        for(int i = list.Count - 1; i >= 0; i--)
         {
-            if (i >= list.Count)
+            if(i >= list.Count)
                 continue;
 
             IStatusEffect status = list[i];
             bool alive = status.Tick(dt);
 
-            if (i >= list.Count || list[i] != status)
+            if(i >= list.Count || list[i] != status)
                 return;
 
-            if (alive)
+            if(alive)
                 continue;
 
             list.RemoveAt(i);

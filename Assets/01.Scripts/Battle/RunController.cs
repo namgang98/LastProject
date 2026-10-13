@@ -8,7 +8,7 @@ public class RunController : MonoBehaviour
     [SerializeField] BattleController battle;
     [SerializeField] StageController stage;
     [SerializeField] UnitController player;
-
+    [SerializeField] ToolTipView toolTip;
     private ClassInfo currentClass;
     private Backpack backpack;
 
@@ -44,6 +44,7 @@ public class RunController : MonoBehaviour
         var stats = PlayerStatsBuilder.Build(currentClass, backpack);
         ui.Bind(backpack);
         battle.Bind(backpack, currentClass);
+        toolTip.Bind(backpack);
         player.ResetUnit(stats.MaxHp);
         stage.Begin();
     }

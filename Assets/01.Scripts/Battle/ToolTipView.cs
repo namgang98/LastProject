@@ -12,10 +12,10 @@ public class ToolTipView : MonoBehaviour
     [SerializeField] Color[] gradeColors;
 
     [SerializeField] RectTransform rect;
-    [SerializeField] RectTransform canvasRect;
 
-    private readonly Vector3[] corners = new Vector3[4];
-    
+    private readonly Vector3[] targetCorners = new Vector3[4];
+    private readonly Vector3[] tipCorners = new Vector3[4];
+    private Backpack backpack;
     StringBuilder sb = new();
     private void Awake()
     {
@@ -46,6 +46,8 @@ public class ToolTipView : MonoBehaviour
 
         sb.Clear();
         info.AppendTooltip(sb);
+        if(backpack != null)
+            SetTooltipWriter.Append(sb, info, SetCounter.CollectEquippedIds(backpack));
         infoText.text = sb.ToString();
 
         panel.SetActive(true);
@@ -58,27 +60,29 @@ public class ToolTipView : MonoBehaviour
 
     private void Place(RectTransform target)
     {
-        LayoutRebuilder.ForceRebuildLayoutImmediate(rect);   // 텍스트 넣은 직후 크기 확정
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
 
-        target.GetWorldCorners(corners);
+        target.GetWorldCorners(targetCorners);
         rect.pivot = new Vector2(0f, 1f);
-        rect.position = corners[2];                          // 아이템 오른쪽 위에 툴팁 왼쪽 위를 붙임
+        rect.position = targetCorners[2];
+        rect.GetWorldCorners(tipCorners);
 
-        Rect area = canvasRect.rect;                         // 캔버스 기준 화면 범위
-        Vector2 local = canvasRect.InverseTransformPoint(rect.position);
-        Vector2 size = rect.rect.size;
-
-        if(local.x + size.x > area.xMax)                     // 오른쪽 넘침 → 아이템 왼쪽으로
+        if (tipCorners[2].x > Screen.width)                  // 오른쪽 넘침 → 아이템 왼쪽으로
         {
             rect.pivot = new Vector2(1f, 1f);
-            rect.position = corners[1];
-            local = canvasRect.InverseTransformPoint(rect.position);
+            rect.position = targetCorners[1];
+            rect.GetWorldCorners(tipCorners);
         }
 
-        if(local.y - size.y < area.yMin)                     // 아래 넘침 → 넘친 만큼 위로
-        {
-            local.y = area.yMin + size.y;
-            rect.position = canvasRect.TransformPoint(local);
-        }
+        float bottom = tipCorners[0].y;
+
+        if (bottom >= 0f)                                    // 아래 안 넘침 → 끝
+            return;
+
+        rect.position += new Vector3(0f, -bottom, 0f);      // 넘친 픽셀만큼 위로
+    }
+    public void Bind(Backpack backpack)
+    {
+        this.backpack = backpack;
     }
 }

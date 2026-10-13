@@ -40,7 +40,7 @@ public abstract class DotStatus : IStatusEffect
     {
         remaining -= deltaTime;
         tickTimer -= deltaTime;
-        if (tickTimer <= 0)
+        if(tickTimer <= 0)
         {
             Target.TakeDamage(new DamageInfo(damagePerTick, false, Element, true));
             tickTimer += tickInterval;

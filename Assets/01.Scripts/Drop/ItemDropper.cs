@@ -37,7 +37,7 @@ public class ItemDropper : MonoBehaviour
     }
     private void BuildTable()
     {
-        foreach (var item in DataManager.instance.Items)
+        foreach(var item in DataManager.instance.Items)
         {
             if(!item.IsLootable)
                 continue;

@@ -50,7 +50,7 @@ public class DamageTextSpawner : MonoBehaviour
     {
         if(e.Info.IsCritical)
         {
-            Spawn($"-{e.Info.Amount}!", critColor, e.Position, critScale);
+            Spawn($"-{e.Info.Amount}!!!", critColor, e.Position, critScale);
             return;
         }
 

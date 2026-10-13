@@ -160,6 +160,40 @@ public static class InfoParser
         info = new AccessoryInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc, effect, maxHp, damageBonus, cooldownReduction);
         return true;
     }
+
+    public static bool TryParseSet(CsvRow row, List<string> errors, out SetInfo info)
+    {
+        info = null;
+        if(!row.TryGetInt(CSVStamp.SetId, out int setid))
+            return Fail(row, errors, CSVStamp.SetId);
+        string name = row.GetString(CSVStamp.Name);
+        if(!row.TryGetIntList(CSVStamp.Members, '|', out List<int> members) || members.Count < 2)
+            return Fail(row, errors, CSVStamp.Members);
+        string desc = row.GetString(CSVStamp.Description);
+        info = new SetInfo(setid, name, members, desc);
+        return true;
+    }
+
+    public static bool TryParseSetBonus(CsvRow row, List<string> errors, out SetBonusInfo info)
+    {
+        info = null;
+
+        if(!row.TryGetInt(CSVStamp.SetId, out int setid))
+            return Fail(row, errors,CSVStamp.SetId);
+        if(!row.TryGetInt(CSVStamp.Count, out int count) || count < 1)
+            return Fail(row, errors, CSVStamp.Count);
+        if(!row.TryGetInt(CSVStamp.MaxHp, out int maxHp))
+            return Fail(row, errors, CSVStamp.MaxHp);
+        if(!row.TryGetFloat(CSVStamp.DamageBonus, out float damageBonus))
+            return Fail(row, errors, CSVStamp.DamageBonus);
+        if(!row.TryGetFloat(CSVStamp.CooldownReduction, out float cooldownReduction))
+            return Fail(row, errors, CSVStamp.CooldownReduction);
+        if(!row.TryGetFloat(CSVStamp.CritChance, out float critChance))
+            return Fail(row, errors, CSVStamp.CritChance);
+        string desc = row.GetString(CSVStamp.Description);
+        info = new SetBonusInfo(setid,count,maxHp,damageBonus,cooldownReduction,critChance,desc);
+        return true;
+    }
     #endregion
 
     #region 공통
@@ -239,7 +273,7 @@ public static class InfoParser
         if(!row.TryGetFloat(CSVStamp.Elementchance, out float chance) || chance <= 0f || chance > 1f)
             return Fail(row, errors,CSVStamp.Elementchance);
 
-        if (!row.TryGetInt(CSVStamp.Elementvalue, out int value) || value <= 0)
+        if(!row.TryGetInt(CSVStamp.Elementvalue, out int value) || value <= 0)
             return Fail(row, errors, CSVStamp.Elementvalue);
 
         if(!row.TryGetFloat(CSVStamp.Elementduration, out float duration) || duration <= 0f)

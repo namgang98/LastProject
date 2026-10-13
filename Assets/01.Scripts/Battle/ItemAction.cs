@@ -19,10 +19,11 @@ public class ItemAction : ICooldownSource
 
     public event Action OnFired;
 
-    public ItemAction(IBattleEffect effect, float cooldown, UnitHealth owner)
+    public ItemAction(IBattleEffect effect, float cooldown, float windup, UnitHealth owner)
     {
         this.effect = effect;
         this.cooldown = cooldown;
+        this.windup = Mathf.Clamp(windup, 0f, cooldown);
         Owner = owner;
         timer = cooldown;
     }
@@ -41,13 +42,13 @@ public class ItemAction : ICooldownSource
     {
         timer -= time;
 
-        if (!windupFired && timer <= windup)
+        if(!windupFired && timer <= windup)
         {
             windupFired = true;
             OnFired?.Invoke();
         }
 
-        if (timer > 0f)
+        if(timer > 0f)
             return;
 
         effect.Execute();

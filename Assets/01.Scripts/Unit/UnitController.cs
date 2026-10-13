@@ -6,7 +6,8 @@ public class UnitController : MonoBehaviour
     public UnitHealth Health => health;
     [SerializeField] UnitAnimator animator;
     [SerializeField] Transform headPoint;
-
+    [SerializeField] float attackWindup = 0.3f;
+    public float AttackWindup => attackWindup;
     private void Reset()
     {
         health = GetComponent<UnitHealth>();
@@ -32,7 +33,7 @@ public class UnitController : MonoBehaviour
     }
     public void PlayAttack()
     {
-        if(animator == null)
+        if(animator == null || health.IsDead)
             return;
 
         animator.AttackAni();
@@ -43,7 +44,7 @@ public class UnitController : MonoBehaviour
 
         EventManager.instance.PostNotification(new OnUnitDamaged(pos, info));
 
-        if(animator == null)
+        if(animator == null || health.CurrentHP <= 0)
             return;
         animator.HurtAni();
     }

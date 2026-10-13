@@ -24,6 +24,7 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange MonsterIds = new(2000,2999);
     private static readonly IdRange ClassIds = new(3000, 3999);
     private static readonly IdRange ArmorIds = new(4000, 4999);
+    private static readonly IdRange SetIds = new(6000, 6999);
     private static readonly IdRange AccessoryIds = new(5000, 5999);
     private static readonly IdRange PouchIds = new(9000, 9010);
 
@@ -37,7 +38,8 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset armorCsv;
     [SerializeField] TextAsset accessoryCsv;
     [SerializeField] TextAsset pouchCsv;
-
+    [SerializeField] TextAsset setCsv;
+    [SerializeField] TextAsset setBonusCsv;
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
     [SerializeField] MonsterPrefabs monsterPrefabs;
@@ -47,7 +49,9 @@ public class DataManager : Singleton<DataManager>
     private readonly Dictionary<int, ItemInfo> items = new();
     private readonly Dictionary<int, MonsterInfo> monsters = new();
     private readonly Dictionary<int, ClassInfo> classes = new();
-
+    private readonly Dictionary<int, SetInfo> sets = new();
+    private readonly Dictionary<int, List<SetInfo>> setsByItem = new();
+    private static readonly List<SetInfo> NoSets = new();
     private bool isLoading;
     public bool IsLoaded { get; private set; }
     public IReadOnlyCollection<ItemInfo> Items => items.Values;
@@ -80,6 +84,9 @@ public class DataManager : Singleton<DataManager>
         string classText = ReadText(classCsv, nameof(classCsv));
         string armorText = ReadText(armorCsv, nameof(armorCsv));
         string accessoryText = ReadText(accessoryCsv, nameof(accessoryCsv));
+        string setText = ReadText(setCsv, nameof(setCsv));
+        string setBonusText = ReadText(setBonusCsv, nameof(setBonusCsv));
+
 
         //백그라운드 스레드
         await Awaitable.BackgroundThreadAsync();
@@ -92,6 +99,8 @@ public class DataManager : Singleton<DataManager>
         List<ClassInfo> classList = ParseTable<ClassInfo>(DataTag.Classes,classText,errors, InfoParser.TryParseClass);
         List<ArmorInfo> armorList = ParseTable<ArmorInfo>(DataTag.Armors, armorText, errors, InfoParser.TryParseArmor);
         List<AccessoryInfo> accessoryList = ParseTable<AccessoryInfo>(DataTag.Accessories, accessoryText, errors, InfoParser.TryParseAccessory);
+        List<SetInfo> setList = ParseTable<SetInfo>(DataTag.Sets, setText, errors, InfoParser.TryParseSet);
+        List<SetBonusInfo> setBonusList = ParseTable<SetBonusInfo>(DataTag.SetBonuses, setBonusText, errors, InfoParser.TryParseSetBonus);
 
         //메인 스레드
         await Awaitable.MainThreadAsync();
@@ -112,13 +121,15 @@ public class DataManager : Singleton<DataManager>
         RegisterClasses(DataTag.Classes, classList, ClassIds, errors);
         RegisterItems(DataTag.Armors, armorList, ArmorIds, errors);
         RegisterItems(DataTag.Accessories, accessoryList, AccessoryIds, errors);
+        RegisterSets(DataTag.Sets, setList, SetIds, errors);
+        RegisterSetBonuses(DataTag.SetBonuses, setBonusList, errors);
 
         foreach(var error in errors)
         {
             Debug.LogWarning($"[DataManager] {error}", this);
         }
 
-        Debug.Log($"아이템 {items.Count}, 몬스터 {monsters.Count}, 직업 {classes.Count} / 경고 {errors.Count}", this);
+        Debug.Log($"아이템 {items.Count}, 몬스터 {monsters.Count}, 직업 {classes.Count}, 세트 {sets.Count} / 경고 {errors.Count}", this);
         isLoading = false;
         IsLoaded = true;
     }
@@ -207,6 +218,84 @@ public class DataManager : Singleton<DataManager>
             classes.Add(info.Id, info);
         }
     }
+    private void RegisterSets(string sheetName, List<SetInfo> list, IdRange range, List<string> errors)
+    {
+        foreach(var info in list)
+        {
+            if(!range.Contains(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} ({info.Name}) 가 구간 {range.Min}~{range.Max} 밖입니다");
+                continue;
+            }
+
+            if(sets.TryGetValue(info.Id, out SetInfo existing))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} 중복 ({existing.Name} / {info.Name}) → 뒤의 것은 무시");
+                continue;
+            }
+
+            if(!HasAllMembers(sheetName, info, errors))
+                continue;
+
+            sets.Add(info.Id, info);
+
+            foreach(int memberId in info.Members)
+            {
+                if(!setsByItem.TryGetValue(memberId, out List<SetInfo> owners))
+                {
+                    owners = new List<SetInfo>();
+                    setsByItem.Add(memberId, owners);
+                }
+
+                owners.Add(info);
+            }
+        }
+    }
+    private void RegisterSetBonuses(string sheetName, List<SetBonusInfo> list, List<string> errors)
+    {
+        foreach(var bonus in list)
+        {
+            if(!sets.TryGetValue(bonus.SetId, out SetInfo set))
+            {
+                errors.Add($"{sheetName} : 세트 {bonus.SetId} 가 없습니다 → 보너스 무시");
+                continue;
+            }
+
+            if(HasBonusCount(set, bonus.Count))
+            {
+                errors.Add($"{sheetName} : 세트 {bonus.SetId} 의 {bonus.Count}세트 보너스 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            set.AddBonus(bonus);
+        }
+    }
+
+    private static bool HasBonusCount(SetInfo set, int count)
+    {
+        foreach(var existing in set.Bonuses)
+        {
+            if(existing.Count == count)
+                return true;
+        }
+
+        return false;
+    }
+    private bool HasAllMembers(string sheetName, SetInfo info, List<string> errors)
+    {
+        bool valid = true;
+
+        foreach(int memberId in info.Members)
+        {
+            if(items.ContainsKey(memberId))
+                continue;
+
+            errors.Add($"{sheetName} : 세트 {info.Id} ({info.Name}) 의 구성원 {memberId} 가 아이템 목록에 없습니다 → 세트 무시");
+            valid = false;
+        }
+
+        return valid;
+    }
     private Sprite FindIcon(string sheetName, int id, string iconName, List<string> errors)
     {
         if(string.IsNullOrEmpty(iconName) || iconLibrary == null)
@@ -218,7 +307,6 @@ public class DataManager : Singleton<DataManager>
         errors.Add($"{sheetName} : ID {id} 의 아이콘 '{iconName}' 을 IconLibrary 에서 찾을 수 없습니다");
         return null;
     }
-
     private GameObject FindPrefab(string sheetName, int id, string prefabName, List<string> errors)
     {
         if(string.IsNullOrEmpty(prefabName) || monsterPrefabs == null)
@@ -256,6 +344,18 @@ public class DataManager : Singleton<DataManager>
 
         info = found as T;
         return info != null;
+    }
+    public bool TryGetSet(int setId, out SetInfo info)
+    {
+        return sets.TryGetValue(setId, out info);
+    }
+
+    public IReadOnlyList<SetInfo> GetSetsOf(int itemId)
+    {
+        if (setsByItem.TryGetValue(itemId, out List<SetInfo> list))
+            return list;
+
+        return NoSets;
     }
     #endregion
 }

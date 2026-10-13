@@ -29,7 +29,7 @@ public class IceStatus : IStatusEffect
 
     public void Refresh(float duration)
     {
-        if (duration <= remaining)
+        if(duration <= remaining)
             return;
 
         remaining = duration;

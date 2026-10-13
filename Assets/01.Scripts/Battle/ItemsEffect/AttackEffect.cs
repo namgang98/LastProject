@@ -24,7 +24,7 @@ public class AttackEffect : IBattleEffect
 
         IStatusEffect status = StatusEffectFactory.Create(data, target);
 
-        if (status != null)
+        if(status != null)
             statuses.Apply(status);
     }
 

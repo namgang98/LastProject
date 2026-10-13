@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class RunController : MonoBehaviour
 {
-    [SerializeField] int classId = 3000;
+    private const string SaveFileName = "save.json";
+
+    [SerializeField] int defaultclassId = 3000;
     [SerializeField] StarterKit kit;
     [SerializeField] InventoryUI ui;
     [SerializeField] BattleController battle;
@@ -11,7 +14,13 @@ public class RunController : MonoBehaviour
     [SerializeField] ToolTipView toolTip;
     private ClassInfo currentClass;
     private Backpack backpack;
-
+    private SaveService saveService;
+    private SaveData saveData;
+    public Backpack CurrentBackpack => backpack;
+    private void Awake()
+    {
+        saveService = new SaveService(new FileSaveStorage(SaveFileName));
+    }
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnRunEnded>(HandleRunEnded);
@@ -27,14 +36,22 @@ public class RunController : MonoBehaviour
 
     public void StartFirstRun()
     {
-        if(!DataManager.instance.TryGetClass(classId, out currentClass))
+        if (!saveService.TryLoad(out saveData))
+            saveData = new SaveData { classId = defaultclassId };
+
+        if (!DataManager.instance.TryGetClass(saveData.classId, out currentClass))
         {
-            Debug.LogError($"[RunController] 직업 ID {classId}를 찾을 수 없습니다.", this);
+            Debug.LogError($"[RunController] 직업 ID {saveData.classId}를 찾을 수 없습니다.", this);
             return;
         }
-
-        if(!kit.TryCreate(out backpack))
+        if (!TryLoadBackpack())
             return;
+
+        if (saveData.inRun)
+        {
+            Debug.Log("[RunController] 런 도중 종료 기록 → 사망 처리", this);
+            LoseBackpack();
+        }
 
         StartRun();
     }
@@ -46,6 +63,7 @@ public class RunController : MonoBehaviour
         battle.Bind(backpack, currentClass);
         toolTip.Bind(backpack);
         player.ResetUnit(stats.MaxHp);
+        Save(true);
         stage.Begin();
     }
 
@@ -53,10 +71,26 @@ public class RunController : MonoBehaviour
     {
         if(e.Reason == RunEndReason.Death)
             LoseBackpack();
-
+        Save(false);
     }
-   private void LoseBackpack()
-   {
+    private bool TryLoadBackpack()
+    {
+        var errors = new List<string>();
+
+        if (saveData.backpack.bagId != 0 && InventorySaveMapper.TryRestore(saveData.backpack, errors, out backpack))
+        {
+            foreach (var error in errors)
+            {
+                Debug.LogWarning($"[RunController] {error}", this);
+            }
+
+            return true;
+        }
+
+        return kit.TryCreate(out backpack);
+    }
+    private void LoseBackpack()
+    {
 
        PouchInstance pouch = backpack.LoseAllOnDeath();
 
@@ -70,5 +104,18 @@ public class RunController : MonoBehaviour
 
        backpack = newPack;
    
-   }
+    }
+    private void Save(bool inRun)
+    {
+        saveData.classId = currentClass.Id;
+        saveData.inRun = inRun;
+        saveData.backpack = InventorySaveMapper.ToData(backpack);
+        saveService.Save(saveData);
+    }
+
+    public void DeleteSave()
+    {
+        saveService.Delete();
+        Debug.Log($"[RunController] 세이브 삭제 : {Application.persistentDataPath}", this);
+    }
 }

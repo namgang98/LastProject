@@ -1,0 +1,127 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+public static class InventorySaveMapper
+{
+    public static BackpackSaveData ToData(Backpack backpack)
+    {
+        return new BackpackSaveData
+        {
+            bagId = backpack.Bag.Info.Id,
+            grid = ToData(backpack.Grid)
+        };
+    }
+
+    public static GridSaveData ToData(GridContainer grid)
+    {
+        var data = new GridSaveData();
+
+        foreach(var item in grid.Items)
+        {
+            Append(data.items, item, -1);
+        }
+
+        return data;
+    }
+
+    private static void Append(List<ItemSaveData> list, ItemInstance item, int parent)
+    {
+        int index = list.Count;
+
+        list.Add(new ItemSaveData
+        {
+            id = item.Info.Id,
+            x = item.Anchor.x,
+            y = item.Anchor.y,
+            rotation = item.Rotation,
+            parent = parent
+        });
+
+        if(item is not ContainerInstance container)
+            return;
+
+        foreach(var child in container.Storage.Items)
+        {
+            Append(list, child, index);
+        }
+    }
+    public static void Restore(GridSaveData data, GridContainer target, List<string> errors)
+    {
+        ItemInstance[] instances = CreateAll(data, errors);
+        for(int i = 0; i < instances.Length; i++)
+        {
+            if(instances[i] == null)
+                continue;
+
+            GridContainer destination = FindDestination(data.items[i].parent, i, instances, target, errors);
+
+            if(destination == null)
+                continue;
+
+            Place(instances[i], data.items[i], destination, errors);
+        }
+    }
+    private static ItemInstance[] CreateAll(GridSaveData data, List<string> errors)
+    {
+        var instances = new ItemInstance[data.items.Count];
+
+        for(int i = 0; i < data.items.Count; i++)
+        {
+            int id = data.items[i].id;
+
+            if(!DataManager.instance.TryGetItem(id, out ItemInfo info))
+            {
+                errors.Add($"아이템 ID {id} 가 데이터에 없습니다 → 사라짐");
+                continue;
+            }
+
+            instances[i] = info.CreateInstance();
+        }
+
+        return instances;
+    }
+    private static GridContainer FindDestination(int parent, int index, ItemInstance[] instances, GridContainer target, List<string> errors)
+    {
+        if(parent == -1)
+            return target;
+
+        if(parent < 0 || parent >= index)
+        {
+            errors.Add($"{index}번 아이템의 번호 {parent}가 잘못되었습니다");
+            return null;
+        }
+
+        if(instances[parent] is not ContainerInstance container)
+        {
+            errors.Add($"{index}번 아이템의 부모가 없거나 컨테이너가 아닙니다 → 사라짐");
+            return null;
+        }
+
+        return container.Storage;
+    }
+    private static void Place(ItemInstance item, ItemSaveData saved, GridContainer destination, List<string> errors)
+    {
+        if(destination.TryPlace(item, new Vector2Int(saved.x, saved.y), saved.rotation))
+            return;
+
+        if(destination.TryAutoPlace(item))
+            return;
+
+        errors.Add($"{item.Info.Name} 이 들어갈 자리가 없습니다 → 사라짐");
+    }
+    public static bool TryRestore(BackpackSaveData data, List<string> errors, out Backpack backpack)
+    {
+        backpack = null;
+        
+        if(!DataManager.instance.TryGetItem(data.bagId, out BagInfo bagInfo))
+        {
+            errors.Add($"가방 ID {data.bagId} 가 데이터에 없습니다.");
+            return false;
+        }
+
+        backpack = new Backpack((BagInstance)bagInfo.CreateInstance());
+        Restore(data.grid, backpack.Grid, errors);
+        return true;
+    }
+
+}

@@ -352,7 +352,7 @@ public class DataManager : Singleton<DataManager>
 
     public IReadOnlyList<SetInfo> GetSetsOf(int itemId)
     {
-        if (setsByItem.TryGetValue(itemId, out List<SetInfo> list))
+        if(setsByItem.TryGetValue(itemId, out List<SetInfo> list))
             return list;
 
         return NoSets;

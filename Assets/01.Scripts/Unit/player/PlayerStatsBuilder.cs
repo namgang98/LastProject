@@ -15,11 +15,11 @@ public static class PlayerStatsBuilder
             modifier.Apply(stats);
         }
 
-        foreach (var pair in SetCounter.CountActiveSets(backpack))
+        foreach(var pair in SetCounter.CountActiveSets(backpack))
         {
-            foreach (var bonus in pair.Key.Bonuses)
+            foreach(var bonus in pair.Key.Bonuses)
             {
-                if (pair.Value < bonus.Count)
+                if(pair.Value < bonus.Count)
                     break;
 
                 bonus.Apply(stats);

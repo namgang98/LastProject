@@ -67,7 +67,7 @@ public class ToolTipView : MonoBehaviour
         rect.position = targetCorners[2];
         rect.GetWorldCorners(tipCorners);
 
-        if (tipCorners[2].x > Screen.width)                  // 오른쪽 넘침 → 아이템 왼쪽으로
+        if(tipCorners[2].x > Screen.width)                  // 오른쪽 넘침 → 아이템 왼쪽으로
         {
             rect.pivot = new Vector2(1f, 1f);
             rect.position = targetCorners[1];
@@ -76,7 +76,7 @@ public class ToolTipView : MonoBehaviour
 
         float bottom = tipCorners[0].y;
 
-        if (bottom >= 0f)                                    // 아래 안 넘침 → 끝
+        if(bottom >= 0f)                                    // 아래 안 넘침 → 끝
             return;
 
         rect.position += new Vector3(0f, -bottom, 0f);      // 넘친 픽셀만큼 위로

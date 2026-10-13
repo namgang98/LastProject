@@ -13,7 +13,7 @@ public static class SetTooltipWriter
             int count = SetCounter.CountEquipped(set, equipped);
             sb.AppendLine("<size=30%> </size>");
             sb.AppendLine($"<size=80%>[{set.Name}] ({count}/{set.MaxCount})</size>");
-            foreach (var bonus in set.Bonuses)
+            foreach(var bonus in set.Bonuses)
             {
                 string color = count >= bonus.Count ? ActiveColor : InactiveColor;
                 sb.AppendLine($"<size=80%><color={color}>{bonus.Count}세트 : {bonus.Description}</color></size>");

@@ -6,6 +6,9 @@ public static class SetCounter
     {
         var equipped = new HashSet<int> { backpack.Bag.Info.Id };
 
+        if(backpack.EquippedPouch != null)
+            equipped.Add(backpack.EquippedPouch.Info.Id);
+
         foreach(var item in backpack.EquippedItems())
         {
             equipped.Add(item.Info.Id);

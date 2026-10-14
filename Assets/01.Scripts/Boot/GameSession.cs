@@ -7,7 +7,10 @@ public class GameSession : Singleton<GameSession>
 
     [SerializeField] int defaultClassId = 3000;
     [SerializeField] StarterKit kit;
+    [SerializeField] Vector2Int chestTabSize = new (10, 8);
+    [SerializeField, Min(1)] int startTabCount = 1;
 
+    public Chest Chest { get; private set; }
     private SaveService saveService;
     private SaveData saveData;
 
@@ -19,10 +22,10 @@ public class GameSession : Singleton<GameSession>
     {
         saveService = new SaveService(new FileSaveStorage(SaveFileName));
 
-        if (!saveService.TryLoad(out saveData))
+        if(!saveService.TryLoad(out saveData))
             saveData = new SaveData { classId = defaultClassId };
 
-        if (!DataManager.instance.TryGetClass(saveData.classId, out ClassInfo playerClass))
+        if(!DataManager.instance.TryGetClass(saveData.classId, out ClassInfo playerClass))
         {
             Debug.LogError($"[GameSession] 직업 ID {saveData.classId}를 찾을 수 없습니다.", this);
             return false;
@@ -32,10 +35,10 @@ public class GameSession : Singleton<GameSession>
         Wallet = new Wallet(saveData.gold);
         Wallet.Changed += PostGold;
 
-        if (!TryLoadBackpack())
+        if(!TryLoadBackpack())
             return false;
-
-        if (!saveData.inRun)
+        LoadChest();
+        if(!saveData.inRun)
             return true;
 
         Debug.Log("[GameSession] 런 도중 종료 기록 → 사망 처리", this);
@@ -44,13 +47,13 @@ public class GameSession : Singleton<GameSession>
         return true;
     }
 
-    public void ReturnVillage()
+    public void BeginRun()
     {
         Save(true);
     }
     public void FinishRun(RunEndReason reason)
     {
-        if (reason == RunEndReason.Death)
+        if(reason == RunEndReason.Death)
         {
             LoseBackpack();
             Wallet.LoseRun();
@@ -78,9 +81,9 @@ public class GameSession : Singleton<GameSession>
     {
         var errors = new List<string>();
 
-        if (saveData.backpack.bagId != 0 && InventorySaveMapper.TryRestore(saveData.backpack, errors, out Backpack restored))
+        if(saveData.backpack.bagId != 0 && InventorySaveMapper.TryRestore(saveData.backpack, errors, out Backpack restored))
         {
-            foreach (var error in errors)
+            foreach(var error in errors)
             {
                 Debug.LogWarning($"[GameSession] {error}", this);
             }
@@ -89,35 +92,93 @@ public class GameSession : Singleton<GameSession>
             return true;
         }
 
-        if (!kit.TryCreate(out Backpack created))
+        if(!kit.TryCreate(out Backpack created))
             return false;
 
         Backpack = created;
         return true;
     }
 
+    public bool TrySwapBag(BagInstance newBag)
+    {
+        GridContainer from = newBag.Owner;
+
+        if(from == null || newBag == Backpack.Bag)
+            return false;
+
+        Vector2Int anchor = newBag.Anchor;
+        int rotation = newBag.Rotation;
+        BagInstance oldBag = Backpack.Bag;
+
+        from.Remove(newBag);
+
+        if(!from.TryPlace(oldBag, anchor, rotation) && !from.TryAutoPlace(oldBag))
+        {
+            from.TryPlace(newBag, anchor, rotation);
+            return false;
+        }
+
+        Backpack old = Backpack;
+        Backpack = new Backpack(newBag);
+
+        PouchInstance pouch = old.UnequipPouch();
+
+        if(pouch != null)
+            Backpack.TryEquipPouch(pouch);
+
+        EventManager.instance.PostNotification(new OnBackpackChanged(Backpack));
+        return true;
+    }
     private void LoseBackpack()
     {
         PouchInstance pouch = Backpack.LoseAllOnDeath();
 
-        if (!kit.TryCreate(out Backpack newPack))
+        if(!kit.TryCreate(out Backpack newPack))
             return;
 
-        if (pouch != null && !newPack.Grid.TryAutoPlace(pouch))
-            Debug.LogWarning("[GameSession] 새 가방에 안전 주머니를 넣지 못했습니다.", this);
+        if(pouch != null)
+            newPack.TryEquipPouch(pouch);
 
         Backpack = newPack;
     }
 
+    private void LoadChest()
+    {
+        var errors = new List<string>();
+        Chest = new Chest(chestTabSize);
+        int count = Mathf.Max(startTabCount, saveData.chestTabs.Count);
+
+        for(int i = 0; i < count; i++)
+        {
+            GridContainer tab = Chest.AddTab();
+
+            if(i < saveData.chestTabs.Count)
+                InventorySaveMapper.Restore(saveData.chestTabs[i], tab, errors);
+        }
+
+        foreach(var error in errors)
+        {
+            Debug.LogWarning($"[GameSession] 창고 : {error}", this);
+        }
+    }
+
     private void Save(bool inRun)
     {
+        saveData.chestTabs.Clear();
+        foreach(var tab in Chest.Tabs)
+        {
+            saveData.chestTabs.Add(InventorySaveMapper.ToData(tab));
+        }
         saveData.classId = CurrentClass.Id;
         saveData.gold = Wallet.Gold;
         saveData.inRun = inRun;
         saveData.backpack = InventorySaveMapper.ToData(Backpack);
         saveService.Save(saveData);
     }
-
+    public void SaveInVillage()
+    {
+        Save(false);
+    }
     private void PostGold(Wallet wallet)
     {
         EventManager.instance.PostNotification(new OnChangeGold(wallet.Gold, wallet.RunGold));

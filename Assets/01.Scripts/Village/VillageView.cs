@@ -19,7 +19,7 @@ public class VillageView : MonoBehaviour
     private void EnterDungeon()
     {
         enterButton.interactable = false;
-        GameSession.instance.ReturnVillage();
+        GameSession.instance.BeginRun();
         SceneManager.LoadScene(SceneNames.Dungeon);
     }
 }

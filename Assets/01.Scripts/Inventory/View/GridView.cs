@@ -41,7 +41,11 @@ public class GridView : ItemContainerView
 
     private void OnDestroy()
     {
-        Unbind();
+        if(container == null)
+            return;
+
+        container.Changed -= Refresh;
+        container = null;
     }
 
     #region 연결

@@ -88,6 +88,9 @@ public class DragController : MonoBehaviour
             return;
         }
 
+        if(view.Home is IItemDragSource source && !source.CanDragOut(view.Item))
+            return;
+
         if(dragging != null || context == null)
             return;
 
@@ -159,4 +162,8 @@ public class DragController : MonoBehaviour
         hover.ShowPreview(dragging.Item, rotation, lastEvent);
     }
     #endregion
+}
+public interface IItemDragSource
+{
+    bool CanDragOut(ItemInstance item);
 }

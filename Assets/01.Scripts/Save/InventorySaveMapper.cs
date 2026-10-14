@@ -8,8 +8,19 @@ public static class InventorySaveMapper
         return new BackpackSaveData
         {
             bagId = backpack.Bag.Info.Id,
-            grid = ToData(backpack.Grid)
+            grid = ToData(backpack.Grid),
+            pouch = ToSingleData(backpack.EquippedPouch)
         };
+    }
+    private static GridSaveData ToSingleData(ItemInstance item)
+    {
+        var data = new GridSaveData();
+
+        if(item == null)
+            return data;
+
+        Append(data.items, item, -1);
+        return data;
     }
 
     public static GridSaveData ToData(GridContainer grid)
@@ -48,18 +59,39 @@ public static class InventorySaveMapper
     public static void Restore(GridSaveData data, GridContainer target, List<string> errors)
     {
         ItemInstance[] instances = CreateAll(data, errors);
-        for(int i = 0; i < instances.Length; i++)
+        PlaceAll(data, instances, target, 0, errors);
+    }
+    private static void PlaceAll(GridSaveData data, ItemInstance[] instances, GridContainer root, int start, List<string> errors)
+    {
+        for(int i = start; i < instances.Length; i++)
         {
             if(instances[i] == null)
                 continue;
 
-            GridContainer destination = FindDestination(data.items[i].parent, i, instances, target, errors);
+            GridContainer destination = FindDestination(data.items[i].parent, i, instances, root, errors);
 
             if(destination == null)
                 continue;
 
             Place(instances[i], data.items[i], destination, errors);
         }
+    }
+
+    private static PouchInstance RestorePouch(GridSaveData data, List<string> errors)
+    {
+        if(data == null || data.items.Count == 0)
+            return null;
+
+        ItemInstance[] instances = CreateAll(data, errors);
+
+        if(instances[0] is not PouchInstance pouch)
+        {
+            errors.Add("착용 주머니 데이터가 주머니가 아닙니다 → 사라짐");
+            return null;
+        }
+
+        PlaceAll(data, instances, null, 1, errors);
+        return pouch;
     }
     private static ItemInstance[] CreateAll(GridSaveData data, List<string> errors)
     {
@@ -121,6 +153,12 @@ public static class InventorySaveMapper
 
         backpack = new Backpack((BagInstance)bagInfo.CreateInstance());
         Restore(data.grid, backpack.Grid, errors);
+
+        PouchInstance pouch = RestorePouch(data.pouch, errors);
+
+        if(pouch != null)
+            backpack.TryEquipPouch(pouch);
+
         return true;
     }
 

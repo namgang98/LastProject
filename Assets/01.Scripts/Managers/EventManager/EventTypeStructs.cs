@@ -139,3 +139,9 @@ public struct OnStatusRemoved : IGameEvent
         Element = element;
     }
 }
+
+public struct OnBackpackChanged : IGameEvent
+{
+    public Backpack Backpack;
+    public OnBackpackChanged(Backpack backpack) => Backpack = backpack;
+}

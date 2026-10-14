@@ -11,7 +11,7 @@ public class SaveData
     public int gold;
     public bool inRun;
     public BackpackSaveData backpack = new();
-    public List<GridSaveData> stashTabs = new();
+    public List<GridSaveData> chestTabs = new();
 }
 
 [Serializable]
@@ -19,6 +19,7 @@ public class BackpackSaveData
 {
     public int bagId;
     public GridSaveData grid = new();
+    public GridSaveData pouch = new();
 }
 
 [Serializable]

@@ -18,7 +18,7 @@ public class RunController : MonoBehaviour
 
     private void OnDisable()
     {
-        if (!EventManager.HasInstance)
+        if(!EventManager.HasInstance)
             return;
 
         EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);

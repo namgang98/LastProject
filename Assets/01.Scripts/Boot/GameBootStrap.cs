@@ -7,7 +7,7 @@ public class GameBootStrap : MonoBehaviour
     {
         await DataManager.instance.InitAsync();
 
-        if (!GameSession.instance.TryLoad())
+        if(!GameSession.instance.TryLoad())
         {
             Debug.LogError("[GameBootStrap] 세션을 불러오지 못했습니다.", this);
             return;

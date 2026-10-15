@@ -19,4 +19,35 @@ public class Chest
         tabs.Add(tab);
         return tab;
     }
+    public List<ItemInstance> StoreAll(GridContainer source)
+    {
+        var items = new List<ItemInstance>(source.Items);
+        items.Sort((a, b) => CellCount(b).CompareTo(CellCount(a)));
+
+        var leftover = new List<ItemInstance>();
+
+        foreach(var item in items)
+        {
+            if(!TryStore(item))
+                leftover.Add(item);
+        }
+
+        return leftover;
+    }
+
+    private bool TryStore(ItemInstance item)
+    {
+        foreach(var tab in tabs)
+        {
+            if(tab.TryAutoPlace(item))
+                return true;
+        }
+
+        return false;
+    }
+
+    private static int CellCount(ItemInstance item)
+    {
+        return item.Info.Shape.GetRotatedCells(0).Count;
+    }
 }

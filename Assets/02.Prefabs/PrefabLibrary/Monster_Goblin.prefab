@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2015353810843143190}
   - component: {fileID: 4015390460806599207}
   m_Layer: 0
-  m_Name: Goblin
+  m_Name: Monster_Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.9823, y: 3.2086964, z: 1}
+  m_LocalScale: {x: 2.8, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7897299789461663855}
@@ -52,6 +52,7 @@ MonoBehaviour:
   health: {fileID: 3748023692672963359}
   animator: {fileID: 1935057635139188295}
   headPoint: {fileID: 7897299789461663855}
+  attackWindup: 0.3
 --- !u!114 &3748023692672963359
 MonoBehaviour:
   m_ObjectHideFlags: 0

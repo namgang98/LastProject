@@ -420,7 +420,7 @@ MonoBehaviour:
   setCsv: {fileID: 4900000, guid: 9616c488d03eb0c42ac628d35e29dd35, type: 3}
   setBonusCsv: {fileID: 4900000, guid: ba64108d8fc17c64ba9215f9bf8827d7, type: 3}
   iconLibrary: {fileID: 11400000, guid: 20216c8c80df7864eb072731d2e539c4, type: 2}
-  monsterPrefabs: {fileID: 11400000, guid: 588dc369a837cc046afec98909ddbc42, type: 2}
+  prefabLibrary: {fileID: 11400000, guid: 56cf11582a5258c458ffb7ec871b7b33, type: 2}
 --- !u!1 &7968245182707994519
 GameObject:
   m_ObjectHideFlags: 0

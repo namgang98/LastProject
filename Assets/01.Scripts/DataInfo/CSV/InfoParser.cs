@@ -117,7 +117,11 @@ public static class InfoParser
 
         string desc = row.GetString(CSVStamp.Description);
 
-        info = new ClassInfo(b.id, b.name, maxHp, type, damageRate, cooldownRate, desc);
+        string prefab = row.GetString(CSVStamp.Prefab);
+        if(string.IsNullOrEmpty(prefab))
+            return Fail(row, errors, CSVStamp.Prefab);
+        
+        info = new ClassInfo(b.id, b.name, maxHp, type, damageRate, cooldownRate, desc, prefab);
         return true;
     }
 

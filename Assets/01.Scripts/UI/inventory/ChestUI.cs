@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ChestUI : MonoBehaviour
@@ -92,6 +93,15 @@ public class ChestUI : MonoBehaviour
             return;
 
         backpackPanel.Bind(e.Backpack, context);
+        GameSession.instance.SaveInVillage();
+    }
+    public void StoreAll()
+    {
+        List<ItemInstance> leftover = chest.StoreAll(GameSession.instance.Backpack.Grid);
+
+        if (leftover.Count > 0) //피드백팝업만들면 변경
+            Debug.LogWarning($"[ChestUI] 창고 공간이 부족해 {leftover.Count}개를 넣지 못했습니다.", this);
+
         GameSession.instance.SaveInVillage();
     }
 }

@@ -183,4 +183,10 @@ public class GameSession : Singleton<GameSession>
     {
         EventManager.instance.PostNotification(new OnChangeGold(wallet.Gold, wallet.RunGold));
     }
+    public void SelectClass(ClassInfo info)
+    {
+        if(info == null)
+            return;
+        CurrentClass = info;
+    }
 }

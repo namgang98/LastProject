@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1dba655585f3b564f83168350601cff2, type: 3}
-  m_Name: MonsterPrefabs
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterPrefabs
+  m_Name: PrefabLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::PrefabLibrary
   prefabs:
   - {fileID: 1015551902316359095, guid: ac56dd33f662b6d40964db88ca7929bb, type: 3}
   - {fileID: 2260059848270852755, guid: 39e74b48595435e4eb90b88f14be8839, type: 3}
   - {fileID: 881761834679181887, guid: e41b7ce721deece4d8960102dfc5019e, type: 3}
+  - {fileID: 4817885338933701450, guid: 2f8c56b17253b0f45a95f12762c715e3, type: 3}
+  - {fileID: 1925886137746997011, guid: 40a0fc67313310a469fcc08d0b7f0471, type: 3}
+  - {fileID: 788534966728796790, guid: 68f28a7c7958ece4cab5039a94969cc2, type: 3}

@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.Collections.Unicode;
 
 public class StageController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class StageController : MonoBehaviour
     [SerializeField] int bossInterval = 10;
     [SerializeField] Transform spawnPoint;
     [SerializeField] BattleController battle;
-    [SerializeField] UnitController player;
+    private UnitController player;
     [SerializeField] HpBarView monsterHpbar;
     [SerializeField] Button nextButton;
     [SerializeField] TextMeshProUGUI stageText;
@@ -39,17 +40,19 @@ public class StageController : MonoBehaviour
         nextButton.onClick.AddListener(NextStage);
         returnButton.onClick.AddListener(ReturnToTown);
     }
-    private void OnEnable()
-    {
-        player.Health.OnDie += HandlePlayerDead;
-    }
     private void OnDisable()
     {
         if(player != null)
             player.Health.OnDie -= HandlePlayerDead;
     }
-    public void Begin()
+    public void Begin(UnitController runner)
     {
+        if (player != null)
+            player.Health.OnDie -= HandlePlayerDead;
+
+        player = runner;
+        player.Health.OnDie += HandlePlayerDead;
+
         normalMonsters.Clear();
         bossMonsters.Clear();
 

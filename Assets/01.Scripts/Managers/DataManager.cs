@@ -42,7 +42,7 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset setBonusCsv;
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
-    [SerializeField] MonsterPrefabs monsterPrefabs;
+    [SerializeField] PrefabLibrary prefabLibrary;
     
 
 
@@ -109,8 +109,8 @@ public class DataManager : Singleton<DataManager>
             iconLibrary.Init();
         else
             errors.Add("IconLibrary가 연결되지 않았습니다. 아이콘 없이 진행합니다");
-        if(monsterPrefabs != null)
-            monsterPrefabs.Init();
+        if(prefabLibrary != null)
+            prefabLibrary.Init();
         else
             errors.Add("monsterPrefabs가 연결되지 않았습니다");
 
@@ -215,6 +215,7 @@ public class DataManager : Singleton<DataManager>
                 continue;
             }
 
+            info.SetPrefab(FindPrefab(sheetName, info.Id, info.PrefabName, errors));
             classes.Add(info.Id, info);
         }
     }
@@ -309,10 +310,10 @@ public class DataManager : Singleton<DataManager>
     }
     private GameObject FindPrefab(string sheetName, int id, string prefabName, List<string> errors)
     {
-        if(string.IsNullOrEmpty(prefabName) || monsterPrefabs == null)
+        if(string.IsNullOrEmpty(prefabName) || prefabLibrary == null)
             return null;
 
-        if(monsterPrefabs.TryGet(prefabName, out GameObject prefab))
+        if(prefabLibrary.TryGet(prefabName, out GameObject prefab))
             return prefab;
 
         errors.Add($"{sheetName} : ID {id} 의 아이콘 '{prefabName}' 을 MonsterPrefabs 에서 찾을 수 없습니다");

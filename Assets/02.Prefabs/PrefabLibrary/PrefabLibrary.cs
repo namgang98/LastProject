@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prefab/MonsterPrefabs", fileName = "MonsterPrefabs")]
-public class MonsterPrefabs : ScriptableObject
+[CreateAssetMenu(menuName = "Prefab/PrefabLibrary", fileName = "PrefabLibrary")]
+public class PrefabLibrary : ScriptableObject
 {
     [SerializeField] List<GameObject> prefabs = new();
 
@@ -19,7 +19,7 @@ public class MonsterPrefabs : ScriptableObject
 
             if(!table.TryAdd(prefab.name, prefab))
             {
-                Debug.LogWarning($"[MonsterPrefabs]의 이름이 같은 프리팹이 있습니다 : {prefab.name}", this);
+                Debug.LogWarning($"[PrefabLibrary]의 이름이 같은 프리팹이 있습니다 : {prefab.name}", this);
             }
         }
 

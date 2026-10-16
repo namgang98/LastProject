@@ -22,7 +22,7 @@ public class ClassSelectView : MonoBehaviour
 
     public void Open()
     {
-        PopupManager.instance.Open(popup);
+        PopupManager.instance.Open(popup, Close);
         BuildCards();
         Select(Find(GameSession.instance.CurrentClass));
     }

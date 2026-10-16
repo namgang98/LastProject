@@ -67,7 +67,7 @@ public class SellUI : MonoBehaviour
         GameSession session = GameSession.instance;
         shop = session.Shop;
 
-        PopupManager.instance.Open(popup);
+        PopupManager.instance.Open(popup, Close);
         dragController.SetContext(context);
         backpackPanel.Bind(session.Backpack, context);
         sellArea.Bind(basket, context);

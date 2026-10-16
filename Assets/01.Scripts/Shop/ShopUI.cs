@@ -67,7 +67,7 @@ public class ShopUI : MonoBehaviour
         shop.Changed -= Refresh;
         shop.Changed += Refresh;
 
-        PopupManager.instance.Open(popup);
+        PopupManager.instance.Open(popup, Close);
         HideConfirm();
         Refresh();
     }

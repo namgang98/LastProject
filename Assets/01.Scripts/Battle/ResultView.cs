@@ -40,7 +40,7 @@ public class ResultView : MonoBehaviour
         titleText.text = reason == RunEndReason.Death ? "쓰러졌다..." : "안전 귀환 성공!";
         stageText.text = $"{stage}F";
 
-        PopupManager.instance.Open(panel);
+        PopupManager.instance.Open(panel, closeOnEscape: false);
     }
 
 }

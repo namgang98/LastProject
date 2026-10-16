@@ -18,7 +18,7 @@ public class MenuView : MonoBehaviour
 
     private void Open()
     {
-        PopupManager.instance.Open(panel);
+        PopupManager.instance.Open(panel, Close);
         speedCon.SetPaused(true);
     }
     private void Close()

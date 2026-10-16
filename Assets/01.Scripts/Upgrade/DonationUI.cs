@@ -77,7 +77,7 @@ public class DonationUI : MonoBehaviour
         progress = found;
         progress.Changed += HandleProgressChanged;
 
-        PopupManager.instance.Open(popup);
+        PopupManager.instance.Open(popup, Close);
         amount = 0;
         Refresh();
     }

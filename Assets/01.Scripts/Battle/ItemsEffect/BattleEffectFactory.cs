@@ -2,7 +2,7 @@
 {
     public static IBattleEffect Create(EffectData data, UnitHealth owner)
     {
-        switch (data.Type)
+        switch(data.Type)
         {
             case EffectType.Heal:
                 return new HealEffect(owner, data.Value);

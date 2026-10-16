@@ -11,11 +11,12 @@ public class PopupOpenButton : MonoBehaviour
 
     private void Awake()
     {
-        openButton.onClick.AddListener(() => PopupManager.instance.Open(targetPopup));
+        openButton.onClick.AddListener(TriggerOpen);
     }
+
     public void TriggerOpen()
     {
-        PopupManager.instance.Open(targetPopup);
+        PopupManager.instance.Open(targetPopup, () => PopupManager.instance.Close(targetPopup));
     }
 }
 

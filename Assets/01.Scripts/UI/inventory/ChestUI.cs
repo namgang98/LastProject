@@ -48,7 +48,7 @@ public class ChestUI : MonoBehaviour
 
     public void Open()
     {
-        PopupManager.instance.Open(popup);   // 먼저 켜야 안쪽 Awake가 실행됨
+        PopupManager.instance.Open(popup, Close);
         Bind();
     }
 

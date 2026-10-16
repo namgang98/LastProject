@@ -14,7 +14,7 @@ public class Entry
 public class PouchDropTable : ScriptableObject
 {
 
-    [SerializeField, Range(0f, 1f)] private float dropChance = 0.001f;
+    [SerializeField, Range(0f, 1f)] private float dropChance = 0.01f;
     [SerializeField] private List<Entry> entries = new();
 
     public float DropChance => dropChance;

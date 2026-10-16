@@ -48,4 +48,12 @@ public class Wallet
         Changed?.Invoke(this);
         return true;
     }
+    public void Earn(int amount)
+    {
+        if(amount <= 0)
+            return;
+
+        Gold += amount;
+        Changed?.Invoke(this);
+    }
 }

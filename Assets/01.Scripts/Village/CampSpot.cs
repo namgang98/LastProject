@@ -35,7 +35,7 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     {
         transform.DOKill();
 
-        if (outline != null)
+        if(outline != null)
             outline.DOKill();
     }
 
@@ -60,15 +60,15 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         float scale = on ? hoverScale : 1f;
         float alpha = on ? hoverAlpha : idleAlpha;
 
-        if (nameLabel != null)
+        if(nameLabel != null)
             nameLabel.SetActive(on);
 
         transform.DOKill();
 
-        if (outline != null)
+        if(outline != null)
             outline.DOKill();
 
-        if (instant)
+        if(instant)
         {
             transform.localScale = Vector3.one * scale;
             SetOutlineAlpha(alpha);
@@ -77,13 +77,13 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
         transform.DOScale(scale, duration).SetEase(on ? Ease.OutBack : Ease.OutQuad);
 
-        if (outline != null)
+        if(outline != null)
             outline.DOFade(alpha, duration);
     }
 
     private void SetOutlineAlpha(float alpha)
     {
-        if (outline == null)
+        if(outline == null)
             return;
 
         Color c = outline.color;
@@ -94,6 +94,13 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     private void SetupHitTest()
     {
         Image image = GetComponent<Image>();
+
+        if(image.sprite == null || !image.sprite.texture.isReadable)
+        {
+            Debug.LogWarning($"[CampSpot] {name} : 그림이 없거나 Read/Write가 꺼져 있어 사각형 전체로 클릭됩니다.", this);
+            return;
+        }
+
         image.alphaHitTestMinimumThreshold = alphaHitThreshold;
     }
 }

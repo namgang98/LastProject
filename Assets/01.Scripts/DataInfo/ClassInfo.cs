@@ -36,7 +36,7 @@ public class ClassInfo : IStatModifier
 
     public void SetPrefab(GameObject prefab)
     {
-        if (Prefab != null)
+        if(Prefab != null)
             return;
         Prefab = prefab;
     }

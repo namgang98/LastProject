@@ -35,7 +35,7 @@ public class Chest
         return leftover;
     }
 
-    private bool TryStore(ItemInstance item)
+    public bool TryStore(ItemInstance item)
     {
         foreach(var tab in tabs)
         {

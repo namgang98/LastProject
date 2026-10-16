@@ -335,6 +335,14 @@ MonoBehaviour:
   kit: {fileID: 11400000, guid: 3c86818ee9c896545b7266a1d55d66f8, type: 2}
   chestTabSize: {x: 8, y: 12}
   startTabCount: 1
+  shopSlotCount: 3
+  buyMultiplier: 3
+  rerollCost: 20
+  shopNormal: 70
+  shopRare: 25
+  shopEpic: 5
+  shopRarePerLevel: 5
+  shopEpicPerLevel: 2
 --- !u!4 &1148943069
 Transform:
   m_ObjectHideFlags: 0
@@ -813,6 +821,7 @@ MonoBehaviour:
   pouchCsv: {fileID: 4900000, guid: c083df870157ec946b7ded340ecddd49, type: 3}
   setCsv: {fileID: 4900000, guid: 9616c488d03eb0c42ac628d35e29dd35, type: 3}
   setBonusCsv: {fileID: 4900000, guid: ba64108d8fc17c64ba9215f9bf8827d7, type: 3}
+  upgradeCsv: {fileID: 4900000, guid: ffe34faa405eac5409fafe16a415466b, type: 3}
   iconLibrary: {fileID: 11400000, guid: 20216c8c80df7864eb072731d2e539c4, type: 2}
   prefabLibrary: {fileID: 11400000, guid: 56cf11582a5258c458ffb7ec871b7b33, type: 2}
 --- !u!1 &7968245182707994519

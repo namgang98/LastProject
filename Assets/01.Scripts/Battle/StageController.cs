@@ -47,7 +47,7 @@ public class StageController : MonoBehaviour
     }
     public void Begin(UnitController runner)
     {
-        if (player != null)
+        if(player != null)
             player.Health.OnDie -= HandlePlayerDead;
 
         player = runner;

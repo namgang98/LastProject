@@ -12,6 +12,8 @@ public class SaveData
     public bool inRun;
     public BackpackSaveData backpack = new();
     public List<GridSaveData> chestTabs = new();
+    public List<int> shopOffers = new();
+    public List<UpgradeSaveData> upgrades = new();
 }
 
 [Serializable]
@@ -36,4 +38,12 @@ public class ItemSaveData
     public int y;
     public int rotation;
     public int parent = -1;
+}
+
+[Serializable]
+public class UpgradeSaveData
+{
+    public string track;
+    public int level = 1;
+    public int deposited;
 }

@@ -10,6 +10,18 @@ public class GameSession : Singleton<GameSession>
     [SerializeField] Vector2Int chestTabSize = new (10, 8);
     [SerializeField, Min(1)] int startTabCount = 1;
 
+    [Header("상점")]
+    [SerializeField, Range(1, Shop.MaxSlots)] int shopSlotCount = 3;
+    [SerializeField] float buyMultiplier = 3f;
+    [SerializeField] int rerollCost = 20;
+    [SerializeField] float shopNormal = 70f;
+    [SerializeField] float shopRare = 25f;
+    [SerializeField] float shopEpic = 5f;
+    [SerializeField] float shopRarePerLevel = 5f;
+    [SerializeField] float shopEpicPerLevel = 2f;
+
+    public Shop Shop { get; private set; }
+    public UpgradeService Upgrades { get; private set; }
     public Chest Chest { get; private set; }
     private SaveService saveService;
     private SaveData saveData;
@@ -37,7 +49,10 @@ public class GameSession : Singleton<GameSession>
 
         if(!TryLoadBackpack())
             return false;
+        
         LoadChest();
+        LoadUpgrades();
+        LoadShop();
         if(!saveData.inRun)
             return true;
 
@@ -63,6 +78,7 @@ public class GameSession : Singleton<GameSession>
             Wallet.CommitRun();
         }
 
+        Shop.Restock();
         Save(false);
     }
 
@@ -165,9 +181,17 @@ public class GameSession : Singleton<GameSession>
     private void Save(bool inRun)
     {
         saveData.chestTabs.Clear();
+        saveData.shopOffers.Clear();
+        saveData.upgrades = Upgrades.ToData();
+
         foreach(var tab in Chest.Tabs)
         {
             saveData.chestTabs.Add(InventorySaveMapper.ToData(tab));
+        }
+
+        foreach(var offer in Shop.Offers)
+        {
+            saveData.shopOffers.Add(offer != null ? offer.Id : 0);
         }
         saveData.classId = CurrentClass.Id;
         saveData.gold = Wallet.Gold;
@@ -188,5 +212,91 @@ public class GameSession : Singleton<GameSession>
         if(info == null)
             return;
         CurrentClass = info;
+    }
+    private void LoadShop()
+    {
+        var rarity = new DropRarity(shopNormal, shopRare, shopEpic, shopRarePerLevel, shopEpicPerLevel);
+        var pricing = new ShopPricing(buyMultiplier, rerollCost);
+
+        int level = 1;
+        int slotCount = shopSlotCount;
+
+        if(Upgrades.TryGet(UpgradeTrack.Shop, out UpgradeProgress progress))
+        {
+            level = progress.Level;
+            slotCount = progress.Current.Value;
+            progress.LevelUp -= HandleShopLevelUp;
+            progress.LevelUp += HandleShopLevelUp;
+        }
+
+        Shop = new Shop(new LootTable(DataManager.instance.Items), rarity, pricing, level, slotCount);
+
+        if(saveData.shopOffers.Count == 0)
+        {
+            Shop.Restock();
+            return;
+        }
+
+        var saved = new List<ItemInfo>();
+
+        foreach(int id in saveData.shopOffers)
+        {
+            DataManager.instance.TryGetItem(id, out ItemInfo info);
+            saved.Add(info);
+        }
+
+        Shop.Restore(saved);
+    }
+
+    public bool TryReceive(ItemInstance item)
+    {
+        if(Backpack.EquippedPouch == null && Backpack.TryEquipPouch(item))
+            return true;
+
+        if(Backpack.Grid.TryAutoPlace(item))
+            return true;
+
+        if(Backpack.PouchStorage != null && Backpack.PouchStorage.TryAutoPlace(item))
+            return true;
+
+        return Chest.TryStore(item);
+    }
+
+    private void LoadUpgrades()
+    {
+        Upgrades = new UpgradeService();
+
+        foreach(UpgradeTrack track in System.Enum.GetValues(typeof(UpgradeTrack)))
+        {
+            if(!DataManager.instance.TryGetUpgrade(track, out UpgradeTrackInfo info))
+            {
+                Debug.LogWarning($"[GameSession] 강화 데이터 {track} 가 없습니다.", this);
+                continue;
+            }
+
+            UpgradeSaveData saved = FindUpgradeSave(track);
+            int level = saved != null ? saved.level : 1;
+            int deposited = saved != null ? saved.deposited : 0;
+            Upgrades.Register(new UpgradeProgress(info, level, deposited));
+        }
+    }
+
+    private UpgradeSaveData FindUpgradeSave(UpgradeTrack track)
+    {
+        string key = track.ToString();
+
+        foreach(var data in saveData.upgrades)
+        {
+            if(data.track == key)
+                return data;
+        }
+
+        return null;
+    }
+
+    private void HandleShopLevelUp(UpgradeProgress progress)
+    {
+        Shop.ApplyLevel(progress.Level, progress.Current.Value);
+        SaveInVillage();
     }
 }

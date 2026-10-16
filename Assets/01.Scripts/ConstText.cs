@@ -34,6 +34,11 @@
     public const string SetId = "setid";
     public const string Members = "members";
     public const string Count = "count";
+
+    public const string Track = "track";
+    public const string Level = "level";
+    public const string Cost = "cost";
+    public const string Value = "value";
 }
 
 public static class DataTag
@@ -47,6 +52,7 @@ public static class DataTag
     public const string Accessories = "accessories";
     public const string Sets = "sets";
     public const string SetBonuses = "setbonuses";
+    public const string Upgrades = "upgrades";
 }
 
 public static class AnimatorTag

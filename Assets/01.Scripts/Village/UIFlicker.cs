@@ -33,7 +33,7 @@ public class UIFlicker : MonoBehaviour
 
         float s = 1f + (n - 0.5f) * 2f * scaleAmount;
 
-        if (onlyY)
+        if(onlyY)
         {
             rect.localScale = new Vector3(1f, s, 1f);
             return;

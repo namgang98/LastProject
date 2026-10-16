@@ -36,7 +36,7 @@ public class ClassCardView : MonoBehaviour
 
     private static Sprite FindPortrait(ClassInfo info)
     {
-        if (info.Prefab == null)
+        if(info.Prefab == null)
             return null;
 
         SpriteRenderer renderer = info.Prefab.GetComponentInChildren<SpriteRenderer>();

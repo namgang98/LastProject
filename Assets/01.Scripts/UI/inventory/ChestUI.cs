@@ -99,7 +99,7 @@ public class ChestUI : MonoBehaviour
     {
         List<ItemInstance> leftover = chest.StoreAll(GameSession.instance.Backpack.Grid);
 
-        if (leftover.Count > 0) //피드백팝업만들면 변경
+        if(leftover.Count > 0) //피드백팝업만들면 변경
             Debug.LogWarning($"[ChestUI] 창고 공간이 부족해 {leftover.Count}개를 넣지 못했습니다.", this);
 
         GameSession.instance.SaveInVillage();

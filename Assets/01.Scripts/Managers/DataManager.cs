@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
+    #region IdRange
     private readonly struct IdRange
     {
         public readonly int Min;
@@ -27,9 +28,10 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange SetIds = new(6000, 6999);
     private static readonly IdRange AccessoryIds = new(5000, 5999);
     private static readonly IdRange PouchIds = new(9000, 9010);
+    private static readonly IdRange UpgradeIds = new(7000, 7999);
+    #endregion
 
-    private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
-
+    #region 필드 + 라이브러리
     [Header("CSV문서")]
     [SerializeField] TextAsset bagCsv;
     [SerializeField] TextAsset weaponCsv;
@@ -40,23 +42,32 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset pouchCsv;
     [SerializeField] TextAsset setCsv;
     [SerializeField] TextAsset setBonusCsv;
+    [SerializeField] TextAsset upgradeCsv;
+
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
     [SerializeField] PrefabLibrary prefabLibrary;
-    
+    #endregion
 
-
+    #region 딕셔너리모음
     private readonly Dictionary<int, ItemInfo> items = new();
     private readonly Dictionary<int, MonsterInfo> monsters = new();
     private readonly Dictionary<int, ClassInfo> classes = new();
     private readonly Dictionary<int, SetInfo> sets = new();
     private readonly Dictionary<int, List<SetInfo>> setsByItem = new();
     private static readonly List<SetInfo> NoSets = new();
+    private readonly Dictionary<UpgradeTrack, UpgradeTrackInfo> upgrades = new();
+    #endregion
+
+    private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
+
     private bool isLoading;
     public bool IsLoaded { get; private set; }
+    #region 읽기전용
     public IReadOnlyCollection<ItemInfo> Items => items.Values;
     public IReadOnlyCollection<MonsterInfo> Monsters => monsters.Values; 
     public IReadOnlyCollection<ClassInfo> Classes => classes.Values;
+    #endregion
 
     #region 초기화
     public async Awaitable InitAsync()
@@ -76,7 +87,7 @@ public class DataManager : Singleton<DataManager>
 
         isLoading = true;
 
-        //메인 스레드
+        #region 메인스레드 ReadText
         string weaponText = ReadText(weaponCsv, nameof(weaponCsv));
         string pouchText = ReadText(pouchCsv, nameof(pouchCsv));
         string bagText = ReadText(bagCsv, nameof(bagCsv));
@@ -86,11 +97,12 @@ public class DataManager : Singleton<DataManager>
         string accessoryText = ReadText(accessoryCsv, nameof(accessoryCsv));
         string setText = ReadText(setCsv, nameof(setCsv));
         string setBonusText = ReadText(setBonusCsv, nameof(setBonusCsv));
+        string upgradeText = ReadText(upgradeCsv, nameof(upgradeCsv));
+        #endregion
 
-
-        //백그라운드 스레드
         await Awaitable.BackgroundThreadAsync();
 
+        #region 백그라운드 스레드 ParseTable
         var errors = new List<string>();
         List<WeaponInfo> weaponList = ParseTable<WeaponInfo>(DataTag.Weapons, weaponText, errors, InfoParser.TryParseWeapon);
         List<PouchInfo> pouchList = ParseTable<PouchInfo>(DataTag.Pouches, pouchText, errors, InfoParser.TryParsePouch);
@@ -101,6 +113,8 @@ public class DataManager : Singleton<DataManager>
         List<AccessoryInfo> accessoryList = ParseTable<AccessoryInfo>(DataTag.Accessories, accessoryText, errors, InfoParser.TryParseAccessory);
         List<SetInfo> setList = ParseTable<SetInfo>(DataTag.Sets, setText, errors, InfoParser.TryParseSet);
         List<SetBonusInfo> setBonusList = ParseTable<SetBonusInfo>(DataTag.SetBonuses, setBonusText, errors, InfoParser.TryParseSetBonus);
+        List<UpgradeLevelInfo> upgradeList = ParseTable<UpgradeLevelInfo>(DataTag.Upgrades, upgradeText, errors, InfoParser.TryParseUpgrade);
+        #endregion
 
         //메인 스레드
         await Awaitable.MainThreadAsync();
@@ -114,6 +128,7 @@ public class DataManager : Singleton<DataManager>
         else
             errors.Add("monsterPrefabs가 연결되지 않았습니다");
 
+        #region Register
         RegisterItems(DataTag.Weapons, weaponList, WeaponIds, errors);
         RegisterItems(DataTag.Pouches, pouchList, PouchIds, errors);
         RegisterItems(DataTag.Bags, bagList, BagIds, errors);
@@ -123,6 +138,8 @@ public class DataManager : Singleton<DataManager>
         RegisterItems(DataTag.Accessories, accessoryList, AccessoryIds, errors);
         RegisterSets(DataTag.Sets, setList, SetIds, errors);
         RegisterSetBonuses(DataTag.SetBonuses, setBonusList, errors);
+        RegisterUpgrades(DataTag.Upgrades, upgradeList, UpgradeIds, errors);
+        #endregion
 
         foreach(var error in errors)
         {
@@ -319,6 +336,50 @@ public class DataManager : Singleton<DataManager>
         errors.Add($"{sheetName} : ID {id} 의 아이콘 '{prefabName}' 을 MonsterPrefabs 에서 찾을 수 없습니다");
         return null;
     }
+
+    private void RegisterUpgrades(string sheetName, List<UpgradeLevelInfo> list, IdRange range, List<string> errors)
+    {
+        foreach(var info in list)
+        {
+            if(!range.Contains(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id}가 구간 {range.Min}~{range.Max} 밖입니다");
+                continue;
+            }
+
+            if(!upgrades.TryGetValue(info.Track, out UpgradeTrackInfo track))
+            {
+                track = new UpgradeTrackInfo(info.Track);
+                upgrades.Add(info.Track, track);
+            }
+
+            if(track.HasLevel(info.Level))
+            {
+                errors.Add($"{sheetName} : {info.Track} {info.Level}레벨 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            track.Add(info);
+        }
+
+        var broken = new List<UpgradeTrack>();
+
+        foreach(var pair in upgrades)
+        {
+            if(pair.Value.IsValid(out string reason))
+                continue;
+
+            errors.Add($"{sheetName} : {pair.Key} {reason} → 이 강화는 사용하지 않습니다");
+            broken.Add(pair.Key);
+        }
+
+        foreach(var key in broken)
+        {
+            upgrades.Remove(key);
+        }
+    }
+
+    
     #endregion
 
     #region 조회
@@ -357,6 +418,10 @@ public class DataManager : Singleton<DataManager>
             return list;
 
         return NoSets;
+    }
+    public bool TryGetUpgrade(UpgradeTrack track, out UpgradeTrackInfo info)
+    {
+        return upgrades.TryGetValue(track, out info);
     }
     #endregion
 }

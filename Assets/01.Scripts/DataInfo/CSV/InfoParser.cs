@@ -198,6 +198,30 @@ public static class InfoParser
         info = new SetBonusInfo(setid,count,maxHp,damageBonus,cooldownReduction,critChance,desc);
         return true;
     }
+
+    public static bool TryParseUpgrade(CsvRow row, List<string> errors, out UpgradeLevelInfo info)
+    {
+        info = null;
+
+        if(!row.TryGetInt(CSVStamp.Id, out int id))
+            return Fail(row, errors, CSVStamp.Id);
+
+        if(!row.TryGetEnum(CSVStamp.Track, out UpgradeTrack track))
+            return Fail(row, errors, CSVStamp.Track);
+
+        if(!row.TryGetInt(CSVStamp.Level, out int level) || level < 1)
+            return Fail(row, errors, CSVStamp.Level);
+
+        if(!row.TryGetInt(CSVStamp.Cost, out int cost) || cost < 0)
+            return Fail(row, errors, CSVStamp.Cost);
+
+        if(!row.TryGetInt(CSVStamp.Value, out int value))
+            return Fail(row, errors, CSVStamp.Value);
+
+        string desc = row.GetString(CSVStamp.Description);
+        info = new UpgradeLevelInfo(id, track, level, cost, value, desc);
+        return true;
+    }
     #endregion
 
     #region 공통

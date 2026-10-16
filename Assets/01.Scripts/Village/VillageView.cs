@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class VillageView : MonoBehaviour
 {
     private void Start()
     {
-        GameSession.instance.RefreshGold();
+        GameSession s = GameSession.instance;
     }
 }

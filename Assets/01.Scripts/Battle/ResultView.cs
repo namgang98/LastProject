@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ResultView : MonoBehaviour
@@ -8,11 +9,10 @@ public class ResultView : MonoBehaviour
     [SerializeField] TextMeshProUGUI titleText;
     [SerializeField] TextMeshProUGUI stageText;
     [SerializeField] Button restartButton;
-    [SerializeField] RunController run;
 
     private void Awake()
     {
-        restartButton.onClick.AddListener(Restart);
+        restartButton.onClick.AddListener(ReturnToVillage);
     }
 
     private void OnEnable()
@@ -26,24 +26,21 @@ public class ResultView : MonoBehaviour
 
         EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);
     }
-
     private void HandleRunEnded(OnRunEnded e)
     {
         Show(e.Reason, e.Stage);
     }
-
-    private void Restart()
+    private void ReturnToVillage()
     {
-        PopupManager.instance.Close(panel);
-        run.StartRun();
+        restartButton.interactable = false;
+        SceneManager.LoadScene(SceneNames.Village);
     }
-
     private void Show(RunEndReason reason, int stage)
     {
         titleText.text = reason == RunEndReason.Death ? "쓰러졌다..." : "안전 귀환 성공!";
         stageText.text = $"{stage}F";
 
-        PopupManager.instance.Open(panel);
+        PopupManager.instance.Open(panel, closeOnEscape: false);
     }
 
 }

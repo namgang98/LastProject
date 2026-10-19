@@ -19,7 +19,9 @@ public static class InfoParser
         public int sellPrice;
         public string desc;
     }
+
     #region 탭별 변환
+    //무기
     public static bool TryParseWeapon(CsvRow row, List<string> errors, out WeaponInfo info)
     {
         info = null;
@@ -36,7 +38,7 @@ public static class InfoParser
         info = new WeaponInfo(i.common.id, i.common.name, i.iconName, i.shape, i.grade, i.sellPrice, i.desc, attack, type);
         return true;
     }
-
+    //주머니
     public static bool TryParsePouch(CsvRow row, List<string> errors, out PouchInfo info)
     {
         info = null;
@@ -50,7 +52,7 @@ public static class InfoParser
         info = new PouchInfo(i.common.id, i.common.name, i.iconName, i.shape, i.grade, i.sellPrice, i.desc, storage);
         return true;
     }
-
+    //가방
     public static bool TryParseBag(CsvRow row, List<string> errors, out BagInfo info)
     {
         info = null;
@@ -68,7 +70,7 @@ public static class InfoParser
         return true;
 
     }
-
+    //몬스터
     public static bool TryParseMonster(CsvRow row, List<string> errors, out MonsterInfo info)
     {
         info = null;
@@ -95,7 +97,7 @@ public static class InfoParser
         info = new MonsterInfo(b.id, b.name, prefab, maxHp, attack, dropgold, type);
         return true;
     }
-
+    //직업
     public static bool TryParseClass(CsvRow row, List<string> errors, out ClassInfo info)
     {
         info = null;
@@ -117,10 +119,21 @@ public static class InfoParser
 
         string desc = row.GetString(CSVStamp.Description);
 
-        info = new ClassInfo(b.id, b.name, maxHp, type, damageRate, cooldownRate, desc);
+        string prefab = row.GetString(CSVStamp.Prefab);
+
+        if(string.IsNullOrEmpty(prefab))
+            return Fail(row, errors, CSVStamp.Prefab);
+
+        if(!row.TryGetInt(CSVStamp.UnlockFloor, out int unlockFloor) || unlockFloor < 0)
+            return Fail(row, errors, CSVStamp.UnlockFloor);
+
+        if(!row.TryGetInt(CSVStamp.UnlockCost, out int unlockCost) || unlockCost < 0)
+            return Fail(row, errors, CSVStamp.UnlockCost);
+
+        info = new ClassInfo(b.id, b.name, maxHp, type, damageRate, cooldownRate, desc, prefab, unlockFloor, unlockCost);
         return true;
     }
-
+    //아머
     public static bool TryParseArmor(CsvRow row, List<string> errors, out ArmorInfo info)
     {
         info = null;
@@ -138,6 +151,7 @@ public static class InfoParser
         return true;
 
     }
+    //악세서리
     public static bool TryParseAccessory(CsvRow row, List<string> errors, out AccessoryInfo info)
     {
         info = null;
@@ -160,7 +174,7 @@ public static class InfoParser
         info = new AccessoryInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc, effect, maxHp, damageBonus, cooldownReduction);
         return true;
     }
-
+    //새트
     public static bool TryParseSet(CsvRow row, List<string> errors, out SetInfo info)
     {
         info = null;
@@ -173,7 +187,7 @@ public static class InfoParser
         info = new SetInfo(setid, name, members, desc);
         return true;
     }
-
+    //세트보너스
     public static bool TryParseSetBonus(CsvRow row, List<string> errors, out SetBonusInfo info)
     {
         info = null;
@@ -192,6 +206,48 @@ public static class InfoParser
             return Fail(row, errors, CSVStamp.CritChance);
         string desc = row.GetString(CSVStamp.Description);
         info = new SetBonusInfo(setid,count,maxHp,damageBonus,cooldownReduction,critChance,desc);
+        return true;
+    }
+    //업그레이드
+    public static bool TryParseUpgrade(CsvRow row, List<string> errors, out UpgradeLevelInfo info)
+    {
+        info = null;
+
+        if(!row.TryGetInt(CSVStamp.Id, out int id))
+            return Fail(row, errors, CSVStamp.Id);
+
+        if(!row.TryGetEnum(CSVStamp.Track, out UpgradeTrack track))
+            return Fail(row, errors, CSVStamp.Track);
+
+        if(!row.TryGetInt(CSVStamp.Level, out int level) || level < 1)
+            return Fail(row, errors, CSVStamp.Level);
+
+        if(!row.TryGetInt(CSVStamp.Cost, out int cost) || cost < 0)
+            return Fail(row, errors, CSVStamp.Cost);
+
+        if(!row.TryGetInt(CSVStamp.Value, out int value))
+            return Fail(row, errors, CSVStamp.Value);
+
+        string desc = row.GetString(CSVStamp.Description);
+        info = new UpgradeLevelInfo(id, track, level, cost, value, desc);
+        return true;
+    }
+    //훈련스텟
+    public static bool TryParseTrainingStat(CsvRow row, List<string> errors, out TrainingStatInfo info)
+    {
+        info = null;
+
+        if(!row.TryGetEnum(CSVStamp.Stat, out TrainingStat stat))
+            return Fail(row, errors, CSVStamp.Stat);
+
+        if(!row.TryGetFloat(CSVStamp.Increase, out float increase) || increase <= 0f)
+            return Fail(row, errors, CSVStamp.Increase);
+
+        if(!row.TryGetInt(CSVStamp.MaxPoints, out int maxPoints) || maxPoints < 1)
+            return Fail(row, errors, CSVStamp.MaxPoints);
+
+        string desc = row.GetString(CSVStamp.Description);
+        info = new TrainingStatInfo(stat, increase, maxPoints, desc);
         return true;
     }
     #endregion

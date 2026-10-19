@@ -34,6 +34,18 @@
     public const string SetId = "setid";
     public const string Members = "members";
     public const string Count = "count";
+
+    public const string Track = "track";
+    public const string Level = "level";
+    public const string Cost = "cost";
+    public const string Value = "value";
+
+    public const string UnlockFloor = "unlockfloor";
+    public const string UnlockCost = "unlockcost";
+    public const string Stat = "stat";
+    public const string Increase = "increase";
+    public const string MaxPoints = "maxpoints";
+
 }
 
 public static class DataTag
@@ -47,6 +59,8 @@ public static class DataTag
     public const string Accessories = "accessories";
     public const string Sets = "sets";
     public const string SetBonuses = "setbonuses";
+    public const string Upgrades = "upgrades";
+    public const string TrainingStats = "trainingstats";
 }
 
 public static class AnimatorTag
@@ -58,4 +72,9 @@ public static class AnimatorTag
     public const string Recover = "Recover";
 }
 
-        
+public static class SceneNames
+{
+    public const string Boot = "Boot";
+    public const string Village = "Village";
+    public const string Dungeon = "Dungeon";
+}

@@ -34,8 +34,8 @@ public class TestItemSpawner : MonoBehaviour
         if(keyboard.digit4Key.wasPressedThisFrame && run != null)
             DebugKey(run.CurrentBackpack);
 
-        if (keyboard.digit5Key.wasPressedThisFrame && run != null)
-            run.DeleteSave();
+        if(keyboard.digit5Key.wasPressedThisFrame && run != null)
+            GameSession.instance.DeleteSave();
     }
     private void DebugKey(Backpack backpack)
     {

@@ -219,7 +219,7 @@ namespace DG.Tweening
                 if(Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && !t.IsComplete()) await System.Threading.Tasks.Task.Yield();
+            while(t.active && !t.IsComplete()) await System.Threading.Tasks.Task.Yield();
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace DG.Tweening
                 if(Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && (!t.playedOnce || t.position * (t.CompletedLoops() + 1) > 0)) await System.Threading.Tasks.Task.Yield();
+            while(t.active && (!t.playedOnce || t.position * (t.CompletedLoops() + 1) > 0)) await System.Threading.Tasks.Task.Yield();
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace DG.Tweening
                 if(Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active) await System.Threading.Tasks.Task.Yield();
+            while(t.active) await System.Threading.Tasks.Task.Yield();
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace DG.Tweening
                 if(Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && t.CompletedLoops() < elapsedLoops) await System.Threading.Tasks.Task.Yield();
+            while(t.active && t.CompletedLoops() < elapsedLoops) await System.Threading.Tasks.Task.Yield();
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace DG.Tweening
                 if(Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && t.position * (t.CompletedLoops() + 1) < position) await System.Threading.Tasks.Task.Yield();
+            while(t.active && t.position * (t.CompletedLoops() + 1) < position) await System.Threading.Tasks.Task.Yield();
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace DG.Tweening
                 if(Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && !t.playedOnce) await System.Threading.Tasks.Task.Yield();
+            while(t.active && !t.playedOnce) await System.Threading.Tasks.Task.Yield();
         }
 
         #endregion

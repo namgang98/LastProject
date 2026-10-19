@@ -1,11 +1,11 @@
 ﻿
 public static class PlayerStatsBuilder
 {
-    public static PlayerStats Build(ClassInfo playerClass, Backpack backpack)
+    public static PlayerStats Build(ClassInfo playerClass, Backpack backpack, IStatModifier training)
     {
         var stats = new PlayerStats();
-
         playerClass.Apply(stats);
+        training.Apply(stats);
 
         foreach(var item in backpack.EquippedItems())
         {

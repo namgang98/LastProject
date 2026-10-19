@@ -8,6 +8,6 @@
     }
     protected override bool CanStore(ItemInstance item)
     {
-        return item.Info.CanStoreInPouch;
+        return item != this && item.Info.CanStoreInPouch;
     }
 }

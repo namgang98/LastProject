@@ -13,7 +13,7 @@ public class ItemDropper : MonoBehaviour
     [SerializeField] float rarePerStage = 1f;
     [SerializeField] float epicPerStage = 0.5f;
 
-    private readonly Dictionary<ItemGrade, List<ItemInfo>> looTable = new();
+    private LootTable table;
     private DropRarity rarity;
     private int currentStage = 1;
 
@@ -35,39 +35,17 @@ public class ItemDropper : MonoBehaviour
         EventManager.instance.RemoveListener<OnMonsterKilled>(HandleMonsterKilled);
         EventManager.instance.RemoveListener<OnStageStarted>(HandleStageStarted);
     }
-    private void BuildTable()
-    {
-        foreach(var item in DataManager.instance.Items)
-        {
-            if(!item.IsLootable)
-                continue;
-
-            if(!looTable.TryGetValue(item.Grade, out List<ItemInfo> list))
-            {
-                list = new List<ItemInfo>();
-                looTable.Add(item.Grade, list);
-            }
-
-            list.Add(item);
-        }
-    }
-
     private ItemInfo PickItem()
     {
-        ItemGrade grade = rarity.Roll(currentStage);
-
-        if(!looTable.TryGetValue(grade, out List<ItemInfo> list))
-            list = looTable[ItemGrade.Normal];
-
-        return list[Random.Range(0, list.Count)];
+        return table.Pick(rarity.Roll(currentStage));
     }
 
     private void HandleMonsterKilled(OnMonsterKilled e)
     {
-        if(looTable.Count == 0)
-            BuildTable();
+        if(table == null)
+            table = new LootTable(DataManager.instance.Items);
 
-        if(!looTable.ContainsKey(ItemGrade.Normal))
+        if(table.IsEmpty)
         {
             Debug.LogWarning("[ItemDropper] Normal 등급 아이템이 없습니다.");
             return;

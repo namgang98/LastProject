@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-class Slot
+public class StatusSlot
 {
     public DamageElement element;
     public GameObject root;
@@ -13,10 +13,10 @@ class Slot
 public class StatusIconView : MonoBehaviour
 {
     [SerializeField] UnitController owner;
-    [SerializeField] Slot[] slots;
+    [SerializeField] StatusSlot[] slots;
     private void Awake()
     {
-        foreach(Slot slot in slots)
+        foreach(StatusSlot slot in slots)
         {
             slot.root.SetActive(false);
         }
@@ -37,7 +37,7 @@ public class StatusIconView : MonoBehaviour
     {
         owner = unit;
 
-        foreach(Slot slot in slots)
+        foreach(StatusSlot slot in slots)
         {
             slot.status = null;
             slot.root.SetActive(false);
@@ -48,7 +48,7 @@ public class StatusIconView : MonoBehaviour
         if(owner == null || e.Target != owner.Health)
             return;
 
-        Slot slot = Find(e.Status.Element);
+        StatusSlot slot = Find(e.Status.Element);
 
         if(slot == null)
             return;
@@ -61,7 +61,7 @@ public class StatusIconView : MonoBehaviour
         if(owner == null || e.Target != owner.Health)
             return;
 
-        Slot slot = Find(e.Element);
+        StatusSlot slot = Find(e.Element);
 
         if(slot == null)
             return;
@@ -71,7 +71,7 @@ public class StatusIconView : MonoBehaviour
     }
     private void Update()
     {
-        foreach(Slot slot in slots)
+        foreach(StatusSlot slot in slots)
         {
             if(slot.status == null)
                 continue;
@@ -79,9 +79,9 @@ public class StatusIconView : MonoBehaviour
             slot.fill.fillAmount = slot.status.Progress;
         }
     }
-    private Slot Find(DamageElement element)
+    private StatusSlot Find(DamageElement element)
     {
-        foreach(Slot slot in slots)
+        foreach(StatusSlot slot in slots)
         {
             if(slot.element == element)
                 return slot;

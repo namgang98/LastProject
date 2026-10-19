@@ -22,7 +22,7 @@ public readonly struct EffectData
 
     public string Describe()
     {
-        switch (Type)
+        switch(Type)
         {
             case EffectType.Heal:
                 return $"{Cooldown:0.#}초마다 체력 {Value} 회복";

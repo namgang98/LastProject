@@ -3,142 +3,77 @@ using UnityEngine;
 
 public class RunController : MonoBehaviour
 {
-    private const string SaveFileName = "save.json";
-
-    [SerializeField] int defaultclassId = 3000;
-    [SerializeField] StarterKit kit;
     [SerializeField] InventoryUI ui;
     [SerializeField] BattleController battle;
     [SerializeField] StageController stage;
-    [SerializeField] UnitController player;
+    [SerializeField] Transform playerSpawnPoint;
+    [SerializeField] StatusIconView playerStatusIcons;
+    private UnitController player;
     [SerializeField] ToolTipView toolTip;
-    private ClassInfo currentClass;
-    private Backpack backpack;
-    private SaveService saveService;
-    private SaveData saveData;
-    private Wallet wallet;
-    public Backpack CurrentBackpack => backpack;
-    private void Awake()
-    {
-        saveService = new SaveService(new FileSaveStorage(SaveFileName));
-    }
+    [SerializeField] HpBarView playerHpBar;
+    public Backpack CurrentBackpack => GameSession.instance.Backpack;
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnRunEnded>(HandleRunEnded);
         EventManager.instance.AddListener<OnMonsterKilled>(HandleMonsterKilled);
+        EventManager.instance.AddListener<OnStageStarted>(HandleStageStarted);
     }
 
     private void OnDisable()
     {
-        if (!EventManager.HasInstance)
+        if(!EventManager.HasInstance)
             return;
 
         EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);
         EventManager.instance.RemoveListener<OnMonsterKilled>(HandleMonsterKilled);
+        EventManager.instance.RemoveListener<OnStageStarted>(HandleStageStarted);
     }
-
-    public void StartFirstRun()
+    private void Start()
     {
-        if (!saveService.TryLoad(out saveData))
-            saveData = new SaveData { classId = defaultclassId };
-        
-        wallet = new Wallet(saveData.gold);
-        wallet.Changed += PostGold;
-        PostGold(wallet);
+        GameSession session = GameSession.instance;
 
-        if (!DataManager.instance.TryGetClass(saveData.classId, out currentClass))
-        {
-            Debug.LogError($"[RunController] 직업 ID {saveData.classId}를 찾을 수 없습니다.", this);
-            return;
-        }
-        if (!TryLoadBackpack())
+        if(!TrySpawnPlayer(session.CurrentClass))
             return;
 
-        if (saveData.inRun)
-        {
-            Debug.Log("[RunController] 런 도중 종료 기록 → 사망 처리", this);
-            LoseBackpack();
-        }
 
-        StartRun();
-    }
-
-    public void StartRun()
-    {
-        var stats = PlayerStatsBuilder.Build(currentClass, backpack);
-        ui.Bind(backpack);
-        battle.Bind(backpack, currentClass);
-        toolTip.Bind(backpack);
+        ui.Bind(session.Backpack);
+        IStatModifier training = session.Training.GetBonus(session.CurrentClass);
+        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training);
+        battle.Bind(session.Backpack, session.CurrentClass, training);
+        toolTip.Bind(session.Backpack);
+        playerHpBar.Bind(player.Health);
+        playerStatusIcons.Bind(player);
         player.ResetUnit(stats.MaxHp);
-        Save(true);
-        stage.Begin();
+        session.RefreshGold();
+        stage.Begin(player);
     }
+    private bool TrySpawnPlayer(ClassInfo info)
+    {
+        if(info == null || info.Prefab == null)
+        {
+            Debug.LogError($"[RunController] 직업 {info?.Name} 의 프리팹이 없습니다.", this);
+            return false;
+        }
 
+        GameObject obj = Instantiate(info.Prefab, playerSpawnPoint);
+
+        if(obj.TryGetComponent(out player))
+            return true;
+
+        Debug.LogError($"[RunController] {info.Prefab.name} 에 UnitController가 없습니다.", this);
+        Destroy(obj);
+        return false;
+    }
     private void HandleRunEnded(OnRunEnded e)
     {
-        if(e.Reason == RunEndReason.Death)
-        {
-            LoseBackpack();
-            wallet.LoseRun();
-        }
-
-        wallet.CommitRun();
-        Save(false);
+        GameSession.instance.FinishRun(e.Reason);
     }
     private void HandleMonsterKilled(OnMonsterKilled e)
     {
-        wallet.AddRunGold(e.Monster.DropGold);
+        GameSession.instance.Wallet.AddRunGold(e.Monster.DropGold);
     }
-
-    private bool TryLoadBackpack()
+    private void HandleStageStarted(OnStageStarted e)
     {
-        var errors = new List<string>();
-
-        if (saveData.backpack.bagId != 0 && InventorySaveMapper.TryRestore(saveData.backpack, errors, out backpack))
-        {
-            foreach (var error in errors)
-            {
-                Debug.LogWarning($"[RunController] {error}", this);
-            }
-
-            return true;
-        }
-
-        return kit.TryCreate(out backpack);
-    }
-    private void LoseBackpack()
-    {
-
-       PouchInstance pouch = backpack.LoseAllOnDeath();
-
-       if(!kit.TryCreate(out Backpack newPack))
-           return;
-
-       if(pouch != null && !newPack.Grid.TryAutoPlace(pouch))
-       {
-               Debug.LogWarning("[RunController] 새 가방에 안전 주머니를 넣지 못했습니다.", this);   
-       }
-
-       backpack = newPack;
-   
-    }
-
-    private void Save(bool inRun)
-    {
-        saveData.classId = currentClass.Id;
-        saveData.inRun = inRun;
-        saveData.backpack = InventorySaveMapper.ToData(backpack);
-        saveData.gold = wallet.Gold;
-        saveService.Save(saveData);
-    }
-
-    public void DeleteSave()
-    {
-        saveService.Delete();
-        Debug.Log($"[RunController] 세이브 삭제 : {Application.persistentDataPath}", this);
-    }
-    private void PostGold(Wallet w)
-    {
-        EventManager.instance.PostNotification(new OnChangeGold(w.Gold, w.RunGold));
+        GameSession.instance.Training.ReportFloor(e.Stage);
     }
 }

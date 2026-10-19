@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameBootStrap : MonoBehaviour
 {
-    [SerializeField] RunController run;
-    [SerializeField] UnitController player;
-    [SerializeField] HpBarView hpBar;
-
     private async Awaitable Start()
     {
-
         await DataManager.instance.InitAsync();
 
-        run.StartFirstRun();
-        hpBar.Bind(player.Health);
+        if(!GameSession.instance.TryLoad())
+        {
+            Debug.LogError("[GameBootStrap] 세션을 불러오지 못했습니다.", this);
+            return;
+        }
+
+        await SceneManager.LoadSceneAsync(SceneNames.Village);
     }
 }

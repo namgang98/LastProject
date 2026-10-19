@@ -13,7 +13,7 @@ public class Wallet
 
     public void AddRunGold(int amount)
     {
-        if (amount <= 0)
+        if(amount <= 0)
             return;
 
         RunGold += amount;
@@ -22,7 +22,7 @@ public class Wallet
 
     public void CommitRun()
     {
-        if (RunGold == 0)
+        if(RunGold == 0)
             return;
 
         Gold += RunGold;
@@ -32,7 +32,7 @@ public class Wallet
 
     public void LoseRun()
     {
-        if (RunGold == 0)
+        if(RunGold == 0)
             return;
 
         RunGold = 0;
@@ -41,11 +41,19 @@ public class Wallet
 
     public bool TrySpend(int amount)
     {
-        if (amount <= 0 || Gold < amount)
+        if(amount <= 0 || Gold < amount)
             return false;
 
         Gold -= amount;
         Changed?.Invoke(this);
         return true;
+    }
+    public void Earn(int amount)
+    {
+        if(amount <= 0)
+            return;
+
+        Gold += amount;
+        Changed?.Invoke(this);
     }
 }

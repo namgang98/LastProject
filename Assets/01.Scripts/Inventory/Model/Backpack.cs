@@ -2,41 +2,49 @@
 
 public class Backpack
 {
-    public GridContainer Grid => Bag.Storage;
     public BagInstance Bag { get; }
+    public GridContainer Grid => Bag.Storage;
     public PouchInstance EquippedPouch { get; private set; }
-
-    // 가방 옆에 표시할 주머니 공간 (없으면 null)
     public GridContainer PouchStorage => EquippedPouch?.Storage;
 
     public Backpack(BagInstance bag)
     {
         Bag = bag;
-        Grid.Changed += OnGridChanged;
+    }
+    #region 파우치 장착
+    public bool CanEquipPouch(ItemInstance item)
+    {
+        return EquippedPouch == null && item is PouchInstance;
     }
 
-    // 메인 그리드가 바뀔 때마다 주머니가 들어왔는지 / 빠졌는지 확인
-    private void OnGridChanged(GridContainer grid)
+    public bool TryEquipPouch(ItemInstance item)
     {
-        PouchInstance found = FindPouch();
+        if(EquippedPouch != null || item is not PouchInstance pouch)
+            return false;
 
-        if(found == EquippedPouch)
-            return;
+        pouch.Owner?.Remove(pouch);
+        EquippedPouch = pouch;
+        NotifyPouchChanged();
+        return true;
+    }
 
-        EquippedPouch = found;
+    public PouchInstance UnequipPouch()
+    {
+        PouchInstance pouch = EquippedPouch;
+
+        if(pouch == null)
+            return null;
+
+        EquippedPouch = null;
+        NotifyPouchChanged();
+        return pouch;
+    }
+
+    private void NotifyPouchChanged()
+    {
         EventManager.instance.PostNotification(new OnPouchChanged(this, EquippedPouch));
     }
-
-    private PouchInstance FindPouch()
-    {
-        foreach(var item in Grid.Items)
-        {
-            if(item is PouchInstance pouch)
-                return pouch;
-        }
-
-        return null;
-    }
+    #endregion
 
     public List<ItemInstance> ExtractAll()
     {
@@ -53,12 +61,20 @@ public class Backpack
     public IEnumerable<ItemInstance> EquippedItems()
     {
         foreach(var item in Grid.Items)
+        {
+            if(item is ContainerInstance)
+                continue;
             yield return item;
+        }
 
         if(PouchStorage == null)
             yield break;
 
         foreach(var item in PouchStorage.Items)
+        {
+            if(item is ContainerInstance)
+                continue;
             yield return item;
+        }
     }
 }

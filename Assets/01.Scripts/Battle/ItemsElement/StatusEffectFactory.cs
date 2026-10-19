@@ -2,7 +2,7 @@
 {
     public static IStatusEffect Create(AttackData data, UnitHealth target)
     {
-        switch (data.Element)
+        switch(data.Element)
         {
             case DamageElement.Poison:
                 return new PoisonStatus(target, data.ElementValue, data.ElementDuration);

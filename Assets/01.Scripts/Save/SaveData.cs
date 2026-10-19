@@ -10,10 +10,13 @@ public class SaveData
     public int classId;
     public int gold;
     public bool inRun;
+    public int bestFloor;
     public BackpackSaveData backpack = new();
     public List<GridSaveData> chestTabs = new();
     public List<int> shopOffers = new();
     public List<UpgradeSaveData> upgrades = new();
+    public List<int> unlockedClasses = new();
+    public List<ClassProgressSaveData> classProgress = new();
 }
 
 [Serializable]
@@ -46,4 +49,12 @@ public class UpgradeSaveData
     public string track;
     public int level = 1;
     public int deposited;
+}
+
+[Serializable]
+public class ClassProgressSaveData
+{
+    public int classId;
+    public int level = 1;
+    public List<int> points = new();
 }

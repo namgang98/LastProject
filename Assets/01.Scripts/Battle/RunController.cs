@@ -16,6 +16,7 @@ public class RunController : MonoBehaviour
     {
         EventManager.instance.AddListener<OnRunEnded>(HandleRunEnded);
         EventManager.instance.AddListener<OnMonsterKilled>(HandleMonsterKilled);
+        EventManager.instance.AddListener<OnStageStarted>(HandleStageStarted);
     }
 
     private void OnDisable()
@@ -25,6 +26,7 @@ public class RunController : MonoBehaviour
 
         EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);
         EventManager.instance.RemoveListener<OnMonsterKilled>(HandleMonsterKilled);
+        EventManager.instance.RemoveListener<OnStageStarted>(HandleStageStarted);
     }
     private void Start()
     {
@@ -33,10 +35,11 @@ public class RunController : MonoBehaviour
         if(!TrySpawnPlayer(session.CurrentClass))
             return;
 
-        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack);
 
         ui.Bind(session.Backpack);
-        battle.Bind(session.Backpack, session.CurrentClass);
+        IStatModifier training = session.Training.GetBonus(session.CurrentClass);
+        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training);
+        battle.Bind(session.Backpack, session.CurrentClass, training);
         toolTip.Bind(session.Backpack);
         playerHpBar.Bind(player.Health);
         playerStatusIcons.Bind(player);
@@ -68,5 +71,9 @@ public class RunController : MonoBehaviour
     private void HandleMonsterKilled(OnMonsterKilled e)
     {
         GameSession.instance.Wallet.AddRunGold(e.Monster.DropGold);
+    }
+    private void HandleStageStarted(OnStageStarted e)
+    {
+        GameSession.instance.Training.ReportFloor(e.Stage);
     }
 }

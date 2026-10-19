@@ -11,7 +11,7 @@ public class BattleController : MonoBehaviour
     private UnitController player;
     private UnitController monster;
     private ClassInfo playerClass;
-
+    private IStatModifier training;
     public event Action<ItemInstance, ICooldownSource> OnActionReady;
     public event Action OnBattleEnded;
 
@@ -46,7 +46,7 @@ public class BattleController : MonoBehaviour
         this.player = player;
         this.monster = monster;
 
-        var stats = PlayerStatsBuilder.Build(playerClass, backpack);
+        var stats = PlayerStatsBuilder.Build(playerClass, backpack, training);
         this.player.Health.SetMaxHp(stats.MaxHp);
 
         foreach(var item in backpack.EquippedItems())
@@ -77,10 +77,11 @@ public class BattleController : MonoBehaviour
         this.monster.Health.OnDie += EndBattle;
         isFighting = true;
     }
-    public void Bind(Backpack backpack, ClassInfo playerClass)
+    public void Bind(Backpack backpack, ClassInfo playerClass, IStatModifier training)
     {
         this.backpack = backpack;
         this.playerClass = playerClass;
+        this.training = training;
     }
 
     public void EndBattle()

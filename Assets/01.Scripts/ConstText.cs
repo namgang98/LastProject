@@ -39,6 +39,13 @@
     public const string Level = "level";
     public const string Cost = "cost";
     public const string Value = "value";
+
+    public const string UnlockFloor = "unlockfloor";
+    public const string UnlockCost = "unlockcost";
+    public const string Stat = "stat";
+    public const string Increase = "increase";
+    public const string MaxPoints = "maxpoints";
+
 }
 
 public static class DataTag
@@ -53,6 +60,7 @@ public static class DataTag
     public const string Sets = "sets";
     public const string SetBonuses = "setbonuses";
     public const string Upgrades = "upgrades";
+    public const string TrainingStats = "trainingstats";
 }
 
 public static class AnimatorTag

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameSession : Singleton<GameSession>
@@ -22,6 +23,8 @@ public class GameSession : Singleton<GameSession>
 
     public Shop Shop { get; private set; }
     public UpgradeService Upgrades { get; private set; }
+    private static readonly UpgradeTrack[] DonationTracks = { UpgradeTrack.Shop, UpgradeTrack.Chest };
+    public ClassTraining Training { get; private set; }
     public Chest Chest { get; private set; }
     private SaveService saveService;
     private SaveData saveData;
@@ -50,10 +53,11 @@ public class GameSession : Singleton<GameSession>
         if(!TryLoadBackpack())
             return false;
         
-        LoadChest();
         LoadUpgrades();
+        LoadChest();
         LoadShop();
-        if(!saveData.inRun)
+        LoadTraining();
+        if (!saveData.inRun)
             return true;
 
         Debug.Log("[GameSession] 런 도중 종료 기록 → 사망 처리", this);
@@ -163,19 +167,23 @@ public class GameSession : Singleton<GameSession>
         var errors = new List<string>();
         Chest = new Chest(chestTabSize);
         int count = Mathf.Max(startTabCount, saveData.chestTabs.Count);
+        Chest.EnsureTabCount(count);
 
-        for(int i = 0; i < count; i++)
+        for(int i = 0; i < saveData.chestTabs.Count; i++)
         {
-            GridContainer tab = Chest.AddTab();
-
-            if(i < saveData.chestTabs.Count)
-                InventorySaveMapper.Restore(saveData.chestTabs[i], tab, errors);
+            InventorySaveMapper.Restore(saveData.chestTabs[i], Chest.Tabs[i], errors);
         }
 
         foreach(var error in errors)
         {
             Debug.LogWarning($"[GameSession] 창고 : {error}", this);
         }
+
+        if(!Upgrades.TryGet(UpgradeTrack.Chest, out UpgradeProgress progress))
+            return;
+
+        progress.LevelUp -= HandleChestLevelUp;
+        progress.LevelUp += HandleChestLevelUp;
     }
 
     private void Save(bool inRun)
@@ -195,6 +203,7 @@ public class GameSession : Singleton<GameSession>
         }
         saveData.classId = CurrentClass.Id;
         saveData.gold = Wallet.Gold;
+        Training.WriteTo(saveData);
         saveData.inRun = inRun;
         saveData.backpack = InventorySaveMapper.ToData(Backpack);
         saveService.Save(saveData);
@@ -266,7 +275,7 @@ public class GameSession : Singleton<GameSession>
     {
         Upgrades = new UpgradeService();
 
-        foreach(UpgradeTrack track in System.Enum.GetValues(typeof(UpgradeTrack)))
+        foreach(UpgradeTrack track in DonationTracks)
         {
             if(!DataManager.instance.TryGetUpgrade(track, out UpgradeTrackInfo info))
             {
@@ -298,5 +307,30 @@ public class GameSession : Singleton<GameSession>
     {
         Shop.ApplyLevel(progress.Level, progress.Current.Value);
         SaveInVillage();
+    }
+    private int GetUnlockedTabCount()
+    {
+        if(Upgrades.TryGet(UpgradeTrack.Chest, out UpgradeProgress progress))
+            return Mathf.Max(1, progress.Current.Value);
+
+        return startTabCount;
+    }
+
+    private void HandleChestLevelUp(UpgradeProgress progress)
+    {
+        Chest.EnsureTabCount(progress.Current.Value);
+        EventManager.instance.PostNotification(new OnChestExpanded(Chest.Tabs.Count));
+        SaveInVillage();
+    }
+    private void LoadTraining()
+    {
+        DataManager.instance.TryGetUpgrade(UpgradeTrack.Training, out UpgradeTrackInfo costs);
+        Training = new ClassTraining(saveData, costs, DataManager.instance.TryGetTrainingStat);
+
+        if (Training.IsUnlocked(CurrentClass))
+            return;
+
+        if (DataManager.instance.TryGetClass(defaultClassId, out ClassInfo starter))
+            CurrentClass = starter;
     }
 }

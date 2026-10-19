@@ -15,7 +15,11 @@ public class ClassInfo : IStatModifier
     public string Description { get; }
     public string PrefabName { get; }
     public GameObject Prefab { get; private set; }
-    public ClassInfo(int id, string name, int maxHp, WeaponType type, float dmg, float cool, string desc, string prefabName)
+    public int UnlockFloor { get; }
+    public int UnlockCost { get; }
+
+    public bool IsStarter => UnlockFloor <= 0 && UnlockCost <= 0;
+    public ClassInfo(int id, string name, int maxHp, WeaponType type, float dmg, float cool, string desc, string prefabName, int unlockfloor, int unlockcost)
     {
         Id = id;
         Name = name;
@@ -25,6 +29,8 @@ public class ClassInfo : IStatModifier
         CooldownRate = cool;
         Description = desc;
         PrefabName = prefabName;
+        UnlockFloor = unlockfloor;
+        UnlockCost = unlockcost;
     }
 
     public void Apply(PlayerStats stats)

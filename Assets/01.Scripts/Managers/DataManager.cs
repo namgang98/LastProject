@@ -43,6 +43,7 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset setCsv;
     [SerializeField] TextAsset setBonusCsv;
     [SerializeField] TextAsset upgradeCsv;
+    [SerializeField] TextAsset trainingStatCsv;
 
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
@@ -57,6 +58,8 @@ public class DataManager : Singleton<DataManager>
     private readonly Dictionary<int, List<SetInfo>> setsByItem = new();
     private static readonly List<SetInfo> NoSets = new();
     private readonly Dictionary<UpgradeTrack, UpgradeTrackInfo> upgrades = new();
+    private readonly Dictionary<TrainingStat, TrainingStatInfo> trainingStats = new();
+
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
@@ -98,6 +101,7 @@ public class DataManager : Singleton<DataManager>
         string setText = ReadText(setCsv, nameof(setCsv));
         string setBonusText = ReadText(setBonusCsv, nameof(setBonusCsv));
         string upgradeText = ReadText(upgradeCsv, nameof(upgradeCsv));
+        string trainingStatText = ReadText(trainingStatCsv, nameof(trainingStatCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -114,6 +118,7 @@ public class DataManager : Singleton<DataManager>
         List<SetInfo> setList = ParseTable<SetInfo>(DataTag.Sets, setText, errors, InfoParser.TryParseSet);
         List<SetBonusInfo> setBonusList = ParseTable<SetBonusInfo>(DataTag.SetBonuses, setBonusText, errors, InfoParser.TryParseSetBonus);
         List<UpgradeLevelInfo> upgradeList = ParseTable<UpgradeLevelInfo>(DataTag.Upgrades, upgradeText, errors, InfoParser.TryParseUpgrade);
+        List<TrainingStatInfo> trainingStatList = ParseTable<TrainingStatInfo>(DataTag.TrainingStats, trainingStatText, errors, InfoParser.TryParseTrainingStat);
         #endregion
 
         //메인 스레드
@@ -139,9 +144,10 @@ public class DataManager : Singleton<DataManager>
         RegisterSets(DataTag.Sets, setList, SetIds, errors);
         RegisterSetBonuses(DataTag.SetBonuses, setBonusList, errors);
         RegisterUpgrades(DataTag.Upgrades, upgradeList, UpgradeIds, errors);
+        RegisterTrainingStats(DataTag.TrainingStats, trainingStatList, errors);
         #endregion
 
-        foreach(var error in errors)
+        foreach (var error in errors)
         {
             Debug.LogWarning($"[DataManager] {error}", this);
         }
@@ -379,7 +385,25 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
-    
+    private void RegisterTrainingStats(string sheetName, List<TrainingStatInfo> list, List<string> errors)
+    {
+        foreach(var info in list)
+        {
+            if(trainingStats.ContainsKey(info.Stat))
+            {
+                errors.Add($"{sheetName} : {info.Stat} 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            trainingStats.Add(info.Stat, info);
+        }
+
+        foreach(TrainingStat stat in System.Enum.GetValues(typeof(TrainingStat)))
+        {
+            if(!trainingStats.ContainsKey(stat))
+                errors.Add($"{sheetName} : {stat} 줄이 없습니다 → 이 스탯은 훈련할 수 없습니다");
+        }
+    }
     #endregion
 
     #region 조회
@@ -422,6 +446,10 @@ public class DataManager : Singleton<DataManager>
     public bool TryGetUpgrade(UpgradeTrack track, out UpgradeTrackInfo info)
     {
         return upgrades.TryGetValue(track, out info);
+    }
+    public bool TryGetTrainingStat(TrainingStat stat, out TrainingStatInfo info)
+    {
+        return trainingStats.TryGetValue(stat, out info);
     }
     #endregion
 }

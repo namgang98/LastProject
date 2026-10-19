@@ -1,4 +1,4 @@
-﻿id,name,maxhp,type,damagerate,cooldownrate,description,prefab
-3000,검사,100,Sword,1.3,1,검류데미지 +30%,Player_SwordMaster
-3001,나무꾼,120,Axe,1.3,1,도끼류데미지 +30%,Player_WoodCutter
-3002,엘프,90,Bow,1.3,1,활류데미지 +30%,Player_Archer
+﻿id,name,maxhp,type,damagerate,cooldownrate,description,prefab,unlockfloor,unlockcost
+3000,검사,100,Sword,1.3,1,검류데미지 +30%,Player_SwordMaster,0,0
+3001,나무꾼,120,Axe,1.3,1,도끼류데미지 +30%,Player_WoodCutter,10,1000
+3002,엘프,90,Bow,1.3,1,활류데미지 +30%,Player_Archer,20,2000

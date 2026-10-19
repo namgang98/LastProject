@@ -18,6 +18,10 @@ public class ChestUI : MonoBehaviour
     [Header("팝업")]
     [SerializeField] GameObject popup;
 
+    [Header("확장")]
+    [SerializeField] Button expandButton;
+    [SerializeField] DonationUI expandDonation;
+
     private InventoryUIContext context;
     private Chest chest;
     private int currentTab;
@@ -33,10 +37,12 @@ public class ChestUI : MonoBehaviour
             int index = i;
             tabButtons[i].onClick.AddListener(() => ShowTab(index));
         }
+        expandButton.onClick.AddListener(expandDonation.Open);
     }
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnBackpackChanged>(HandleBackpackChanged);
+        EventManager.instance.AddListener<OnChestExpanded>(HandleChestExpanded);
     }
 
     private void OnDisable()
@@ -44,6 +50,7 @@ public class ChestUI : MonoBehaviour
         if(!EventManager.HasInstance)
             return;
         EventManager.instance.RemoveListener<OnBackpackChanged>(HandleBackpackChanged);
+        EventManager.instance.RemoveListener<OnChestExpanded>(HandleChestExpanded);
     }
 
     public void Open()
@@ -85,6 +92,9 @@ public class ChestUI : MonoBehaviour
             tabButtons[i].gameObject.SetActive(i < chest.Tabs.Count);
             tabButtons[i].interactable = i != currentTab;
         }
+
+        bool canExpand = GameSession.instance.Upgrades.TryGet(UpgradeTrack.Chest, out UpgradeProgress progress) && !progress.IsMaxed;
+        expandButton.gameObject.SetActive(canExpand);
     }
 
     private void HandleBackpackChanged(OnBackpackChanged e)
@@ -94,6 +104,13 @@ public class ChestUI : MonoBehaviour
 
         backpackPanel.Bind(e.Backpack, context);
         GameSession.instance.SaveInVillage();
+    }
+    private void HandleChestExpanded(OnChestExpanded e)
+    {
+        if (!popup.activeSelf)
+            return;
+
+        RefreshTabButtons();
     }
     public void StoreAll()
     {

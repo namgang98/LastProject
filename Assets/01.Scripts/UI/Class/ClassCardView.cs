@@ -11,8 +11,15 @@ public class ClassCardView : MonoBehaviour
     [SerializeField] TextMeshProUGUI descText;
     [SerializeField] GameObject selectedMark;
 
+    [Header("잠금")]
+    [SerializeField] GameObject lockMark;
+    [SerializeField] TextMeshProUGUI statusText;
+    [SerializeField] Color lockedTint = new(0.25f, 0.25f, 0.25f, 1f);
+
     public ClassInfo Info { get; private set; }
     public event Action<ClassCardView> Clicked;
+
+    public bool IsLocked { get; private set; }
 
     private void Awake()
     {
@@ -41,5 +48,13 @@ public class ClassCardView : MonoBehaviour
 
         SpriteRenderer renderer = info.Prefab.GetComponentInChildren<SpriteRenderer>();
         return renderer != null ? renderer.sprite : null;
+    }
+
+    public void SetStatus(string status, bool locked)
+    {
+        IsLocked = locked;
+        statusText.text = status;
+        lockMark.SetActive(locked);
+        portrait.color = locked ? lockedTint : Color.white;
     }
 }

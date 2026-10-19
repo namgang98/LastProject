@@ -34,6 +34,13 @@ public class Chest
 
         return leftover;
     }
+    public void EnsureTabCount(int count)
+    {
+        while(tabs.Count < count)
+        {
+            AddTab();
+        }
+    }
 
     public bool TryStore(ItemInstance item)
     {

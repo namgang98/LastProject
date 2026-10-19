@@ -145,3 +145,9 @@ public struct OnBackpackChanged : IGameEvent
     public Backpack Backpack;
     public OnBackpackChanged(Backpack backpack) => Backpack = backpack;
 }
+
+public struct OnChestExpanded : IGameEvent
+{
+    public int TabCount;
+    public OnChestExpanded(int tabCount) => TabCount = tabCount;
+}

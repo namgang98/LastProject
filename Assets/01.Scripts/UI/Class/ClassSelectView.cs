@@ -24,6 +24,7 @@ public class ClassSelectView : MonoBehaviour
     {
         PopupManager.instance.Open(popup, Close);
         BuildCards();
+        RefreshLocks();
         Select(Find(GameSession.instance.CurrentClass));
     }
 
@@ -48,10 +49,23 @@ public class ClassSelectView : MonoBehaviour
             cards.Add(card);
         }
     }
+    private void RefreshLocks()
+    {
+        ClassTraining training = GameSession.instance.Training;
 
+        foreach(var card in cards)
+        {
+            bool locked = !training.IsUnlocked(card.Info);
+            string status = locked ? "훈련장에서 해금" : $"Lv.{training.GetProgress(card.Info).Level}";
+            card.SetStatus(status, locked);
+        }
+    }
     private void Select(ClassCardView card)
     {
-        if(selected != null)
+        if(card != null && card.IsLocked)
+            return;
+
+        if (selected != null)
             selected.SetSelected(false);
 
         selected = card;

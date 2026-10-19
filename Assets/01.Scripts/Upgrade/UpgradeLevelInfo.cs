@@ -3,6 +3,7 @@ public enum UpgradeTrack
 {
     Shop,
     Chest,
+    Training,
 }
 public class UpgradeLevelInfo
 {

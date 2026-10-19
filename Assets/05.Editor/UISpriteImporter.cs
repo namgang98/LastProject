@@ -9,18 +9,20 @@ public class UISpriteImporter : AssetPostprocessor
 {
     private const string Folder = "Assets/03.Asset/UI/";
 
-    // 파일 이름 → 9-slice 테두리 두께(px). 없으면 테두리 없이 Single
-    private static readonly Dictionary<string, int> Borders = new()
+    // 파일 이름 → 9-slice 테두리 (왼쪽, 아래, 오른쪽, 위) px. 없으면 테두리 없이 Single
+    private static readonly Dictionary<string, Vector4> Borders = new()
     {
-        { "ui_panel", 32 },
-        { "ui_gauge_bg", 12 },
-        { "ui_slider_track", 8 },
-        { "ui_slider_fill", 4 },
-        { "ui_input", 12 },
-        { "ui_button_normal", 16 },
-        { "ui_button_hover", 16 },
-        { "ui_button_pressed", 16 },
-        { "ui_button_disabled", 16 },
+        { "ui_panel", new Vector4(36, 36, 36, 36) },
+        { "ui_gauge_bg", new Vector4(12, 12, 12, 12) },
+        { "ui_slider_track", new Vector4(8, 8, 8, 8) },
+        { "ui_slider_fill", new Vector4(4, 4, 4, 4) },
+        { "ui_input", new Vector4(12, 12, 12, 12) },
+        { "ui_button_normal", new Vector4(16, 16, 16, 16) },
+        { "ui_button_hover", new Vector4(16, 16, 16, 16) },
+        { "ui_button_pressed", new Vector4(16, 16, 16, 16) },
+        { "ui_button_disabled", new Vector4(16, 16, 16, 16) },
+        { "ui_title_banner", new Vector4(16, 16, 16, 16) },
+        { "ui_divider", new Vector4(24, 0, 24, 0) },
     };
 
     private void OnPreprocessTexture()
@@ -38,13 +40,13 @@ public class UISpriteImporter : AssetPostprocessor
 
         string name = Path.GetFileNameWithoutExtension(assetPath);
 
-        if(!Borders.TryGetValue(name, out int border))
+        if(!Borders.TryGetValue(name, out Vector4 border))
             return;
 
         var settings = new TextureImporterSettings();
         importer.ReadTextureSettings(settings);
         settings.spriteMeshType = SpriteMeshType.FullRect;
-        settings.spriteBorder = new Vector4(border, border, border, border);
+        settings.spriteBorder = border;
         importer.SetTextureSettings(settings);
     }
 }

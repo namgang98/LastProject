@@ -103,27 +103,27 @@ public class ShopUI : MonoBehaviour
             return;
         }
 
-        ItemInfo info = shop.Offers[i];
+        ShopStockInfo stock = shop.Offers[i];
 
-        if(info == null)
+        if(stock == null)
         {
             slots[i].ShowEmpty();
             return;
         }
 
-        int price = shop.Pricing.BuyPrice(info);
-        slots[i].ShowItem(info, price, wallet.Gold >= price);
+        int price = shop.Pricing.BuyPrice(stock);
+        slots[i].ShowItem(stock.Item, price, wallet.Gold >= price);
     }
 
     private void Select(int index)
     {
-        ItemInfo info = shop.Offers[index];
+        ShopStockInfo stock = shop.Offers[index];
 
-        if(info == null)
+        if(stock == null)
             return;
 
         selected = index;
-        confirmText.text = $"{info.Name}\n{shop.Pricing.BuyPrice(info)}G에 구매할까요?";
+        confirmText.text = $"{stock.Item.Name}\n{shop.Pricing.BuyPrice(stock)}G에 구매할까요?";
         confirmPanel.SetActive(true);
     }
 

@@ -65,7 +65,7 @@ public class ClassSelectView : MonoBehaviour
         if(card != null && card.IsLocked)
             return;
 
-        if (selected != null)
+        if(selected != null)
             selected.SetSelected(false);
 
         selected = card;

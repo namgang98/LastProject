@@ -106,7 +106,7 @@ public class TrainingUI : MonoBehaviour
         var classes = new List<ClassInfo>(DataManager.instance.Classes);
         classes.Sort((a, b) => a.Id.CompareTo(b.Id));
 
-        foreach (ClassInfo info in classes)
+        foreach(ClassInfo info in classes)
         {
             ClassCardView card = Instantiate(cardPrefab, cardRoot);
             card.Bind(info);
@@ -143,9 +143,9 @@ public class TrainingUI : MonoBehaviour
 
     private ClassCardView Find(ClassInfo info)
     {
-        foreach (var card in cards)
+        foreach(var card in cards)
         {
-            if (card.Info == info)
+            if(card.Info == info)
                 return card;
         }
 
@@ -217,7 +217,7 @@ public class TrainingUI : MonoBehaviour
     #region 버튼
     private void Train()
     {
-        if (selected == null || !training.TryTrain(selected.Info, wallet))
+        if(selected == null || !training.TryTrain(selected.Info, wallet))
             return;
 
         GameSession.instance.SaveInVillage();

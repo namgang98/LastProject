@@ -7,6 +7,7 @@ public class UnitController : MonoBehaviour
     [SerializeField] UnitAnimator animator;
     [SerializeField] Transform headPoint;
     [SerializeField] float attackWindup = 0.3f;
+    [SerializeField] SfxType attackSfx = SfxType.None;
     public float AttackWindup => attackWindup;
     private void Reset()
     {
@@ -37,6 +38,7 @@ public class UnitController : MonoBehaviour
             return;
 
         animator.AttackAni();
+        SoundManager.instance.PlaySfx(attackSfx);
     }
     private void HandleHit(DamageInfo info)
     {

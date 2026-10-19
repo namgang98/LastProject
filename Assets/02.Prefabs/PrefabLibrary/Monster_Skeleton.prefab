@@ -52,6 +52,8 @@ MonoBehaviour:
   health: {fileID: 7865922752572778353}
   animator: {fileID: 4938383351904956684}
   headPoint: {fileID: 4054663985496077969}
+  attackWindup: 0.3
+  attackSfx: 502
 --- !u!114 &7865922752572778353
 MonoBehaviour:
   m_ObjectHideFlags: 0

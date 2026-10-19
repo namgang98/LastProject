@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64c805f3259aef4caaab45cbe66017e, type: 3}
+  m_Name: SoundLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
+  bgms:
+  - type: 1
+    clip: {fileID: 8300000, guid: 7619ec15f671986408aec3a2825c0bc5, type: 3}
+    volume: 0.58
+  - type: 2
+    clip: {fileID: 8300000, guid: e0fc7548916c7af45a11308c3fc47cc4, type: 3}
+    volume: 0.47
+  sfxs:
+  - type: 100
+    clips:
+    - {fileID: 8300000, guid: 76c7bb5ec5249154ba55f1dfcd86ccb7, type: 3}
+    volume: 0.7
+    pitchRandom: 0.05
+  - type: 101
+    clips:
+    - {fileID: 8300000, guid: e6d62a7ab1363f34f9e8b6e51d7131f6, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 102
+    clips:
+    - {fileID: 8300000, guid: e6d62a7ab1363f34f9e8b6e51d7131f6, type: 3}
+    volume: 0.8
+    pitchRandom: 0
+  - type: 200
+    clips:
+    - {fileID: 8300000, guid: b90f0d55856227244945030a59ed3569, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 201
+    clips:
+    - {fileID: 8300000, guid: 56663dbb046f30149974634a343b47ea, type: 3}
+    volume: 0.8
+    pitchRandom: 0.05
+  - type: 203
+    clips:
+    - {fileID: 8300000, guid: eca158722a7839849bd35b6c3603d657, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 500
+    clips:
+    - {fileID: 8300000, guid: bcb5adacc8177da43935959c4d712757, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 501
+    clips:
+    - {fileID: 8300000, guid: 2e7bceeceb9ffb24d90fee198594357b, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 502
+    clips:
+    - {fileID: 8300000, guid: eca158722a7839849bd35b6c3603d657, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08

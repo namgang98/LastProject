@@ -301,6 +301,58 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &779737976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 779737978}
+  - component: {fileID: 779737977}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &779737977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779737976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7648a2a743acc224d9d6678897d42684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  isDontDestroy: 1
+  library: {fileID: 11400000, guid: 5f383764a694010489a672fe17b0c4c4, type: 2}
+  mixer: {fileID: 24100000, guid: 2eeb73274052a4b49af3a0177606a904, type: 2}
+  bgmGroup: {fileID: -7492789288258976376, guid: 2eeb73274052a4b49af3a0177606a904, type: 2}
+  sfxGroup: {fileID: 5724073723607879778, guid: 2eeb73274052a4b49af3a0177606a904, type: 2}
+  sfxPoolSize: 12
+  bgmFadeTime: 1.5
+  sfxMinInterval: 0.05
+--- !u!4 &779737978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779737976}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -678.397, y: 664.8544, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1148943067
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,11 +390,6 @@ MonoBehaviour:
   shopSlotCount: 3
   buyMultiplier: 3
   rerollCost: 20
-  shopNormal: 70
-  shopRare: 25
-  shopEpic: 5
-  shopRarePerLevel: 5
-  shopEpicPerLevel: 2
 --- !u!4 &1148943069
 Transform:
   m_ObjectHideFlags: 0
@@ -823,6 +870,9 @@ MonoBehaviour:
   setBonusCsv: {fileID: 4900000, guid: ba64108d8fc17c64ba9215f9bf8827d7, type: 3}
   upgradeCsv: {fileID: 4900000, guid: ffe34faa405eac5409fafe16a415466b, type: 3}
   trainingStatCsv: {fileID: 4900000, guid: 01afc1abb0959064e8966afd80c28431, type: 3}
+  materialCsv: {fileID: 4900000, guid: 844d0d3da9e91dc44ad8d2a40638b7ca, type: 3}
+  monsterDropCsv: {fileID: 4900000, guid: 00a40424669c6f44fbe83b22df73cf5c, type: 3}
+  shopStockCsv: {fileID: 4900000, guid: 3187205e2ae36324b852d7e543670665, type: 3}
   iconLibrary: {fileID: 11400000, guid: 20216c8c80df7864eb072731d2e539c4, type: 2}
   prefabLibrary: {fileID: 11400000, guid: 56cf11582a5258c458ffb7ec871b7b33, type: 2}
 --- !u!1 &7968245182707994519
@@ -859,6 +909,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2024496872}
+  - {fileID: 779737978}
   - {fileID: 517764862784098033}
   - {fileID: 3244532858070171530}
   - {fileID: 2579359976964990370}

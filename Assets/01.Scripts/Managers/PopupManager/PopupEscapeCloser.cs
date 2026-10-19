@@ -9,10 +9,10 @@ public class PopupEscapeCloser : MonoBehaviour
     {
         Keyboard keyboard = Keyboard.current;
 
-        if (keyboard == null || !keyboard.escapeKey.wasPressedThisFrame)
+        if(keyboard == null || !keyboard.escapeKey.wasPressedThisFrame)
             return;
 
-        if (!PopupManager.HasInstance || IsTyping())
+        if(!PopupManager.HasInstance || IsTyping())
             return;
 
         PopupManager.instance.CloseTop();
@@ -20,7 +20,7 @@ public class PopupEscapeCloser : MonoBehaviour
 
     private static bool IsTyping()
     {
-        if (EventSystem.current == null)
+        if(EventSystem.current == null)
             return false;
 
         GameObject selected = EventSystem.current.currentSelectedGameObject;

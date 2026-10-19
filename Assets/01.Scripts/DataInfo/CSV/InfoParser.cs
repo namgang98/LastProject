@@ -63,12 +63,8 @@ public static class InfoParser
         if(!TryParseSize(row, errors, CSVStamp.StorageX, CSVStamp.StorageY, out Vector2Int storage))
             return false;
 
-        if(!row.TryGetInt(CSVStamp.Price, out int price))
-            return Fail(row, errors, CSVStamp.Price);
-
-        info = new BagInfo(i.common.id, i.common.name, i.iconName, i.shape, i.grade, i.sellPrice, storage, i.desc, price);
+        info = new BagInfo(i.common.id, i.common.name, i.iconName, i.shape, i.grade, i.sellPrice, storage, i.desc);
         return true;
-
     }
     //몬스터
     public static bool TryParseMonster(CsvRow row, List<string> errors, out MonsterInfo info)
@@ -88,13 +84,47 @@ public static class InfoParser
         if(!TryParseAttack(row, errors, out AttackData attack))
             return false;
 
-        if(!row.TryGetInt(CSVStamp.DropGold, out int dropgold))
-            return Fail(row, errors, CSVStamp.DropGold);
+        if(!row.TryGetFloat(CSVStamp.EquipChance, out float equipChance) || equipChance < 0f || equipChance > 1f)
+            return Fail(row, errors, CSVStamp.EquipChance);
 
         if(!row.TryGetEnum(CSVStamp.Type, out MonsterType type))
             return Fail(row, errors, CSVStamp.Type);
 
-        info = new MonsterInfo(b.id, b.name, prefab, maxHp, attack, dropgold, type);
+        info = new MonsterInfo(b.id, b.name, prefab, maxHp, attack, equipChance, type);
+        return true;
+    }
+    //기타템
+    public static bool TryParseMaterial(CsvRow row, List<string> errors, out MaterialInfo info)
+    {
+        info = null;
+
+        if(!TryParseItemBase(row, errors, out ItemBase b))
+            return false;
+
+        info = new MaterialInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc);
+        return true;
+    }
+    //몬스터 드랍표
+    public static bool TryParseMonsterDrop(CsvRow row, List<string> errors, out MonsterDropInfo info)
+    {
+        info = null;
+
+        if(!row.TryGetInt(CSVStamp.MonsterId, out int monsterId))
+            return Fail(row, errors, CSVStamp.MonsterId);
+
+        if(!row.TryGetInt(CSVStamp.ItemId, out int itemId))
+            return Fail(row, errors, CSVStamp.ItemId);
+
+        if(!row.TryGetFloat(CSVStamp.Chance, out float chance) || chance <= 0f || chance > 1f)
+            return Fail(row, errors, CSVStamp.Chance);
+
+        if(!row.TryGetInt(CSVStamp.Min, out int min) || min < 1)
+            return Fail(row, errors, CSVStamp.Min);
+
+        if(!row.TryGetInt(CSVStamp.Max, out int max) || max < min)
+            return Fail(row, errors, CSVStamp.Max);
+
+        info = new MonsterDropInfo(monsterId, itemId, chance, min, max);
         return true;
     }
     //직업
@@ -248,6 +278,26 @@ public static class InfoParser
 
         string desc = row.GetString(CSVStamp.Description);
         info = new TrainingStatInfo(stat, increase, maxPoints, desc);
+        return true;
+    }
+    //상점 진열
+    public static bool TryParseShopStock(CsvRow row, List<string> errors, out ShopStockInfo info)
+    {
+        info = null;
+
+        if(!row.TryGetInt(CSVStamp.ItemId, out int itemId))
+            return Fail(row, errors, CSVStamp.ItemId);
+
+        if(!row.TryGetInt(CSVStamp.Weight, out int weight) || weight < 1)
+            return Fail(row, errors, CSVStamp.Weight);
+
+        if(!row.TryGetInt(CSVStamp.MinLevel, out int minLevel) || minLevel < 1)
+            return Fail(row, errors, CSVStamp.MinLevel);
+
+        if(!row.TryGetInt(CSVStamp.Price, out int price) || price < 0)
+            return Fail(row, errors, CSVStamp.Price);
+
+        info = new ShopStockInfo(itemId, weight, minLevel, price);
         return true;
     }
     #endregion

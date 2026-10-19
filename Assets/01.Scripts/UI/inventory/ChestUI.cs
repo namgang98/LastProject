@@ -107,7 +107,7 @@ public class ChestUI : MonoBehaviour
     }
     private void HandleChestExpanded(OnChestExpanded e)
     {
-        if (!popup.activeSelf)
+        if(!popup.activeSelf)
             return;
 
         RefreshTabButtons();

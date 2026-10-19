@@ -9,9 +9,12 @@ public class ShopPricing
         this.buyMultplier = buyMultplier;
         RerollCost = rerollCost;
     }
-    public int BuyPrice(ItemInfo info)
+    public int BuyPrice(ShopStockInfo stock)
     {
-        return Mathf.Max(1, Mathf.RoundToInt(info.SellPrice * buyMultplier));
+        if(stock.Price > 0)
+            return stock.Price;
+
+        return Mathf.Max(1, Mathf.RoundToInt(stock.Item.SellPrice * buyMultplier));
     }
     public int SellPrice(ItemInfo info)
     {

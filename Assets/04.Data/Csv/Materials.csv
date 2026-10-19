@@ -1,0 +1,9 @@
+﻿id,name,icon,shape,grade,sellprice,description
+8001,버섯 포자,Mat_Spore, X,Normal,15,축축한 포자 가루
+8002,버섯 갓,Mat_MushroomCap,X,Normal,40,독이 없는 쪽이길 바란다.
+8003,고블린 귀,Mat_GoblinEar,X|X,Normal,20,현상금 증표로 쓰인다.
+8004,녹슨 동전 꾸러미,Mat_CoinPouch,X,Rare,80,누군가 빼앗긴 돈
+8005,독주머니,Mat_PoisonGland,X|X,Epic,60,조심해서 다뤄야 한다.
+8006,뼈 조각,Mat_Bone,X|X,Normal,25,오래된 뼈
+8007,해골,Mat_Skull,XX|XX,Rare,200,아직도 눈이 노려본다.
+8008,서리 핵,Mat_FrostCore,X|X,Epic,400,손이 얼어붙을 듯 차갑다.

@@ -2,9 +2,10 @@
 
 public class ClassProgress
 {
+
     private readonly int[] points = new int[TrainingStatInfo.StatCount];
 
-    public int Level { get; private set; } = 1;
+    public int Level { get; private set; } = 0;
 
     public int SpentPoints
     {
@@ -21,7 +22,7 @@ public class ClassProgress
         }
     }
 
-    public int FreePoints => Math.Max(0, Level - 1 - SpentPoints);
+    public int FreePoints => Math.Max(0, Level - SpentPoints);
 
     public int GetPoints(TrainingStat stat)
     {
@@ -30,14 +31,14 @@ public class ClassProgress
 
     internal void Restore(int level, int[] saved)
     {
-        Level = Math.Max(1, level);
+        Level = Math.Max(0, level);
 
         for(int i = 0; i < points.Length && i < saved.Length; i++)
         {
             points[i] = Math.Max(0, saved[i]);
         }
 
-        while(SpentPoints > Level - 1)
+        while(SpentPoints > Level)
         {
             RemoveOne();
         }

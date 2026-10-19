@@ -18,12 +18,12 @@ public class ClassTraining
         this.findStat = findStat;
         BestFloor = Math.Max(0, data.bestFloor);
 
-        foreach (int id in data.unlockedClasses)
+        foreach(int id in data.unlockedClasses)
         {
             unlocked.Add(id);
         }
 
-        foreach (var saved in data.classProgress)
+        foreach(var saved in data.classProgress)
         {
             var progress = new ClassProgress();
             progress.Restore(saved.level, saved.points.ToArray());
@@ -49,10 +49,10 @@ public class ClassTraining
 
     public bool TryUnlock(ClassInfo info, Wallet wallet)
     {
-        if (!CanUnlock(info, wallet))
+        if(!CanUnlock(info, wallet))
             return false;
 
-        if (info.UnlockCost > 0 && !wallet.TrySpend(info.UnlockCost))
+        if(info.UnlockCost > 0 && !wallet.TrySpend(info.UnlockCost))
             return false;
 
         unlocked.Add(info.Id);
@@ -62,7 +62,7 @@ public class ClassTraining
 
     public void ReportFloor(int floor)
     {
-        if (floor <= BestFloor)
+        if(floor <= BestFloor)
             return;
 
         BestFloor = floor;
@@ -72,7 +72,7 @@ public class ClassTraining
     #region 훈련 (레벨업)
     public ClassProgress GetProgress(ClassInfo info)
     {
-        if (!progresses.TryGetValue(info.Id, out ClassProgress progress))
+        if(!progresses.TryGetValue(info.Id, out ClassProgress progress))
         {
             progress = new ClassProgress();
             progresses.Add(info.Id, progress);
@@ -86,7 +86,7 @@ public class ClassTraining
         cost = 0;
         int next = GetProgress(info).Level + 1;
 
-        if (costs == null || next > costs.MaxLevel)
+        if(costs == null || next > costs.MaxLevel)
             return false;
 
         cost = costs.GetLevel(next).Cost;
@@ -95,10 +95,10 @@ public class ClassTraining
 
     public bool TryTrain(ClassInfo info, Wallet wallet)
     {
-        if (!IsUnlocked(info) || !TryGetTrainCost(info, out int cost))
+        if(!IsUnlocked(info) || !TryGetTrainCost(info, out int cost))
             return false;
 
-        if (!wallet.TrySpend(cost))
+        if(!wallet.TrySpend(cost))
             return false;
 
         GetProgress(info).LevelUp();
@@ -110,7 +110,7 @@ public class ClassTraining
     #region 포인트
     public bool CanAddPoint(ClassInfo info, TrainingStat stat)
     {
-        if (!IsUnlocked(info) || !findStat(stat, out TrainingStatInfo statInfo))
+        if(!IsUnlocked(info) || !findStat(stat, out TrainingStatInfo statInfo))
             return false;
 
         ClassProgress progress = GetProgress(info);
@@ -119,7 +119,7 @@ public class ClassTraining
 
     public bool TryAddPoint(ClassInfo info, TrainingStat stat)
     {
-        if (!CanAddPoint(info, stat))
+        if(!CanAddPoint(info, stat))
             return false;
 
         GetProgress(info).AddPoint(stat);
@@ -129,7 +129,7 @@ public class ClassTraining
 
     public bool ResetPoints(ClassInfo info)
     {
-        if (!GetProgress(info).ResetPoints())
+        if(!GetProgress(info).ResetPoints())
             return false;
 
         Changed?.Invoke(info);
@@ -148,7 +148,7 @@ public class ClassTraining
         data.unlockedClasses = new List<int>(unlocked);
         data.classProgress.Clear();
 
-        foreach (var pair in progresses)
+        foreach(var pair in progresses)
         {
             data.classProgress.Add(new ClassProgressSaveData
             {

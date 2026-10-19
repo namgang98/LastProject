@@ -1,5 +1,5 @@
-﻿id,name,icon,shape,grade,storageX,storageY,SellPrice,description,price
-100,초보용가방,Bag0,XXX|XXX|XXX,Base,3,3,0,초보자에게 첫 모험을 위해 주는 가방,0
-101,모험가배낭,Bag1,XX|XX,Normal,4,4,375,설명,500
-102,전문가배낭,Bag2,XXX|XXX,Rare,5,5,750,설명,1000
-103,베테랑배낭,Bag3,XXX|XXX|XXX,Epic,6,6,7500,설명,10000
+﻿id,name,icon,shape,grade,storageX,storageY,SellPrice,description
+100,초보용가방,Bag0,XXX|XXX|XXX,Base,3,3,0,초보자에게 첫 모험을 위해 주는 가방
+101,모험가배낭,Bag1,XX|XX,Normal,4,4,375,설명
+102,전문가배낭,Bag2,XXX|XXX,Rare,5,5,750,설명
+103,베테랑배낭,Bag3,XXX|XXX|XXX,Epic,6,6,7500,설명

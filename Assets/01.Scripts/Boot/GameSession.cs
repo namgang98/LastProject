@@ -15,11 +15,6 @@ public class GameSession : Singleton<GameSession>
     [SerializeField, Range(1, Shop.MaxSlots)] int shopSlotCount = 3;
     [SerializeField] float buyMultiplier = 3f;
     [SerializeField] int rerollCost = 20;
-    [SerializeField] float shopNormal = 70f;
-    [SerializeField] float shopRare = 25f;
-    [SerializeField] float shopEpic = 5f;
-    [SerializeField] float shopRarePerLevel = 5f;
-    [SerializeField] float shopEpicPerLevel = 2f;
 
     public Shop Shop { get; private set; }
     public UpgradeService Upgrades { get; private set; }
@@ -57,7 +52,7 @@ public class GameSession : Singleton<GameSession>
         LoadChest();
         LoadShop();
         LoadTraining();
-        if (!saveData.inRun)
+        if(!saveData.inRun)
             return true;
 
         Debug.Log("[GameSession] 런 도중 종료 기록 → 사망 처리", this);
@@ -199,7 +194,7 @@ public class GameSession : Singleton<GameSession>
 
         foreach(var offer in Shop.Offers)
         {
-            saveData.shopOffers.Add(offer != null ? offer.Id : 0);
+            saveData.shopOffers.Add(offer != null ? offer.ItemId : 0);
         }
         saveData.classId = CurrentClass.Id;
         saveData.gold = Wallet.Gold;
@@ -224,8 +219,8 @@ public class GameSession : Singleton<GameSession>
     }
     private void LoadShop()
     {
-        var rarity = new DropRarity(shopNormal, shopRare, shopEpic, shopRarePerLevel, shopEpicPerLevel);
         var pricing = new ShopPricing(buyMultiplier, rerollCost);
+        var catalog = new ShopCatalog(DataManager.instance.ShopStocks);
 
         int level = 1;
         int slotCount = shopSlotCount;
@@ -238,7 +233,7 @@ public class GameSession : Singleton<GameSession>
             progress.LevelUp += HandleShopLevelUp;
         }
 
-        Shop = new Shop(new LootTable(DataManager.instance.Items), rarity, pricing, level, slotCount);
+        Shop = new Shop(catalog, pricing, level, slotCount);
 
         if(saveData.shopOffers.Count == 0)
         {
@@ -246,12 +241,12 @@ public class GameSession : Singleton<GameSession>
             return;
         }
 
-        var saved = new List<ItemInfo>();
+        var saved = new List<ShopStockInfo>();
 
         foreach(int id in saveData.shopOffers)
         {
-            DataManager.instance.TryGetItem(id, out ItemInfo info);
-            saved.Add(info);
+            catalog.TryFind(id, out ShopStockInfo stock);
+            saved.Add(stock);
         }
 
         Shop.Restore(saved);
@@ -327,10 +322,10 @@ public class GameSession : Singleton<GameSession>
         DataManager.instance.TryGetUpgrade(UpgradeTrack.Training, out UpgradeTrackInfo costs);
         Training = new ClassTraining(saveData, costs, DataManager.instance.TryGetTrainingStat);
 
-        if (Training.IsUnlocked(CurrentClass))
+        if(Training.IsUnlocked(CurrentClass))
             return;
 
-        if (DataManager.instance.TryGetClass(defaultClassId, out ClassInfo starter))
+        if(DataManager.instance.TryGetClass(defaultClassId, out ClassInfo starter))
             CurrentClass = starter;
     }
 }

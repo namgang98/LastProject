@@ -14,7 +14,12 @@
     public const string StorageY = "storageY";
 
     public const string MaxHp = "maxhp";
-    public const string DropGold = "dropgold";
+    public const string EquipChance = "equipchance";
+    public const string MonsterId = "monsterid";
+    public const string ItemId = "itemid";
+    public const string Chance = "chance";
+    public const string Min = "min";
+    public const string Max = "max";
     public const string Type = "type";
     public const string Prefab = "prefab";
 
@@ -46,6 +51,8 @@
     public const string Increase = "increase";
     public const string MaxPoints = "maxpoints";
 
+    public const string Weight = "weight";
+    public const string MinLevel = "minlevel";
 }
 
 public static class DataTag
@@ -61,6 +68,9 @@ public static class DataTag
     public const string SetBonuses = "setbonuses";
     public const string Upgrades = "upgrades";
     public const string TrainingStats = "trainingstats";
+    public const string Materials = "materials";
+    public const string MonsterDrops = "monsterdrops";
+    public const string ShopStock = "shopstock";
 }
 
 public static class AnimatorTag

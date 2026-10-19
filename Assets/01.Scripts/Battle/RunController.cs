@@ -15,7 +15,6 @@ public class RunController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnRunEnded>(HandleRunEnded);
-        EventManager.instance.AddListener<OnMonsterKilled>(HandleMonsterKilled);
         EventManager.instance.AddListener<OnStageStarted>(HandleStageStarted);
     }
 
@@ -25,7 +24,6 @@ public class RunController : MonoBehaviour
             return;
 
         EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);
-        EventManager.instance.RemoveListener<OnMonsterKilled>(HandleMonsterKilled);
         EventManager.instance.RemoveListener<OnStageStarted>(HandleStageStarted);
     }
     private void Start()
@@ -67,10 +65,6 @@ public class RunController : MonoBehaviour
     private void HandleRunEnded(OnRunEnded e)
     {
         GameSession.instance.FinishRun(e.Reason);
-    }
-    private void HandleMonsterKilled(OnMonsterKilled e)
-    {
-        GameSession.instance.Wallet.AddRunGold(e.Monster.DropGold);
     }
     private void HandleStageStarted(OnStageStarted e)
     {

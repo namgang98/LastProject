@@ -29,6 +29,7 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange AccessoryIds = new(5000, 5999);
     private static readonly IdRange PouchIds = new(9000, 9010);
     private static readonly IdRange UpgradeIds = new(7000, 7999);
+    private static readonly IdRange MaterialIds = new(8000, 8499);
     #endregion
 
     #region 필드 + 라이브러리
@@ -44,6 +45,9 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset setBonusCsv;
     [SerializeField] TextAsset upgradeCsv;
     [SerializeField] TextAsset trainingStatCsv;
+    [SerializeField] TextAsset materialCsv;
+    [SerializeField] TextAsset monsterDropCsv;
+    [SerializeField] TextAsset shopStockCsv;
 
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
@@ -59,7 +63,8 @@ public class DataManager : Singleton<DataManager>
     private static readonly List<SetInfo> NoSets = new();
     private readonly Dictionary<UpgradeTrack, UpgradeTrackInfo> upgrades = new();
     private readonly Dictionary<TrainingStat, TrainingStatInfo> trainingStats = new();
-
+    private readonly List<ShopStockInfo> shopStocks = new();
+ 
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
@@ -70,6 +75,7 @@ public class DataManager : Singleton<DataManager>
     public IReadOnlyCollection<ItemInfo> Items => items.Values;
     public IReadOnlyCollection<MonsterInfo> Monsters => monsters.Values; 
     public IReadOnlyCollection<ClassInfo> Classes => classes.Values;
+    public IReadOnlyList<ShopStockInfo> ShopStocks => shopStocks;
     #endregion
 
     #region 초기화
@@ -102,6 +108,9 @@ public class DataManager : Singleton<DataManager>
         string setBonusText = ReadText(setBonusCsv, nameof(setBonusCsv));
         string upgradeText = ReadText(upgradeCsv, nameof(upgradeCsv));
         string trainingStatText = ReadText(trainingStatCsv, nameof(trainingStatCsv));
+        string materialText = ReadText(materialCsv, nameof(materialCsv));
+        string monsterDropText = ReadText(monsterDropCsv, nameof(monsterDropCsv));
+        string shopStockText = ReadText(shopStockCsv, nameof(shopStockCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -119,6 +128,9 @@ public class DataManager : Singleton<DataManager>
         List<SetBonusInfo> setBonusList = ParseTable<SetBonusInfo>(DataTag.SetBonuses, setBonusText, errors, InfoParser.TryParseSetBonus);
         List<UpgradeLevelInfo> upgradeList = ParseTable<UpgradeLevelInfo>(DataTag.Upgrades, upgradeText, errors, InfoParser.TryParseUpgrade);
         List<TrainingStatInfo> trainingStatList = ParseTable<TrainingStatInfo>(DataTag.TrainingStats, trainingStatText, errors, InfoParser.TryParseTrainingStat);
+        List<MaterialInfo> materialList = ParseTable<MaterialInfo>(DataTag.Materials, materialText, errors, InfoParser.TryParseMaterial);
+        List<MonsterDropInfo> monsterDropList = ParseTable<MonsterDropInfo>(DataTag.MonsterDrops, monsterDropText, errors, InfoParser.TryParseMonsterDrop);
+        List<ShopStockInfo> shopStockList = ParseTable<ShopStockInfo>(DataTag.ShopStock, shopStockText, errors, InfoParser.TryParseShopStock);
         #endregion
 
         //메인 스레드
@@ -145,6 +157,9 @@ public class DataManager : Singleton<DataManager>
         RegisterSetBonuses(DataTag.SetBonuses, setBonusList, errors);
         RegisterUpgrades(DataTag.Upgrades, upgradeList, UpgradeIds, errors);
         RegisterTrainingStats(DataTag.TrainingStats, trainingStatList, errors);
+        RegisterItems(DataTag.Materials, materialList, MaterialIds, errors);
+        RegisterMonsterDrops(DataTag.MonsterDrops, monsterDropList, errors);
+        RegisterShopStocks(DataTag.ShopStock, shopStockList, errors);
         #endregion
 
         foreach (var error in errors)
@@ -402,6 +417,49 @@ public class DataManager : Singleton<DataManager>
         {
             if(!trainingStats.ContainsKey(stat))
                 errors.Add($"{sheetName} : {stat} 줄이 없습니다 → 이 스탯은 훈련할 수 없습니다");
+        }
+    }
+
+    private void RegisterMonsterDrops(string sheetName, List<MonsterDropInfo> list, List<string> errors)
+    {
+        foreach(var drop in list)
+        {
+            if(!monsters.TryGetValue(drop.MonsterId, out MonsterInfo monster))
+            {
+                errors.Add($"{sheetName} : 몬스터 {drop.MonsterId} 가 없습니다 → 이 줄은 무시");
+                continue;
+            }
+
+            if(!items.TryGetValue(drop.ItemId, out ItemInfo item))
+            {
+                errors.Add($"{sheetName} : 아이템 {drop.ItemId} 가 없습니다 → {monster.Name} 드랍에서 제외");
+                continue;
+            }
+
+            drop.SetItem(item);
+            monster.AddDrop(drop);
+        }
+    }
+    private void RegisterShopStocks(string sheetName, List<ShopStockInfo> list, List<string> errors)
+    {
+        var seen = new HashSet<int>();
+
+        foreach(var stock in list)
+        {
+            if(!items.TryGetValue(stock.ItemId, out ItemInfo item))
+            {
+                errors.Add($"{sheetName} : 아이템 {stock.ItemId} 가 없습니다 → 진열 제외");
+                continue;
+            }
+
+            if(!seen.Add(stock.ItemId))
+            {
+                errors.Add($"{sheetName} : 아이템 {stock.ItemId} ({item.Name}) 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            stock.SetItem(item);
+            shopStocks.Add(stock);
         }
     }
     #endregion

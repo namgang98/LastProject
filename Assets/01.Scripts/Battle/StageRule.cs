@@ -14,7 +14,10 @@ public class StageRule
     {
         return stage % bossInterval == 0;
     }
-
+    public bool IsRestStage(int stage)
+    {
+        return (stage + 1) % bossInterval == 0;
+    }
     public bool CanReturn(int clearedStage)
     {
         if(!returnOnlyAfterBoss)

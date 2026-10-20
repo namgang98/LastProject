@@ -41,7 +41,7 @@ public class RunController : MonoBehaviour
         toolTip.Bind(session.Backpack);
         playerHpBar.Bind(player.Health);
         playerStatusIcons.Bind(player);
-        player.ResetUnit(stats.MaxHp);
+        player.Init(stats.MaxHp);
         session.RefreshGold();
         stage.Begin(player);
     }

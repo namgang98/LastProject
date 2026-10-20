@@ -30,10 +30,13 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange PouchIds = new(9000, 9010);
     private static readonly IdRange UpgradeIds = new(7000, 7999);
     private static readonly IdRange MaterialIds = new(8000, 8499);
+    private static readonly IdRange ConsumableIds = new(8500, 8999);
+    private static readonly IdRange PotionCaseIds = new(9100, 9199);
+
     #endregion
 
     #region 필드 + 라이브러리
-    [Header("CSV문서")]
+   [Header("CSV문서")]
     [SerializeField] TextAsset bagCsv;
     [SerializeField] TextAsset weaponCsv;
     [SerializeField] TextAsset monsterCsv;
@@ -48,6 +51,8 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset materialCsv;
     [SerializeField] TextAsset monsterDropCsv;
     [SerializeField] TextAsset shopStockCsv;
+    [SerializeField] TextAsset consumableCsv;
+    [SerializeField] TextAsset potionCaseCsv;
 
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
@@ -63,8 +68,7 @@ public class DataManager : Singleton<DataManager>
     private static readonly List<SetInfo> NoSets = new();
     private readonly Dictionary<UpgradeTrack, UpgradeTrackInfo> upgrades = new();
     private readonly Dictionary<TrainingStat, TrainingStatInfo> trainingStats = new();
-    private readonly List<ShopStockInfo> shopStocks = new();
- 
+    private readonly List<ShopStockInfo> shopStocks = new(); 
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
@@ -111,6 +115,8 @@ public class DataManager : Singleton<DataManager>
         string materialText = ReadText(materialCsv, nameof(materialCsv));
         string monsterDropText = ReadText(monsterDropCsv, nameof(monsterDropCsv));
         string shopStockText = ReadText(shopStockCsv, nameof(shopStockCsv));
+        string consumableText = ReadText(consumableCsv, nameof(consumableCsv));
+        string potioncaseText = ReadText(potionCaseCsv, nameof(potionCaseCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -131,6 +137,8 @@ public class DataManager : Singleton<DataManager>
         List<MaterialInfo> materialList = ParseTable<MaterialInfo>(DataTag.Materials, materialText, errors, InfoParser.TryParseMaterial);
         List<MonsterDropInfo> monsterDropList = ParseTable<MonsterDropInfo>(DataTag.MonsterDrops, monsterDropText, errors, InfoParser.TryParseMonsterDrop);
         List<ShopStockInfo> shopStockList = ParseTable<ShopStockInfo>(DataTag.ShopStock, shopStockText, errors, InfoParser.TryParseShopStock);
+        List<ConsumableInfo> consumableList = ParseTable<ConsumableInfo>(DataTag.Consumables, consumableText, errors, InfoParser.TryParseConsumable);
+        List<PotionCaseInfo> potionCaseList = ParseTable<PotionCaseInfo>(DataTag.PotionCases, potioncaseText, errors, InfoParser.TryParsePotionCase);
         #endregion
 
         //메인 스레드
@@ -149,20 +157,22 @@ public class DataManager : Singleton<DataManager>
         RegisterItems(DataTag.Weapons, weaponList, WeaponIds, errors);
         RegisterItems(DataTag.Pouches, pouchList, PouchIds, errors);
         RegisterItems(DataTag.Bags, bagList, BagIds, errors);
-        RegisterMonsters(DataTag.Monsters, monsterList, MonsterIds, errors);
-        RegisterClasses(DataTag.Classes, classList, ClassIds, errors);
         RegisterItems(DataTag.Armors, armorList, ArmorIds, errors);
         RegisterItems(DataTag.Accessories, accessoryList, AccessoryIds, errors);
+        RegisterItems(DataTag.Consumables, consumableList, ConsumableIds, errors);
+        RegisterItems(DataTag.Materials, materialList, MaterialIds, errors);
+        RegisterItems(DataTag.PotionCases, potionCaseList, PotionCaseIds, errors);
+        RegisterMonsters(DataTag.Monsters, monsterList, MonsterIds, errors);
+        RegisterMonsterDrops(DataTag.MonsterDrops, monsterDropList, errors);
+        RegisterClasses(DataTag.Classes, classList, ClassIds, errors);
         RegisterSets(DataTag.Sets, setList, SetIds, errors);
         RegisterSetBonuses(DataTag.SetBonuses, setBonusList, errors);
         RegisterUpgrades(DataTag.Upgrades, upgradeList, UpgradeIds, errors);
         RegisterTrainingStats(DataTag.TrainingStats, trainingStatList, errors);
-        RegisterItems(DataTag.Materials, materialList, MaterialIds, errors);
-        RegisterMonsterDrops(DataTag.MonsterDrops, monsterDropList, errors);
         RegisterShopStocks(DataTag.ShopStock, shopStockList, errors);
         #endregion
 
-        foreach (var error in errors)
+        foreach(var error in errors)
         {
             Debug.LogWarning($"[DataManager] {error}", this);
         }

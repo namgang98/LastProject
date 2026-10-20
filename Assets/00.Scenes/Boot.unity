@@ -873,6 +873,8 @@ MonoBehaviour:
   materialCsv: {fileID: 4900000, guid: 844d0d3da9e91dc44ad8d2a40638b7ca, type: 3}
   monsterDropCsv: {fileID: 4900000, guid: 00a40424669c6f44fbe83b22df73cf5c, type: 3}
   shopStockCsv: {fileID: 4900000, guid: 3187205e2ae36324b852d7e543670665, type: 3}
+  consumableCsv: {fileID: 4900000, guid: f1cfa9b4ce1ff044e93935e91ceabee4, type: 3}
+  potionCaseCsv: {fileID: 4900000, guid: 74974e6e653534847b368bece4313235, type: 3}
   iconLibrary: {fileID: 11400000, guid: 20216c8c80df7864eb072731d2e539c4, type: 2}
   prefabLibrary: {fileID: 11400000, guid: 56cf11582a5258c458ffb7ec871b7b33, type: 2}
 --- !u!1 &7968245182707994519

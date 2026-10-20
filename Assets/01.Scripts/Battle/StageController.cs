@@ -2,10 +2,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.Collections.Unicode;
 
 public class StageController : MonoBehaviour
 {
+    [Header("휴식 층")]
+    [SerializeField, Range(0f, 1f)] float restHealRate = 0.5f;
+    [SerializeField] GameObject monsterHpBack;
+    [SerializeField] GameObject restVisual;
 
     [SerializeField] int bossInterval = 10;
     [SerializeField] Transform spawnPoint;
@@ -16,7 +19,6 @@ public class StageController : MonoBehaviour
     [SerializeField] TextMeshProUGUI stageText;
     [SerializeField] bool returnOnlyAfterBoss;
     [SerializeField] Button returnButton;
-    [SerializeField] float clearHealRate = 0.3f;
     [SerializeField] StatusIconView statusIconView;
     private StageRule rule;
 
@@ -73,11 +75,23 @@ public class StageController : MonoBehaviour
     }
     private void StartStage()
     {
-        EventManager.instance.PostNotification(new OnStageStarted(stage));
-        stageText.text = $"{stage} F";
+        bool isRest = rule.IsRestStage(stage);
+        EventManager.instance.PostNotification(new OnStageStarted(stage, isRest));
+        stageText.text = isRest ? $"{stage} F 휴식" : $"{stage} F";
+
+        if(restVisual != null)
+            restVisual.SetActive(isRest);
+
+        if(isRest)
+        {
+            StartRest();
+            return;
+        }
+        monsterHpBack.SetActive(true);
+        monsterHpbar.gameObject.SetActive(true);
         List<MonsterInfo> pool = rule.IsBossStage(stage) ? bossMonsters : normalMonsters;
 
-        if(pool.Count == 0)
+        if (pool.Count == 0)
         {
             Debug.LogError($"[StageController] {stage}층에 나올 몬스터가 없습니다.", this);
             return;
@@ -100,7 +114,7 @@ public class StageController : MonoBehaviour
         monsterHpbar.Bind(currentMonster.Health);
         currentMonster.Health.OnDie += HandleMonsterDead;
         var monsterAttack = info.Attack.WithDamage(stats.Damage);
-        battle.StartBattle(player, monster, monsterAttack);
+        battle.StartBattle(player, monster, monsterAttack, info.IsBoss);
         statusIconView.Bind(monster);
         phase = Phase.Fighting;
         nextButton.gameObject.SetActive(false);
@@ -112,12 +126,8 @@ public class StageController : MonoBehaviour
         currentMonster.Health.OnDie -= HandleMonsterDead;
         EventManager.instance.PostNotification(new OnMonsterKilled(spawnPoint.position, currentInfo));
         phase = Phase.Looting;
-
-        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * clearHealRate));
-
         nextButton.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(rule.CanReturn(stage));
-
     }
     private void HandlePlayerDead()
     {
@@ -162,7 +172,16 @@ public class StageController : MonoBehaviour
         returnButton.gameObject.SetActive(false);
         EventManager.instance.PostNotification(new OnRunEnded(stage, reason));
     }
+    private void StartRest()
+    {
+        monsterHpBack.SetActive(false);
+        monsterHpbar.gameObject.SetActive(false);
+        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * restHealRate));
 
+        phase = Phase.Looting;
+        nextButton.gameObject.SetActive(true);
+        returnButton.gameObject.SetActive(rule.CanReturn(stage));
+    }
 
     private enum Phase
     {

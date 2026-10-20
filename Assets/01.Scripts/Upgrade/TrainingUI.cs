@@ -24,6 +24,10 @@ public class TrainingUI : MonoBehaviour
     [SerializeField] Button trainButton;
     [SerializeField] TMP_Text trainText;
 
+    [Header("초기화")]
+    [SerializeField] Button resetButton;
+    [SerializeField] TMP_Text resetText;
+
     [Header("해금")]
     [SerializeField] GameObject unlockGroup;
     [SerializeField] TMP_Text conditionText;
@@ -42,8 +46,9 @@ public class TrainingUI : MonoBehaviour
         closeButton.onClick.AddListener(Close);
         trainButton.onClick.AddListener(Train);
         unlockButton.onClick.AddListener(Unlock);
+        resetButton.onClick.AddListener(ResetPoints);
 
-        foreach(var row in statRows)
+        foreach (var row in statRows)
         {
             row.PlusClicked += AddPoint;
         }
@@ -203,6 +208,7 @@ public class TrainingUI : MonoBehaviour
 
         trainText.text = $"훈련하기 {cost}G";
         trainButton.interactable = wallet.Gold >= cost;
+        RefreshReset(info);
     }
 
     private void RefreshUnlock(ClassInfo info)
@@ -211,6 +217,34 @@ public class TrainingUI : MonoBehaviour
         conditionText.color = training.MeetsFloor(info) ? metColor : unmetColor;
         unlockText.text = $"해금 {info.UnlockCost}G";
         unlockButton.interactable = training.CanUnlock(info, wallet);
+    }
+
+    private void RefreshReset(ClassInfo info)
+    {
+        int scrolls = GameSession.instance.CountConsumable(ConsumeType.ResetPoints);
+        bool spent = training.GetProgress(info).SpentPoints > 0;
+
+        resetText.text = $"초기화 (두루마리 {scrolls}개)";
+        resetButton.interactable = spent && scrolls > 0;
+    }
+
+    private void ResetPoints()
+    {
+        if(selected == null)
+            return;
+
+        ClassInfo info = selected.Info;
+
+        if(!training.IsUnlocked(info) || training.GetProgress(info).SpentPoints <= 0)
+            return;
+
+        GameSession session = GameSession.instance;
+
+        if(!session.TryTakeConsumable(ConsumeType.ResetPoints, out _))
+            return;
+
+        training.ResetPoints(info);
+        session.SaveInVillage();
     }
     #endregion
 

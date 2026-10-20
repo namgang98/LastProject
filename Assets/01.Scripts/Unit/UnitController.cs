@@ -61,14 +61,8 @@ public class UnitController : MonoBehaviour
         Vector3 pos = headPoint != null ? headPoint.position : transform.position;
         EventManager.instance.PostNotification(new OnUnitBlocked(pos));
     }
-    public void ResetUnit(int maxHp)
+    public void Init(int maxHp)
     {
-        bool wasDead = health.IsDead;
         health.Init(maxHp);
-
-        if(!wasDead || animator == null)
-            return;
-
-        animator.ResetAni();
     }
 }

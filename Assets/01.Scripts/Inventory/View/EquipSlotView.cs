@@ -87,8 +87,9 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
         if(Backpack == null || item == Current)
             return;
 
+        bool canEquip = !locked && CanEquip(item);
         highlight.enabled = true;
-        highlight.color = !locked && CanEquip(item) ? validColor : invalidColor;
+        highlight.color = canEquip || CanInsert(item) ? validColor : invalidColor;
     }
 
     public override void HidePreview()
@@ -98,10 +99,16 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
 
     public override bool TryDrop(ItemInstance item, int rotation, PointerEventData eventData)
     {
-        if(Backpack == null || locked)
+        if(Backpack == null)
             return false;
 
-        return Equip(item);
+        if(!locked && CanEquip(item))
+            return Equip(item);
+
+        if(!CanInsert(item))
+            return false;
+
+        return ((ContainerInstance)Current).Storage.TryAutoPlace(item);
     }
 
     public override void Release(ItemInstance item)
@@ -110,6 +117,10 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
             return;
 
         Unequip(item);
+    }
+    private bool CanInsert(ItemInstance item)
+    {
+        return Current is ContainerInstance target && item != target && item.Owner != target.Storage && target.Storage.CanAutoPlace(item);
     }
     #endregion
 }

@@ -74,20 +74,38 @@ public class GridContainer
         Changed?.Invoke(this);
         return true;
     }
+
+    public bool CanAutoPlace(ItemInstance item)
+    {
+        return TryFindSpot(item, out _, out _);
+    }
+
     public bool TryAutoPlace(ItemInstance item)
     {
-        for(int rotation = 0; rotation < 4; rotation++)
+        if(!TryFindSpot(item, out Vector2Int anchor, out int rotation))
+            return false;
+
+        return TryPlace(item, anchor, rotation);
+    }
+
+    private bool TryFindSpot(ItemInstance item, out Vector2Int anchor, out int rotation)
+    {
+        for(rotation = 0; rotation < 4; rotation++)
         {
             for(int y = 0; y < Size.y; y++)
             {
                 for(int x = 0; x < Size.x; x++)
                 {
-                    if(TryPlace(item, new Vector2Int(x, y), rotation))
+                    anchor = new Vector2Int(x, y);
+
+                    if(CanPlace(item, anchor, rotation))
                         return true;
                 }
             }
         }
 
+        anchor = default;
+        rotation = 0;
         return false;
     }
 

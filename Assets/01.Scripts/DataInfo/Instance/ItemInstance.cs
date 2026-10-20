@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 // 게임 안에 실제로 존재하는 아이템 1개 (순수 C# 클래스)
@@ -43,7 +44,9 @@ public class ItemInstance
         Anchor = anchor;
         Rotation = ((rotation % 4) + 4) % 4;
     }
-
+    public virtual void AppendStateTooltip(StringBuilder sb)
+    {
+    }
     internal void ClearPlacement()
     {
         Owner = null;

@@ -153,7 +153,7 @@ public class SellUI : MonoBehaviour
             if(TryReturn(item))
                 basket.Remove(item);
             else
-                Debug.LogWarning($"[SellUI] {item.Info.Name}을(를) 돌려놓을 자리가 없습니다.", this);
+                EventManager.instance.PostNotification(new OnFeedback($"[SellUI] {item.Info.Name}을(를) 돌려놓을 자리가 없습니다."));
         }
     }
     private bool TryReturn(ItemInstance item)

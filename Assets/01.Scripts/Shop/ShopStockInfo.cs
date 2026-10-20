@@ -16,7 +16,7 @@
 
     public void SetItem(ItemInfo item)
     {
-        if (Item != null)
+        if(Item != null)
             return;
 
         Item = item;

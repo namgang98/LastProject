@@ -9,7 +9,7 @@
             case DamageElement.Fire:
                 return new FireStatus(target, data.ElementValue, data.ElementDuration);
             case DamageElement.Ice:
-                return new IceStatus(target, data.ElementValue / 100f, data.ElementDuration);
+                return new SpeedStatus(target, DamageElement.Ice, 1f - UnityEngine.Mathf.Clamp(data.ElementValue / 100f, 0f, 0.9f), data.ElementDuration);
             default:
                 return null;
         }

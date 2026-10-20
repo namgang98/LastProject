@@ -1,4 +1,5 @@
-﻿public static class CSVStamp
+﻿#region CSV용 단어CSVStamp.
+public static class CSVStamp
 {
     public const string Id = "id";
     public const string Name = "name";
@@ -53,8 +54,13 @@
 
     public const string Weight = "weight";
     public const string MinLevel = "minlevel";
+    public const string Kind = "kind";
+    public const string Duration = "duration";
+    public const string Slots = "slots";
 }
+#endregion
 
+#region 데이터테그 DataTag.
 public static class DataTag
 {
     public const string Weapons = "weapons";
@@ -71,20 +77,26 @@ public static class DataTag
     public const string Materials = "materials";
     public const string MonsterDrops = "monsterdrops";
     public const string ShopStock = "shopstock";
+    public const string Consumables = "consumables";
+    public const string PotionCases = "potioncases";
 }
+#endregion
 
+#region 애니메이션태그 AnimatorTag. 
 public static class AnimatorTag
 {
     public const string Idle = "Idle";
     public const string Attack = "Attack";
     public const string Hurt = "Hurt";
     public const string Death = "Death";
-    public const string Recover = "Recover";
 }
+#endregion
 
+#region 씬이름들 SceneNames.
 public static class SceneNames
 {
     public const string Boot = "Boot";
     public const string Village = "Village";
     public const string Dungeon = "Dungeon";
 }
+#endregion

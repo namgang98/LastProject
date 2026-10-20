@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
+    [Header("물약")]
+    [SerializeField, Range(0f, 1f)] float potionThreshold = 0.2f;
+    [SerializeField] float potionCooldown = 2f;
+    private PotionUser potionUser;
+
     private Backpack backpack;
     private readonly List<ItemAction> actions = new();
     private readonly StatusEffects statuses = new();
@@ -29,10 +34,11 @@ public class BattleController : MonoBehaviour
             if(!isFighting)
                 return;
         }
+        potionUser?.Tick(Time.deltaTime);
         statuses.Tick(Time.deltaTime);
     }
 
-    public void StartBattle(UnitController player, UnitController monster, AttackData monsterAttack)
+    public void StartBattle(UnitController player, UnitController monster, AttackData monsterAttack, bool isBoss)
     {
         if(isFighting)
             EndBattle();
@@ -67,6 +73,7 @@ public class BattleController : MonoBehaviour
             if(effect == null)
                 continue;
 
+
             var action = AddAction(effect, equip.Effect.Cooldown, 0f, player.Health, null);
             OnActionReady?.Invoke(item, action);
         }
@@ -75,6 +82,8 @@ public class BattleController : MonoBehaviour
 
         this.player.Health.OnDie += EndBattle;
         this.monster.Health.OnDie += EndBattle;
+        potionUser = new PotionUser(backpack, player.Health, statuses, potionThreshold, potionCooldown);
+        potionUser.OnBattleStart(isBoss);
         isFighting = true;
     }
     public void Bind(Backpack backpack, ClassInfo playerClass, IStatModifier training)
@@ -93,6 +102,7 @@ public class BattleController : MonoBehaviour
         player.Health.ClearShield();
         statuses.Clear();
         actions.Clear();
+        potionUser = null;
         OnBattleEnded?.Invoke();
         player.Health.OnDie -= EndBattle;
         monster.Health.OnDie -= EndBattle;

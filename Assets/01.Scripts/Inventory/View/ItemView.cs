@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // 로직은 없고, 드래그 입력은 전부 DragController에 넘긴다
 // 구조 : ItemView(틀, 피벗 왼쪽 아래) > Icon(Image, 피벗 가운데, 회전 담당)
 [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
-public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] Image icon;
     [SerializeField] ItemCooldownView cooldown;
@@ -120,6 +120,13 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         isHovered = false;
         EventManager.instance.PostNotification(new OnItemHoverExit());
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(eventData.dragging || Item == null)
+            return;
+
+        EventManager.instance.PostNotification(new OnItemClicked(Item));
     }
     private void OnDisable()
     {

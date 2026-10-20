@@ -104,7 +104,7 @@ public class InventoryUI : MonoBehaviour
     private void HandleStageStarted(OnStageStarted e)
     {
         ClearLoot();
-        dragController.Interactable = false;
+        dragController.Interactable = e.IsRest;
         lockView.SetLocked(!dragController.Interactable);
     }
     private void HandleMonsterKilled(OnMonsterKilled e)

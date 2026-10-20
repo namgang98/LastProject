@@ -1,0 +1,5 @@
+﻿id,name,icon,shape,grade,sellprice,description,kind,value,duration
+8501,회복물약,Con_HealPotion,X|X,Normal,30,걸쭉하고 붉은 약 (맛이 없어보인다..),Heal,40,0
+8502,해독제,Con_Antidote,X|X,Rare,25,쓴 약초 냄새가 난다,Cure,0,0
+8503,신속 물약,Con_SwiftPotion,X|X,Rare,60,심장이 빨리 뛴다,Haste,30,10
+8504,망각의 두루마리,Con_ResetScroll,X|X,Rare,150,훈련의 기억을 지운다,ResetPoints,0,0

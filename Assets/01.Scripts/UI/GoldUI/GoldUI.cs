@@ -8,6 +8,8 @@ public class GoldUI : MonoBehaviour
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnChangeGold>(HandleChangeGold);
+        if(GameSession.HasInstance)
+            GameSession.instance.RefreshGold();
     }
     private void OnDisable()
     {

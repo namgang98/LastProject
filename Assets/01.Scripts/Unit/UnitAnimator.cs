@@ -18,12 +18,4 @@ public abstract class UnitAnimator : MonoBehaviour
         animator.ResetTrigger(AnimatorTag.Hurt);
         animator.SetTrigger(AnimatorTag.Death);
     }
-
-    public virtual void ResetAni()
-    {
-        animator.ResetTrigger(AnimatorTag.Hurt);
-        animator.ResetTrigger(AnimatorTag.Attack);
-        animator.SetTrigger(AnimatorTag.Recover);
-    }
-
 }

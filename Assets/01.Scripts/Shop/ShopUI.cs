@@ -133,9 +133,12 @@ public class ShopUI : MonoBehaviour
             return;
 
         GameSession session = GameSession.instance;
+        ShopStockInfo stock = shop.Offers[selected];
 
-        if(!shop.TryBuy(selected, wallet, session.TryReceive))
-            Debug.LogWarning("[ShopUI] 골드가 부족하거나 가방과 창고에 자리가 없습니다.", this); //피드맥이벤트만들면 거기로 연결
+        if(stock != null && wallet.Gold < shop.Pricing.BuyPrice(stock))
+            Feedback("골드가 부족합니다");
+        else if(!shop.TryBuy(selected, wallet, session.TryReceive))
+            Feedback("가방과 창고에 자리가 없습니다");
         else
             session.SaveInVillage();
 
@@ -164,5 +167,9 @@ public class ShopUI : MonoBehaviour
             return;
 
         Refresh();
+    }
+    private static void Feedback(string message)
+    {
+        EventManager.instance.PostNotification(new OnFeedback(message));
     }
 }

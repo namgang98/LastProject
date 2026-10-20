@@ -46,6 +46,7 @@ public class ToolTipView : MonoBehaviour
 
         sb.Clear();
         info.AppendTooltip(sb);
+        e.Item.AppendStateTooltip(sb);
         if(backpack != null)
             SetTooltipWriter.Append(sb, info, SetCounter.CollectEquippedIds(backpack));
         infoText.text = sb.ToString();

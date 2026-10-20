@@ -52,7 +52,30 @@ public class Chest
 
         return false;
     }
+    public bool TryTakeConsumable(ConsumeType kind, out ConsumableInfo info)
+    {
+        info = null;
 
+        foreach(GridContainer tab in tabs)
+        {
+            if(ConsumableSearch.TryTake(tab, kind, out info))
+                return true;
+        }
+
+        return false;
+    }
+
+    public int CountConsumable(ConsumeType kind)
+    {
+        int count = 0;
+
+        foreach(GridContainer tab in tabs)
+        {
+            count += ConsumableSearch.Count(tab, kind);
+        }
+
+        return count;
+    }
     private static int CellCount(ItemInstance item)
     {
         return item.Info.Shape.GetRotatedCells(0).Count;

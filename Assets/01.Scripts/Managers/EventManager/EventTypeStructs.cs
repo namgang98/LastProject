@@ -51,7 +51,12 @@ public struct OnPouchChanged : IGameEvent
 public struct OnStageStarted : IGameEvent
 {
     public int Stage;
-    public OnStageStarted(int stage) => Stage = stage;
+    public bool IsRest;
+    public OnStageStarted(int stage, bool isRest)
+    {
+        Stage = stage;
+        IsRest = isRest;
+    }
 }
 
 public enum RunEndReason
@@ -150,4 +155,28 @@ public struct OnChestExpanded : IGameEvent
 {
     public int TabCount;
     public OnChestExpanded(int tabCount) => TabCount = tabCount;
+}
+
+public struct OnItemClicked : IGameEvent
+{
+    public ItemInstance Item;
+    public OnItemClicked(ItemInstance item) => Item = item;
+}
+
+public enum FeedbackType
+{
+    Info,
+    Warning,
+}
+
+public struct OnFeedback : IGameEvent
+{
+    public string Message;
+    public FeedbackType Type;
+
+    public OnFeedback(string message, FeedbackType type = FeedbackType.Warning)
+    {
+        Message = message;
+        Type = type;
+    }
 }

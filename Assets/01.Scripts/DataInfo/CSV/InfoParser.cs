@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 
 public static class InfoParser
 {
+    #region 공통구조체
     private struct InfoBase
     {
         public int id;
@@ -19,9 +19,10 @@ public static class InfoParser
         public int sellPrice;
         public string desc;
     }
+    #endregion
 
     #region 탭별 변환
-    //무기
+    #region 무기
     public static bool TryParseWeapon(CsvRow row, List<string> errors, out WeaponInfo info)
     {
         info = null;
@@ -38,7 +39,8 @@ public static class InfoParser
         info = new WeaponInfo(i.common.id, i.common.name, i.iconName, i.shape, i.grade, i.sellPrice, i.desc, attack, type);
         return true;
     }
-    //주머니
+    #endregion
+    #region 주머니
     public static bool TryParsePouch(CsvRow row, List<string> errors, out PouchInfo info)
     {
         info = null;
@@ -52,7 +54,8 @@ public static class InfoParser
         info = new PouchInfo(i.common.id, i.common.name, i.iconName, i.shape, i.grade, i.sellPrice, i.desc, storage);
         return true;
     }
-    //가방
+    #endregion
+    #region 가방
     public static bool TryParseBag(CsvRow row, List<string> errors, out BagInfo info)
     {
         info = null;
@@ -66,7 +69,8 @@ public static class InfoParser
         info = new BagInfo(i.common.id, i.common.name, i.iconName, i.shape, i.grade, i.sellPrice, storage, i.desc);
         return true;
     }
-    //몬스터
+    #endregion
+    #region 몬스터
     public static bool TryParseMonster(CsvRow row, List<string> errors, out MonsterInfo info)
     {
         info = null;
@@ -93,7 +97,8 @@ public static class InfoParser
         info = new MonsterInfo(b.id, b.name, prefab, maxHp, attack, equipChance, type);
         return true;
     }
-    //기타템
+    #endregion
+    #region 기타템
     public static bool TryParseMaterial(CsvRow row, List<string> errors, out MaterialInfo info)
     {
         info = null;
@@ -104,7 +109,8 @@ public static class InfoParser
         info = new MaterialInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc);
         return true;
     }
-    //몬스터 드랍표
+    #endregion
+    #region 몬스터 드랍테이블
     public static bool TryParseMonsterDrop(CsvRow row, List<string> errors, out MonsterDropInfo info)
     {
         info = null;
@@ -127,7 +133,8 @@ public static class InfoParser
         info = new MonsterDropInfo(monsterId, itemId, chance, min, max);
         return true;
     }
-    //직업
+    #endregion
+    #region 직업
     public static bool TryParseClass(CsvRow row, List<string> errors, out ClassInfo info)
     {
         info = null;
@@ -163,7 +170,8 @@ public static class InfoParser
         info = new ClassInfo(b.id, b.name, maxHp, type, damageRate, cooldownRate, desc, prefab, unlockFloor, unlockCost);
         return true;
     }
-    //아머
+    #endregion
+    #region 아머
     public static bool TryParseArmor(CsvRow row, List<string> errors, out ArmorInfo info)
     {
         info = null;
@@ -181,7 +189,8 @@ public static class InfoParser
         return true;
 
     }
-    //악세서리
+    #endregion
+    #region 악세서리
     public static bool TryParseAccessory(CsvRow row, List<string> errors, out AccessoryInfo info)
     {
         info = null;
@@ -204,7 +213,8 @@ public static class InfoParser
         info = new AccessoryInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc, effect, maxHp, damageBonus, cooldownReduction);
         return true;
     }
-    //새트
+    #endregion
+    #region 세트
     public static bool TryParseSet(CsvRow row, List<string> errors, out SetInfo info)
     {
         info = null;
@@ -217,7 +227,8 @@ public static class InfoParser
         info = new SetInfo(setid, name, members, desc);
         return true;
     }
-    //세트보너스
+    #endregion
+    #region 세트보너스
     public static bool TryParseSetBonus(CsvRow row, List<string> errors, out SetBonusInfo info)
     {
         info = null;
@@ -238,7 +249,8 @@ public static class InfoParser
         info = new SetBonusInfo(setid,count,maxHp,damageBonus,cooldownReduction,critChance,desc);
         return true;
     }
-    //업그레이드
+    #endregion
+    #region 업그레이드
     public static bool TryParseUpgrade(CsvRow row, List<string> errors, out UpgradeLevelInfo info)
     {
         info = null;
@@ -262,7 +274,8 @@ public static class InfoParser
         info = new UpgradeLevelInfo(id, track, level, cost, value, desc);
         return true;
     }
-    //훈련스텟
+    #endregion
+    #region 훈련스텟
     public static bool TryParseTrainingStat(CsvRow row, List<string> errors, out TrainingStatInfo info)
     {
         info = null;
@@ -280,7 +293,8 @@ public static class InfoParser
         info = new TrainingStatInfo(stat, increase, maxPoints, desc);
         return true;
     }
-    //상점 진열
+    #endregion
+    #region 상잠진열
     public static bool TryParseShopStock(CsvRow row, List<string> errors, out ShopStockInfo info)
     {
         info = null;
@@ -300,6 +314,43 @@ public static class InfoParser
         info = new ShopStockInfo(itemId, weight, minLevel, price);
         return true;
     }
+    #endregion
+    #region 소비템
+    public static bool TryParseConsumable(CsvRow row, List<string> errors, out ConsumableInfo info)
+    {
+        info = null;
+
+        if(!TryParseItemBase(row, errors, out ItemBase b))
+            return false;
+
+        if(!row.TryGetEnum(CSVStamp.Kind, out ConsumeType kind))
+            return Fail(row, errors, CSVStamp.Kind);
+
+        if(!row.TryGetInt(CSVStamp.Value, out int value) || value < 0)
+            return Fail(row, errors, CSVStamp.Value);
+
+        if(!row.TryGetFloat(CSVStamp.Duration, out float duration) || duration < 0f)
+            return Fail(row, errors, CSVStamp.Duration);
+
+        info = new ConsumableInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc, kind, value, duration);
+        return true;
+    }
+    #endregion
+    #region 포션케이스
+    public static bool TryParsePotionCase(CsvRow row, List<string> errors, out PotionCaseInfo info)
+    {
+        info = null;
+
+        if(!TryParseItemBase(row, errors, out ItemBase b))
+            return false;
+
+        if(!row.TryGetInt(CSVStamp.Slots, out int slots) || slots < 1)
+            return Fail(row, errors, CSVStamp.Slots);
+
+        info = new PotionCaseInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc, slots);
+        return true;
+    }
+    #endregion
     #endregion
 
     #region 공통

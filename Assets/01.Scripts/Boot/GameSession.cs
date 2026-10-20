@@ -55,7 +55,6 @@ public class GameSession : Singleton<GameSession>
         if(!saveData.inRun)
             return true;
 
-        Debug.Log("[GameSession] 런 도중 종료 기록 → 사망 처리", this);
         LoseBackpack();
         Save(false);
         return true;
@@ -156,7 +155,18 @@ public class GameSession : Singleton<GameSession>
 
         Backpack = newPack;
     }
+    public int CountConsumable(ConsumeType kind)
+    {
+        return Backpack.CountConsumable(kind) + Chest.CountConsumable(kind);
+    }
 
+    public bool TryTakeConsumable(ConsumeType kind, out ConsumableInfo info)
+    {
+        if (Backpack.TryTakeConsumable(kind, out info))
+            return true;
+
+        return Chest.TryTakeConsumable(kind, out info);
+    }
     private void LoadChest()
     {
         var errors = new List<string>();

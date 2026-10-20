@@ -31,6 +31,7 @@ public class GridView : ItemContainerView
     public GridContainer Container => container;
     public Vector2 PixelSize => rect.sizeDelta;
 
+    private ContainerInstance insertTarget;
     protected override void Awake()
     {
         base.Awake();
@@ -144,6 +145,17 @@ public class GridView : ItemContainerView
         if(container == null)
             return;
 
+        if(TryGetInsertTarget(item, eventData, out ContainerInstance target))
+        {
+            ShowInsertPreview(item, target);
+            return;
+        }
+
+        insertTarget = null;
+
+        if(container == null)
+            return;
+
         Vector2Int anchor = GetAnchor(item, rotation, eventData);
 
         if(previewVisible && anchor == lastPreviewAnchor && rotation == lastPreviewRotation)
@@ -188,6 +200,9 @@ public class GridView : ItemContainerView
         if(container == null)
             return false;
 
+        if(TryGetInsertTarget(item, eventData, out ContainerInstance target))
+            return target.Storage.TryAutoPlace(item);
+
         return container.TryPlace(item, GetAnchor(item, rotation, eventData), rotation);
     }
 
@@ -208,6 +223,46 @@ public class GridView : ItemContainerView
         Vector2 size = ItemView.GetBounds(item, rotation);
         Vector2 origin = local / context.CellSize - size * 0.5f;
         return new Vector2Int(Mathf.RoundToInt(origin.x), Mathf.RoundToInt(origin.y));
+    }
+    private bool TryGetInsertTarget(ItemInstance item, PointerEventData eventData, out ContainerInstance target)
+    {
+        target = null;
+
+        if(!TryGetLocalPoint(eventData, out Vector2 local))
+            return false;
+
+        Vector2Int cell = new Vector2Int(Mathf.FloorToInt(local.x / context.CellSize), Mathf.FloorToInt(local.y / context.CellSize));
+
+        if(container.GetItemAt(cell) is not ContainerInstance found || found == item)
+            return false;
+
+        target = found;
+        return true;
+    }
+
+    private void ShowInsertPreview(ItemInstance item, ContainerInstance target)
+    {
+        if(previewVisible && insertTarget == target)
+            return;
+
+        insertTarget = target;
+        previewVisible = true;
+
+        List<Vector2Int> targetCells = target.GetOccupiedCells();
+        Color color = target.Storage.CanAutoPlace(item) ? validColor : invalidColor;
+        EnsureCount(previews, previewPrefab, previewLayer, targetCells.Count);
+
+        for(int i = 0; i < previews.Count; i++)
+        {
+            bool show = i < targetCells.Count;
+            previews[i].gameObject.SetActive(show);
+
+            if(!show)
+                continue;
+
+            previews[i].color = color;
+            SetCellRect(previews[i], targetCells[i]);
+        }
     }
     #endregion
 }

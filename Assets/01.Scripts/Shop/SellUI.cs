@@ -40,6 +40,7 @@ public class SellUI : MonoBehaviour
     {
         context = new InventoryUIContext(cellSize, itemViewPool, dragController);
         sellArea.CanAccept = CanAccept;
+        sellArea.Rejected += HandleRejected;
         sellArea.Entering += RememberOrigin;
 
         for(int i = 0; i < tabButtons.Length; i++)
@@ -153,7 +154,7 @@ public class SellUI : MonoBehaviour
             if(TryReturn(item))
                 basket.Remove(item);
             else
-                EventManager.instance.PostNotification(new OnFeedback($"[SellUI] {item.Info.Name}을(를) 돌려놓을 자리가 없습니다."));
+                EventManager.instance.PostNotification(new OnFeedback($"{item.Info.Name}을(를) 돌려놓을 자리가 없습니다"));
         }
     }
     private bool TryReturn(ItemInstance item)
@@ -183,6 +184,11 @@ public class SellUI : MonoBehaviour
     private void HandleBasketChanged(LootArea changed)
     {
         RefreshTotal();
+    }
+    private void HandleRejected(ItemInstance item)
+    {
+        if(item is ContainerInstance)
+            EventManager.instance.PostNotification(new OnFeedback("안에 물건이 들어있습니다."));
     }
     private void FitChest()
     {

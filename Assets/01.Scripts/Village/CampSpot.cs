@@ -25,9 +25,16 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     [Header("클릭했을 때")]
     [SerializeField] UnityEvent onClick;
 
+    [Header("줌")]
+    [SerializeField] VillageZoom zoom;
+    [SerializeField] Transform focusPoint;
+
+    private Vector2 opaqueCenter;
+
     private void Awake()
     {
         SetupHitTest();
+        CacheOpaqueCenter();
         ApplyHover(false, true);
     }
 
@@ -52,7 +59,14 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     public void OnPointerClick(PointerEventData eventData)
     {
         ApplyHover(false, true);
-        onClick.Invoke();
+
+        if(zoom == null || focusPoint == null)
+        {
+            onClick.Invoke();
+            return;
+        }
+
+        zoom.Focus(focusPoint.position, onClick.Invoke);
     }
 
     private void ApplyHover(bool on, bool instant)
@@ -96,11 +110,57 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         Image image = GetComponent<Image>();
 
         if(image.sprite == null || !image.sprite.texture.isReadable)
-        {
-            Debug.LogWarning($"[CampSpot] {name} : 그림이 없거나 Read/Write가 꺼져 있어 사각형 전체로 클릭됩니다.", this);
             return;
-        }
 
         image.alphaHitTestMinimumThreshold = alphaHitThreshold;
+    }
+
+    private Vector3 GetFocusWorldPoint()
+    {
+        if(focusPoint != null)
+            return focusPoint.position;
+
+        return transform.TransformPoint(opaqueCenter);
+    }
+
+    private void CacheOpaqueCenter()
+    {
+        RectTransform rect = (RectTransform)transform;
+        opaqueCenter = rect.rect.center;
+
+        Sprite sprite = GetComponent<Image>().sprite;
+
+        if(sprite == null || !sprite.texture.isReadable)
+            return;
+
+        Rect area = sprite.textureRect;
+        int width = (int)area.width;
+        int height = (int)area.height;
+        Color[] pixels = sprite.texture.GetPixels((int)area.x, (int)area.y, width, height);
+
+        int minX = width;
+        int minY = height;
+        int maxX = -1;
+        int maxY = -1;
+
+        for(int y = 0; y < height; y++)
+        {
+            for(int x = 0; x < width; x++)
+            {
+                if(pixels[y * width + x].a < alphaHitThreshold)
+                    continue;
+
+                minX = Mathf.Min(minX, x);
+                maxX = Mathf.Max(maxX, x);
+                minY = Mathf.Min(minY, y);
+                maxY = Mathf.Max(maxY, y);
+            }
+        }
+
+        if(maxX < 0)
+            return;
+
+        Vector2 center01 = new((minX + maxX + 1) * 0.5f / width, (minY + maxY + 1) * 0.5f / height);
+        opaqueCenter = rect.rect.min + Vector2.Scale(center01, rect.rect.size);
     }
 }

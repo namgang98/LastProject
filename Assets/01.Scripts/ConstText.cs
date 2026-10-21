@@ -57,6 +57,11 @@ public static class CSVStamp
     public const string Kind = "kind";
     public const string Duration = "duration";
     public const string Slots = "slots";
+
+    public const string Background = "background";
+    public const string Monsters = "monsters";
+    public const string Boss = "boss";
+    public const string MinFloor = "minfloor";
 }
 #endregion
 
@@ -79,6 +84,7 @@ public static class DataTag
     public const string ShopStock = "shopstock";
     public const string Consumables = "consumables";
     public const string PotionCases = "potioncases";
+    public const string Stages = "stages";
 }
 #endregion
 
@@ -89,6 +95,7 @@ public static class AnimatorTag
     public const string Attack = "Attack";
     public const string Hurt = "Hurt";
     public const string Death = "Death";
+    public const string Walk = "Walk";
 }
 #endregion
 

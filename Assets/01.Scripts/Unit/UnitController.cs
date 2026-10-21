@@ -50,6 +50,13 @@ public class UnitController : MonoBehaviour
             return;
         animator.HurtAni();
     }
+    public void SetMoving(bool moving)
+    {
+        if(animator == null || health.IsDead)
+            return;
+
+        animator.SetMoving(moving);
+    }
     private void HandleHealed(int value)
     {
         Vector3 pos = headPoint != null? headPoint.position : transform.position;

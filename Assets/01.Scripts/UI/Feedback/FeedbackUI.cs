@@ -32,7 +32,7 @@ public class FeedbackUI : MonoBehaviour
         currentSequence?.Kill();
         canvasGroup.alpha = 0f;
 
-        if (!EventManager.HasInstance)
+        if(!EventManager.HasInstance)
             return;
 
         EventManager.instance.RemoveListener<OnFeedback>(HandleFeedback);

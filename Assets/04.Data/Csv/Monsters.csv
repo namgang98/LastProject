@@ -1,4 +1,11 @@
 ﻿id,name,prefab,maxHp,damage,cooldown,equipchance,type,critchance,critmultiplier,element,elementchance,elementvalue,elementduration
 2001,버섯,Monster_Mushroom,50,5,3,0.15,Normal,0.05,1.5,None,0,0,0
 2002,고블린,Monster_Goblin,35,5,2,0.2,Normal,0.15,1.5,poison,0.2,3,4
-2003,스켈레톤,Monster_Skeleton,100,10,2,1,Boss,0.1,2,ice,0.5,30,5
+2003,스켈레톤,Monster_Skeleton,60,7,2.5,0.2,Normal,0.1,1.5,None,0,0,0
+2004,역병쥐,Monster_Rat,25,3,1.2,0.1,Normal,0.05,1.5,poison,0.25,2,4
+2005,거대 거미,Monster_Spider,40,5,2,0.15,Normal,0.1,1.5,poison,0.5,3,5
+2006,구울,Monster_Ghoul,80,9,3,0.2,Normal,0.2,1.8,None,0,0,0
+2007,서리 망령,Monster_FrostWraith,55,6,2.5,0.2,Normal,0.1,1.5,ice,0.4,30,3
+2008,광신도 화염술사,Monster_Cultist,40,7,2.5,0.25,Normal,0.1,1.5,fire,0.5,3,4
+2101,고블린 족장,Monster_GoblinKing,220,12,2.5,1,Boss,0.15,2,None,0,0,0
+2102,포자 모체,Monster_SporeMother,300,10,3.5,1,Boss,0.05,1.5,poison,0.6,5,6

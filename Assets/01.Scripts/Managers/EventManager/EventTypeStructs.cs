@@ -180,3 +180,13 @@ public struct OnFeedback : IGameEvent
         Type = type;
     }
 }
+
+public struct OnPopupCountChanged : IGameEvent
+{
+    public int Count;
+
+    public OnPopupCountChanged(int count)
+    {
+        Count = count;
+    }
+}

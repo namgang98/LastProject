@@ -351,6 +351,29 @@ public static class InfoParser
         return true;
     }
     #endregion
+    #region 지역
+    public static bool TryParseStage(CsvRow row, List<string> errors, out StageInfo info)
+    {
+        info = null;
+
+        if(!TryParseInfoBase(row, errors, out InfoBase b))
+            return false;
+
+        string background = row.GetString(CSVStamp.Background);
+
+        if(!row.TryGetIntList(CSVStamp.Monsters, '|', out List<int> monsterIds) || monsterIds.Count == 0)
+            return Fail(row, errors, CSVStamp.Monsters);
+
+        if(!row.TryGetInt(CSVStamp.Boss, out int bossId) || bossId < 0)
+            return Fail(row, errors, CSVStamp.Boss);
+
+        if(!row.TryGetInt(CSVStamp.MinFloor, out int minFloor) || minFloor < 1)
+            return Fail(row, errors, CSVStamp.MinFloor);
+
+        info = new StageInfo(b.id, b.name, background, monsterIds, bossId, minFloor);
+        return true;
+    }
+    #endregion
     #endregion
 
     #region 공통

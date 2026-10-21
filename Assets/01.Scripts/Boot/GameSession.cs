@@ -162,7 +162,7 @@ public class GameSession : Singleton<GameSession>
 
     public bool TryTakeConsumable(ConsumeType kind, out ConsumableInfo info)
     {
-        if (Backpack.TryTakeConsumable(kind, out info))
+        if(Backpack.TryTakeConsumable(kind, out info))
             return true;
 
         return Chest.TryTakeConsumable(kind, out info);

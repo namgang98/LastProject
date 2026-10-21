@@ -22,6 +22,8 @@ public enum SfxType
     BowAttack = 201,
     Die = 202,
     AxeAttack = 203,
+    Footsteps = 204,
+    FootstepsWood = 205,
 
     //Monster
     GoblinAttack = 500,

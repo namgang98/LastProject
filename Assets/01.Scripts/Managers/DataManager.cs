@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
@@ -32,11 +33,12 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange MaterialIds = new(8000, 8499);
     private static readonly IdRange ConsumableIds = new(8500, 8999);
     private static readonly IdRange PotionCaseIds = new(9100, 9199);
+    private static readonly IdRange StageIds = new(9500, 9599);
 
     #endregion
 
     #region 필드 + 라이브러리
-   [Header("CSV문서")]
+    [Header("CSV문서")]
     [SerializeField] TextAsset bagCsv;
     [SerializeField] TextAsset weaponCsv;
     [SerializeField] TextAsset monsterCsv;
@@ -53,10 +55,12 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset shopStockCsv;
     [SerializeField] TextAsset consumableCsv;
     [SerializeField] TextAsset potionCaseCsv;
+    [SerializeField] TextAsset stageCsv;
 
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
     [SerializeField] PrefabLibrary prefabLibrary;
+    [SerializeField] IconLibrary backgroundLibrary;
     #endregion
 
     #region 딕셔너리모음
@@ -68,18 +72,21 @@ public class DataManager : Singleton<DataManager>
     private static readonly List<SetInfo> NoSets = new();
     private readonly Dictionary<UpgradeTrack, UpgradeTrackInfo> upgrades = new();
     private readonly Dictionary<TrainingStat, TrainingStatInfo> trainingStats = new();
-    private readonly List<ShopStockInfo> shopStocks = new(); 
+    private readonly List<ShopStockInfo> shopStocks = new();
+    private readonly List<StageInfo> stages = new();
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
 
     private bool isLoading;
     public bool IsLoaded { get; private set; }
+
     #region 읽기전용
     public IReadOnlyCollection<ItemInfo> Items => items.Values;
     public IReadOnlyCollection<MonsterInfo> Monsters => monsters.Values; 
     public IReadOnlyCollection<ClassInfo> Classes => classes.Values;
     public IReadOnlyList<ShopStockInfo> ShopStocks => shopStocks;
+    public IReadOnlyList<StageInfo> Stages => stages;
     #endregion
 
     #region 초기화
@@ -117,6 +124,7 @@ public class DataManager : Singleton<DataManager>
         string shopStockText = ReadText(shopStockCsv, nameof(shopStockCsv));
         string consumableText = ReadText(consumableCsv, nameof(consumableCsv));
         string potioncaseText = ReadText(potionCaseCsv, nameof(potionCaseCsv));
+        string stageText = ReadText(stageCsv, nameof(stageCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -139,6 +147,7 @@ public class DataManager : Singleton<DataManager>
         List<ShopStockInfo> shopStockList = ParseTable<ShopStockInfo>(DataTag.ShopStock, shopStockText, errors, InfoParser.TryParseShopStock);
         List<ConsumableInfo> consumableList = ParseTable<ConsumableInfo>(DataTag.Consumables, consumableText, errors, InfoParser.TryParseConsumable);
         List<PotionCaseInfo> potionCaseList = ParseTable<PotionCaseInfo>(DataTag.PotionCases, potioncaseText, errors, InfoParser.TryParsePotionCase);
+        List<StageInfo> stageList = ParseTable<StageInfo>(DataTag.Stages, stageText, errors, InfoParser.TryParseStage);
         #endregion
 
         //메인 스레드
@@ -152,6 +161,8 @@ public class DataManager : Singleton<DataManager>
             prefabLibrary.Init();
         else
             errors.Add("monsterPrefabs가 연결되지 않았습니다");
+        if(backgroundLibrary != null)
+            backgroundLibrary.Init();
 
         #region Register
         RegisterItems(DataTag.Weapons, weaponList, WeaponIds, errors);
@@ -170,6 +181,7 @@ public class DataManager : Singleton<DataManager>
         RegisterUpgrades(DataTag.Upgrades, upgradeList, UpgradeIds, errors);
         RegisterTrainingStats(DataTag.TrainingStats, trainingStatList, errors);
         RegisterShopStocks(DataTag.ShopStock, shopStockList, errors);
+        RegisterStages(DataTag.Stages, stageList, StageIds, errors);
         #endregion
 
         foreach(var error in errors)
@@ -472,6 +484,53 @@ public class DataManager : Singleton<DataManager>
             shopStocks.Add(stock);
         }
     }
+    private void RegisterStages(string sheetName, List<StageInfo> list, IdRange range, List<string> errors)
+    {
+        var ids = new HashSet<int>();
+
+        foreach(var info in list)
+        {
+            if(!range.Contains(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} ({info.Name}) 가 구간 {range.Min}~{range.Max} 밖입니다");
+                continue;
+            }
+
+            if(!ids.Add(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            foreach(int monsterId in info.MonsterIds)
+            {
+                if(!monsters.TryGetValue(monsterId, out MonsterInfo monster) || monster.IsBoss)
+                {
+                    errors.Add($"{sheetName} : 지역 {info.Name} 의 몬스터 {monsterId} 가 없거나 보스입니다 → 제외");
+                    continue;
+                }
+
+                info.AddMonster(monster);
+            }
+
+            if(info.Monsters.Count == 0)
+            {
+                errors.Add($"{sheetName} : 지역 {info.Name} 에 일반 몬스터가 없습니다 → 지역 무시");
+                continue;
+            }
+
+            if(info.BossId != 0)
+            {
+                if(monsters.TryGetValue(info.BossId, out MonsterInfo boss) && boss.IsBoss)
+                    info.SetBoss(boss);
+                else
+                    errors.Add($"{sheetName} : 지역 {info.Name} 의 보스 {info.BossId} 가 없거나 보스가 아닙니다 → 랜덤 보스");
+            }
+
+            info.SetBackground(FindBackground(sheetName, info));
+            stages.Add(info);
+        }
+    }
     #endregion
 
     #region 조회
@@ -518,6 +577,16 @@ public class DataManager : Singleton<DataManager>
     public bool TryGetTrainingStat(TrainingStat stat, out TrainingStatInfo info)
     {
         return trainingStats.TryGetValue(stat, out info);
+    }
+    private Sprite FindBackground(string sheetName, StageInfo info)
+    {
+        if(string.IsNullOrEmpty(info.BackgroundName) || backgroundLibrary == null)
+            return null;
+
+        if(backgroundLibrary.TryGet(info.BackgroundName, out Sprite sprite))
+            return sprite;
+
+        return null;
     }
     #endregion
 }

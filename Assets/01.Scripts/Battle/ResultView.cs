@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ResultView : MonoBehaviour
@@ -33,7 +32,7 @@ public class ResultView : MonoBehaviour
     private void ReturnToVillage()
     {
         restartButton.interactable = false;
-        SceneManager.LoadScene(SceneNames.Village);
+        SceneLoader.instance.Load(SceneNames.Village);
     }
     private void Show(RunEndReason reason, int stage)
     {

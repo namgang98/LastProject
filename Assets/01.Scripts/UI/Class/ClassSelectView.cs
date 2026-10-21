@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ClassSelectView : MonoBehaviour
@@ -92,6 +91,6 @@ public class ClassSelectView : MonoBehaviour
         departButton.interactable = false;
         GameSession.instance.SelectClass(selected.Info);
         GameSession.instance.BeginRun();
-        SceneManager.LoadScene(SceneNames.Dungeon);
+        SceneLoader.instance.Load(SceneNames.Dungeon);
     }
 }

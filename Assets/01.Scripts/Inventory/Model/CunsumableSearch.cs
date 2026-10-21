@@ -4,7 +4,7 @@
     {
         int count = 0;
 
-        foreach (ItemInstance item in grid.Items)
+        foreach(ItemInstance item in grid.Items)
         {
             if(IsKind(item, kind))
                 count++;
@@ -17,10 +17,10 @@
 
     public static bool TryTake(GridContainer grid, ConsumeType kind, out ConsumableInfo info)
     {
-        if (TryTakeLoose(grid, kind, out info))
+        if(TryTakeLoose(grid, kind, out info))
             return true;
 
-        foreach (ItemInstance item in grid.Items)
+        foreach(ItemInstance item in grid.Items)
         {
             if(item is not PotionCaseInstance potionCase)
                 continue;

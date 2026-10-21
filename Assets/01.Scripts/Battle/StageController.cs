@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.UI;
 
 public class StageController : MonoBehaviour
@@ -10,29 +12,36 @@ public class StageController : MonoBehaviour
     [SerializeField] GameObject monsterHpBack;
     [SerializeField] GameObject restVisual;
 
+    [Header("층 이동 연출")]
+    [SerializeField] FloorTransitionView transition;
+    [SerializeField] PlayerWalk walker;
+
+
     [SerializeField] int bossInterval = 10;
     [SerializeField] Transform spawnPoint;
     [SerializeField] BattleController battle;
-    private UnitController player;
     [SerializeField] HpBarView monsterHpbar;
     [SerializeField] Button nextButton;
     [SerializeField] TextMeshProUGUI stageText;
     [SerializeField] bool returnOnlyAfterBoss;
     [SerializeField] Button returnButton;
     [SerializeField] StatusIconView statusIconView;
+    [SerializeField] StageBackgroundView background;
+    private StagePlanner planner;
+
+
+    [SerializeField] private float hpGrowth = 0.1f;
+    [SerializeField] private float damageGrowth = 0.05f;
+
     private StageRule rule;
+    private StageScaling scaling;
+    private UnitController player;
 
     private int stage;
     private Phase phase;
     private UnitController currentMonster;
     private MonsterInfo currentInfo;
-
-    [SerializeField] private float hpGrowth = 0.1f;
-    [SerializeField] private float damageGrowth = 0.05f;
-    private StageScaling scaling;
-
-    private List<MonsterInfo> normalMonsters = new();
-    private List<MonsterInfo> bossMonsters = new();
+    private AttackData currentAttack;
 
     private void Awake()
     {
@@ -42,11 +51,13 @@ public class StageController : MonoBehaviour
         nextButton.onClick.AddListener(NextStage);
         returnButton.onClick.AddListener(ReturnToTown);
     }
+
     private void OnDisable()
     {
         if(player != null)
             player.Health.OnDie -= HandlePlayerDead;
     }
+
     public void Begin(UnitController runner)
     {
         if(player != null)
@@ -55,95 +66,24 @@ public class StageController : MonoBehaviour
         player = runner;
         player.Health.OnDie += HandlePlayerDead;
 
-        normalMonsters.Clear();
-        bossMonsters.Clear();
-
-        foreach(MonsterInfo monster in DataManager.instance.Monsters)
-        {
-            if(monster.IsBoss)
-            {
-                bossMonsters.Add(monster);
-            }
-            else 
-            {
-                normalMonsters.Add(monster);    
-            }
-        }
+        planner = new StagePlanner(DataManager.instance.Stages, DataManager.instance.Monsters, bossInterval);
 
         stage = 1;
-        StartStage();
-    }
-    private void StartStage()
-    {
-        bool isRest = rule.IsRestStage(stage);
-        EventManager.instance.PostNotification(new OnStageStarted(stage, isRest));
-        stageText.text = isRest ? $"{stage} F 휴식" : $"{stage} F";
-
-        if(restVisual != null)
-            restVisual.SetActive(isRest);
-
-        if(isRest)
-        {
-            StartRest();
-            return;
-        }
-        monsterHpBack.SetActive(true);
-        monsterHpbar.gameObject.SetActive(true);
-        List<MonsterInfo> pool = rule.IsBossStage(stage) ? bossMonsters : normalMonsters;
-
-        if (pool.Count == 0)
-        {
-            Debug.LogError($"[StageController] {stage}층에 나올 몬스터가 없습니다.", this);
-            return;
-        }
-
-        MonsterInfo info = pool[Random.Range(0, pool.Count)];
-        currentInfo = info;
-
-        GameObject obj = Instantiate(info.Prefab, spawnPoint);
-        if(!obj.TryGetComponent(out UnitController monster))
-        {
-            Debug.LogError($"[StageController] {info.Name} 프리팹에 UnitController 가 없습니다.", this);
-            Destroy(obj);
-            return;
-        }
-        currentMonster = monster;
-        MonsterStats stats = scaling.Apply(info, stage);
-
-        currentMonster.Health.Init(stats.MaxHp);
-        monsterHpbar.Bind(currentMonster.Health);
-        currentMonster.Health.OnDie += HandleMonsterDead;
-        var monsterAttack = info.Attack.WithDamage(stats.Damage);
-        battle.StartBattle(player, monster, monsterAttack, info.IsBoss);
-        statusIconView.Bind(monster);
-        phase = Phase.Fighting;
-        nextButton.gameObject.SetActive(false);
-        returnButton.gameObject.SetActive(false);
-    }
-
-    private void HandleMonsterDead()
-    {
-        currentMonster.Health.OnDie -= HandleMonsterDead;
-        EventManager.instance.PostNotification(new OnMonsterKilled(spawnPoint.position, currentInfo));
-        phase = Phase.Looting;
-        nextButton.gameObject.SetActive(true);
-        returnButton.gameObject.SetActive(rule.CanReturn(stage));
-    }
-    private void HandlePlayerDead()
-    {
-        EndRun(RunEndReason.Death);
+        phase = Phase.Moving;
+        HideButtons();
+        walker.Bind(player);
+        transition.Play(stage, GetKind(stage), GetAreaTitle(stage), PrepareStage, WalkIn, null, true);
     }
 
     public void NextStage()
     {
         if(phase != Phase.Looting)
             return;
-        if(currentMonster != null)
-            Destroy(currentMonster.gameObject);
 
-        currentMonster = null;
-        stage++;
-        StartStage();
+        phase = Phase.Moving;
+        HideButtons();
+        walker.WalkOut();
+        transition.Play(stage + 1, GetKind(stage + 1), GetAreaTitle(stage + 1), EnterNextFloor, WalkIn);
     }
 
     public void ReturnToTown()
@@ -158,35 +98,165 @@ public class StageController : MonoBehaviour
     {
         if(phase == Phase.Ended)
             return;
+
         phase = Phase.Ended;
         battle.EndBattle();
-
-        if(currentMonster != null)
-        {
-            currentMonster.Health.OnDie -= HandleMonsterDead;
-            Destroy(currentMonster.gameObject);
-            currentMonster = null;
-        }
-
-        nextButton.gameObject.SetActive(false);
-        returnButton.gameObject.SetActive(false);
+        ClearMonster();
+        HideButtons();
         EventManager.instance.PostNotification(new OnRunEnded(stage, reason));
     }
+
+    private void EnterNextFloor()
+    {
+        ClearMonster();
+        stage++;
+        PrepareStage();
+    }
+
+    private void PrepareStage()
+    {
+        StageInfo area = planner.Get(stage);
+
+        if(area != null)
+            background.Show(area.Background);
+
+        bool isRest = rule.IsRestStage(stage);
+
+        EventManager.instance.PostNotification(new OnStageStarted(stage, isRest));
+        stageText.text = isRest ? $"{stage} F 휴식" : $"{stage} F";
+
+        if(restVisual != null)
+            restVisual.SetActive(isRest);
+
+        monsterHpBack.SetActive(!isRest);
+        monsterHpbar.gameObject.SetActive(!isRest);
+
+        if(isRest)
+            return;
+
+        SpawnMonster();
+    }
+
+    private void SpawnMonster()
+    {
+        MonsterInfo info = planner.PickMonster(stage, rule.IsBossStage(stage));
+
+        if(info == null)
+        {
+            Debug.LogError($"[StageController] {stage}층에 나올 몬스터가 없습니다. Stages 데이터를 확인하세요.", this);
+            return;
+        }
+
+        GameObject obj = Instantiate(info.Prefab, spawnPoint);
+
+        if(!obj.TryGetComponent(out UnitController monster))
+        {
+            Debug.LogError($"[StageController] {info.Name} 프리팹에 UnitController 가 없습니다.", this);
+            Destroy(obj);
+            return;
+        }
+
+        currentInfo = info;
+        currentMonster = monster;
+
+        MonsterStats stats = scaling.Apply(info, stage);
+        currentMonster.Health.Init(stats.MaxHp);
+        currentAttack = info.Attack.WithDamage(stats.Damage);
+
+        monsterHpbar.Bind(currentMonster.Health);
+        statusIconView.Bind(currentMonster);
+    }
+
+    private void BeginStage()
+    {
+        if(phase == Phase.Ended)
+            return;
+
+        if(rule.IsRestStage(stage))
+        {
+            StartRest();
+            return;
+        }
+
+        if(currentMonster == null)
+            return;
+
+        currentMonster.Health.OnDie += HandleMonsterDead;
+        battle.StartBattle(player, currentMonster, currentAttack, currentInfo.IsBoss);
+        phase = Phase.Fighting;
+    }
+
     private void StartRest()
     {
-        monsterHpBack.SetActive(false);
-        monsterHpbar.gameObject.SetActive(false);
         player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * restHealRate));
-
         phase = Phase.Looting;
+        ShowButtons();
+    }
+
+    private void HandleMonsterDead()
+    {
+        currentMonster.Health.OnDie -= HandleMonsterDead;
+        EventManager.instance.PostNotification(new OnMonsterKilled(spawnPoint.position, currentInfo));
+        phase = Phase.Looting;
+        ShowButtons();
+    }
+
+    private void HandlePlayerDead()
+    {
+        EndRun(RunEndReason.Death);
+    }
+
+    private void ClearMonster()
+    {
+        if(currentMonster == null)
+            return;
+
+        currentMonster.Health.OnDie -= HandleMonsterDead;
+        Destroy(currentMonster.gameObject);
+        currentMonster = null;
+    }
+
+    private FloorKind GetKind(int floor)
+    {
+        if(rule.IsRestStage(floor))
+            return FloorKind.Rest;
+
+        if(rule.IsBossStage(floor))
+            return FloorKind.Boss;
+
+        return FloorKind.Normal;
+    }
+
+    private void ShowButtons()
+    {
         nextButton.gameObject.SetActive(true);
         returnButton.gameObject.SetActive(rule.CanReturn(stage));
     }
 
+    private void HideButtons()
+    {
+        nextButton.gameObject.SetActive(false);
+        returnButton.gameObject.SetActive(false);
+    }
+    private void WalkIn()
+    {
+        walker.WalkIn(BeginStage);
+    }
+    private string GetAreaTitle(int floor)
+    {
+        if(!planner.IsFirstFloor(floor))
+            return null;
+
+        StageInfo area = planner.Get(floor);
+        return area != null ? area.Name : null;
+    }
     private enum Phase
     {
+        Moving,
         Fighting,
         Looting,
         Ended,
     }
+
+
 }

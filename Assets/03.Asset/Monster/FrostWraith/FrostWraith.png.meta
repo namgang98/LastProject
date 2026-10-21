@@ -1,0 +1,1117 @@
+fileFormatVersion: 2
+guid: 8119853de3c1e1e4c82b1598b576cd46
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2740887803505921527
+    second: FrostWraith_packed_0
+  - first:
+      213: -7165218765496614965
+    second: FrostWraith_packed_1
+  - first:
+      213: 629174799220218186
+    second: FrostWraith_packed_2
+  - first:
+      213: -1760968090216366122
+    second: FrostWraith_packed_3
+  - first:
+      213: -8900180581344999511
+    second: FrostWraith_packed_4
+  - first:
+      213: 7678467396000692190
+    second: FrostWraith_packed_5
+  - first:
+      213: -2026342743266113919
+    second: FrostWraith_packed_6
+  - first:
+      213: 1044600270934760466
+    second: FrostWraith_packed_7
+  - first:
+      213: 3240144859048985066
+    second: FrostWraith_packed_8
+  - first:
+      213: 220322782975396057
+    second: FrostWraith_packed_9
+  - first:
+      213: -6997378474093570726
+    second: FrostWraith_packed_10
+  - first:
+      213: -4645714569455850214
+    second: FrostWraith_packed_11
+  - first:
+      213: 4140414683407736507
+    second: FrostWraith_packed_12
+  - first:
+      213: 3648309663650738429
+    second: FrostWraith_packed_13
+  - first:
+      213: -5725995960367774718
+    second: FrostWraith_packed_14
+  - first:
+      213: -6428111954411316350
+    second: FrostWraith_packed_15
+  - first:
+      213: 193905053554468009
+    second: FrostWraith_packed_16
+  - first:
+      213: -8838652807063219734
+    second: FrostWraith_packed_17
+  - first:
+      213: 2303147695877593601
+    second: FrostWraith_packed_18
+  - first:
+      213: -830617386791753650
+    second: FrostWraith_packed_19
+  - first:
+      213: -3432712387702445725
+    second: FrostWraith_packed_20
+  - first:
+      213: -2093444333193040871
+    second: FrostWraith_packed_21
+  - first:
+      213: 2618841937294525924
+    second: FrostWraith_packed_22
+  - first:
+      213: 9003499405823586911
+    second: FrostWraith_packed_23
+  - first:
+      213: 5828458060732757554
+    second: FrostWraith_packed_24
+  - first:
+      213: 4170647342474072134
+    second: FrostWraith_packed_25
+  - first:
+      213: 2331308185247706898
+    second: FrostWraith_packed_26
+  - first:
+      213: -5892749011147234483
+    second: FrostWraith_packed_27
+  - first:
+      213: 6488262847287956921
+    second: FrostWraith_packed_28
+  - first:
+      213: 2498749716469623511
+    second: FrostWraith_packed_29
+  - first:
+      213: 4649571107422389877
+    second: FrostWraith_packed_30
+  - first:
+      213: -476762051062704817
+    second: FrostWraith_packed_31
+  - first:
+      213: -4689911435503495148
+    second: FrostWraith_packed_32
+  - first:
+      213: -4924806098369923850
+    second: FrostWraith_packed_33
+  - first:
+      213: 2634915372849674237
+    second: FrostWraith_packed_34
+  - first:
+      213: 7854360389184691873
+    second: FrostWraith_packed_35
+  - first:
+      213: -6500297070358563466
+    second: FrostWraith_packed_36
+  - first:
+      213: 4300644967689629041
+    second: FrostWraith_packed_37
+  - first:
+      213: 8437412816936366779
+    second: FrostWraith_packed_38
+  - first:
+      213: 6654451142546499712
+    second: FrostWraith_packed_39
+  - first:
+      213: -8564794718269477412
+    second: FrostWraith_packed_40
+  - first:
+      213: -4836647966414638585
+    second: FrostWraith_packed_41
+  - first:
+      213: -9205938420461277758
+    second: FrostWraith_packed_42
+  - first:
+      213: -6159126710194463648
+    second: FrostWraith_packed_43
+  - first:
+      213: 6989572181965518899
+    second: FrostWraith_packed_44
+  - first:
+      213: 8043658351489998479
+    second: FrostWraith_packed_45
+  - first:
+      213: 2206777020920255936
+    second: FrostWraith_packed_46
+  - first:
+      213: 4750544058017406105
+    second: FrostWraith_packed_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FrostWraith_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf7aef045e3eedc4f9036e25baeb9df3
+      internalID: -2034527998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_1
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 600
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e8c95f7cdea0ab48ade736ade2c591b
+      internalID: 1289714260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_2
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 600
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d08849dbb1baf749b140c2e9f7609bd
+      internalID: 1248768742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_3
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 600
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03821addb5be0704d9629f97b087208a
+      internalID: -2090950015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 480
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56983ca3b7dbbbb4285c336569091152
+      internalID: 1483620038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_5
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 480
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9ef5cf23252f4341950cf06e801a81c
+      internalID: -70594505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_6
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 480
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d33334fe3ccc0894bb0259ec6c63b77b
+      internalID: -2099283629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_7
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 480
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f162023fcf97ef24f9551d6211c8e4a8
+      internalID: -742393571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_8
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 480
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83f3665984fd40f4194ee66f94eec1d1
+      internalID: 170778116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_9
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 480
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd037449ab9db204b9d886dae156084f
+      internalID: 1253029036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_10
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 480
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ceb21c4078d7f3438c28de6523d57a5
+      internalID: -585222397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_11
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 480
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b5a1c57d9c79d14fb5a925b61fd9479
+      internalID: 1031620754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4eba007b7d9f3a4abc9afc2830dc422
+      internalID: -1542116757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_13
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 360
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6defd16627d927f42a3110745c5bc324
+      internalID: -1676752317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_14
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 360
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6c85b4a33f8d5746a446266619f6078
+      internalID: -1364075913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_15
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 360
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab33809308738374999b4cd9e57e7dcb
+      internalID: -1919526295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_16
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 360
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c08bf1b87caae642bff9edd62878cfd
+      internalID: 1750105806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_17
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 360
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d1ad1b2158fda8499c62b81b33ace35
+      internalID: -1274864684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_18
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 360
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f8cbc00c4a225f47b1b4072dd81cd26
+      internalID: 199192970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_19
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 360
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d8d0973cad5eba489d85554515d6f00
+      internalID: -914938702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882d71dca7a982e4a82b42430e3beb6e
+      internalID: 1024632448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_21
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 240
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8a7b9a650b8b7147bdcfca3d816a238
+      internalID: -640933528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_22
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 240
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e82c66649369e6b4fa92993ad3dd08df
+      internalID: 817213121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_23
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 240
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ab41e8b7b39c704c87382f04bb5801c
+      internalID: 265430023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_24
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 240
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3ddc8f939fd66a49aab57e26f4ce05e
+      internalID: -68538535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_25
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 240
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aab1f057c4548c4b9f32e4c62202e40
+      internalID: 13753209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_26
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 240
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e38ab2e6cdd9c640b2b170a77e19609
+      internalID: -1217020828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_27
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 240
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e01b303f0bf6ce6449fbb5b4730ff24f
+      internalID: -2074215643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a1e24b93550e5c40b6ac3b61093105f
+      internalID: -1814015323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_29
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 120
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 043c88a48eafa564393be4b7301b1eec
+      internalID: -1276611108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_30
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 120
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c55c2f3b6bec1bc42b41b9fb74476de9
+      internalID: -1114850265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_31
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 120
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 237dece505a2c104396ca6223e6fa5c5
+      internalID: -877458194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41a01edaffeea574d986eac1e4b90e60
+      internalID: 602488948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_33
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 0
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfc496b2dfad32a46bee45901295e774
+      internalID: 1583509853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_34
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb4c5735d60498b47afcba700b4e0c78
+      internalID: 446016760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWraith_35
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 0
+        width: 138
+        height: 120
+      alignment: 9
+      pivot: {x: 0.384, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aba573a06df96f4e929ffa3c3c05c0a
+      internalID: 1750775348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 37610219c60fc384695c0c986b6af619
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":138.0,"y":120.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.3840000033378601,"y":0.05000000074505806},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      FrostWraith_0: -2034527998
+      FrostWraith_1: 1289714260
+      FrostWraith_10: -585222397
+      FrostWraith_11: 1031620754
+      FrostWraith_12: -1542116757
+      FrostWraith_13: -1676752317
+      FrostWraith_14: -1364075913
+      FrostWraith_15: -1919526295
+      FrostWraith_16: 1750105806
+      FrostWraith_17: -1274864684
+      FrostWraith_18: 199192970
+      FrostWraith_19: -914938702
+      FrostWraith_2: 1248768742
+      FrostWraith_20: 1024632448
+      FrostWraith_21: -640933528
+      FrostWraith_22: 817213121
+      FrostWraith_23: 265430023
+      FrostWraith_24: -68538535
+      FrostWraith_25: 13753209
+      FrostWraith_26: -1217020828
+      FrostWraith_27: -2074215643
+      FrostWraith_28: -1814015323
+      FrostWraith_29: -1276611108
+      FrostWraith_3: -2090950015
+      FrostWraith_30: -1114850265
+      FrostWraith_31: -877458194
+      FrostWraith_32: 602488948
+      FrostWraith_33: 1583509853
+      FrostWraith_34: 446016760
+      FrostWraith_35: 1750775348
+      FrostWraith_4: 1483620038
+      FrostWraith_5: -70594505
+      FrostWraith_6: -2099283629
+      FrostWraith_7: -742393571
+      FrostWraith_8: 170778116
+      FrostWraith_9: 1253029036
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

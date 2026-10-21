@@ -12,6 +12,11 @@ public abstract class UnitAnimator : MonoBehaviour
     {
         animator.SetTrigger(AnimatorTag.Hurt);
     }
+
+    public virtual void SetMoving(bool moving)
+    {
+        animator.SetBool(AnimatorTag.Walk, moving);
+    }
     public virtual void DeadAni()
     {
         animator.ResetTrigger(AnimatorTag.Attack);

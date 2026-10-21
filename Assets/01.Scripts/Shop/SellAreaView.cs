@@ -16,7 +16,7 @@ public class SellAreaView : LootAreaView
             return false;
         }
 
-        if (Area != null && !Area.Contains(item))
+        if(Area != null && !Area.Contains(item))
             Entering?.Invoke(item);
 
         return base.TryDrop(item, rotation, eventData);

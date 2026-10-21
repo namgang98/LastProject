@@ -22,7 +22,7 @@ MonoBehaviour:
   sfxs:
   - type: 100
     clips:
-    - {fileID: 8300000, guid: 76c7bb5ec5249154ba55f1dfcd86ccb7, type: 3}
+    - {fileID: 8300000, guid: f7395e3127cc3224793298cda50ac6d9, type: 3}
     volume: 0.7
     pitchRandom: 0.05
   - type: 101
@@ -65,3 +65,17 @@ MonoBehaviour:
     - {fileID: 8300000, guid: eca158722a7839849bd35b6c3603d657, type: 3}
     volume: 0.8
     pitchRandom: 0.08
+  - type: 204
+    clips:
+    - {fileID: 8300000, guid: 5307d735c60691e45adfd092f08b5024, type: 3}
+    - {fileID: 8300000, guid: bbe1d4b7ae7f95240a82b9e9452a73cc, type: 3}
+    - {fileID: 8300000, guid: 870f155730aebd04ca2f0545689ad0b6, type: 3}
+    volume: 1
+    pitchRandom: 0.12
+  - type: 205
+    clips:
+    - {fileID: 8300000, guid: 252c8b50d0782da439266de241470cb4, type: 3}
+    - {fileID: 8300000, guid: 25b6f7d68507c1c4abd72337f8d94730, type: 3}
+    - {fileID: 8300000, guid: 7e9dc4d0d8acd92409877d064eac1421, type: 3}
+    volume: 1
+    pitchRandom: 0.12

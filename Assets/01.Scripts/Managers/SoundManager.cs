@@ -69,7 +69,7 @@ public class SoundManager : Singleton<SoundManager>
         StartFade(bgmSources[bgmIndex], null, 0f);
     }
 
-    public void PlaySfx(SfxType type)
+    public void PlaySfx(SfxType type, float volumeScale = 1f)
     {
         if(type == SfxType.None)
             return;
@@ -94,16 +94,38 @@ public class SoundManager : Singleton<SoundManager>
         sfxIndex = (sfxIndex + 1) % sfxSources.Length;
 
         source.clip = entry.PickClip();
-        source.volume = entry.volume;
+        source.volume = entry.volume * volumeScale;
         source.pitch = entry.PickPitch();
         source.Play();
     }
+
+    public void PlaySfxRepeat(SfxType type, int count, float interval, float endVolume = 1f)
+    {
+        if(type == SfxType.None || count <= 0)
+            return;
+
+        StartCoroutine(RepeatSfx(type, count, interval, endVolume));
+    }
+
+    private IEnumerator RepeatSfx(SfxType type, int count, float interval, float endVolume)
+    {
+        var wait = new WaitForSeconds(interval);
+
+        for(int i = 0; i < count; i++)
+        {
+            float rate = count > 1 ? (float)i / (count - 1) : 0f;
+            PlaySfx(type, Mathf.Lerp(1f, endVolume, rate));
+
+            if(i < count - 1)
+                yield return wait;
+        }
+    }
+
     private bool HasLibrary()
     {
         if(library != null)
             return true;
 
-        Debug.LogWarning("[SoundManager] SoundLibrary가 없습니다. 부트 씬에서 시작했는지 확인하세요.");
         return false;
     }
 

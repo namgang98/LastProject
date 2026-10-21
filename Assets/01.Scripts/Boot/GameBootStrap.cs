@@ -13,6 +13,6 @@ public class GameBootStrap : MonoBehaviour
             return;
         }
 
-        await SceneManager.LoadSceneAsync(SceneNames.Village);
+        SceneLoader.instance.Load(SceneNames.Village);
     }
 }

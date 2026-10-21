@@ -48,7 +48,7 @@ public class TrainingUI : MonoBehaviour
         unlockButton.onClick.AddListener(Unlock);
         resetButton.onClick.AddListener(ResetPoints);
 
-        foreach (var row in statRows)
+        foreach(var row in statRows)
         {
             row.PlusClicked += AddPoint;
         }

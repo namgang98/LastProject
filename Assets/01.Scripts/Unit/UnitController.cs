@@ -46,8 +46,9 @@ public class UnitController : MonoBehaviour
 
         EventManager.instance.PostNotification(new OnUnitDamaged(pos, info));
 
-        if(animator == null || health.CurrentHP <= 0)
+        if(animator == null || info.IsTick || health.CurrentHP <= 0)
             return;
+
         animator.HurtAni();
     }
     public void SetMoving(bool moving)

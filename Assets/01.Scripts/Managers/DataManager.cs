@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
@@ -34,6 +33,7 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange ConsumableIds = new(8500, 8999);
     private static readonly IdRange PotionCaseIds = new(9100, 9199);
     private static readonly IdRange StageIds = new(9500, 9599);
+    private static readonly IdRange QuestIds = new(9600, 9699);
 
     #endregion
 
@@ -56,7 +56,7 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset consumableCsv;
     [SerializeField] TextAsset potionCaseCsv;
     [SerializeField] TextAsset stageCsv;
-
+    [SerializeField] TextAsset questCsv;
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
     [SerializeField] PrefabLibrary prefabLibrary;
@@ -74,6 +74,7 @@ public class DataManager : Singleton<DataManager>
     private readonly Dictionary<TrainingStat, TrainingStatInfo> trainingStats = new();
     private readonly List<ShopStockInfo> shopStocks = new();
     private readonly List<StageInfo> stages = new();
+    private readonly Dictionary<int, QuestInfo> quests = new();
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
@@ -87,6 +88,7 @@ public class DataManager : Singleton<DataManager>
     public IReadOnlyCollection<ClassInfo> Classes => classes.Values;
     public IReadOnlyList<ShopStockInfo> ShopStocks => shopStocks;
     public IReadOnlyList<StageInfo> Stages => stages;
+    public IReadOnlyCollection<QuestInfo> Quests => quests.Values;
     #endregion
 
     #region 초기화
@@ -125,6 +127,7 @@ public class DataManager : Singleton<DataManager>
         string consumableText = ReadText(consumableCsv, nameof(consumableCsv));
         string potioncaseText = ReadText(potionCaseCsv, nameof(potionCaseCsv));
         string stageText = ReadText(stageCsv, nameof(stageCsv));
+        string questText = ReadText(questCsv, nameof(questCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -148,6 +151,7 @@ public class DataManager : Singleton<DataManager>
         List<ConsumableInfo> consumableList = ParseTable<ConsumableInfo>(DataTag.Consumables, consumableText, errors, InfoParser.TryParseConsumable);
         List<PotionCaseInfo> potionCaseList = ParseTable<PotionCaseInfo>(DataTag.PotionCases, potioncaseText, errors, InfoParser.TryParsePotionCase);
         List<StageInfo> stageList = ParseTable<StageInfo>(DataTag.Stages, stageText, errors, InfoParser.TryParseStage);
+        List<QuestInfo> questList = ParseTable<QuestInfo>(DataTag.Quests, questText, errors, InfoParser.TryParseQuest);
         #endregion
 
         //메인 스레드
@@ -182,6 +186,7 @@ public class DataManager : Singleton<DataManager>
         RegisterTrainingStats(DataTag.TrainingStats, trainingStatList, errors);
         RegisterShopStocks(DataTag.ShopStock, shopStockList, errors);
         RegisterStages(DataTag.Stages, stageList, StageIds, errors);
+        RegisterQuests(DataTag.Quests, questList, QuestIds, errors);
         #endregion
 
         foreach(var error in errors)
@@ -531,6 +536,54 @@ public class DataManager : Singleton<DataManager>
             stages.Add(info);
         }
     }
+
+    private void RegisterQuests(string sheetName, List<QuestInfo> list, IdRange range, List<string> errors)
+    {
+        foreach(var info in list)
+        {
+            if(!range.Contains(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} ({info.Name}) 가 구간 {range.Min}~{range.Max} 밖입니다");
+                continue;
+            }
+
+            if(!quests.TryAdd(info.Id, info))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            if(info.RewardItemId != 0)
+            {
+                if(items.TryGetValue(info.RewardItemId, out ItemInfo reward))
+                    info.SetRewardItem(reward);
+                else
+                    errors.Add($"{sheetName} : {info.Name} 의 보상 아이템 {info.RewardItemId} 가 없습니다");
+            }
+
+            if(!IsValidTarget(info))
+                errors.Add($"{sheetName} : {info.Name} 의 대상 {info.Target} 가 없습니다");
+        }
+
+        foreach(var info in quests.Values)
+        {
+            if(info.PrereqId != 0 && !quests.ContainsKey(info.PrereqId))
+                errors.Add($"{sheetName} : {info.Name} 의 선행 퀘스트 {info.PrereqId} 가 없습니다");
+        }
+    }
+    private bool IsValidTarget(QuestInfo info)
+    {
+        if(info.Type == QuestType.Deliver)
+            return items.ContainsKey(info.Target);
+
+        if(info.Type == QuestType.ReachFloor || info.Target == 0)
+            return true;
+
+        if(!monsters.TryGetValue(info.Target, out MonsterInfo monster))
+            return false;
+
+        return info.Type == QuestType.Kill || monster.IsBoss;
+    }
     #endregion
 
     #region 조회
@@ -587,6 +640,11 @@ public class DataManager : Singleton<DataManager>
             return sprite;
 
         return null;
+    }
+
+    public bool TryGetQuest(int id, out QuestInfo info)
+    {
+        return quests.TryGetValue(id, out info);
     }
     #endregion
 }

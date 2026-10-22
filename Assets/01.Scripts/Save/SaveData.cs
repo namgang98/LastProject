@@ -17,6 +17,7 @@ public class SaveData
     public List<UpgradeSaveData> upgrades = new();
     public List<int> unlockedClasses = new();
     public List<ClassProgressSaveData> classProgress = new();
+    public List<QuestSaveData> quests = new();
 }
 
 [Serializable]
@@ -57,4 +58,12 @@ public class ClassProgressSaveData
     public int classId;
     public int level = 1;
     public List<int> points = new();
+}
+
+[Serializable]
+public class QuestSaveData
+{
+    public int id;
+    public int progress;
+    public int claimed;
 }

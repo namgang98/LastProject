@@ -62,6 +62,13 @@ public static class CSVStamp
     public const string Monsters = "monsters";
     public const string Boss = "boss";
     public const string MinFloor = "minfloor";
+
+    public const string Target = "target";
+    public const string RewardItem = "rewarditem";
+    public const string RewardCount = "rewardcount";
+    public const string RewardGold = "rewardgold";
+    public const string Repeatable = "repeatable";
+    public const string Prereq = "prereq";
 }
 #endregion
 
@@ -85,6 +92,7 @@ public static class DataTag
     public const string Consumables = "consumables";
     public const string PotionCases = "potioncases";
     public const string Stages = "stages";
+    public const string Quests = "quests";
 }
 #endregion
 

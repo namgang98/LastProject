@@ -1,4 +1,4 @@
 ﻿id,name,icon,grade,shape,sellprice,maxhp,description,effecttype,effectvalue,effectcooldown
 4000,초보자갑옷,Armor1,Normal,XX|XX,70,10,가볍고 질긴 갑옷,None,0,0
-4001,전문가갑옷,Armor2,Rare,XX|XX,100,25,더욱 단단하고 질긴 갑옷,Heal,5,4
+4001,전문가갑옷,Armor2,Rare,XX|XX,100,25,붕대와 약초를 챙긴 노련한 자의 갑옷. 상처가 저절로 아문다.,Heal,5,4
 4002,베테랑갑옷,Armor3,Epic,XX|XX,150,50,몬스터를 사냥하고 묻은 피로 붉은 색을 띈다,Shield,1,8

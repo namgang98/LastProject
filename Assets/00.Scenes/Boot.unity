@@ -1253,6 +1253,7 @@ MonoBehaviour:
   consumableCsv: {fileID: 4900000, guid: f1cfa9b4ce1ff044e93935e91ceabee4, type: 3}
   potionCaseCsv: {fileID: 4900000, guid: 74974e6e653534847b368bece4313235, type: 3}
   stageCsv: {fileID: 4900000, guid: d7c8944b9a48f4a4b9eceb26837e450c, type: 3}
+  questCsv: {fileID: 4900000, guid: f839ed5c6527ce14e8ddc1d65c0ddc59, type: 3}
   iconLibrary: {fileID: 11400000, guid: 20216c8c80df7864eb072731d2e539c4, type: 2}
   prefabLibrary: {fileID: 11400000, guid: 56cf11582a5258c458ffb7ec871b7b33, type: 2}
   backgroundLibrary: {fileID: 11400000, guid: bc83198d2c36c9b45a067d38498400a4, type: 2}

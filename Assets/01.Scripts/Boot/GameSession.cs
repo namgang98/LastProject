@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameSession : Singleton<GameSession>
@@ -27,7 +28,8 @@ public class GameSession : Singleton<GameSession>
     public ClassInfo CurrentClass { get; private set; }
     public Backpack Backpack { get; private set; }
     public Wallet Wallet { get; private set; }
-
+    public QuestBook Quests { get; private set; }
+    public int BestFloor => Training.BestFloor;
     public bool TryLoad()
     {
         saveService = new SaveService(new FileSaveStorage(SaveFileName));
@@ -52,6 +54,8 @@ public class GameSession : Singleton<GameSession>
         LoadChest();
         LoadShop();
         LoadTraining();
+        LoadQuests();
+        
         if(!saveData.inRun)
             return true;
 
@@ -209,6 +213,7 @@ public class GameSession : Singleton<GameSession>
         saveData.classId = CurrentClass.Id;
         saveData.gold = Wallet.Gold;
         Training.WriteTo(saveData);
+        Quests.WriteTo(saveData.quests);
         saveData.inRun = inRun;
         saveData.backpack = InventorySaveMapper.ToData(Backpack);
         saveService.Save(saveData);
@@ -337,5 +342,78 @@ public class GameSession : Singleton<GameSession>
 
         if(DataManager.instance.TryGetClass(defaultClassId, out ClassInfo starter))
             CurrentClass = starter;
+    }
+
+    private void LoadQuests()
+    {
+        Quests = new QuestBook(DataManager.instance.Quests, saveData.quests, () => Training.BestFloor, CountItem);
+    }
+    public int CountItem(int itemId)
+    {
+        int count = ItemSearch.Count(Backpack.Grid, itemId);
+
+        if(Backpack.PouchStorage != null)
+            count += ItemSearch.Count(Backpack.PouchStorage, itemId);
+
+        foreach(GridContainer tab in Chest.Tabs)
+        {
+            count += ItemSearch.Count(tab, itemId);
+        }
+
+        return count;
+    }
+
+    public QuestClaimResult TryClaimQuest(QuestProgress quest)
+    {
+        if(!Quests.IsVisible(quest) || !Quests.IsReady(quest))
+            return QuestClaimResult.NotReady;
+
+        QuestInfo info = quest.Info;
+        var given = new List<ItemInstance>();
+
+        if(info.HasRewardItem)
+        {
+            for(int i = 0; i < info.RewardCount; i++)
+            {
+                ItemInstance item = info.RewardItem.CreateInstance();
+
+                if(TryReceive(item))
+                {
+                    given.Add(item);
+                    continue;
+                }
+
+                foreach(ItemInstance placed in given)
+                {
+                    placed.Owner?.Remove(placed);
+                }
+
+                return QuestClaimResult.NoSpace;
+            }
+        }
+
+        if(info.Type == QuestType.Deliver)
+            TakeItems(info.Target, info.Count);
+
+        Wallet.Earn(info.RewardGold);
+        Quests.MarkClaimed(quest);
+        SaveInVillage();
+        return QuestClaimResult.Ok;
+    }
+
+    private void TakeItems(int itemId, int amount)
+    {
+        amount -= ItemSearch.Take(Backpack.Grid, itemId, amount);
+
+        if(amount > 0 && Backpack.PouchStorage != null)
+            amount -= ItemSearch.Take(Backpack.PouchStorage, itemId, amount);
+
+        foreach(GridContainer tab in Chest.Tabs)
+        {
+            if(amount <= 0)
+                return;
+
+            amount -= ItemSearch.Take(tab, itemId, amount);
+        }
     }
 }

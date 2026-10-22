@@ -1,0 +1,1119 @@
+fileFormatVersion: 2
+guid: b8b1e73117dc2c34982d9ccb50afe495
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1058382013156883176
+    second: SkeletonLord_packed_0
+  - first:
+      213: 7074681630414221628
+    second: SkeletonLord_packed_1
+  - first:
+      213: -2603074342439947392
+    second: SkeletonLord_packed_2
+  - first:
+      213: -1717723713150594264
+    second: SkeletonLord_packed_3
+  - first:
+      213: 5325809864041033783
+    second: SkeletonLord_packed_4
+  - first:
+      213: -7683358745960145820
+    second: SkeletonLord_packed_5
+  - first:
+      213: -4154149831895350153
+    second: SkeletonLord_packed_6
+  - first:
+      213: 3845148452384467560
+    second: SkeletonLord_packed_7
+  - first:
+      213: 7713796994857796134
+    second: SkeletonLord_packed_8
+  - first:
+      213: 8006338362087571885
+    second: SkeletonLord_packed_9
+  - first:
+      213: -502857487629898400
+    second: SkeletonLord_packed_10
+  - first:
+      213: 2192699567869113011
+    second: SkeletonLord_packed_11
+  - first:
+      213: -5435192447604279333
+    second: SkeletonLord_packed_12
+  - first:
+      213: -6764850132361154620
+    second: SkeletonLord_packed_13
+  - first:
+      213: -6841821488243853928
+    second: SkeletonLord_packed_14
+  - first:
+      213: 6703410138886088166
+    second: SkeletonLord_packed_15
+  - first:
+      213: -6465624333944395688
+    second: SkeletonLord_packed_16
+  - first:
+      213: 2546552580400268949
+    second: SkeletonLord_packed_17
+  - first:
+      213: 2369688255490090863
+    second: SkeletonLord_packed_18
+  - first:
+      213: 2418105099796861373
+    second: SkeletonLord_packed_19
+  - first:
+      213: -5754641424871039446
+    second: SkeletonLord_packed_20
+  - first:
+      213: 249671122135965569
+    second: SkeletonLord_packed_21
+  - first:
+      213: 6392883081237018042
+    second: SkeletonLord_packed_22
+  - first:
+      213: 2251119554150947952
+    second: SkeletonLord_packed_23
+  - first:
+      213: 6082715879814194267
+    second: SkeletonLord_packed_24
+  - first:
+      213: -1114591693867639564
+    second: SkeletonLord_packed_25
+  - first:
+      213: 5557646153572065440
+    second: SkeletonLord_packed_26
+  - first:
+      213: -816655837989269065
+    second: SkeletonLord_packed_27
+  - first:
+      213: 5241669428336814567
+    second: SkeletonLord_packed_28
+  - first:
+      213: -6819244641239277466
+    second: SkeletonLord_packed_29
+  - first:
+      213: -8951062299576611528
+    second: SkeletonLord_packed_30
+  - first:
+      213: -7199164920523164475
+    second: SkeletonLord_packed_31
+  - first:
+      213: 4214981562040648128
+    second: SkeletonLord_packed_32
+  - first:
+      213: 3190263397156779826
+    second: SkeletonLord_packed_33
+  - first:
+      213: 1587092592615976331
+    second: SkeletonLord_packed_34
+  - first:
+      213: -3413067910795291831
+    second: SkeletonLord_packed_35
+  - first:
+      213: 4230367272838452112
+    second: SkeletonLord_packed_36
+  - first:
+      213: -5264725503326257291
+    second: SkeletonLord_packed_37
+  - first:
+      213: 3561629321477118695
+    second: SkeletonLord_packed_38
+  - first:
+      213: -3983703168304916090
+    second: SkeletonLord_packed_39
+  - first:
+      213: 6276034196025588918
+    second: SkeletonLord_packed_40
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SkeletonLord_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1015
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25cbd406b9f72da4daf88c10d31a8cc8
+      internalID: -1200142675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_1
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 1015
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6867e322c7a3ae4a811295c08df3fa2
+      internalID: 1405851682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_2
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 1015
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21f1984a5585403498d2d2499658de8b
+      internalID: -262690277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_3
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 1015
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abe3d2fe0a77297488232e4686406bf3
+      internalID: -1501634350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 812
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda1f0f063915004b809eb7769772c47
+      internalID: 1414907454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_5
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 812
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ae38aa22ca4614fb54edf300e18a69
+      internalID: 491072773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_6
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 812
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 687f87cd88588664eb0959301f7d47a5
+      internalID: -1942685055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_7
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 812
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 359fdc30d9aac144f8ea6abf3ba5b40c
+      internalID: 993883386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_8
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 812
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e54947f6ce8663429c5fe326ea98951
+      internalID: -206697686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_9
+      rect:
+        serializedVersion: 2
+        x: 1565
+        y: 812
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a91188b0a2313349a70c6b7fd117644
+      internalID: -1318434507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_10
+      rect:
+        serializedVersion: 2
+        x: 1878
+        y: 812
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f34e41b8a54d04bb1ab3e38d724752
+      internalID: 1404229234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_11
+      rect:
+        serializedVersion: 2
+        x: 2191
+        y: 812
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05180c483e33d0846ad7167da911d5fc
+      internalID: -1194538073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 609
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55579b0e81ddb6a48995a7dfdfa31a71
+      internalID: -421303244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_13
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 609
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c488e5d82cdd2e34aae4a02dbaf64536
+      internalID: -1018508393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_14
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 609
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d812b01e2c975349a3bcd5b78c2e7e1
+      internalID: -804209119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_15
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 609
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe36b1f610e9354bbe5bda0349456bf
+      internalID: 2139719363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_16
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 609
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 310fc0ace42d7284f94d707dc62421cb
+      internalID: -941394722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_17
+      rect:
+        serializedVersion: 2
+        x: 1565
+        y: 609
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f69450d7bd837bc42923932e56d339c8
+      internalID: 895772647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_18
+      rect:
+        serializedVersion: 2
+        x: 1878
+        y: 609
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b7ba4f1bd2799144a5a7ef778e1ee31
+      internalID: -1582548894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_19
+      rect:
+        serializedVersion: 2
+        x: 2191
+        y: 609
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4de566622ec299a448e747a0ccbd8836
+      internalID: 1481014702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 406
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b56568c7c9f7b49840739b3888a680
+      internalID: 1856438777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_21
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 406
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a164e029ba105eb4c8f5b77ec78dec6b
+      internalID: -2092095383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_22
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 406
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77962f303fb3c2947bd21d38529d1988
+      internalID: 387496262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_23
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 406
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e32a105fad3a5dc4dbf66368704805e5
+      internalID: 1584523066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_24
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 406
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bb077d464debc8479ce36d84e3f2878
+      internalID: -833702215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_25
+      rect:
+        serializedVersion: 2
+        x: 1565
+        y: 406
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9455cdf76e0a71c43ae54ae1637efccc
+      internalID: -1273847886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_26
+      rect:
+        serializedVersion: 2
+        x: 1878
+        y: 406
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47fc5d1344e12a24eb9caa41459d3993
+      internalID: -422120622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_27
+      rect:
+        serializedVersion: 2
+        x: 2191
+        y: 406
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 568986051fbda1b4da925f1aac7c013d
+      internalID: 1415611603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 203
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f758681391a15b4fb405d8cf3ff7b65
+      internalID: 1697140708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_29
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 203
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d750d93e8c202489f7bcbf24f49dd0
+      internalID: -347922963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_30
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 203
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2a2f206d03066c4f9e904fbfde28543
+      internalID: 1259220319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 344f1058fd1c795478f80808d9666fd3
+      internalID: 1806440654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_32
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 0
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1daf914dc0a4a0d49ab266a59e7cc508
+      internalID: 67429517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_33
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 0
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99e2c2e587339e7408e2f47a33b1f323
+      internalID: 66510326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_34
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 0
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a694811e4c050ad44b133b4574e8eb4b
+      internalID: 1504371541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_35
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 0
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bbc644cf0edf3b40bc493180e3213a7
+      internalID: -1392540718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonLord_36
+      rect:
+        serializedVersion: 2
+        x: 1565
+        y: 0
+        width: 313
+        height: 203
+      alignment: 9
+      pivot: {x: 0.403, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 384e66fe7ff1cec458ada9edb8331b0f
+      internalID: 958114586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3555de8f2f21e07459e11c041ad5ec61
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":313.0,"y":203.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.40299999713897707,"y":0.029999999329447748},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      SkeletonLord_0: -1200142675
+      SkeletonLord_1: 1405851682
+      SkeletonLord_10: 1404229234
+      SkeletonLord_11: -1194538073
+      SkeletonLord_12: -421303244
+      SkeletonLord_13: -1018508393
+      SkeletonLord_14: -804209119
+      SkeletonLord_15: 2139719363
+      SkeletonLord_16: -941394722
+      SkeletonLord_17: 895772647
+      SkeletonLord_18: -1582548894
+      SkeletonLord_19: 1481014702
+      SkeletonLord_2: -262690277
+      SkeletonLord_20: 1856438777
+      SkeletonLord_21: -2092095383
+      SkeletonLord_22: 387496262
+      SkeletonLord_23: 1584523066
+      SkeletonLord_24: -833702215
+      SkeletonLord_25: -1273847886
+      SkeletonLord_26: -422120622
+      SkeletonLord_27: 1415611603
+      SkeletonLord_28: 1697140708
+      SkeletonLord_29: -347922963
+      SkeletonLord_3: -1501634350
+      SkeletonLord_30: 1259220319
+      SkeletonLord_31: 1806440654
+      SkeletonLord_32: 67429517
+      SkeletonLord_33: 66510326
+      SkeletonLord_34: 1504371541
+      SkeletonLord_35: -1392540718
+      SkeletonLord_36: 958114586
+      SkeletonLord_4: 1414907454
+      SkeletonLord_5: 491072773
+      SkeletonLord_6: -1942685055
+      SkeletonLord_7: 993883386
+      SkeletonLord_8: -206697686
+      SkeletonLord_9: -1318434507
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

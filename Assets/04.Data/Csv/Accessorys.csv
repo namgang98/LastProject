@@ -1,4 +1,4 @@
 ﻿id,name,icon,shape,grade,sellprice,description,damagebonus,cooldownreduction,maxhp,effecttype,effectvalue,effectcooldown
-5000,힘의 반지,StrRing,X,Rare,1000,힘의 보석으로 세공한 반지,0.1,0,0,none,0,0
-5001,신속의 반지,SpeedRing,X,Rare,1000,신속의 보석으로 세공한 반지,0,0.1,0,none,0,0
-5002,수호의 반지,SaveRing,X,Epic,1000,수호의 보석으로 세공한 반지,0,0,15,Shield,1,10
+5000,힘의 반지,StrRing,X,Rare,1000,손가락에 끼면 팔에 힘이 실린다.,0.1,0,0,none,0,0
+5001,신속의 반지,SpeedRing,X,Rare,1000,깃털처럼 가벼워진 손이 더 빨리 움직인다.,0,0.1,0,none,0,0
+5002,수호의 반지,SaveRing,X,Epic,1000,새겨진 방패 문양이 일격을 막아 준다.,0,0,15,Shield,1,10

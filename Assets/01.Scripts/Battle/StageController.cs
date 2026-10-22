@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
 using UnityEngine.UI;
 
 public class StageController : MonoBehaviour
@@ -16,6 +14,9 @@ public class StageController : MonoBehaviour
     [SerializeField] FloorTransitionView transition;
     [SerializeField] PlayerWalk walker;
 
+    [Header("귀환 규칙")]
+    [SerializeField] int veteranFloor = 10;
+    [SerializeField] bool returnOnlyAfterBoss;
 
     [SerializeField] int bossInterval = 10;
     [SerializeField] Transform spawnPoint;
@@ -23,7 +24,6 @@ public class StageController : MonoBehaviour
     [SerializeField] HpBarView monsterHpbar;
     [SerializeField] Button nextButton;
     [SerializeField] TextMeshProUGUI stageText;
-    [SerializeField] bool returnOnlyAfterBoss;
     [SerializeField] Button returnButton;
     [SerializeField] StatusIconView statusIconView;
     [SerializeField] StageBackgroundView background;
@@ -45,7 +45,6 @@ public class StageController : MonoBehaviour
 
     private void Awake()
     {
-        rule = new StageRule(bossInterval, returnOnlyAfterBoss);
         scaling = new StageScaling(hpGrowth, damageGrowth);
 
         nextButton.onClick.AddListener(NextStage);
@@ -60,6 +59,9 @@ public class StageController : MonoBehaviour
 
     public void Begin(UnitController runner)
     {
+        bool isVeteran = GameSession.instance.BestFloor >= veteranFloor;
+        rule = new StageRule(bossInterval, isVeteran);
+
         if(player != null)
             player.Health.OnDie -= HandlePlayerDead;
 

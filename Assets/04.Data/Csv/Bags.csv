@@ -1,5 +1,5 @@
 ﻿id,name,icon,shape,grade,storageX,storageY,SellPrice,description
-100,초보용가방,Bag0,XXX|XXX|XXX,Base,3,3,0,초보자에게 첫 모험을 위해 주는 가방
-101,모험가배낭,Bag1,XX|XX,Normal,4,4,375,설명
-102,전문가배낭,Bag2,XXX|XXX,Rare,5,5,750,설명
-103,베테랑배낭,Bag3,XXX|XXX|XXX,Epic,6,6,7500,설명
+100,초보용가방,Bag0,XXX|XXX|XXX,Base,4,4,0,초보자에게 첫 모험을 위해 주는 가방
+101,모험가배낭,Bag1,XX|XX,Normal,5,5,375,수많은 모험가의 땀이 밴 튼튼한 배낭.
+102,전문가배낭,Bag2,XXX|XXX,Rare,6,6,750,"랜턴 고리까지 달린, 깊은 곳을 위한 배낭."
+103,베테랑배낭,Bag3,XXX|XXX|XXX,Epic,7,7,7500,살아 돌아온 자만이 메는 배낭. 해골이 그 증거다.

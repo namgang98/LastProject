@@ -374,6 +374,50 @@ public static class InfoParser
         return true;
     }
     #endregion
+    #region 퀘스트
+    public static bool TryParseQuest(CsvRow row, List<string> errors, out QuestInfo info)
+    {
+        info = null;
+
+        if(!TryParseInfoBase(row, errors, out InfoBase b))
+            return false;
+
+        string desc = row.GetString(CSVStamp.Description);
+
+        if(!row.TryGetEnum(CSVStamp.Type, out QuestType type))
+            return Fail(row, errors, CSVStamp.Type);
+
+        if(!row.TryGetInt(CSVStamp.Target, out int target) || target < 0)
+            return Fail(row, errors, CSVStamp.Target);
+
+        if(!row.TryGetInt(CSVStamp.Count, out int count) || count < 1)
+            return Fail(row, errors, CSVStamp.Count);
+
+        if(!row.TryGetInt(CSVStamp.RewardItem, out int rewardItem) || rewardItem < 0)
+            return Fail(row, errors, CSVStamp.RewardItem);
+
+        if(!row.TryGetInt(CSVStamp.RewardCount, out int rewardCount) || rewardCount < 0)
+            return Fail(row, errors, CSVStamp.RewardCount);
+
+        if(!row.TryGetInt(CSVStamp.RewardGold, out int rewardGold) || rewardGold < 0)
+            return Fail(row, errors, CSVStamp.RewardGold);
+
+        if(rewardItem == 0 && rewardGold == 0)
+            return Fail(row, errors, CSVStamp.RewardGold);
+
+        if(!row.TryGetInt(CSVStamp.Repeatable, out int repeatable) || repeatable < 0 || repeatable > 1)
+            return Fail(row, errors, CSVStamp.Repeatable);
+
+        if(!row.TryGetInt(CSVStamp.Prereq, out int prereq) || prereq < 0)
+            return Fail(row, errors, CSVStamp.Prereq);
+
+        if((type == QuestType.ReachFloor || type == QuestType.Deliver) && target == 0)
+            return Fail(row, errors, CSVStamp.Target);
+
+        info = new QuestInfo(b.id, b.name, desc, type, target, count, rewardItem, rewardCount, rewardGold, repeatable == 1, prereq);
+        return true;
+    }
+    #endregion
     #endregion
 
     #region 공통

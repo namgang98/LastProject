@@ -12,7 +12,7 @@ public class StageBackgroundView : MonoBehaviour
 
     public void Show(Sprite sprite)
     {
-        if (sprite == null)
+        if(sprite == null)
             return;
 
         render.sprite = sprite;

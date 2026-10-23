@@ -1,10 +1,13 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PopupEscapeCloser : MonoBehaviour
 {
+    [SerializeField] UnityEvent onEscapeIdle;
+
     private void Update()
     {
         Keyboard keyboard = Keyboard.current;
@@ -15,7 +18,13 @@ public class PopupEscapeCloser : MonoBehaviour
         if(!PopupManager.HasInstance || IsTyping())
             return;
 
-        PopupManager.instance.CloseTop();
+        if(PopupManager.instance.OpenCount > 0)
+        {
+            PopupManager.instance.CloseTop();
+            return;
+        }
+
+        onEscapeIdle?.Invoke();
     }
 
     private static bool IsTyping()

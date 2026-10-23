@@ -7,15 +7,17 @@ public class ClassTraining
     private readonly Dictionary<int, ClassProgress> progresses = new();
     private readonly UpgradeTrackInfo costs;
     private readonly TrainingStatLookup findStat;
+    private readonly Func<float> costRate;
 
     public int BestFloor { get; private set; }
 
     public event Action<ClassInfo> Changed;
 
-    public ClassTraining(SaveData data, UpgradeTrackInfo costs, TrainingStatLookup findStat)
+    public ClassTraining(SaveData data, UpgradeTrackInfo costs, TrainingStatLookup findStat, Func<float> costRate = null)
     {
         this.costs = costs;
         this.findStat = findStat;
+        this.costRate = costRate;
         BestFloor = Math.Max(0, data.bestFloor);
 
         foreach(int id in data.unlockedClasses)
@@ -90,6 +92,10 @@ public class ClassTraining
             return false;
 
         cost = costs.GetLevel(next).Cost;
+
+        if(costRate != null)
+            cost = Math.Max(1, (int)Math.Round(cost * costRate()));
+
         return true;
     }
 

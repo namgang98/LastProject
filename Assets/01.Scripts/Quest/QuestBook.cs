@@ -76,6 +76,17 @@ public class QuestBook
         }
     }
 
+    public bool HasReady(NpcType npc)
+    {
+        foreach(QuestProgress quest in list)
+        {
+            if(quest.Info.Npc == npc && IsVisible(quest) && IsReady(quest))
+                return true;
+        }
+
+        return false;
+    }
+
     public void ReportKill(MonsterInfo monster, List<QuestProgress> newlyReady)
     {
         foreach(QuestProgress quest in list)
@@ -116,6 +127,29 @@ public class QuestBook
 
         if(info.Type == QuestType.KillBoss)
             return monster.IsBoss && (info.Target == 0 || info.Target == monster.Id);
+
+        return false;
+    }
+    public int CountVisible(NpcType npc)
+    {
+        int count = 0;
+
+        foreach(QuestProgress quest in list)
+        {
+            if(quest.Info.Npc == npc && IsVisible(quest))
+                count++;
+        }
+
+        return count;
+    }
+
+    public bool HasAnyReady()
+    {
+        foreach(QuestProgress quest in list)
+        {
+            if(IsVisible(quest) && IsReady(quest))
+                return true;
+        }
 
         return false;
     }

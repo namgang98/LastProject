@@ -69,6 +69,11 @@ public static class CSVStamp
     public const string RewardGold = "rewardgold";
     public const string Repeatable = "repeatable";
     public const string Prereq = "prereq";
+    public const string Npc = "npc";
+    public const string Favor = "favor";
+    public const string Materials = "materials";
+    public const string Bonus = "bonus";
+    public const string Downgrade = "downgrade";
 }
 #endregion
 
@@ -93,6 +98,7 @@ public static class DataTag
     public const string PotionCases = "potioncases";
     public const string Stages = "stages";
     public const string Quests = "quests";
+    public const string Forge = "forge";
 }
 #endregion
 

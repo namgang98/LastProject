@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameSession : Singleton<GameSession>
+public class GameSession : Singleton<GameSession>, IMaterialStorage
 {
     private const string SaveFileName = "save.json";
 
@@ -20,6 +20,8 @@ public class GameSession : Singleton<GameSession>
     public Shop Shop { get; private set; }
     public UpgradeService Upgrades { get; private set; }
     private static readonly UpgradeTrack[] DonationTracks = { UpgradeTrack.Shop, UpgradeTrack.Chest };
+    private static readonly UpgradeTrack[] FavorTracks = { UpgradeTrack.FavorMerchant, UpgradeTrack.FavorTrainer, UpgradeTrack.FavorBlacksmith };
+    public NpcFavor Favor { get; private set; }
     public ClassTraining Training { get; private set; }
     public Chest Chest { get; private set; }
     private SaveService saveService;
@@ -29,6 +31,7 @@ public class GameSession : Singleton<GameSession>
     public Backpack Backpack { get; private set; }
     public Wallet Wallet { get; private set; }
     public QuestBook Quests { get; private set; }
+    public ForgeService Forge { get; private set; }
     public int BestFloor => Training.BestFloor;
     public bool TryLoad()
     {
@@ -55,7 +58,8 @@ public class GameSession : Singleton<GameSession>
         LoadShop();
         LoadTraining();
         LoadQuests();
-        
+        Forge = new ForgeService(DataManager.instance.Forge, () => Favor.GetRate(NpcType.Blacksmith));
+
         if(!saveData.inRun)
             return true;
 
@@ -234,7 +238,7 @@ public class GameSession : Singleton<GameSession>
     }
     private void LoadShop()
     {
-        var pricing = new ShopPricing(buyMultiplier, rerollCost);
+        var pricing = new ShopPricing(buyMultiplier, rerollCost, () => Favor.GetRate(NpcType.Merchant));
         var catalog = new ShopCatalog(DataManager.instance.ShopStocks);
 
         int level = 1;
@@ -284,8 +288,14 @@ public class GameSession : Singleton<GameSession>
     private void LoadUpgrades()
     {
         Upgrades = new UpgradeService();
+        RegisterTracks(DonationTracks);
+        RegisterTracks(FavorTracks);
+        Favor = new NpcFavor(Upgrades);
+    }
 
-        foreach(UpgradeTrack track in DonationTracks)
+    private void RegisterTracks(UpgradeTrack[] tracks)
+    {
+        foreach(UpgradeTrack track in tracks)
         {
             if(!DataManager.instance.TryGetUpgrade(track, out UpgradeTrackInfo info))
             {
@@ -335,7 +345,7 @@ public class GameSession : Singleton<GameSession>
     private void LoadTraining()
     {
         DataManager.instance.TryGetUpgrade(UpgradeTrack.Training, out UpgradeTrackInfo costs);
-        Training = new ClassTraining(saveData, costs, DataManager.instance.TryGetTrainingStat);
+        Training = new ClassTraining(saveData, costs, DataManager.instance.TryGetTrainingStat, () => 1f - Favor.GetRate(NpcType.Trainer));
 
         if(Training.IsUnlocked(CurrentClass))
             return;
@@ -363,8 +373,10 @@ public class GameSession : Singleton<GameSession>
         return count;
     }
 
-    public QuestClaimResult TryClaimQuest(QuestProgress quest)
+    public QuestClaimResult TryClaimQuest(QuestProgress quest, out int favorLevelUps)
     {
+        favorLevelUps = 0;
+
         if(!Quests.IsVisible(quest) || !Quests.IsReady(quest))
             return QuestClaimResult.NotReady;
 
@@ -396,12 +408,13 @@ public class GameSession : Singleton<GameSession>
             TakeItems(info.Target, info.Count);
 
         Wallet.Earn(info.RewardGold);
+        favorLevelUps = Favor.AddFavor(info.Npc, info.Favor);
         Quests.MarkClaimed(quest);
         SaveInVillage();
         return QuestClaimResult.Ok;
     }
 
-    private void TakeItems(int itemId, int amount)
+    public void TakeItems(int itemId, int amount)
     {
         amount -= ItemSearch.Take(Backpack.Grid, itemId, amount);
 
@@ -414,6 +427,28 @@ public class GameSession : Singleton<GameSession>
                 return;
 
             amount -= ItemSearch.Take(tab, itemId, amount);
+        }
+    }
+    public void CollectForgeables(List<ForgeableInstance> results)
+    {
+        results.Clear();
+        AddForgeables(Backpack.Grid, results);
+
+        if(Backpack.PouchStorage != null)
+            AddForgeables(Backpack.PouchStorage, results);
+
+        foreach(GridContainer tab in Chest.Tabs)
+        {
+            AddForgeables(tab, results);
+        }
+    }
+
+    private static void AddForgeables(GridContainer grid, List<ForgeableInstance> results)
+    {
+        foreach(ItemInstance item in grid.Items)
+        {
+            if(item is ForgeableInstance forged)
+                results.Add(forged);
         }
     }
 }

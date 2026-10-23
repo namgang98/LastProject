@@ -374,6 +374,36 @@ public static class InfoParser
         return true;
     }
     #endregion
+    #region 강화
+    public static bool TryParseForge(CsvRow row, List<string> errors, out ForgeLevelInfo info)
+    {
+        info = null;
+
+        if(!row.TryGetInt(CSVStamp.Id, out int id))
+            return Fail(row, errors, CSVStamp.Id);
+
+        if(!row.TryGetInt(CSVStamp.Level, out int level) || level < 1)
+            return Fail(row, errors, CSVStamp.Level);
+
+        if(!row.TryGetInt(CSVStamp.Cost, out int cost) || cost < 0)
+            return Fail(row, errors, CSVStamp.Cost);
+
+        if(!row.TryGetFloat(CSVStamp.Chance, out float chance) || chance <= 0f || chance > 1f)
+            return Fail(row, errors, CSVStamp.Chance);
+
+        if(!row.TryGetFloat(CSVStamp.Bonus, out float bonus) || bonus < 0f)
+            return Fail(row, errors, CSVStamp.Bonus);
+
+        if(!row.TryGetInt(CSVStamp.Downgrade, out int downgrade) || downgrade < 0 || downgrade > 1)
+            return Fail(row, errors, CSVStamp.Downgrade);
+
+        if(!ItemCost.TryParseList(row.GetString(CSVStamp.Materials), out List<ItemCost> materials))
+            return Fail(row, errors, CSVStamp.Materials);
+
+        info = new ForgeLevelInfo(id, level, cost, chance, bonus, downgrade == 1, materials);
+        return true;
+    }
+    #endregion
     #region 퀘스트
     public static bool TryParseQuest(CsvRow row, List<string> errors, out QuestInfo info)
     {
@@ -402,9 +432,6 @@ public static class InfoParser
         if(!row.TryGetInt(CSVStamp.RewardGold, out int rewardGold) || rewardGold < 0)
             return Fail(row, errors, CSVStamp.RewardGold);
 
-        if(rewardItem == 0 && rewardGold == 0)
-            return Fail(row, errors, CSVStamp.RewardGold);
-
         if(!row.TryGetInt(CSVStamp.Repeatable, out int repeatable) || repeatable < 0 || repeatable > 1)
             return Fail(row, errors, CSVStamp.Repeatable);
 
@@ -414,7 +441,23 @@ public static class InfoParser
         if((type == QuestType.ReachFloor || type == QuestType.Deliver) && target == 0)
             return Fail(row, errors, CSVStamp.Target);
 
-        info = new QuestInfo(b.id, b.name, desc, type, target, count, rewardItem, rewardCount, rewardGold, repeatable == 1, prereq);
+        NpcType npc = NpcType.Board;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Npc)) && !row.TryGetEnum(CSVStamp.Npc, out npc))
+            return Fail(row, errors, CSVStamp.Npc);
+
+        int favor = 0;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Favor)) && (!row.TryGetInt(CSVStamp.Favor, out favor) || favor < 0))
+            return Fail(row, errors, CSVStamp.Favor);
+
+        if(rewardItem == 0 && rewardGold == 0 && favor == 0)
+            return Fail(row, errors, CSVStamp.RewardGold);
+
+        if(npc == NpcType.Board && favor > 0)
+            return Fail(row, errors, CSVStamp.Favor);
+
+        info = new QuestInfo(b.id, b.name, desc, type, target, count, rewardItem, rewardCount, rewardGold, repeatable == 1, prereq, npc, favor);
         return true;
     }
     #endregion

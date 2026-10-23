@@ -2,7 +2,13 @@
 
 public class UnitController : MonoBehaviour
 {
+    [Header("피격 연출")]
+    [SerializeField] float hurtCooldown = 0.6f;
+    [SerializeField] float attackLock = 0.5f;
     [SerializeField] UnitHealth health;
+
+    private float nextHurtTime;
+    private float attackLockUntil;
     public UnitHealth Health => health;
     [SerializeField] UnitAnimator animator;
     [SerializeField] Transform headPoint;
@@ -37,6 +43,7 @@ public class UnitController : MonoBehaviour
         if(animator == null || health.IsDead)
             return;
 
+        attackLockUntil = Time.time + attackLock;
         animator.AttackAni();
         SoundManager.instance.PlaySfx(attackSfx);
     }
@@ -44,11 +51,15 @@ public class UnitController : MonoBehaviour
     {
         Vector3 pos = headPoint != null ? headPoint.position : transform.position;
 
-        EventManager.instance.PostNotification(new OnUnitDamaged(pos, info));
+        EventManager.instance.PostNotification(new OnUnitDamaged(pos, info, GetInstanceID()));
 
         if(animator == null || info.IsTick || health.CurrentHP <= 0)
             return;
 
+        if(Time.time < nextHurtTime || Time.time < attackLockUntil)
+            return;
+
+        nextHurtTime = Time.time + hurtCooldown;
         animator.HurtAni();
     }
     public void SetMoving(bool moving)

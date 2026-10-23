@@ -29,3 +29,22 @@
 7217,Training,18,1000,0,포인트 +1
 7218,Training,19,1000,0,포인트 +1
 7219,Training,20,1000,0,포인트 +1
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+7300,FavorMerchant,1,0,0,처음 보는 사이
+7301,FavorMerchant,2,40,3,구매 3% 할인 / 판매 3% 추가
+7302,FavorMerchant,3,100,6,구매 6% 할인 / 판매 6% 추가
+7303,FavorMerchant,4,180,10,구매 10% 할인 / 판매 10% 추가
+7304,FavorMerchant,5,300,15,구매 15% 할인 / 판매 15% 추가
+7400,FavorTrainer,1,0,0,처음 보는 사이
+7401,FavorTrainer,2,40,5,훈련비 5% 할인
+7402,FavorTrainer,3,100,10,훈련비 10% 할인
+7403,FavorTrainer,4,180,15,훈련비 15% 할인
+7404,FavorTrainer,5,300,20,훈련비 20% 할인
+7500,FavorBlacksmith,1,0,0,처음 보는 사이
+7501,FavorBlacksmith,2,40,5,강화비 5% 할인
+7502,FavorBlacksmith,3,100,10,강화비 10% 할인
+7503,FavorBlacksmith,4,180,15,강화비 15% 할인
+7504,FavorBlacksmith,5,300,20,강화비 20% 할인

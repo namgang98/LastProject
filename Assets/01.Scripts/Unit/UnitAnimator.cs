@@ -6,6 +6,7 @@ public abstract class UnitAnimator : MonoBehaviour
     
     public virtual void AttackAni()
     {
+        animator.ResetTrigger(AnimatorTag.Hurt);
         animator.SetTrigger(AnimatorTag.Attack);
     }
     public virtual void HurtAni()

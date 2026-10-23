@@ -30,7 +30,7 @@ public class ClassCardView : MonoBehaviour
     {
         Info = info;
         nameText.text = info.Name;
-        descText.text = $"체력 {info.MaxHp}\n{info.Description}";
+        descText.text = BuildDescription(info);
         portrait.sprite = FindPortrait(info);
         portrait.preserveAspect = true;
         SetSelected(false);
@@ -56,5 +56,28 @@ public class ClassCardView : MonoBehaviour
         statusText.text = status;
         lockMark.SetActive(locked);
         portrait.color = locked ? lockedTint : Color.white;
+    }
+
+    private static string BuildDescription(ClassInfo info)
+    {
+        string text = $"체력 {info.MaxHp}\n{ToKorean(info.Type)} 데미지 +{(info.DamageRate - 1f) * 100f:0}%";
+
+        if(info.CooldownRate < 1f)
+            text += $"\n{ToKorean(info.Type)} 쿨타임 -{(1f - info.CooldownRate) * 100f:0}%";
+
+        return text;
+    }
+
+    private static string ToKorean(WeaponType type)
+    {
+        switch(type)
+        {
+            case WeaponType.Axe:
+                return "도끼";
+            case WeaponType.Bow:
+                return "활";
+            default:
+                return "검";
+        }
     }
 }

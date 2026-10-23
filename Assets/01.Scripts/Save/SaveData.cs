@@ -42,6 +42,7 @@ public class ItemSaveData
     public int y;
     public int rotation;
     public int parent = -1;
+    public int forge;
 }
 
 [Serializable]

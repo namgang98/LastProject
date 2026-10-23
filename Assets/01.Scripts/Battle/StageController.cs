@@ -7,7 +7,6 @@ public class StageController : MonoBehaviour
 {
     [Header("휴식 층")]
     [SerializeField, Range(0f, 1f)] float restHealRate = 0.5f;
-    [SerializeField] GameObject monsterHpBack;
     [SerializeField] GameObject restVisual;
 
     [Header("층 이동 연출")]
@@ -17,6 +16,10 @@ public class StageController : MonoBehaviour
     [Header("귀환 규칙")]
     [SerializeField] int veteranFloor = 10;
     [SerializeField] bool returnOnlyAfterBoss;
+
+    [Header("HUD")]
+    [SerializeField] HudFader playerHud;
+    [SerializeField] HudFader monsterHud;
 
     [SerializeField] int bossInterval = 10;
     [SerializeField] Transform spawnPoint;
@@ -62,6 +65,9 @@ public class StageController : MonoBehaviour
         bool isVeteran = GameSession.instance.BestFloor >= veteranFloor;
         rule = new StageRule(bossInterval, isVeteran);
 
+        playerHud.SetInstant(false);
+        monsterHud.SetInstant(false);
+
         if(player != null)
             player.Health.OnDie -= HandlePlayerDead;
 
@@ -84,6 +90,7 @@ public class StageController : MonoBehaviour
 
         phase = Phase.Moving;
         HideButtons();
+        playerHud.Hide();
         walker.WalkOut();
         transition.Play(stage + 1, GetKind(stage + 1), GetAreaTitle(stage + 1), EnterNextFloor, WalkIn);
     }
@@ -130,9 +137,6 @@ public class StageController : MonoBehaviour
         if(restVisual != null)
             restVisual.SetActive(isRest);
 
-        monsterHpBack.SetActive(!isRest);
-        monsterHpbar.gameObject.SetActive(!isRest);
-
         if(isRest)
             return;
 
@@ -174,6 +178,8 @@ public class StageController : MonoBehaviour
         if(phase == Phase.Ended)
             return;
 
+        playerHud.Show();
+
         if(rule.IsRestStage(stage))
         {
             StartRest();
@@ -183,6 +189,7 @@ public class StageController : MonoBehaviour
         if(currentMonster == null)
             return;
 
+        monsterHud.Show();
         currentMonster.Health.OnDie += HandleMonsterDead;
         battle.StartBattle(player, currentMonster, currentAttack, currentInfo.IsBoss);
         phase = Phase.Fighting;
@@ -197,6 +204,7 @@ public class StageController : MonoBehaviour
 
     private void HandleMonsterDead()
     {
+        monsterHud.Hide();
         currentMonster.Health.OnDie -= HandleMonsterDead;
         EventManager.instance.PostNotification(new OnMonsterKilled(spawnPoint.position, currentInfo));
         phase = Phase.Looting;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,14 @@ public class QuestBoardUI : MonoBehaviour
     [SerializeField] Button closeButton;
     [SerializeField] GameObject emptyText;
 
+    [Header("NPC 의뢰")]
+    [SerializeField] TMP_Text titleText;
+    [SerializeField] FavorView favorView;
+    [SerializeField] GameObject dim;
+
     private readonly List<QuestSlotView> slots = new();
     private readonly List<QuestProgress> visible = new();
+    private NpcType npc = NpcType.Board;
 
     private void Awake()
     {
@@ -21,13 +28,32 @@ public class QuestBoardUI : MonoBehaviour
 
     public void Open()
     {
+        Open(NpcType.Board);
+    }
+
+    public void Open(NpcType target)
+    {
+        npc = target;
+
+        if(titleText != null)
+            titleText.text = npc == NpcType.Board ? npc.ToKorean() : $"{npc.ToKorean()}의 의뢰";
+
+        if(favorView != null)
+            favorView.Show(npc);
+
         Refresh();
         PopupManager.instance.Open(popup, Close);
+
+        if(dim != null)
+            dim.SetActive(true);
     }
 
     public void Close()
     {
         PopupManager.instance.Close(popup);
+
+        if(dim != null)
+            dim.SetActive(false);
     }
 
     private void Refresh()
@@ -37,7 +63,7 @@ public class QuestBoardUI : MonoBehaviour
 
         foreach(QuestProgress quest in book.All)
         {
-            if(book.IsVisible(quest))
+            if(quest.Info.Npc == npc && book.IsVisible(quest))
                 visible.Add(quest);
         }
 
@@ -61,19 +87,32 @@ public class QuestBoardUI : MonoBehaviour
     private void HandleClaim(QuestProgress quest)
     {
         string name = quest.Info.Name;
-        QuestClaimResult result = GameSession.instance.TryClaimQuest(quest);
+        int favor = quest.Info.Favor;
+        QuestClaimResult result = GameSession.instance.TryClaimQuest(quest, out int levelUps);
 
         if(result == QuestClaimResult.NoSpace)
             EventManager.instance.PostNotification(new OnFeedback("가방과 창고에 자리가 없습니다"));
         else if(result == QuestClaimResult.Ok)
-            EventManager.instance.PostNotification(new OnFeedback($"퀘스트 완료: {name}", FeedbackType.Info));
+            PostClaimFeedback(name, favor, levelUps);
 
         Refresh();
     }
 
+    private void PostClaimFeedback(string name, int favor, int levelUps)
+    {
+        string text = favor > 0 ? $"퀘스트 완료: {name} (우호도 +{favor})" : $"퀘스트 완료: {name}";
+        EventManager.instance.PostNotification(new OnFeedback(text, FeedbackType.Info));
+
+        if(levelUps <= 0)
+            return;
+
+        int level = GameSession.instance.Favor.GetLevel(npc);
+        EventManager.instance.PostNotification(new OnFeedback($"{npc.ToKorean()}와(과) 더 가까워졌다! 우호도 Lv.{level}", FeedbackType.Info));
+    }
+
     private void EnsureSlotCount(int count)
     {
-        while (slots.Count < count)
+        while(slots.Count < count)
         {
             slots.Add(Instantiate(slotPrefab, listRoot));
         }

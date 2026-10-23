@@ -34,6 +34,7 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange PotionCaseIds = new(9100, 9199);
     private static readonly IdRange StageIds = new(9500, 9599);
     private static readonly IdRange QuestIds = new(9600, 9699);
+    private static readonly IdRange ForgeIds = new(9700, 9799);
 
     #endregion
 
@@ -57,6 +58,7 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset potionCaseCsv;
     [SerializeField] TextAsset stageCsv;
     [SerializeField] TextAsset questCsv;
+    [SerializeField] TextAsset forgeCsv;
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
     [SerializeField] PrefabLibrary prefabLibrary;
@@ -75,6 +77,7 @@ public class DataManager : Singleton<DataManager>
     private readonly List<ShopStockInfo> shopStocks = new();
     private readonly List<StageInfo> stages = new();
     private readonly Dictionary<int, QuestInfo> quests = new();
+    private readonly ForgeTable forge = new();
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
@@ -89,6 +92,7 @@ public class DataManager : Singleton<DataManager>
     public IReadOnlyList<ShopStockInfo> ShopStocks => shopStocks;
     public IReadOnlyList<StageInfo> Stages => stages;
     public IReadOnlyCollection<QuestInfo> Quests => quests.Values;
+    public ForgeTable Forge => forge;
     #endregion
 
     #region 초기화
@@ -128,6 +132,7 @@ public class DataManager : Singleton<DataManager>
         string potioncaseText = ReadText(potionCaseCsv, nameof(potionCaseCsv));
         string stageText = ReadText(stageCsv, nameof(stageCsv));
         string questText = ReadText(questCsv, nameof(questCsv));
+        string forgeText = ReadText(forgeCsv, nameof(forgeCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -152,6 +157,7 @@ public class DataManager : Singleton<DataManager>
         List<PotionCaseInfo> potionCaseList = ParseTable<PotionCaseInfo>(DataTag.PotionCases, potioncaseText, errors, InfoParser.TryParsePotionCase);
         List<StageInfo> stageList = ParseTable<StageInfo>(DataTag.Stages, stageText, errors, InfoParser.TryParseStage);
         List<QuestInfo> questList = ParseTable<QuestInfo>(DataTag.Quests, questText, errors, InfoParser.TryParseQuest);
+        List<ForgeLevelInfo> forgeList = ParseTable<ForgeLevelInfo>(DataTag.Forge, forgeText, errors, InfoParser.TryParseForge);
         #endregion
 
         //메인 스레드
@@ -187,6 +193,7 @@ public class DataManager : Singleton<DataManager>
         RegisterShopStocks(DataTag.ShopStock, shopStockList, errors);
         RegisterStages(DataTag.Stages, stageList, StageIds, errors);
         RegisterQuests(DataTag.Quests, questList, QuestIds, errors);
+        RegisterForge(DataTag.Forge, forgeList, ForgeIds, errors);
         #endregion
 
         foreach(var error in errors)
@@ -535,6 +542,54 @@ public class DataManager : Singleton<DataManager>
             info.SetBackground(FindBackground(sheetName, info));
             stages.Add(info);
         }
+    }
+
+    private void RegisterForge(string sheetName, List<ForgeLevelInfo> list, IdRange range, List<string> errors)
+    {
+        foreach(ForgeLevelInfo info in list)
+        {
+            if(!range.Contains(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id}가 구간 {range.Min}~{range.Max} 밖입니다");
+                continue;
+            }
+
+            if(forge.HasLevel(info.Level))
+            {
+                errors.Add($"{sheetName} : {info.Level}단계 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            if(!TryLinkMaterials(sheetName, info, errors))
+                continue;
+
+            forge.Add(info);
+        }
+
+        if(forge.IsValid(out string reason))
+            return;
+
+        errors.Add($"{sheetName} : {reason} → 강화를 사용하지 않습니다");
+        forge.Clear();
+    }
+
+    private bool TryLinkMaterials(string sheetName, ForgeLevelInfo info, List<string> errors)
+    {
+        bool ok = true;
+
+        foreach(ItemCost cost in info.Materials)
+        {
+            if(items.TryGetValue(cost.ItemId, out ItemInfo item))
+            {
+                cost.SetItem(item);
+                continue;
+            }
+
+            errors.Add($"{sheetName} : {info.Level}단계 재료 {cost.ItemId} 가 없습니다");
+            ok = false;
+        }
+
+        return ok;
     }
 
     private void RegisterQuests(string sheetName, List<QuestInfo> list, IdRange range, List<string> errors)

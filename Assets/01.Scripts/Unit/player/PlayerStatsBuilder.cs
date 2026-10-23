@@ -9,6 +9,9 @@ public static class PlayerStatsBuilder
 
         foreach(var item in backpack.EquippedItems())
         {
+            if(item is ForgeableInstance forged)
+                forged.ApplyBonus(stats);
+
             if(item.Info is not IStatModifier modifier)
                 continue;
 

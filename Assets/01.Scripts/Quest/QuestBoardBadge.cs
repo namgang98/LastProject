@@ -3,6 +3,8 @@
 public class QuestBoardBadge : MonoBehaviour
 {
     [SerializeField] GameObject badge;
+    [SerializeField] NpcType npc = NpcType.Board;
+    [SerializeField] bool checkAllNpc;
 
     private void OnEnable()
     {
@@ -29,16 +31,6 @@ public class QuestBoardBadge : MonoBehaviour
     private void Refresh()
     {
         QuestBook book = GameSession.instance.Quests;
-
-        foreach(QuestProgress quest in book.All)
-        {
-            if(book.IsVisible(quest) && book.IsReady(quest))
-            {
-                badge.SetActive(true);
-                return;
-            }
-        }
-
-        badge.SetActive(false);
+        badge.SetActive(checkAllNpc ? book.HasAnyReady() : book.HasReady(npc));
     }
 }

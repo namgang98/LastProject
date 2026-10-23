@@ -59,7 +59,8 @@ public class BattleController : MonoBehaviour
         {
             if(item.Info is WeaponInfo weapon)
             {
-                var data = stats.Apply(weapon.Type, weapon.Attack);
+                AttackData attack = item is ForgeableInstance forged ? forged.ApplyTo(weapon.Attack) : weapon.Attack;
+                var data = stats.Apply(weapon.Type, attack);
                 var weaponAction = AddAction(new AttackEffect(monster.Health, data, statuses), data.Cooldown, player.AttackWindup, player.Health, player.PlayAttack);
                 OnActionReady?.Invoke(item, weaponAction);
                 continue;

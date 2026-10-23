@@ -19,7 +19,10 @@ public WeaponInfo(int id, string name, string iconName, ItemShape shape, ItemGra
         Type = type;
     }
     public override bool IsLootable => true;
-
+    public override ItemInstance CreateInstance()
+    {
+        return new ForgeableInstance(this);
+    }
     public override void AppendTooltip(StringBuilder sb)
     {
         sb.AppendLine($"데미지 : {Attack.Damage}");

@@ -81,10 +81,12 @@ public struct OnUnitDamaged : IGameEvent
 {
     public Vector3 Position;
     public DamageInfo Info;
-    public OnUnitDamaged(Vector3 pos, DamageInfo info)
+    public int SourceId;
+    public OnUnitDamaged(Vector3 pos, DamageInfo info, int sourceId)
     {
         Position = pos;
         Info = info;
+        SourceId = sourceId;
     }
 }
 

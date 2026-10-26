@@ -11,6 +11,8 @@ public class SaveData
     public int gold;
     public bool inRun;
     public int bestFloor;
+    public int clearCount;
+    public int abyssClearCount;
     public BackpackSaveData backpack = new();
     public List<GridSaveData> chestTabs = new();
     public List<int> shopOffers = new();

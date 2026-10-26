@@ -33,6 +33,10 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
     public QuestBook Quests { get; private set; }
     public ForgeService Forge { get; private set; }
     public int BestFloor => Training.BestFloor;
+    public int ClearCount => saveData.clearCount;
+    public int AbyssClearCount => saveData.abyssClearCount;
+    public bool IsAbyssOpen => saveData.clearCount > 0;
+    public bool HasPendingTowerRise { get; private set; }
     public bool TryLoad()
     {
         saveService = new SaveService(new FileSaveStorage(SaveFileName));
@@ -84,8 +88,26 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
             Wallet.CommitRun();
         }
 
+        if(reason == RunEndReason.Victory)
+        {
+            saveData.clearCount++;
+            HasPendingTowerRise = true;
+        }
+
+        if(reason == RunEndReason.AbyssVictory)
+            saveData.abyssClearCount++;
+
         Shop.Restock();
         Save(false);
+    }
+
+    public bool ConsumeTowerRise()
+    {
+        if(!HasPendingTowerRise)
+            return false;
+
+        HasPendingTowerRise = false;
+        return true;
     }
 
     public void RefreshGold()

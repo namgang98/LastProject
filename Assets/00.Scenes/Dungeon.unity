@@ -7705,6 +7705,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 351466470}
+  - {fileID: 1406042269}
   m_Father: {fileID: 2020987124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1261361551
@@ -7728,6 +7729,7 @@ MonoBehaviour:
   playerHud: {fileID: 650069256}
   monsterHud: {fileID: 1165462775}
   bossInterval: 10
+  finalFloor: 50
   spawnPoint: {fileID: 8574174109895305707}
   battle: {fileID: 1261361548}
   monsterHpbar: {fileID: 4639009947944471816}
@@ -7736,8 +7738,62 @@ MonoBehaviour:
   returnButton: {fileID: 1840558517}
   statusIconView: {fileID: 242391696669185123}
   background: {fileID: 1382441833}
-  hpGrowth: 0.16
-  damageGrowth: 0.11
+  ambience: {fileID: 1406042268}
+  hpGrowth: 0.05
+  hpCurve: 0.004
+  damageGrowth: 0.04
+  damageCurve: 0.0025
+--- !u!1 &1265853627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1265853629}
+  - component: {fileID: 1265853628}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1265853628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265853627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41ca70a8f943f34f884c43633a0053b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DebugCheats
+  gold: 10000
+  materialCount: 5
+  materialIds: 411f0000431f0000461f0000471f0000481f00004b1f00004c1f00004d1f00004e1f00004f1f0000
+  gearIds: eb030000ea030000e9030000a20f000088130000
+  potionId: 8501
+  potionCount: 5
+  forgeLevel: 5
+--- !u!4 &1265853629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265853627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1521.0724, y: 421.898, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1318542150
 GameObject:
   m_ObjectHideFlags: 0
@@ -8356,7 +8412,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1599682635
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 81d1393d4b2398a448b728ae5934cc1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8395,6 +8451,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b149c03aa01af34bbb75cae4e4eba6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageBackgroundView
+--- !u!1 &1406042267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1406042269}
+  - component: {fileID: 1406042268}
+  m_Layer: 0
+  m_Name: Ambience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1406042268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406042267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ecb0eee326c9f468c018c6bd8d21c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageAmbienceView
+--- !u!4 &1406042269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406042267}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 129.77737, y: -476.58142, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1261361549}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408413474
 GameObject:
   m_ObjectHideFlags: 0
@@ -14071,3 +14171,4 @@ SceneRoots:
   - {fileID: 75125463}
   - {fileID: 1382441832}
   - {fileID: 1503519523}
+  - {fileID: 1265853629}

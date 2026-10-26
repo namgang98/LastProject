@@ -62,6 +62,9 @@ public static class CSVStamp
     public const string Monsters = "monsters";
     public const string Boss = "boss";
     public const string MinFloor = "minfloor";
+    public const string MaxFloor = "maxfloor";
+    public const string Ambience = "ambience";
+    public const string HpDisplay = "hpdisplay";
 
     public const string Target = "target";
     public const string RewardItem = "rewarditem";
@@ -119,5 +122,6 @@ public static class SceneNames
     public const string Boot = "Boot";
     public const string Village = "Village";
     public const string Dungeon = "Dungeon";
+    public const string TowerRise = "TowerRise";
 }
 #endregion

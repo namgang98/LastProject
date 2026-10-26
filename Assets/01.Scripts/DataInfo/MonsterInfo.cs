@@ -1,11 +1,16 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public enum MonsterType
 {
     Normal,
     Boss
+}
+
+public enum HpDisplay
+{
+    Full,
+    Hidden
 }
 
 public class MonsterInfo
@@ -17,12 +22,13 @@ public class MonsterInfo
     public AttackData Attack { get; }
     public float EquipChance { get; }
     public MonsterType Type { get; }
+    public HpDisplay HpDisplay { get; }
 
     private readonly List<MonsterDropInfo> drops = new();
     public IReadOnlyList<MonsterDropInfo> Drops => drops;
 
     public GameObject Prefab { get; private set; }
-    public MonsterInfo(int id, string name, string prefabName, int maxHp, AttackData attack, float equipChance, MonsterType type)
+    public MonsterInfo(int id, string name, string prefabName, int maxHp, AttackData attack, float equipChance, MonsterType type, HpDisplay hpDisplay = HpDisplay.Full)
     {
         Id = id;
         Name = name;
@@ -31,6 +37,7 @@ public class MonsterInfo
         Attack = attack;
         EquipChance = equipChance;
         Type = type;
+        HpDisplay = hpDisplay;
     }
 
     public bool IsBoss => Type == MonsterType.Boss;

@@ -1,4 +1,4 @@
 ﻿id,name,icon,shape,grade,storageX,storageY,sellPrice,description
-9001,주머니,Pouch1,X,Normal,2,2,3000,죽음이 앗아가지 못하는 작은 주머니.
-9002,파란주머니,Pouch2,XX,Rare,3,3,5000,넉넉한 칸이 달린 허리 주머니. 쓰러져도 남는다.
-9003,보라주머니,Pouch3,XXX,Epic,4,4,10000,세 칸으로 나뉜 귀한 주머니. 무엇이든 지켜 준다.
+9001,주머니,Pouch1,X,Normal,2,2,600,죽음이 앗아가지 못하는 작은 주머니.
+9002,파란주머니,Pouch2,XX,Rare,3,3,1200,넉넉한 칸이 달린 허리 주머니. 쓰러져도 남는다.
+9003,보라주머니,Pouch3,XXX,Epic,4,4,2500,세 칸으로 나뉜 귀한 주머니. 무엇이든 지켜 준다.

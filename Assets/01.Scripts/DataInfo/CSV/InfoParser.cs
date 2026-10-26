@@ -94,7 +94,12 @@ public static class InfoParser
         if(!row.TryGetEnum(CSVStamp.Type, out MonsterType type))
             return Fail(row, errors, CSVStamp.Type);
 
-        info = new MonsterInfo(b.id, b.name, prefab, maxHp, attack, equipChance, type);
+        HpDisplay hpDisplay = HpDisplay.Full;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.HpDisplay)) && !row.TryGetEnum(CSVStamp.HpDisplay, out hpDisplay))
+            return Fail(row, errors, CSVStamp.HpDisplay);
+
+        info = new MonsterInfo(b.id, b.name, prefab, maxHp, attack, equipChance, type, hpDisplay);
         return true;
     }
     #endregion
@@ -370,7 +375,14 @@ public static class InfoParser
         if(!row.TryGetInt(CSVStamp.MinFloor, out int minFloor) || minFloor < 1)
             return Fail(row, errors, CSVStamp.MinFloor);
 
-        info = new StageInfo(b.id, b.name, background, monsterIds, bossId, minFloor);
+        int maxFloor = int.MaxValue;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.MaxFloor)) && (!row.TryGetInt(CSVStamp.MaxFloor, out maxFloor) || maxFloor < minFloor))
+            return Fail(row, errors, CSVStamp.MaxFloor);
+
+        string ambience = row.GetString(CSVStamp.Ambience);
+
+        info = new StageInfo(b.id, b.name, background, monsterIds, bossId, minFloor, maxFloor, ambience);
         return true;
     }
     #endregion

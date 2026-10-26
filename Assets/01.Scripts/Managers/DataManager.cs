@@ -540,6 +540,10 @@ public class DataManager : Singleton<DataManager>
             }
 
             info.SetBackground(FindBackground(sheetName, info));
+
+            if(!string.IsNullOrEmpty(info.AmbienceName))
+                info.SetAmbience(FindPrefab(sheetName, info.Id, info.AmbienceName, errors));
+
             stages.Add(info);
         }
     }

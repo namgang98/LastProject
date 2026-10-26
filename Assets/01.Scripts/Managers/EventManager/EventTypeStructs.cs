@@ -63,6 +63,8 @@ public enum RunEndReason
 {
     Death,
     Return,
+    Victory,
+    AbyssVictory,
 }
 public struct OnRunEnded : IGameEvent
 {

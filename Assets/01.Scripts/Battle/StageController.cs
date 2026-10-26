@@ -21,6 +21,10 @@ public class StageController : MonoBehaviour
     [SerializeField] HudFader playerHud;
     [SerializeField] HudFader monsterHud;
 
+    [Header("탑 꼭대기")]
+    [SerializeField] int towerTopFloor = 50;
+    [SerializeField] int abyssTopFloor = 100;
+
     [SerializeField] int bossInterval = 10;
     [SerializeField] Transform spawnPoint;
     [SerializeField] BattleController battle;
@@ -30,17 +34,21 @@ public class StageController : MonoBehaviour
     [SerializeField] Button returnButton;
     [SerializeField] StatusIconView statusIconView;
     [SerializeField] StageBackgroundView background;
+    [SerializeField] StageAmbienceView ambience;
     private StagePlanner planner;
 
-
-    [SerializeField] private float hpGrowth = 0.1f;
-    [SerializeField] private float damageGrowth = 0.05f;
+    [SerializeField] private float hpGrowth = 0.05f;
+    [SerializeField] float hpCurve = 0.004f;
+    [SerializeField] private float damageGrowth = 0.04f;
+    [SerializeField] float damageCurve = 0.0025f;
 
     private StageRule rule;
     private StageScaling scaling;
     private UnitController player;
 
     private int stage;
+    private int finalFloor;
+    private bool isAbyssRun;
     private Phase phase;
     private UnitController currentMonster;
     private MonsterInfo currentInfo;
@@ -48,7 +56,7 @@ public class StageController : MonoBehaviour
 
     private void Awake()
     {
-        scaling = new StageScaling(hpGrowth, damageGrowth);
+        scaling = new StageScaling(hpGrowth, hpCurve, damageGrowth, damageCurve);
 
         nextButton.onClick.AddListener(NextStage);
         returnButton.onClick.AddListener(ReturnToTown);
@@ -64,6 +72,9 @@ public class StageController : MonoBehaviour
     {
         bool isVeteran = GameSession.instance.BestFloor >= veteranFloor;
         rule = new StageRule(bossInterval, isVeteran);
+
+        isAbyssRun = GameSession.instance.IsAbyssOpen;
+        finalFloor = isAbyssRun ? abyssTopFloor : towerTopFloor;
 
         playerHud.SetInstant(false);
         monsterHud.SetInstant(false);
@@ -127,7 +138,10 @@ public class StageController : MonoBehaviour
         StageInfo area = planner.Get(stage);
 
         if(area != null)
+        {
             background.Show(area.Background);
+            ambience.Show(area.AmbiencePrefab);
+        }
 
         bool isRest = rule.IsRestStage(stage);
 
@@ -170,6 +184,7 @@ public class StageController : MonoBehaviour
         currentAttack = info.Attack.WithDamage(stats.Damage);
 
         monsterHpbar.Bind(currentMonster.Health);
+        monsterHpbar.gameObject.SetActive(info.HpDisplay != HpDisplay.Hidden);
         statusIconView.Bind(currentMonster);
     }
 
@@ -207,6 +222,13 @@ public class StageController : MonoBehaviour
         monsterHud.Hide();
         currentMonster.Health.OnDie -= HandleMonsterDead;
         EventManager.instance.PostNotification(new OnMonsterKilled(spawnPoint.position, currentInfo));
+
+        if(stage >= finalFloor && currentInfo.IsBoss)
+        {
+            EndRun(isAbyssRun ? RunEndReason.AbyssVictory : RunEndReason.Victory);
+            return;
+        }
+
         phase = Phase.Looting;
         ShowButtons();
     }
@@ -248,10 +270,12 @@ public class StageController : MonoBehaviour
         nextButton.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(false);
     }
+
     private void WalkIn()
     {
         walker.WalkIn(BeginStage);
     }
+
     private string GetAreaTitle(int floor)
     {
         if(!planner.IsFirstFloor(floor))
@@ -260,6 +284,7 @@ public class StageController : MonoBehaviour
         StageInfo area = planner.Get(floor);
         return area != null ? area.Name : null;
     }
+
     private enum Phase
     {
         Moving,
@@ -267,6 +292,4 @@ public class StageController : MonoBehaviour
         Looting,
         Ended,
     }
-
-
 }

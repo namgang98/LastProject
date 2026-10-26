@@ -1,0 +1,1107 @@
+fileFormatVersion: 2
+guid: 074d182e27074b25a4cc131efa05ccce
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7745093940982605430
+    second: SporeMother_packed_0
+  - first:
+      213: 19194957600673143
+    second: SporeMother_packed_1
+  - first:
+      213: 2913581762952700098
+    second: SporeMother_packed_2
+  - first:
+      213: 7429898854912666408
+    second: SporeMother_packed_3
+  - first:
+      213: 5874387844446729292
+    second: SporeMother_packed_4
+  - first:
+      213: 7844154600742917731
+    second: SporeMother_packed_5
+  - first:
+      213: 7844399196972759997
+    second: SporeMother_packed_6
+  - first:
+      213: -6153733102100158926
+    second: SporeMother_packed_7
+  - first:
+      213: -1414683353666067367
+    second: SporeMother_packed_8
+  - first:
+      213: 2837577886111375871
+    second: SporeMother_packed_9
+  - first:
+      213: -9127738116781900311
+    second: SporeMother_packed_10
+  - first:
+      213: 9091804677371833918
+    second: SporeMother_packed_11
+  - first:
+      213: -2425771946091680833
+    second: SporeMother_packed_12
+  - first:
+      213: 8158171710842530980
+    second: SporeMother_packed_13
+  - first:
+      213: 3885315193383920272
+    second: SporeMother_packed_14
+  - first:
+      213: 5088664829383734473
+    second: SporeMother_packed_15
+  - first:
+      213: 5497045294671495819
+    second: SporeMother_packed_16
+  - first:
+      213: 8492205821749626233
+    second: SporeMother_packed_17
+  - first:
+      213: 7599721402105571238
+    second: SporeMother_packed_18
+  - first:
+      213: -317608183624157648
+    second: SporeMother_packed_19
+  - first:
+      213: -745193376859646575
+    second: SporeMother_packed_20
+  - first:
+      213: -4498695032248041196
+    second: SporeMother_packed_21
+  - first:
+      213: 3695299032189317505
+    second: SporeMother_packed_22
+  - first:
+      213: 6863130155954769566
+    second: SporeMother_packed_23
+  - first:
+      213: 5187252345148297550
+    second: SporeMother_packed_24
+  - first:
+      213: 4177187742967045198
+    second: SporeMother_packed_25
+  - first:
+      213: -4763276221925727587
+    second: SporeMother_packed_26
+  - first:
+      213: 2094445625437339427
+    second: SporeMother_packed_27
+  - first:
+      213: 522354882581918069
+    second: SporeMother_packed_28
+  - first:
+      213: 7193352439574817319
+    second: SporeMother_packed_29
+  - first:
+      213: 121127474337268487
+    second: SporeMother_packed_30
+  - first:
+      213: -7450517380481054961
+    second: SporeMother_packed_31
+  - first:
+      213: -1005405693257730478
+    second: SporeMother_packed_32
+  - first:
+      213: -6397245431652309394
+    second: SporeMother_packed_33
+  - first:
+      213: -2772449127840938900
+    second: SporeMother_packed_34
+  - first:
+      213: -7530825632032764845
+    second: SporeMother_packed_35
+  - first:
+      213: 9192839412287380650
+    second: SporeMother_packed_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SporeMother_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 655
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc1d7248a42f11e4595fa894ce3c5f82
+      internalID: 717389766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_1
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 655
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcaee1d46845f0640b4ae971740356a2
+      internalID: -121569542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_2
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 655
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2188028681ae86844bc58022add23e27
+      internalID: -498142148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_3
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 655
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f411f114715c6649b162c0325a9fe80
+      internalID: 53716051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 524
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d2651207490b4e4c9b2f12aaec5217e
+      internalID: -1900789227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_5
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 524
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0f9dbaee223cd4090bbd087ee1b2bd
+      internalID: 1774367566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_6
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 524
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 588b9148499b65146a96cb0d33a02830
+      internalID: -1667323592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_7
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 524
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a1409de1bca0c54c94b6eecef6414b5
+      internalID: -2104891422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_8
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 524
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 943233fc8ab490a46bef7ceaeb7ddd6b
+      internalID: 1806578365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_9
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 524
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ade134a9607252b4eb612f35e14aabef
+      internalID: 1013411948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_10
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 524
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1336dc3c51fdaad4780d4bdb7a4317ce
+      internalID: -385249756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_11
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 524
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 412208a59b1dc9d49a9bf3f03e952a6e
+      internalID: -405672685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 393
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9ae9034c99aa1a4c84ba0bd4fccaea9
+      internalID: 1990535101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_13
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 393
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4df20ce413640aa4bb06c3d4cd6f4b3d
+      internalID: -106500066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_14
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 393
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f7d4c7a58e25b040bdbff228e02a076
+      internalID: 109256506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_15
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 393
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e9ae6d90daaeb74f92e6c8743ec66b9
+      internalID: 824482384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_16
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 393
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f067fa42195c5e4bb45e000772e0a4c
+      internalID: -1307672303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_17
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 393
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe57d64b20ab1ec4fb89756ec70ad25c
+      internalID: 1968499094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_18
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 393
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95b60016419795448ae5e3d24fe02d6b
+      internalID: 369221893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_19
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 393
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7adb81a9787a760429d1fc55668687e4
+      internalID: 1333042464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 262
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee90fc911cc36b84ba04b581d1360621
+      internalID: 211214301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_21
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 262
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d6d9a15900378547a614adcb9a4891f
+      internalID: 307001801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_22
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 262
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31a82ec30eadcde41a2222bcd4afa3ba
+      internalID: 2094330191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_23
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 262
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 448e69f21abbcf04ead85d631e0889fb
+      internalID: -784312174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_24
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 262
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cc5fbebcbf951d4f98dcc7953cbc792
+      internalID: 502355323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_25
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 262
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0700d5748db5b74987881db42a03c3b
+      internalID: -2056975485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_26
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 262
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ce552c8a233a144d9be03ee93df22ad
+      internalID: 1826054749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_27
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 262
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36a9b91da371771409bf307ff1931365
+      internalID: -1090064534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 131
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34d0ff351eca2f54c8d810abf72cb3ea
+      internalID: -841734491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_29
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 131
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ca13af1bbb6d084f817dc864765b157
+      internalID: 456391603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_30
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 131
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e35e4ba2481fdec4c8d51e9e46c4595a
+      internalID: -1666263974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_31
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 131
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 464b69ba731062b4d936c5346b89be99
+      internalID: -1591927388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b0e2af2a2b048e4f8ad8c5a6a44437d
+      internalID: -1696700998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_33
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 0
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b24d5d1b07efac44a2961ed707482f8
+      internalID: -411451114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_34
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de53a235457c3b2499166a934c2d66a7
+      internalID: -2134625436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_35
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 0
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab8e5b0e27265bf448f505b58e65ab87
+      internalID: -1865329828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SporeMother_36
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 135
+        height: 131
+      alignment: 9
+      pivot: {x: 0.481, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb923b637c2816b4c90d69b41b5b122c
+      internalID: -1712312186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 413e6274fcd8a7c459768e7e58a18ef6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":135.0,"y":131.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.48100000619888308,"y":0.04500000178813934},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      SporeMother_0: 717389766
+      SporeMother_1: -121569542
+      SporeMother_10: -385249756
+      SporeMother_11: -405672685
+      SporeMother_12: 1990535101
+      SporeMother_13: -106500066
+      SporeMother_14: 109256506
+      SporeMother_15: 824482384
+      SporeMother_16: -1307672303
+      SporeMother_17: 1968499094
+      SporeMother_18: 369221893
+      SporeMother_19: 1333042464
+      SporeMother_2: -498142148
+      SporeMother_20: 211214301
+      SporeMother_21: 307001801
+      SporeMother_22: 2094330191
+      SporeMother_23: -784312174
+      SporeMother_24: 502355323
+      SporeMother_25: -2056975485
+      SporeMother_26: 1826054749
+      SporeMother_27: -1090064534
+      SporeMother_28: -841734491
+      SporeMother_29: 456391603
+      SporeMother_3: 53716051
+      SporeMother_30: -1666263974
+      SporeMother_31: -1591927388
+      SporeMother_32: -1696700998
+      SporeMother_33: -411451114
+      SporeMother_34: -2134625436
+      SporeMother_35: -1865329828
+      SporeMother_36: -1712312186
+      SporeMother_4: -1900789227
+      SporeMother_5: 1774367566
+      SporeMother_6: -1667323592
+      SporeMother_7: -2104891422
+      SporeMother_8: 1806578365
+      SporeMother_9: 1013411948
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

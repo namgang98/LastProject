@@ -9,11 +9,13 @@ public class UnitController : MonoBehaviour
 
     private float nextHurtTime;
     private float attackLockUntil;
+    private IRevivable revivable;
     public UnitHealth Health => health;
     [SerializeField] UnitAnimator animator;
     [SerializeField] Transform headPoint;
     [SerializeField] float attackWindup = 0.3f;
     [SerializeField] SfxType attackSfx = SfxType.None;
+    [SerializeField] SfxType skillSfx = SfxType.None;
     public float AttackWindup => attackWindup;
     private void Reset()
     {
@@ -26,10 +28,15 @@ public class UnitController : MonoBehaviour
     }
     private void OnEnable()
     {
-        health.OnHit += HandleHit;        
+        health.OnHit += HandleHit;
         health.OnHealed += HandleHealed;
         health.OnBlocked += HandleShield;
         health.OnDie += animator.DeadAni;
+
+        revivable = health as IRevivable;
+
+        if(revivable != null)
+            revivable.OnRevived += HandleRevived;
     }
     private void OnDisable()
     {
@@ -37,15 +44,34 @@ public class UnitController : MonoBehaviour
         health.OnHealed -= HandleHealed;
         health.OnBlocked -= HandleShield;
         health.OnDie -= animator.DeadAni;
+
+        if(revivable != null)
+            revivable.OnRevived -= HandleRevived;
     }
     public void PlayAttack()
+    {
+        PlayAttackMotion(false);
+    }
+
+    public void PlaySkill()
+    {
+        PlayAttackMotion(true);
+    }
+
+    private void PlayAttackMotion(bool isSkill)
     {
         if(animator == null || health.IsDead)
             return;
 
         attackLockUntil = Time.time + attackLock;
-        animator.AttackAni();
-        SoundManager.instance.PlaySfx(attackSfx);
+
+        if(isSkill)
+            animator.SkillAni();
+        else
+            animator.AttackAni();
+
+        SfxType sfx = isSkill && skillSfx != SfxType.None ? skillSfx : attackSfx;
+        SoundManager.instance.PlaySfx(sfx);
     }
     private void HandleHit(DamageInfo info)
     {
@@ -79,6 +105,11 @@ public class UnitController : MonoBehaviour
     {
         Vector3 pos = headPoint != null ? headPoint.position : transform.position;
         EventManager.instance.PostNotification(new OnUnitBlocked(pos));
+    }
+    private void HandleRevived()
+    {
+        Vector3 pos = headPoint != null ? headPoint.position : transform.position;
+        EventManager.instance.PostNotification(new OnUnitRevived(pos));
     }
     public void Init(int maxHp)
     {

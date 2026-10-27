@@ -99,7 +99,21 @@ public static class InfoParser
         if(!string.IsNullOrEmpty(row.GetString(CSVStamp.HpDisplay)) && !row.TryGetEnum(CSVStamp.HpDisplay, out hpDisplay))
             return Fail(row, errors, CSVStamp.HpDisplay);
 
-        info = new MonsterInfo(b.id, b.name, prefab, maxHp, attack, equipChance, type, hpDisplay);
+        float skillChance = 0f;
+        float skillMultiplier = 1f;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.SkillChance)) && (!row.TryGetFloat(CSVStamp.SkillChance, out skillChance) || skillChance < 0f || skillChance > 1f))
+            return Fail(row, errors, CSVStamp.SkillChance);
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.SkillMultiplier)) && (!row.TryGetFloat(CSVStamp.SkillMultiplier, out skillMultiplier) || skillMultiplier < 1f))
+            return Fail(row, errors, CSVStamp.SkillMultiplier);
+
+        float reviveRate = 0f;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Revive)) && (!row.TryGetFloat(CSVStamp.Revive, out reviveRate) || reviveRate < 0f || reviveRate > 1f))
+            return Fail(row, errors, CSVStamp.Revive);
+
+        info = new MonsterInfo(b.id, b.name, prefab, maxHp, attack, equipChance, type, hpDisplay, skillChance, skillMultiplier, reviveRate);
         return true;
     }
     #endregion
@@ -381,8 +395,37 @@ public static class InfoParser
             return Fail(row, errors, CSVStamp.MaxFloor);
 
         string ambience = row.GetString(CSVStamp.Ambience);
+        int towerId = 0;
 
-        info = new StageInfo(b.id, b.name, background, monsterIds, bossId, minFloor, maxFloor, ambience);
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Tower)) && (!row.TryGetInt(CSVStamp.Tower, out towerId) || towerId < 0))
+            return Fail(row, errors, CSVStamp.Tower);
+
+        info = new StageInfo(b.id, b.name, background, monsterIds, bossId, minFloor, maxFloor, ambience, towerId);
+        return true;
+    }
+    #endregion
+    #region 탑
+    public static bool TryParseTower(CsvRow row, List<string> errors, out TowerInfo info)
+    {
+        info = null;
+
+        if(!TryParseInfoBase(row, errors, out InfoBase b))
+            return false;
+
+        if(!row.TryGetInt(CSVStamp.TopFloor, out int topFloor) || topFloor < 1)
+            return Fail(row, errors, CSVStamp.TopFloor);
+
+        int abyssFloor = 0;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.AbyssFloor)) && (!row.TryGetInt(CSVStamp.AbyssFloor, out abyssFloor) || (abyssFloor != 0 && abyssFloor <= topFloor)))
+            return Fail(row, errors, CSVStamp.AbyssFloor);
+
+        int prologue = 0;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Prologue)) && !row.TryGetInt(CSVStamp.Prologue, out prologue))
+            return Fail(row, errors, CSVStamp.Prologue);
+
+        info = new TowerInfo(b.id, b.name, row.GetString(CSVStamp.Description), topFloor, abyssFloor, prologue == 1);
         return true;
     }
     #endregion
@@ -450,7 +493,7 @@ public static class InfoParser
         if(!row.TryGetInt(CSVStamp.Prereq, out int prereq) || prereq < 0)
             return Fail(row, errors, CSVStamp.Prereq);
 
-        if((type == QuestType.ReachFloor || type == QuestType.Deliver) && target == 0)
+        if((type == QuestType.ReachFloor || type == QuestType.Deliver || type == QuestType.ForgeLevel) && target == 0)
             return Fail(row, errors, CSVStamp.Target);
 
         NpcType npc = NpcType.Board;

@@ -1,14 +1,27 @@
-﻿id,name,prefab,maxHp,damage,cooldown,equipchance,type,critchance,critmultiplier,element,elementchance,elementvalue,elementduration,hpdisplay
-2001,버섯,Monster_Mushroom,50,5,3,0.07,Normal,0.05,1.5,None,0,0,0,
-2002,고블린,Monster_Goblin,35,5,2,0.1,Normal,0.15,1.5,poison,0.2,3,4,
-2003,스켈레톤,Monster_Skeleton,60,7,2.5,0.1,Normal,0.1,1.5,None,0,0,0,
-2004,역병쥐,Monster_Rat,25,2,1.2,0.05,Normal,0.05,1.5,poison,0.25,2,4,
-2005,거대 거미,Monster_Spider,40,4,2,0.07,Normal,0.1,1.5,poison,0.5,3,5,
-2006,구울,Monster_Ghoul,80,9,3,0.1,Normal,0.2,1.8,None,0,0,0,
-2007,서리 망령,Monster_FrostWraith,55,6,2.5,0.1,Normal,0.1,1.5,ice,0.4,30,3,
-2008,광신도 화염술사,Monster_Cultist,40,7,2.5,0.12,Normal,0.1,1.5,fire,0.5,3,4,
-2101,고블린 족장,Monster_GoblinKing,180,9,3,1,Boss,0.15,2,None,0,0,0,
-2102,포자 모체,Monster_SporeMother,240,7,3.5,1,Boss,0.05,1.5,poison,0.6,5,6,
-2103,해골 군주,Monster_SkeletonLord,320,11,3,1,Boss,0.15,2,None,0,0,0,
-2104,서리 여왕,Monster_FrostQueen,300,9,3,1,Boss,0.1,1.5,ice,0.5,40,4,
-2105,고대 용,Monster_Dragon,350,12,3,1,Boss,0.1,1.5,fire,0.4,5,4,Hidden
+﻿id,name,prefab,maxHp,damage,cooldown,equipchance,type,critchance,critmultiplier,element,elementchance,elementvalue,elementduration,hpdisplay,skillchance,skillmultiplier,revive
+2001,버섯,Monster_Mushroom,50,5,3,0.07,Normal,0.05,1.5,None,0,0,0,,0.15,1.6,
+2002,고블린,Monster_Goblin,35,5,2,0.1,Normal,0.15,1.5,poison,0.2,3,4,,0.15,1.6,
+2003,스켈레톤,Monster_Skeleton,60,7,2.5,0.1,Normal,0.1,1.5,None,0,0,0,,0.15,1.6,
+2004,역병쥐,Monster_Rat,25,2,1.2,0.05,Normal,0.05,1.5,poison,0.25,2,4,,0.15,1.6,
+2005,거대 거미,Monster_Spider,40,4,2,0.07,Normal,0.1,1.5,poison,0.5,3,5,,0.15,1.6,
+2006,구울,Monster_Ghoul,80,9,3,0.1,Normal,0.2,1.8,None,0,0,0,,0.15,1.6,
+2007,서리 망령,Monster_FrostWraith,55,6,2.5,0.1,Normal,0.1,1.5,ice,0.4,30,3,,0.15,1.6,
+2008,광신도 화염술사,Monster_Cultist,40,7,2.5,0.12,Normal,0.1,1.5,fire,0.5,3,4,,0.15,1.6,
+2101,고블린 족장,Monster_GoblinKing,180,9,3,1,Boss,0.15,2,None,0,0,0,,0.25,1.8,
+2102,포자 모체,Monster_SporeMother,240,7,3.5,1,Boss,0.05,1.5,poison,0.6,5,6,,0.25,1.8,
+2103,해골 군주,Monster_SkeletonLord,320,11,3,1,Boss,0.15,2,None,0,0,0,,0.25,1.8,
+2104,서리 여왕,Monster_FrostQueen,300,9,3,1,Boss,0.1,1.5,ice,0.5,40,4,,0.25,1.8,
+2105,고대 용,Monster_Dragon,350,12,3,1,Boss,0.1,1.5,fire,0.4,5,4,Hidden,0.3,2,
+2201,되살아난 버섯,Monster_Mushroom_Undead,50,5,3,0.07,Normal,0.05,1.5,None,0,0,0,,0.25,1.8,0.3
+2202,되살아난 고블린,Monster_Goblin_Undead,35,5,2,0.1,Normal,0.15,1.5,poison,0.2,3,4,,0.25,1.8,0.3
+2203,강화된 스켈레톤,Monster_Skeleton_Undead,60,7,2.5,0.1,Normal,0.1,1.5,None,0,0,0,,0.25,1.8,0.3
+2204,되살아난 역병쥐,Monster_Rat_Undead,25,2,1.2,0.05,Normal,0.05,1.5,poison,0.25,2,4,,0.25,1.8,0.3
+2205,되살아난 거대 거미,Monster_Spider_Undead,40,4,2,0.07,Normal,0.1,1.5,poison,0.5,3,5,,0.25,1.8,0.3
+2206,강화된 구울,Monster_Ghoul_Undead,80,9,3,0.1,Normal,0.2,1.8,None,0,0,0,,0.25,1.8,0.3
+2207,강화된 서리 망령,Monster_FrostWraith_Undead,55,6,2.5,0.1,Normal,0.1,1.5,ice,0.4,30,3,,0.25,1.8,0.3
+2208,되살아난 화염술사,Monster_Cultist_Undead,40,7,2.5,0.12,Normal,0.1,1.5,fire,0.5,3,4,,0.25,1.8,0.3
+2301,되살아난 고블린 족장,Monster_GoblinKing_Undead,180,9,3,1,Boss,0.15,2,None,0,0,0,,0.3,2,0.4
+2302,되살아난 포자 모체,Monster_SporeMother_Undead,240,7,3.5,1,Boss,0.05,1.5,poison,0.6,5,6,,0.3,2,0.4
+2303,되살아난 해골 군주,Monster_SkeletonLord_Undead,320,11,3,1,Boss,0.15,2,None,0,0,0,,0.3,2,0.4
+2304,되살아난 서리 여왕,Monster_FrostQueen_Undead,300,9,3,1,Boss,0.1,1.5,ice,0.5,40,4,,0.3,2,0.4
+2305,되살아난 고대 용,Monster_Dragon_Undead,400,14,3,1,Boss,0.1,1.5,fire,0.5,6,4,Hidden,0.35,2.2,0.5

@@ -4,31 +4,34 @@ using UnityEngine;
 
 public class TowerRiseCutscene : MonoBehaviour
 {
-    private static readonly int RumbleHash = Animator.StringToHash("Rumble");
-    private static readonly int RiseHash = Animator.StringToHash("Rise");
-    private static readonly int GlowHash = Animator.StringToHash("Glow");
-
     [Header("탑")]
-    [SerializeField] Animator towerAnimator;
+    [SerializeField] CrossfadeSpritePlayer tower;
+    [SerializeField] Sprite idleFrame;
+    [SerializeField] Sprite[] riseFrames;
+    [SerializeField] float riseFrameTime = 0.25f;
+    [SerializeField] float towerShakeStrength = 0.06f;
 
     [Header("지진")]
     [SerializeField] Transform cameraRoot;
-    [SerializeField] float calmTime = 1f;
+    [SerializeField] float calmTime = 0.8f;
     [SerializeField] float rumbleTime = 1.6f;
-    [SerializeField] float rumbleStrength = 0.06f;
+    [SerializeField] float rumbleStrength = 0.05f;
     [SerializeField] float quakeStrength = 0.3f;
     [SerializeField] ParticleSystem[] riseEffects;
 
     [Header("심연 빛")]
     [SerializeField] SpriteRenderer abyssGlow;
     [SerializeField] float glowAlpha = 0.85f;
+    [SerializeField] float glowFadeTime = 1f;
     [SerializeField] CanvasGroup flash;
 
     [Header("스토리")]
     [SerializeField] CanvasGroup blackScreen;
     [SerializeField] StoryPlayer story;
-    [SerializeField] float afterGlowHold = 1.2f;
+    [SerializeField, TextArea(2, 4)] string[] introLines;
+    [SerializeField, TextArea(2, 4)] string[] outroLines;
     [SerializeField] float fadeDuration = 1.2f;
+    [SerializeField] float afterGlowHold = 1.5f;
     [SerializeField] float endHold = 1f;
 
     [Header("사운드")]
@@ -41,15 +44,16 @@ public class TowerRiseCutscene : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-        blackScreen.alpha = 0f;
+        blackScreen.alpha = 1f;
         flash.alpha = 0f;
         SetGlow(0f);
+        tower.Show(idleFrame);
 
         StartCoroutine(PlayRoutine());
     }
 
     private void Update()
-    {
+    { 
         if(finished || !AdvanceInput.WasSkipPressed())
             return;
 
@@ -58,22 +62,32 @@ public class TowerRiseCutscene : MonoBehaviour
 
     private IEnumerator PlayRoutine()
     {
+        yield return story.Play(introLines);
+        yield return Fade(0f);
         yield return new WaitForSecondsRealtime(calmTime);
         yield return Rumble();
         yield return Rise();
         yield return Flash();
         yield return new WaitForSecondsRealtime(afterGlowHold);
-        yield return blackScreen.DOFade(1f, fadeDuration).SetUpdate(true).WaitForCompletion();
-        yield return story.Play();
+        yield return Fade(1f);
+        yield return story.Play(outroLines);
         yield return new WaitForSecondsRealtime(endHold);
 
         Finish();
     }
 
+    private IEnumerator Fade(float target)
+    {
+        yield return blackScreen.DOFade(target, fadeDuration).SetUpdate(true).WaitForCompletion();
+    }
+
     private IEnumerator Rumble()
     {
         PlaySfx(rumbleSfx);
-        towerAnimator.Play(RumbleHash, 0, 0f);
+
+        tower.transform.DOShakePosition(rumbleTime, towerShakeStrength, 40, 90f, false, false)
+            .SetUpdate(true)
+            .SetLink(tower.gameObject);
 
         yield return cameraRoot.DOShakePosition(rumbleTime, rumbleStrength, 30, 90f, false, false)
             .SetUpdate(true)
@@ -84,15 +98,14 @@ public class TowerRiseCutscene : MonoBehaviour
     {
         PlaySfx(quakeSfx);
         SetEffects(true);
-        towerAnimator.Play(RiseHash, 0, 0f);
 
-        yield return null;
+        float length = riseFrames.Length * riseFrameTime;
 
-        float length = towerAnimator.GetCurrentAnimatorStateInfo(0).length;
-
-        yield return cameraRoot.DOShakePosition(length, quakeStrength, 25, 90f, false, true)
+        cameraRoot.DOShakePosition(length, quakeStrength, 25, 90f, false, true)
             .SetUpdate(true)
-            .WaitForCompletion();
+            .SetLink(cameraRoot.gameObject);
+
+        yield return tower.Play(riseFrames, riseFrameTime);
 
         SetEffects(false);
     }
@@ -103,8 +116,8 @@ public class TowerRiseCutscene : MonoBehaviour
 
         yield return flash.DOFade(1f, 0.08f).SetUpdate(true).WaitForCompletion();
 
-        towerAnimator.Play(GlowHash, 0, 0f);
-        SetGlow(glowAlpha);
+        if(abyssGlow != null)
+            abyssGlow.DOFade(glowAlpha, glowFadeTime).SetUpdate(true).SetLink(abyssGlow.gameObject);
 
         yield return flash.DOFade(0f, 0.8f).SetUpdate(true).WaitForCompletion();
     }
@@ -117,6 +130,7 @@ public class TowerRiseCutscene : MonoBehaviour
         finished = true;
         StopAllCoroutines();
         DOTween.Kill(cameraRoot);
+        DOTween.Kill(tower.transform);
         SceneLoader.instance.Load(SceneNames.Village);
     }
 

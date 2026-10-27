@@ -21,10 +21,6 @@ public class StageController : MonoBehaviour
     [SerializeField] HudFader playerHud;
     [SerializeField] HudFader monsterHud;
 
-    [Header("탑 꼭대기")]
-    [SerializeField] int towerTopFloor = 50;
-    [SerializeField] int abyssTopFloor = 100;
-
     [SerializeField] int bossInterval = 10;
     [SerializeField] Transform spawnPoint;
     [SerializeField] BattleController battle;
@@ -45,14 +41,14 @@ public class StageController : MonoBehaviour
     private StageRule rule;
     private StageScaling scaling;
     private UnitController player;
+    private TowerInfo tower;
 
     private int stage;
     private int finalFloor;
-    private bool isAbyssRun;
     private Phase phase;
     private UnitController currentMonster;
     private MonsterInfo currentInfo;
-    private AttackData currentAttack;
+    private MonsterAttackSet currentAttacks;
 
     private void Awake()
     {
@@ -73,8 +69,8 @@ public class StageController : MonoBehaviour
         bool isVeteran = GameSession.instance.BestFloor >= veteranFloor;
         rule = new StageRule(bossInterval, isVeteran);
 
-        isAbyssRun = GameSession.instance.IsAbyssOpen;
-        finalFloor = isAbyssRun ? abyssTopFloor : towerTopFloor;
+        tower = GameSession.instance.CurrentTower;
+        finalFloor = GameSession.instance.Towers.GetFinalFloor(tower);
 
         playerHud.SetInstant(false);
         monsterHud.SetInstant(false);
@@ -85,7 +81,7 @@ public class StageController : MonoBehaviour
         player = runner;
         player.Health.OnDie += HandlePlayerDead;
 
-        planner = new StagePlanner(DataManager.instance.Stages, DataManager.instance.Monsters, bossInterval);
+        planner = new StagePlanner(DataManager.instance.Stages, DataManager.instance.Monsters, bossInterval, tower.Id);
 
         stage = 1;
         phase = Phase.Moving;
@@ -181,7 +177,11 @@ public class StageController : MonoBehaviour
 
         MonsterStats stats = scaling.Apply(info, stage);
         currentMonster.Health.Init(stats.MaxHp);
-        currentAttack = info.Attack.WithDamage(stats.Damage);
+
+        if(currentMonster.Health is IRevivable revivable)
+            revivable.SetRevive(info.ReviveRate);
+        
+        currentAttacks = MonsterAttackSet.Create(info, stats.Damage);
 
         monsterHpbar.Bind(currentMonster.Health);
         monsterHpbar.gameObject.SetActive(info.HpDisplay != HpDisplay.Hidden);
@@ -206,7 +206,7 @@ public class StageController : MonoBehaviour
 
         monsterHud.Show();
         currentMonster.Health.OnDie += HandleMonsterDead;
-        battle.StartBattle(player, currentMonster, currentAttack, currentInfo.IsBoss);
+        battle.StartBattle(player, currentMonster, currentAttacks, currentInfo.IsBoss);
         phase = Phase.Fighting;
     }
 
@@ -223,9 +223,9 @@ public class StageController : MonoBehaviour
         currentMonster.Health.OnDie -= HandleMonsterDead;
         EventManager.instance.PostNotification(new OnMonsterKilled(spawnPoint.position, currentInfo));
 
-        if(stage >= finalFloor && currentInfo.IsBoss)
+        if (stage >= finalFloor && currentInfo.IsBoss)
         {
-            EndRun(isAbyssRun ? RunEndReason.AbyssVictory : RunEndReason.Victory);
+            EndRun(stage >= tower.LastFloor ? RunEndReason.Conquest : RunEndReason.Victory);
             return;
         }
 

@@ -35,9 +35,17 @@ public class ResultView : MonoBehaviour
     private void ReturnToVillage()
     {
         restartButton.interactable = false;
-
-        string next = GameSession.instance.ConsumeTowerRise() ? SceneNames.TowerRise : SceneNames.Village;
-        SceneLoader.instance.Load(next);
+        SceneLoader.instance.Load(GetNextScene(GameSession.instance.ConsumeCutscene()));
+    }
+    private static string GetNextScene(CutsceneKind kind)
+    {
+        switch(kind)
+        {
+            case CutsceneKind.AbyssRise:
+                return SceneNames.TowerRise;
+            default:
+                return SceneNames.Village;
+        }
     }
 
     private void Show(RunEndReason reason, int stage)
@@ -55,9 +63,9 @@ public class ResultView : MonoBehaviour
             case RunEndReason.Death:
                 return "쓰러졌다...";
             case RunEndReason.Victory:
-                return "고대 용을 쓰러뜨렸다!";
-            case RunEndReason.AbyssVictory:
-                return "심연의 끝에 닿았다!";
+                return "정상의 주인을 쓰러뜨렸다!";
+            case RunEndReason.Conquest:
+                return $"{GameSession.instance.CurrentTower.Name}이 무너진다...";
             default:
                 return "안전 귀환 성공!";
         }

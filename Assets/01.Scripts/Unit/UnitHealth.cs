@@ -16,6 +16,7 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
 
 
     private bool isDead;
+    protected virtual bool IsInvulnerable => false;
     public bool IsDead => isDead;
 
     public event Action<DamageInfo> OnHit;
@@ -41,7 +42,7 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
     }
     public void TakeDamage(DamageInfo info)
     {
-        if(isDead || info.Amount <= 0)
+        if(isDead || info.Amount <= 0 || IsInvulnerable)
             return;
 
         if(shieldCount > 0 && !info.IsTick)
@@ -56,6 +57,9 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
         OnHpChanged?.Invoke(nowHP, maxHP);
 
         if(nowHP > 0)
+            return;
+
+        if(TryCheatDeath())
             return;
 
         isDead = true;
@@ -95,5 +99,15 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
     public void ClearShield()
     {
         shieldCount = 0;
+    }
+    protected virtual bool TryCheatDeath()
+    {
+        return false;
+    }
+
+    protected void ReviveTo(int hp)
+    {
+        nowHP = Mathf.Clamp(hp, 1, maxHP);
+        OnHpChanged?.Invoke(nowHP, maxHP);
     }
 }

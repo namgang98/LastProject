@@ -13,13 +13,17 @@ public class ClassCardView : MonoBehaviour
 
     [Header("잠금")]
     [SerializeField] GameObject lockMark;
+    [SerializeField] GameObject fallenMark;
     [SerializeField] TextMeshProUGUI statusText;
     [SerializeField] Color lockedTint = new(0.25f, 0.25f, 0.25f, 1f);
+    [SerializeField] Color fallenTint = new(0.55f, 0.55f, 0.6f, 1f);
+
 
     public ClassInfo Info { get; private set; }
+    public ClassAvailability State { get; private set; }
+    public bool IsLocked => State != ClassAvailability.Available;
+    
     public event Action<ClassCardView> Clicked;
-
-    public bool IsLocked { get; private set; }
 
     private void Awake()
     {
@@ -50,12 +54,29 @@ public class ClassCardView : MonoBehaviour
         return renderer != null ? renderer.sprite : null;
     }
 
-    public void SetStatus(string status, bool locked)
+    public void SetState(ClassAvailability state, string status)
     {
-        IsLocked = locked;
+        State = state;
         statusText.text = status;
-        lockMark.SetActive(locked);
-        portrait.color = locked ? lockedTint : Color.white;
+        lockMark.SetActive(state == ClassAvailability.Locked);
+
+        if(fallenMark != null)
+            fallenMark.SetActive(state == ClassAvailability.Fallen);
+
+        portrait.color = GetTint(state);
+    }
+
+    private Color GetTint(ClassAvailability state)
+    {
+        switch(state)
+        {
+            case ClassAvailability.Locked:
+                return lockedTint;
+            case ClassAvailability.Fallen:
+                return fallenTint;
+            default:
+                return Color.white;
+        }
     }
 
     private static string BuildDescription(ClassInfo info)

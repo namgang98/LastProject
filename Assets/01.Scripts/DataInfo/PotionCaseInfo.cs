@@ -17,7 +17,7 @@ public class PotionCaseInfo : ContainerInfo
 
     public override void AppendTooltip(StringBuilder sb)
     {
-        sb.AppendLine($"물약 {Slots}병 보관 · 클릭해서 열기");
+        sb.AppendLine($"물약 {Slots}병 보관 · 클릭해서 열기 · 칸을 눌러 꺼내기");
         sb.Append($"판매금액 : {SellPrice}G");
     }
 }

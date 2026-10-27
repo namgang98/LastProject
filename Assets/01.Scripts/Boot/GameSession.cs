@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameSession : Singleton<GameSession>, IMaterialStorage
+public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestContext
 {
     private const string SaveFileName = "save.json";
 
@@ -32,11 +32,28 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
     public Wallet Wallet { get; private set; }
     public QuestBook Quests { get; private set; }
     public ForgeService Forge { get; private set; }
+
+    private readonly List<ForgeableInstance> forgeBuffer = new();
     public int BestFloor => Training.BestFloor;
-    public int ClearCount => saveData.clearCount;
-    public int AbyssClearCount => saveData.abyssClearCount;
-    public bool IsAbyssOpen => saveData.clearCount > 0;
-    public bool HasPendingTowerRise { get; private set; }
+    public int MaxForgeLevel
+    {
+        get
+        {
+            CollectForgeables(forgeBuffer);
+            int max = 0;
+
+            foreach(ForgeableInstance item in forgeBuffer)
+            {
+                max = Mathf.Max(max, item.Level);
+            }
+
+            return max;
+        }
+    }
+    public TowerProgress Towers { get; private set; }
+    public TowerInfo CurrentTower { get; private set; }
+    public CutsceneKind PendingCutscene { get; private set; }
+
     public bool TryLoad()
     {
         saveService = new SaveService(new FileSaveStorage(SaveFileName));
@@ -61,6 +78,8 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
         LoadChest();
         LoadShop();
         LoadTraining();
+        LoadTowers();
+        EnsurePlayableClass();
         LoadQuests();
         Forge = new ForgeService(DataManager.instance.Forge, () => Favor.GetRate(NpcType.Blacksmith));
 
@@ -78,7 +97,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
     }
     public void FinishRun(RunEndReason reason)
     {
-        if(reason == RunEndReason.Death)
+        if (reason == RunEndReason.Death)
         {
             LoseBackpack();
             Wallet.LoseRun();
@@ -88,26 +107,50 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
             Wallet.CommitRun();
         }
 
-        if(reason == RunEndReason.Victory)
-        {
-            saveData.clearCount++;
-            HasPendingTowerRise = true;
-        }
+        if (reason == RunEndReason.Victory)
+            HandleTopReached();
 
-        if(reason == RunEndReason.AbyssVictory)
-            saveData.abyssClearCount++;
+        if (reason == RunEndReason.Conquest)
+            HandleConquest();
 
         Shop.Restock();
         Save(false);
     }
-
-    public bool ConsumeTowerRise()
+    private void HandleTopReached()
     {
-        if(!HasPendingTowerRise)
-            return false;
+        saveData.clearCount++;
 
-        HasPendingTowerRise = false;
-        return true;
+        if (Towers.MarkCleared(CurrentTower))
+            PendingCutscene = CutsceneKind.AbyssRise;
+    }
+
+    private void HandleConquest()
+    {
+        saveData.abyssClearCount++;
+        PendingCutscene = ToCutscene(Towers.Conquer(CurrentTower, CurrentClass));
+        EnsurePlayableClass();
+    }
+
+    private static CutsceneKind ToCutscene(ConquestResult result)
+    {
+        switch (result)
+        {
+            case ConquestResult.Collapsed:
+                return CutsceneKind.Collapse;
+            case ConquestResult.TowersRisen:
+                return CutsceneKind.TowersRise;
+            case ConquestResult.Ending:
+                return CutsceneKind.Ending;
+            default:
+                return CutsceneKind.None;
+        }
+    }
+
+    public CutsceneKind ConsumeCutscene()
+    {
+        CutsceneKind kind = PendingCutscene;
+        PendingCutscene = CutsceneKind.None;
+        return kind;
     }
 
     public void RefreshGold()
@@ -239,6 +282,8 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
         saveData.classId = CurrentClass.Id;
         saveData.gold = Wallet.Gold;
         Training.WriteTo(saveData);
+        Towers.WriteTo(saveData);
+        saveData.towerId = CurrentTower != null ? CurrentTower.Id : 0;
         Quests.WriteTo(saveData.quests);
         saveData.inRun = inRun;
         saveData.backpack = InventorySaveMapper.ToData(Backpack);
@@ -378,7 +423,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
 
     private void LoadQuests()
     {
-        Quests = new QuestBook(DataManager.instance.Quests, saveData.quests, () => Training.BestFloor, CountItem);
+        Quests = new QuestBook(DataManager.instance.Quests, saveData.quests, this);
     }
     public int CountItem(int itemId)
     {
@@ -471,6 +516,56 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage
         {
             if(item is ForgeableInstance forged)
                 results.Add(forged);
+        }
+    }
+    private void LoadTowers()
+    {
+        DataManager data = DataManager.instance;
+        Towers = new TowerProgress(data.Towers, data.PrologueTower, saveData);
+
+        if (Towers.TryGetTower(saveData.towerId, out TowerInfo saved) && Towers.CanEnter(saved))
+        {
+            CurrentTower = saved;
+            return;
+        }
+
+        CurrentTower = data.PrologueTower;
+    }
+
+    public void SelectTower(TowerInfo tower)
+    {
+        if (tower == null || !Towers.CanEnter(tower))
+            return;
+
+        CurrentTower = tower;
+    }
+
+    public ClassAvailability GetAvailability(ClassInfo info)
+    {
+        if (Towers.IsFallen(info))
+            return ClassAvailability.Fallen;
+
+        if (!Training.IsUnlocked(info))
+            return ClassAvailability.Locked;
+
+        return ClassAvailability.Available;
+    }
+
+    private void EnsurePlayableClass()
+    {
+        if (GetAvailability(CurrentClass) == ClassAvailability.Available)
+            return;
+
+        var classes = new List<ClassInfo>(DataManager.instance.Classes);
+        classes.Sort((a, b) => a.Id.CompareTo(b.Id));
+
+        foreach (ClassInfo info in classes)
+        {
+            if (GetAvailability(info) != ClassAvailability.Available)
+                continue;
+
+            CurrentClass = info;
+            return;
         }
     }
 }

@@ -80,4 +80,8 @@ public class Chest
     {
         return item.Info.Shape.GetRotatedCells(0).Count;
     }
+    public bool Owns(GridContainer grid)
+    {
+        return grid != null && tabs.Contains(grid);
+    }
 }

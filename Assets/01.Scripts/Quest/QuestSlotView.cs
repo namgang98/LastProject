@@ -29,7 +29,7 @@ public class QuestSlotView : MonoBehaviour
 
         QuestInfo info = quest.Info;
         int current = book.GetCurrent(quest);
-        int goal = info.Type == QuestType.ReachFloor ? info.Target : info.Count;
+        int goal = info.Goal;
         bool ready = book.IsReady(quest);
 
         nameText.text = info.Name;

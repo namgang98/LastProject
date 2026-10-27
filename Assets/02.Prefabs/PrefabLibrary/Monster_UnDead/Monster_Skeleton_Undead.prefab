@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4938383351904956684}
   - component: {fileID: 5298900670328566970}
   - component: {fileID: 4233939990517876920}
+  - component: {fileID: 4937250217647388618}
   m_Layer: 0
   m_Name: Monster_Skeleton_Undead
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MonoBehaviour:
   headPoint: {fileID: 4054663985496077969}
   attackWindup: 0.3
   attackSfx: 502
+  skillSfx: 0
 --- !u!114 &7865922752572778353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +164,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4937250217647388618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881761834679181887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e07b09a0b7cfbd42816b58b3454eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReviveEffect
+  health: {fileID: 7865922752572778353}
+  body: {fileID: 5298900670328566970}
+  flashColor: {r: 0.6, g: 0.4, b: 1, a: 1}
+  flashTime: 0.12
+  flashCount: 3
+  punchScale: 0.15
+  soulBurst: {fileID: 0}
+  reviveSfx: 0
 --- !u!1 &3312404788955451706
 GameObject:
   m_ObjectHideFlags: 0

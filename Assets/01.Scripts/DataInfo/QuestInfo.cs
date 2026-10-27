@@ -3,7 +3,8 @@
     ReachFloor,
     Kill,
     KillBoss,
-    Deliver
+    Deliver,
+    ForgeLevel
 }
 
 public class QuestInfo
@@ -42,6 +43,8 @@ public class QuestInfo
     }
 
     public bool HasRewardItem => RewardItem != null && RewardCount > 0;
+    public bool UsesTargetAsGoal => Type == QuestType.ReachFloor || Type == QuestType.ForgeLevel;
+    public int Goal => UsesTargetAsGoal ? Target : Count;
 
     internal void SetRewardItem(ItemInfo item)
     {

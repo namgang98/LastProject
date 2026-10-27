@@ -122,14 +122,21 @@ public class TrainingUI : MonoBehaviour
 
     private void RefreshCards()
     {
-        foreach(var card in cards)
+        TowerProgress towers = GameSession.instance.Towers;
+
+        foreach (var card in cards)
         {
             ClassInfo info = card.Info;
+            bool fallen = towers.IsFallen(info);
+            card.gameObject.SetActive(!fallen);
 
-            if(training.IsUnlocked(info))
-                card.SetStatus($"Lv.{training.GetProgress(info).Level}", false);
+            if (fallen)
+                continue;
+
+            if (training.IsUnlocked(info))
+                card.SetState(ClassAvailability.Available, $"Lv.{training.GetProgress(info).Level}");
             else
-                card.SetStatus($"{info.UnlockFloor}층 도달", true);
+                card.SetState(ClassAvailability.Locked, $"{info.UnlockFloor}층 도달");
         }
     }
 
@@ -148,13 +155,21 @@ public class TrainingUI : MonoBehaviour
 
     private ClassCardView Find(ClassInfo info)
     {
+        ClassCardView first = null;
+
         foreach(var card in cards)
         {
+            if(!card.gameObject.activeSelf)
+                continue;
+
             if(card.Info == info)
                 return card;
+
+            if(first == null)
+                first = card;
         }
 
-        return cards.Count > 0 ? cards[0] : null;
+        return first;
     }
     #endregion
 

@@ -126,6 +126,13 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if(eventData.dragging || Item == null)
             return;
 
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            EventManager.instance.PostNotification(new OnItemHoverExit());
+            EventManager.instance.PostNotification(new OnItemQuickMove(Item));
+            return;
+        }
+
         EventManager.instance.PostNotification(new OnItemClicked(Item));
     }
     private void OnDisable()

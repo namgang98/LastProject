@@ -65,6 +65,13 @@ public static class CSVStamp
     public const string MaxFloor = "maxfloor";
     public const string Ambience = "ambience";
     public const string HpDisplay = "hpdisplay";
+    public const string SkillChance = "skillchance";
+    public const string SkillMultiplier = "skillmultiplier";
+    public const string Revive = "revive";
+    public const string Tower = "tower";
+    public const string TopFloor = "topfloor";
+    public const string AbyssFloor = "abyssfloor";
+    public const string Prologue = "prologue";
 
     public const string Target = "target";
     public const string RewardItem = "rewarditem";
@@ -102,6 +109,7 @@ public static class DataTag
     public const string Stages = "stages";
     public const string Quests = "quests";
     public const string Forge = "forge";
+    public const string Towers = "towers";
 }
 #endregion
 
@@ -110,6 +118,7 @@ public static class AnimatorTag
 {
     public const string Idle = "Idle";
     public const string Attack = "Attack";
+    public const string Attack2 = "Attack2";
     public const string Hurt = "Hurt";
     public const string Death = "Death";
     public const string Walk = "Walk";

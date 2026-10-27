@@ -8,13 +8,14 @@ public class StagePlanner
     private readonly int blockSize;
     private readonly Dictionary<int, StageInfo> picked = new();
     private readonly List<StageInfo> candidates = new();
-
-    public StagePlanner(IReadOnlyList<StageInfo> stages, IEnumerable<MonsterInfo> monsters, int blockSize)
+    private readonly int towerId;
+    public StagePlanner(IReadOnlyList<StageInfo> stages, IEnumerable<MonsterInfo> monsters, int blockSize, int towerId)
     {
         this.stages = stages;
         this.blockSize = Mathf.Max(1, blockSize);
+        this.towerId = towerId;
 
-        foreach(MonsterInfo monster in monsters)
+        foreach (MonsterInfo monster in monsters)
         {
             if(monster.IsBoss)
                 allBosses.Add(monster);
@@ -64,11 +65,11 @@ public class StagePlanner
 
         foreach(StageInfo stage in stages)
         {
-            if(stage.IsAvailable(startFloor) && stage != previous)
+            if(stage.IsAvailable(towerId, startFloor) && stage != previous)
                 candidates.Add(stage);
         }
 
-        if(candidates.Count == 0 && previous != null && previous.IsAvailable(startFloor))
+        if(candidates.Count == 0 && previous != null && previous.IsAvailable(towerId, startFloor))
             candidates.Add(previous);
 
         if(candidates.Count == 0)

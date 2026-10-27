@@ -38,7 +38,7 @@ public class BattleController : MonoBehaviour
         statuses.Tick(Time.deltaTime);
     }
 
-    public void StartBattle(UnitController player, UnitController monster, AttackData monsterAttack, bool isBoss)
+    public void StartBattle(UnitController player, UnitController monster, MonsterAttackSet monsterAttacks, bool isBoss)
     {
         if(isFighting)
             EndBattle();
@@ -79,7 +79,7 @@ public class BattleController : MonoBehaviour
             OnActionReady?.Invoke(item, action);
         }
 
-        AddAction(new AttackEffect(player.Health, monsterAttack, statuses), monsterAttack.Cooldown, monster.AttackWindup, monster.Health, monster.PlayAttack);
+        AddMonsterAction(monsterAttacks);
 
         this.player.Health.OnDie += EndBattle;
         this.monster.Health.OnDie += EndBattle;
@@ -118,5 +118,24 @@ public class BattleController : MonoBehaviour
 
         actions.Add(action);
         return action;
+    }
+    private void AddMonsterAction(MonsterAttackSet attacks)
+    {
+        IBattleEffect normal = new AttackEffect(player.Health, attacks.Normal, statuses);
+        IBattleEffect skill = attacks.HasSkill ? new AttackEffect(player.Health, attacks.Skill, statuses) : null;
+        MonsterAttackPattern pattern = new MonsterAttackPattern(normal, skill, attacks.SkillChance);
+
+        AddAction(pattern, attacks.Normal.Cooldown, monster.AttackWindup, monster.Health, () => PlayMonsterAttack(pattern));
+    }
+
+    private void PlayMonsterAttack(MonsterAttackPattern pattern)
+    {
+        if(pattern.Prepare())
+        {
+            monster.PlaySkill();
+            return;
+        }
+
+        monster.PlayAttack();
     }
 }

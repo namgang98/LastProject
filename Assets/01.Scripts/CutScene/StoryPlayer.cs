@@ -1,14 +1,14 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StoryPlayer : MonoBehaviour
 {
     [SerializeField] TypewriterText typewriter;
     [SerializeField] GameObject nextIndicator;
-    [SerializeField, TextArea(2, 4)] string[] lines;
     [SerializeField] float autoAdvanceDelay = 0f;
 
-    public IEnumerator Play()
+    public IEnumerator Play(IReadOnlyList<string> lines)
     {
         typewriter.Clear();
 
@@ -18,6 +18,7 @@ public class StoryPlayer : MonoBehaviour
         }
 
         SetIndicator(false);
+        typewriter.Clear();
     }
 
     private IEnumerator PlayLine(string line)

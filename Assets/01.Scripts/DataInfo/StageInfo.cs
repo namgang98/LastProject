@@ -11,6 +11,7 @@ public class StageInfo
     public int MinFloor { get; }
     public int MaxFloor { get; }
     public string AmbienceName { get; }
+    public int TowerId { get; private set; }
 
     private readonly List<MonsterInfo> monsters = new();
     public IReadOnlyList<MonsterInfo> Monsters => monsters;
@@ -18,7 +19,7 @@ public class StageInfo
     public Sprite Background { get; private set; }
     public GameObject AmbiencePrefab { get; private set; }
 
-    public StageInfo(int id, string name, string backgroundName, List<int> monsterIds, int bossId, int minFloor, int maxFloor = int.MaxValue, string ambienceName = "")
+    public StageInfo(int id, string name, string backgroundName, List<int> monsterIds, int bossId, int minFloor, int maxFloor = int.MaxValue, string ambienceName = "", int towerId = 0)
     {
         Id = id;
         Name = name;
@@ -28,16 +29,22 @@ public class StageInfo
         MinFloor = minFloor;
         MaxFloor = maxFloor;
         AmbienceName = ambienceName;
+        TowerId = towerId;
     }
 
-    public bool IsAvailable(int floor)
+    public bool IsAvailable(int towerId, int floor)
     {
-        return floor >= MinFloor && floor <= MaxFloor && monsters.Count > 0;
+        return towerId == TowerId && floor >= MinFloor && floor <= MaxFloor && monsters.Count > 0;
     }
 
     internal void AddMonster(MonsterInfo monster)
     {
         monsters.Add(monster);
+    }
+
+    internal void SetTower(int towerId)
+    {
+        TowerId = towerId;
     }
 
     internal void SetBoss(MonsterInfo boss)

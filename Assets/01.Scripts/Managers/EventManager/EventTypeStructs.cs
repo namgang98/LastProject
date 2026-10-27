@@ -64,7 +64,7 @@ public enum RunEndReason
     Death,
     Return,
     Victory,
-    AbyssVictory,
+    Conquest,
 }
 public struct OnRunEnded : IGameEvent
 {
@@ -126,7 +126,15 @@ public struct OnItemHoverEnter : IGameEvent
     }
 }
 public struct OnItemHoverExit : IGameEvent {}
+public struct OnItemQuickMove : IGameEvent
+{
+    public ItemInstance Item;
 
+    public OnItemQuickMove(ItemInstance item)
+    {
+        Item = item;
+    }
+}
 public struct OnStatusApplied : IGameEvent
 {
     public UnitHealth Target;
@@ -192,5 +200,15 @@ public struct OnPopupCountChanged : IGameEvent
     public OnPopupCountChanged(int count)
     {
         Count = count;
+    }
+}
+
+public struct OnUnitRevived : IGameEvent
+{
+    public Vector3 Position;
+
+    public OnUnitRevived(Vector3 pos)
+    {
+        Position = pos;
     }
 }

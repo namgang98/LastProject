@@ -9,6 +9,10 @@ public abstract class UnitAnimator : MonoBehaviour
         animator.ResetTrigger(AnimatorTag.Hurt);
         animator.SetTrigger(AnimatorTag.Attack);
     }
+    public virtual void SkillAni()
+    {
+        AttackAni();
+    }
     public virtual void HurtAni()
     {
         animator.SetTrigger(AnimatorTag.Hurt);

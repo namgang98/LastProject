@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1935057635139188295}
   - component: {fileID: 2015353810843143190}
   - component: {fileID: 4015390460806599207}
+  - component: {fileID: 549731060812227037}
   m_Layer: 0
   m_Name: Monster_SporeMother_Undead
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MonoBehaviour:
   headPoint: {fileID: 7897299789461663855}
   attackWindup: 0.3
   attackSfx: 500
+  skillSfx: 0
 --- !u!114 &3748023692672963359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +164,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &549731060812227037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2260059848270852755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e07b09a0b7cfbd42816b58b3454eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReviveEffect
+  health: {fileID: 3748023692672963359}
+  body: {fileID: 2015353810843143190}
+  flashColor: {r: 0.6, g: 0.4, b: 1, a: 1}
+  flashTime: 0.12
+  flashCount: 3
+  punchScale: 0.15
+  soulBurst: {fileID: 0}
+  reviveSfx: 0
 --- !u!1 &2756661440761328027
 GameObject:
   m_ObjectHideFlags: 0

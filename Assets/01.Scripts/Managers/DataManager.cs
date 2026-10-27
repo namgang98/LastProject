@@ -35,6 +35,7 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange StageIds = new(9500, 9599);
     private static readonly IdRange QuestIds = new(9600, 9699);
     private static readonly IdRange ForgeIds = new(9700, 9799);
+    private static readonly IdRange TowerIds = new(9800, 9899);
 
     #endregion
 
@@ -59,6 +60,7 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset stageCsv;
     [SerializeField] TextAsset questCsv;
     [SerializeField] TextAsset forgeCsv;
+    [SerializeField] TextAsset towerCsv;
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
     [SerializeField] PrefabLibrary prefabLibrary;
@@ -78,6 +80,7 @@ public class DataManager : Singleton<DataManager>
     private readonly List<StageInfo> stages = new();
     private readonly Dictionary<int, QuestInfo> quests = new();
     private readonly ForgeTable forge = new();
+    private readonly List<TowerInfo> towers = new();
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
@@ -93,6 +96,8 @@ public class DataManager : Singleton<DataManager>
     public IReadOnlyList<StageInfo> Stages => stages;
     public IReadOnlyCollection<QuestInfo> Quests => quests.Values;
     public ForgeTable Forge => forge;
+    public IReadOnlyList<TowerInfo> Towers => towers;
+    public TowerInfo PrologueTower { get; private set; }
     #endregion
 
     #region 초기화
@@ -133,6 +138,7 @@ public class DataManager : Singleton<DataManager>
         string stageText = ReadText(stageCsv, nameof(stageCsv));
         string questText = ReadText(questCsv, nameof(questCsv));
         string forgeText = ReadText(forgeCsv, nameof(forgeCsv));
+        string towerText = ReadText(towerCsv, nameof(towerCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -158,6 +164,7 @@ public class DataManager : Singleton<DataManager>
         List<StageInfo> stageList = ParseTable<StageInfo>(DataTag.Stages, stageText, errors, InfoParser.TryParseStage);
         List<QuestInfo> questList = ParseTable<QuestInfo>(DataTag.Quests, questText, errors, InfoParser.TryParseQuest);
         List<ForgeLevelInfo> forgeList = ParseTable<ForgeLevelInfo>(DataTag.Forge, forgeText, errors, InfoParser.TryParseForge);
+        List<TowerInfo> towerList = ParseTable<TowerInfo>(DataTag.Towers, towerText, errors, InfoParser.TryParseTower);
         #endregion
 
         //메인 스레드
@@ -191,9 +198,10 @@ public class DataManager : Singleton<DataManager>
         RegisterUpgrades(DataTag.Upgrades, upgradeList, UpgradeIds, errors);
         RegisterTrainingStats(DataTag.TrainingStats, trainingStatList, errors);
         RegisterShopStocks(DataTag.ShopStock, shopStockList, errors);
+        RegisterTowers(DataTag.Towers, towerList, TowerIds, errors);
         RegisterStages(DataTag.Stages, stageList, StageIds, errors);
-        RegisterQuests(DataTag.Quests, questList, QuestIds, errors);
         RegisterForge(DataTag.Forge, forgeList, ForgeIds, errors);
+        RegisterQuests(DataTag.Quests, questList, QuestIds, errors);
         #endregion
 
         foreach(var error in errors)
@@ -514,6 +522,15 @@ public class DataManager : Singleton<DataManager>
                 continue;
             }
 
+            if(info.TowerId == 0 && PrologueTower != null)
+                info.SetTower(PrologueTower.Id);
+
+            if(!TryGetTower(info.TowerId, out _))
+            {
+                errors.Add($"{sheetName} : 지역 {info.Name} 의 탑 {info.TowerId} 가 없습니다 → 지역 무시");
+                continue;
+            }
+
             foreach(int monsterId in info.MonsterIds)
             {
                 if(!monsters.TryGetValue(monsterId, out MonsterInfo monster) || monster.IsBoss)
@@ -546,6 +563,42 @@ public class DataManager : Singleton<DataManager>
 
             stages.Add(info);
         }
+    }
+
+    private void RegisterTowers(string sheetName, List<TowerInfo> list, IdRange range, List<string> errors)
+    {
+        foreach(TowerInfo info in list)
+        {
+            if(!range.Contains(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} ({info.Name}) 가 구간 {range.Min}~{range.Max} 밖입니다");
+                continue;
+            }
+
+            if(TryGetTower(info.Id, out _))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            if(info.IsPrologue)
+            {
+                if(PrologueTower != null)
+                {
+                    errors.Add($"{sheetName} : 첫 탑이 여러 개입니다 ({PrologueTower.Name} / {info.Name}) → {info.Name} 무시");
+                    continue;
+                }
+
+                PrologueTower = info;
+            }
+
+            towers.Add(info);
+        }
+
+        towers.Sort((a, b) => a.Id.CompareTo(b.Id));
+
+        if(PrologueTower == null)
+            errors.Add($"{sheetName} : prologue 가 1 인 첫 탑이 없습니다");
     }
 
     private void RegisterForge(string sheetName, List<ForgeLevelInfo> list, IdRange range, List<string> errors)
@@ -635,6 +688,9 @@ public class DataManager : Singleton<DataManager>
         if(info.Type == QuestType.Deliver)
             return items.ContainsKey(info.Target);
 
+        if(info.Type == QuestType.ForgeLevel)
+            return info.Target <= forge.MaxLevel;
+
         if(info.Type == QuestType.ReachFloor || info.Target == 0)
             return true;
 
@@ -699,6 +755,21 @@ public class DataManager : Singleton<DataManager>
             return sprite;
 
         return null;
+    }
+
+    public bool TryGetTower(int id, out TowerInfo info)
+    {
+        foreach(TowerInfo tower in towers)
+        {
+            if(tower.Id != id)
+                continue;
+
+            info = tower;
+            return true;
+        }
+
+        info = null;
+        return false;
     }
 
     public bool TryGetQuest(int id, out QuestInfo info)

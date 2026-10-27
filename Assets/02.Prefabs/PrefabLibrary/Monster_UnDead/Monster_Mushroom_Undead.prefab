@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1349438628986719470}
   - component: {fileID: 3858138038293816911}
   - component: {fileID: 130451767587184410}
+  - component: {fileID: 3673224611307582030}
   m_Layer: 0
   m_Name: Monster_Mushroom_Undead
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MonoBehaviour:
   headPoint: {fileID: 4554747625782234598}
   attackWindup: 0.3
   attackSfx: 501
+  skillSfx: 0
 --- !u!114 &6128793997067150665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +164,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3673224611307582030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015551902316359095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e07b09a0b7cfbd42816b58b3454eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReviveEffect
+  health: {fileID: 6128793997067150665}
+  body: {fileID: 3858138038293816911}
+  flashColor: {r: 0.6, g: 0.4, b: 1, a: 1}
+  flashTime: 0.12
+  flashCount: 3
+  punchScale: 0.15
+  soulBurst: {fileID: 0}
+  reviveSfx: 0
 --- !u!1 &6940743462327760316
 GameObject:
   m_ObjectHideFlags: 0

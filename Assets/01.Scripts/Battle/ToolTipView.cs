@@ -47,6 +47,10 @@ public class ToolTipView : MonoBehaviour
         sb.Clear();
         info.AppendTooltip(sb);
         e.Item.AppendStateTooltip(sb);
+        
+        if(GameSession.HasInstance && GameSession.instance.Quests != null)
+            GameSession.instance.Quests.AppendItemNeeds(info.Id, sb);
+        
         if(backpack != null)
             SetTooltipWriter.Append(sb, info, SetCounter.CollectEquippedIds(backpack));
         infoText.text = sb.ToString();

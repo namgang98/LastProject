@@ -20,6 +20,11 @@ public class SaveData
     public List<int> unlockedClasses = new();
     public List<ClassProgressSaveData> classProgress = new();
     public List<QuestSaveData> quests = new();
+
+    public int towerId;
+    public List<int> clearedTowers = new();
+    public List<int> collapsedTowers = new();
+    public List<int> fallenClasses = new();
 }
 
 [Serializable]

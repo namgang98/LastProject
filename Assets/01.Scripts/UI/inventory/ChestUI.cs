@@ -43,6 +43,7 @@ public class ChestUI : MonoBehaviour
     {
         EventManager.instance.AddListener<OnBackpackChanged>(HandleBackpackChanged);
         EventManager.instance.AddListener<OnChestExpanded>(HandleChestExpanded);
+        EventManager.instance.AddListener<OnItemQuickMove>(HandleQuickMove);
     }
 
     private void OnDisable()
@@ -51,6 +52,7 @@ public class ChestUI : MonoBehaviour
             return;
         EventManager.instance.RemoveListener<OnBackpackChanged>(HandleBackpackChanged);
         EventManager.instance.RemoveListener<OnChestExpanded>(HandleChestExpanded);
+        EventManager.instance.RemoveListener<OnItemQuickMove>(HandleQuickMove);
     }
 
     public void Open()
@@ -111,6 +113,22 @@ public class ChestUI : MonoBehaviour
             return;
 
         RefreshTabButtons();
+    }
+    private void HandleQuickMove(OnItemQuickMove e)
+    {
+        if(!popup.activeSelf || e.Item.Owner == null)
+            return;
+
+        Backpack backpack = GameSession.instance.Backpack;
+        bool moved = chest.Owns(e.Item.Owner) ? ItemTransfer.ToBackpack(backpack, e.Item) : ItemTransfer.ToChest(chest, e.Item, currentTab);
+
+        if(!moved)
+        {
+            EventManager.instance.PostNotification(new OnFeedback("옮길 빈자리가 없습니다"));
+            return;
+        }
+
+        GameSession.instance.SaveInVillage();
     }
     public void StoreAll()
     {

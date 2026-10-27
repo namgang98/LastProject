@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 public enum QuestClaimResult
 {
     Ok,
@@ -12,14 +13,14 @@ public class QuestBook
     private readonly List<QuestProgress> list = new();
     private readonly Func<int> bestFloor;
     private readonly Func<int, int> countItem;
+    private readonly IQuestContext context;
 
     public IReadOnlyList<QuestProgress> All => list;
     public event Action Changed;
 
-    public QuestBook(IEnumerable<QuestInfo> infos, List<QuestSaveData> saved, Func<int> bestFloor, Func<int, int> countItem)
+    public QuestBook(IEnumerable<QuestInfo> infos, List<QuestSaveData> saved, IQuestContext context)
     {
-        this.bestFloor = bestFloor;
-        this.countItem = countItem;
+        this.context = context;
 
         var savedTable = new Dictionary<int, QuestSaveData>();
 
@@ -55,9 +56,11 @@ public class QuestBook
         switch(quest.Info.Type)
         {
             case QuestType.ReachFloor:
-                return bestFloor() >= quest.Info.Target;
+                return context.BestFloor >= quest.Info.Target;
+            case QuestType.ForgeLevel:
+                return context.MaxForgeLevel >= quest.Info.Target;
             case QuestType.Deliver:
-                return countItem(quest.Info.Target) >= quest.Info.Count;
+                return context.CountItem(quest.Info.Target) >= quest.Info.Count;
             default:
                 return quest.Progress >= quest.Info.Count;
         }
@@ -68,9 +71,11 @@ public class QuestBook
         switch(quest.Info.Type)
         {
             case QuestType.ReachFloor:
-                return Math.Min(bestFloor(), quest.Info.Target);
+                return Math.Min(context.BestFloor, quest.Info.Target);
+            case QuestType.ForgeLevel:
+                return Math.Min(context.MaxForgeLevel, quest.Info.Target);
             case QuestType.Deliver:
-                return Math.Min(countItem(quest.Info.Target), quest.Info.Count);
+                return Math.Min(context.CountItem(quest.Info.Target), quest.Info.Count);
             default:
                 return quest.Progress;
         }
@@ -152,5 +157,17 @@ public class QuestBook
         }
 
         return false;
+    }
+
+    public void AppendItemNeeds(int itemId, StringBuilder sb)
+    {
+        foreach(QuestProgress quest in list)
+        {
+            if(quest.Info.Type != QuestType.Deliver || quest.Info.Target != itemId || !IsVisible(quest))
+                continue;
+
+            sb.AppendLine();
+            sb.Append($"<color=#E8C66A>퀘스트 · {quest.Info.Name} ({GetCurrent(quest)}/{quest.Info.Count})</color>");
+        }
     }
 }

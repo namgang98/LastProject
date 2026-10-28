@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class RunController : MonoBehaviour
+public class RunController : MonoBehaviour, IPlayerStatsSource
 {
     [SerializeField] InventoryUI ui;
     [SerializeField] BattleController battle;
@@ -11,7 +11,14 @@ public class RunController : MonoBehaviour
     private UnitController player;
     [SerializeField] ToolTipView toolTip;
     [SerializeField] HpBarView playerHpBar;
+    [SerializeField] BlessingRewardController blessingReward;
+    [SerializeField] ItemDropper dropper;
+    private RunBlessings blessings;
+    private IStatModifier training;
     public Backpack CurrentBackpack => GameSession.instance.Backpack;
+    public Backpack Backpack => GameSession.instance.Backpack;
+    public RunBlessings Blessings => blessings;
+
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnRunEnded>(HandleRunEnded);
@@ -26,6 +33,13 @@ public class RunController : MonoBehaviour
         EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);
         EventManager.instance.RemoveListener<OnStageStarted>(HandleStageStarted);
     }
+    private void OnDestroy()
+    {
+        if(blessings == null)
+            return;
+
+        blessings.Changed -= HandleBlessingChanged;
+    }
     private void Start()
     {
         GameSession session = GameSession.instance;
@@ -35,9 +49,16 @@ public class RunController : MonoBehaviour
 
 
         ui.Bind(session.Backpack);
-        IStatModifier training = session.Training.GetBonus(session.CurrentClass);
-        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training);
-        battle.Bind(session.Backpack, session.CurrentClass, training);
+        training = session.Training.GetBonus(session.CurrentClass);
+        blessings = new RunBlessings();
+        blessings.Changed += HandleBlessingChanged;
+        blessingReward.Bind(blessings);
+        battle.SetRunBonus(blessings);
+        stage.SetRunBonus(blessings);
+        dropper.SetRunBonus(blessings);
+
+        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings);
+        battle.Bind(session.Backpack, session.CurrentClass, training, blessings);
         toolTip.Bind(session.Backpack);
         playerHpBar.Bind(player.Health);
         playerStatusIcons.Bind(player);
@@ -69,5 +90,31 @@ public class RunController : MonoBehaviour
     private void HandleStageStarted(OnStageStarted e)
     {
         GameSession.instance.Training.ReportFloor(e.Stage);
+
+        if(e.Stage <= 1 || blessings == null)
+            return;
+
+        int heal = Mathf.RoundToInt(blessings.Sum(BlessingStat.FloorHeal));
+
+        if(heal > 0)
+            player.Health.Heal(heal);
+    }
+    private void HandleBlessingChanged(BlessingInfo info)
+    {
+        GameSession session = GameSession.instance;
+        var stats = BuildStats();
+        int before = player.Health.MaxHp;
+
+        player.Health.SetMaxHp(stats.MaxHp);
+
+        int gained = stats.MaxHp - before;
+
+        if(gained > 0)
+            player.Health.Heal(gained);
+    }
+    public PlayerStats BuildStats()
+    {
+        GameSession session = GameSession.instance;
+        return PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings);
     }
 }

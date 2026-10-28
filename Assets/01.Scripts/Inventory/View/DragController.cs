@@ -13,7 +13,7 @@ public class DragController : MonoBehaviour
     private IItemDropTarget origin;
     private IItemDropTarget hover;
     private PointerEventData lastEvent;
-    private int rotation;
+    private DragPose pose;
 
     public bool IsAnyDragging => dragging != null;
     public bool Interactable { get; set; } = true;
@@ -51,8 +51,8 @@ public class DragController : MonoBehaviour
         if(Keyboard.current == null || !Keyboard.current.rKey.wasPressedThisFrame)
             return;
 
-        rotation = (rotation + 1) % 4;
-        dragging.ApplyLayout(context.CellSize, rotation, 0f);
+        pose = pose.RotateClockwise(dragging.Item);
+        dragging.ApplyLayout(context.CellSize, pose.Rotation, 0f);
         FollowPointer();
         UpdatePreview();
     }
@@ -97,11 +97,13 @@ public class DragController : MonoBehaviour
         dragging = view;
         origin = view.Home;
         lastEvent = eventData;
-        rotation = view.Item.IsPlaced ? view.Item.Rotation : 0;
+
+        int rotation = view.Item.IsPlaced ? view.Item.Rotation : 0;
+        pose = DragPose.Grabbed(view.Item, rotation, GetPressedCell(view, rotation, eventData));
 
         view.transform.SetParent(dragLayer, false);
         view.SetRaycastBlocking(false);
-        view.ApplyLayout(context.CellSize, rotation, 0f);
+        view.ApplyLayout(context.CellSize, pose.Rotation, 0f);
 
         EventManager.instance.PostNotification(new OnItemHoverExit());
         FollowPointer();
@@ -134,7 +136,7 @@ public class DragController : MonoBehaviour
         lastEvent = null;
         view.SetRaycastBlocking(true);
 
-        bool success = target != null && target.TryDrop(item, rotation, eventData);
+        bool success = target != null && target.TryDrop(item, pose, eventData);
 
         if(!success)
         {
@@ -151,7 +153,7 @@ public class DragController : MonoBehaviour
         if(!RectTransformUtility.ScreenPointToLocalPointInRectangle(dragLayer, lastEvent.position, lastEvent.pressEventCamera, out Vector2 local))
             return;
 
-        dragging.Rect.anchoredPosition = local - dragging.Rect.sizeDelta * 0.5f;
+        dragging.Rect.anchoredPosition = local - pose.Grab * context.CellSize;
     }
 
     private void UpdatePreview()
@@ -159,10 +161,22 @@ public class DragController : MonoBehaviour
         if(dragging == null || hover == null || lastEvent == null)
             return;
 
-        hover.ShowPreview(dragging.Item, rotation, lastEvent);
+        hover.ShowPreview(dragging.Item, pose, lastEvent);
+    }
+    private static Vector2 GetPressedCell(ItemView view, int rotation, PointerEventData eventData)
+    {
+        Vector2 bounds = ItemView.GetBounds(view.Item, rotation);
+        Vector2 size = view.Rect.rect.size;
+
+        if(size.x <= 0f || size.y <= 0f)
+            return bounds * 0.5f;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(view.Rect, eventData.pressPosition, eventData.pressEventCamera, out Vector2 local);
+        return Vector2.Scale(local, new Vector2(bounds.x / size.x, bounds.y / size.y));
     }
     #endregion
 }
+
 public interface IItemDragSource
 {
     bool CanDragOut(ItemInstance item);

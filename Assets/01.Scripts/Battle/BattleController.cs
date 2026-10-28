@@ -16,10 +16,10 @@ public class BattleController : MonoBehaviour
     private UnitController player;
     private UnitController monster;
     private ClassInfo playerClass;
-    private IStatModifier training;
+    private IStatModifier[] bonuses;
     public event Action<ItemInstance, ICooldownSource> OnActionReady;
     public event Action OnBattleEnded;
-
+    private IRunBonus runBonus = EmptyRunBonus.Instance;
 
     private void Update()
     {
@@ -52,16 +52,25 @@ public class BattleController : MonoBehaviour
         this.player = player;
         this.monster = monster;
 
-        var stats = PlayerStatsBuilder.Build(playerClass, backpack, training);
+        var stats = PlayerStatsBuilder.Build(playerClass, backpack, bonuses);
         this.player.Health.SetMaxHp(stats.MaxHp);
+        var rules = new PlayerAttackRules(runBonus, player.Health, isBoss);
+        float firstStrike = Mathf.Clamp(runBonus.Sum(BlessingStat.FirstStrike) * 0.5f, 0f, 0.9f);
+
+        if(player.Health is PlayerHealth playerHealth)
+        {
+            playerHealth.SetDefense(runBonus.Sum(BlessingStat.DamageReduction), runBonus.Sum(BlessingStat.Dodge));
+            playerHealth.SetRevive(runBonus.Sum(BlessingStat.Revive));
+        }
 
         foreach(var item in backpack.EquippedItems())
         {
             if(item.Info is WeaponInfo weapon)
             {
                 AttackData attack = item is ForgeableInstance forged ? forged.ApplyTo(weapon.Attack) : weapon.Attack;
-                var data = stats.Apply(weapon.Type, attack);
-                var weaponAction = AddAction(new AttackEffect(monster.Health, data, statuses), data.Cooldown, player.AttackWindup, player.Health, player.PlayAttack);
+                var data = rules.ApplyElement(stats.Apply(weapon.Type, attack));
+                var weaponAction = AddAction(new AttackEffect(monster.Health, data, statuses, rules), data.Cooldown, player.AttackWindup, player.Health, player.PlayAttack);
+                weaponAction.Advance(firstStrike);
                 OnActionReady?.Invoke(item, weaponAction);
                 continue;
             }
@@ -81,17 +90,19 @@ public class BattleController : MonoBehaviour
 
         AddMonsterAction(monsterAttacks);
 
+        this.player.Health.AddShield(Mathf.RoundToInt(runBonus.Sum(BlessingStat.StartShield)));
+        this.player.Health.OnHit += HandlePlayerHit;
         this.player.Health.OnDie += EndBattle;
         this.monster.Health.OnDie += EndBattle;
-        potionUser = new PotionUser(backpack, player.Health, statuses, potionThreshold, potionCooldown);
+        potionUser = new PotionUser(backpack, player.Health, statuses, potionThreshold, potionCooldown, runBonus.Sum(BlessingStat.PotionPower));
         potionUser.OnBattleStart(isBoss);
         isFighting = true;
     }
-    public void Bind(Backpack backpack, ClassInfo playerClass, IStatModifier training)
+    public void Bind(Backpack backpack, ClassInfo playerClass, params IStatModifier[] bonuses)
     {
         this.backpack = backpack;
         this.playerClass = playerClass;
-        this.training = training;
+        this.bonuses = bonuses;
     }
 
     public void EndBattle()
@@ -107,6 +118,7 @@ public class BattleController : MonoBehaviour
         OnBattleEnded?.Invoke();
         player.Health.OnDie -= EndBattle;
         monster.Health.OnDie -= EndBattle;
+        player.Health.OnHit -= HandlePlayerHit;
     }
 
     private ItemAction AddAction(IBattleEffect effect, float cooldown, float windup, UnitHealth owner, Action onFired)
@@ -127,6 +139,10 @@ public class BattleController : MonoBehaviour
 
         AddAction(pattern, attacks.Normal.Cooldown, monster.AttackWindup, monster.Health, () => PlayMonsterAttack(pattern));
     }
+    public void SetRunBonus(IRunBonus bonus)
+    {
+        runBonus = bonus ?? EmptyRunBonus.Instance;
+    }
 
     private void PlayMonsterAttack(MonsterAttackPattern pattern)
     {
@@ -138,4 +154,16 @@ public class BattleController : MonoBehaviour
 
         monster.PlayAttack();
     }
+
+    private void HandlePlayerHit(DamageInfo info)
+    {
+        float thorns = runBonus.Sum(BlessingStat.Thorns);
+
+        if(info.IsTick || thorns <= 0f || monster == null || monster.Health.IsDead)
+            return;
+
+        int reflect = Mathf.Max(1, Mathf.RoundToInt(info.Amount * thorns));
+        monster.Health.TakeDamage(new DamageInfo(reflect, false, DamageElement.None, true));
+    }
+
 }

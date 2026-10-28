@@ -91,7 +91,15 @@ public struct OnUnitDamaged : IGameEvent
         SourceId = sourceId;
     }
 }
+public struct OnUnitDodged : IGameEvent
+{
+    public Vector3 Position;
 
+    public OnUnitDodged(Vector3 pos)
+    {
+        Position = pos;
+    }
+}
 public struct OnUnitHealed : IGameEvent
 {
     public Vector3 Position;

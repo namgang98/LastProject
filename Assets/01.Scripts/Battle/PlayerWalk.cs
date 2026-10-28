@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using System;
 using UnityEngine;
-using static Unity.Collections.Unicode;
 
 [Serializable]
 public class FootstepSettings

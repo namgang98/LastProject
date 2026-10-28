@@ -2,3 +2,9 @@
 4000,초보자갑옷,Armor1,Normal,XX|XX,70,10,가볍고 질긴 갑옷,None,0,0
 4001,전문가갑옷,Armor2,Rare,XX|XX,100,25,붕대와 약초를 챙긴 노련한 자의 갑옷. 상처가 저절로 아문다.,Heal,5,4
 4002,베테랑갑옷,Armor3,Epic,XX|XX,150,50,몬스터를 사냥하고 묻은 피로 붉은 색을 띈다,Shield,1,8
+4003,가죽 조끼,A_LeatherVest,Normal,XX|XX,60,15,몇 번이고 기워 입은 질긴 가죽.,None,0,0
+4004,사슬 갑옷,A_Chainmail,Rare,XX|XX|XX,160,40,촘촘한 고리가 날을 미끄러뜨린다.,Shield,1,12
+4005,수도사 로브,A_MonkRobe,Rare,XX|XX|XX,140,20,기도문이 수놓인 로브. 상처가 천천히 아문다.,Heal,6,4
+4006,가시 갑옷,A_SpikedArmor,Epic,XX|XX,260,45,박힌 가시마다 적의 피가 말라붙어 있다.,Heal,8,5
+4007,판금 갑옷,A_PlateArmor,Epic,XXX|XXX,320,80,성채처럼 무겁고 단단하다.,Shield,1,10
+4008,그림자 망토,A_ShadowCloak,Rare,.X.|XXX|XXX,180,25,어둠에 섞여 일격을 흘려보낸다.,Shield,1,9

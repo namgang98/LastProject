@@ -107,6 +107,10 @@ public class ForgeService
                 return 1.5f;
             case ItemGrade.Epic:
                 return 2f;
+            case ItemGrade.Unique:
+                return 3f;
+            case ItemGrade.Legendary:
+                return 4f;
             default:
                 return 1f;
         }

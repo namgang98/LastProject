@@ -93,11 +93,12 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
 
     public void BeginRun()
     {
+        EnsureStarterWeapon();
         Save(true);
     }
     public void FinishRun(RunEndReason reason)
     {
-        if (reason == RunEndReason.Death)
+        if(reason == RunEndReason.Death)
         {
             LoseBackpack();
             Wallet.LoseRun();
@@ -107,10 +108,10 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
             Wallet.CommitRun();
         }
 
-        if (reason == RunEndReason.Victory)
+        if(reason == RunEndReason.Victory)
             HandleTopReached();
 
-        if (reason == RunEndReason.Conquest)
+        if(reason == RunEndReason.Conquest)
             HandleConquest();
 
         Shop.Restock();
@@ -120,7 +121,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     {
         saveData.clearCount++;
 
-        if (Towers.MarkCleared(CurrentTower))
+        if(Towers.MarkCleared(CurrentTower))
             PendingCutscene = CutsceneKind.AbyssRise;
     }
 
@@ -133,7 +134,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
 
     private static CutsceneKind ToCutscene(ConquestResult result)
     {
-        switch (result)
+        switch(result)
         {
             case ConquestResult.Collapsed:
                 return CutsceneKind.Collapse;
@@ -523,7 +524,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         DataManager data = DataManager.instance;
         Towers = new TowerProgress(data.Towers, data.PrologueTower, saveData);
 
-        if (Towers.TryGetTower(saveData.towerId, out TowerInfo saved) && Towers.CanEnter(saved))
+        if(Towers.TryGetTower(saveData.towerId, out TowerInfo saved) && Towers.CanEnter(saved))
         {
             CurrentTower = saved;
             return;
@@ -534,7 +535,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
 
     public void SelectTower(TowerInfo tower)
     {
-        if (tower == null || !Towers.CanEnter(tower))
+        if(tower == null || !Towers.CanEnter(tower))
             return;
 
         CurrentTower = tower;
@@ -542,10 +543,10 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
 
     public ClassAvailability GetAvailability(ClassInfo info)
     {
-        if (Towers.IsFallen(info))
+        if(Towers.IsFallen(info))
             return ClassAvailability.Fallen;
 
-        if (!Training.IsUnlocked(info))
+        if(!Training.IsUnlocked(info))
             return ClassAvailability.Locked;
 
         return ClassAvailability.Available;
@@ -553,19 +554,47 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
 
     private void EnsurePlayableClass()
     {
-        if (GetAvailability(CurrentClass) == ClassAvailability.Available)
+        if(GetAvailability(CurrentClass) == ClassAvailability.Available)
             return;
 
         var classes = new List<ClassInfo>(DataManager.instance.Classes);
         classes.Sort((a, b) => a.Id.CompareTo(b.Id));
 
-        foreach (ClassInfo info in classes)
+        foreach(ClassInfo info in classes)
         {
-            if (GetAvailability(info) != ClassAvailability.Available)
+            if(GetAvailability(info) != ClassAvailability.Available)
                 continue;
 
             CurrentClass = info;
             return;
         }
+    }
+    private void EnsureStarterWeapon()
+    {
+        WeaponInfo starter = CurrentClass.StarterWeapon;
+
+        if (starter == null || HasClassWeapon(CurrentClass.Type))
+            return;
+
+        ItemInstance weapon = starter.CreateInstance();
+
+        if (Backpack.Grid.TryAutoPlace(weapon))
+            return;
+
+        if (Backpack.PouchStorage != null && Backpack.PouchStorage.TryAutoPlace(weapon))
+            return;
+
+        Debug.LogWarning($"[GameSession] {starter.Name}을(를) 넣을 자리가 없습니다.", this);
+    }
+
+    private bool HasClassWeapon(WeaponType type)
+    {
+        foreach (ItemInstance item in Backpack.EquippedItems())
+        {
+            if (item.Info is WeaponInfo weapon && weapon.Type == type)
+                return true;
+        }
+
+        return false;
     }
 }

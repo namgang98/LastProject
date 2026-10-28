@@ -111,11 +111,11 @@ public class LootAreaView : ItemContainerView
     #endregion
 
     #region 드래그 대상 (IItemDropTarget)
-    public override void ShowPreview(ItemInstance item, int rotation, PointerEventData eventData){}
+    public override void ShowPreview(ItemInstance item, DragPose pose, PointerEventData eventData) { }
 
     public override void HidePreview(){}
 
-    public override bool TryDrop(ItemInstance item, int rotation, PointerEventData eventData)
+    public override bool TryDrop(ItemInstance item, DragPose pose, PointerEventData eventData)
     {
         if(area == null)
             return false;
@@ -124,13 +124,14 @@ public class LootAreaView : ItemContainerView
             return false;
 
         Rect bounds = itemLayer.rect;
-        local.x = Mathf.Clamp(local.x, 0f, bounds.width);
-        local.y = Mathf.Clamp(local.y, 0f, bounds.height);
+        Vector2 center = local + pose.GetCenterOffset(item) * context.CellSize;
+        center.x = Mathf.Clamp(center.x, 0f, bounds.width);
+        center.y = Mathf.Clamp(center.y, 0f, bounds.height);
 
         if(item.Owner != null)
             item.Owner.Remove(item);
 
-        area.Add(item, local, 0f);
+        area.Add(item, center, 0f);
         return true;
     }
 

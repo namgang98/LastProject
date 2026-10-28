@@ -1,11 +1,22 @@
 ﻿
 public static class PlayerStatsBuilder
 {
-    public static PlayerStats Build(ClassInfo playerClass, Backpack backpack, IStatModifier training)
+    public static PlayerStats Build(ClassInfo playerClass, Backpack backpack, params IStatModifier[] bonuses)
     {
         var stats = new PlayerStats();
         playerClass.Apply(stats);
-        training.Apply(stats);
+        int extraSet = 0;
+
+        foreach(IStatModifier bonus in bonuses)
+        {
+            if(bonus == null)
+                continue;
+
+            bonus.Apply(stats);
+
+            if(bonus is ISetBonusModifier setModifier)
+                extraSet += setModifier.ExtraSetCount;
+        }
 
         foreach(var item in backpack.EquippedItems())
         {
@@ -22,7 +33,7 @@ public static class PlayerStatsBuilder
         {
             foreach(var bonus in pair.Key.Bonuses)
             {
-                if(pair.Value < bonus.Count)
+                if(pair.Value + extraSet < bonus.Count)
                     break;
 
                 bonus.Apply(stats);

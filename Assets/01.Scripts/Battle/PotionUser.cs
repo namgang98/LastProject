@@ -9,13 +9,16 @@ public class PotionUser
     private readonly float cooldown;
     private float timer;
 
-    public PotionUser(Backpack backpack, UnitHealth health, StatusEffects statuses, float threshold, float cooldown)
+    private readonly float potionPower;
+
+    public PotionUser(Backpack backpack, UnitHealth health, StatusEffects statuses, float threshold, float cooldown, float potionPower = 0f)
     {
         this.backpack = backpack;
         this.health = health;
         this.statuses = statuses;
         this.threshold = threshold;
         this.cooldown = cooldown;
+        this.potionPower = potionPower;
     }
 
     public void OnBattleStart(bool isBoss)
@@ -53,7 +56,7 @@ public class PotionUser
         if(!backpack.TryTakeConsumable(ConsumeType.Heal, out ConsumableInfo potion))
             return false;
 
-        health.Heal(Mathf.RoundToInt(health.MaxHp * potion.Value / 100f));
+        health.Heal(Mathf.RoundToInt(health.MaxHp * potion.Value / 100f * (1f + potionPower)));
         return true;
     }
 

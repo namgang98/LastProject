@@ -32,6 +32,7 @@ public class UnitController : MonoBehaviour
         health.OnHealed += HandleHealed;
         health.OnBlocked += HandleShield;
         health.OnDie += animator.DeadAni;
+        health.OnDodged += HandleDodged;
 
         revivable = health as IRevivable;
 
@@ -44,6 +45,7 @@ public class UnitController : MonoBehaviour
         health.OnHealed -= HandleHealed;
         health.OnBlocked -= HandleShield;
         health.OnDie -= animator.DeadAni;
+        health.OnDodged -= HandleDodged;
 
         if(revivable != null)
             revivable.OnRevived -= HandleRevived;
@@ -110,6 +112,11 @@ public class UnitController : MonoBehaviour
     {
         Vector3 pos = headPoint != null ? headPoint.position : transform.position;
         EventManager.instance.PostNotification(new OnUnitRevived(pos));
+    }
+    private void HandleDodged()
+    {
+        Vector3 pos = headPoint != null ? headPoint.position : transform.position;
+        EventManager.instance.PostNotification(new OnUnitDodged(pos));
     }
     public void Init(int maxHp)
     {

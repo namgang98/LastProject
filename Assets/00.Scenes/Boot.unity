@@ -1255,6 +1255,8 @@ MonoBehaviour:
   stageCsv: {fileID: 4900000, guid: d7c8944b9a48f4a4b9eceb26837e450c, type: 3}
   questCsv: {fileID: 4900000, guid: f839ed5c6527ce14e8ddc1d65c0ddc59, type: 3}
   forgeCsv: {fileID: 4900000, guid: 1bc0518636954864da25f6c82e9a4324, type: 3}
+  towerCsv: {fileID: 4900000, guid: ead78a7e86f647718104bbd63e4aac8e, type: 3}
+  blessingCsv: {fileID: 4900000, guid: c963e9e1562f4195a67476a50be34d56, type: 3}
   iconLibrary: {fileID: 11400000, guid: 20216c8c80df7864eb072731d2e539c4, type: 2}
   prefabLibrary: {fileID: 11400000, guid: 56cf11582a5258c458ffb7ec871b7b33, type: 2}
   backgroundLibrary: {fileID: 11400000, guid: bc83198d2c36c9b45a067d38498400a4, type: 2}

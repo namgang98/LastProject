@@ -15,7 +15,7 @@ public class StagePlanner
         this.blockSize = Mathf.Max(1, blockSize);
         this.towerId = towerId;
 
-        foreach (MonsterInfo monster in monsters)
+        foreach(MonsterInfo monster in monsters)
         {
             if(monster.IsBoss)
                 allBosses.Add(monster);

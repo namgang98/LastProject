@@ -8,7 +8,7 @@ public class SellAreaView : LootAreaView
     public event Action<ItemInstance> Entering;
     public event Action<ItemInstance> Rejected;
 
-    public override bool TryDrop(ItemInstance item, int rotation, PointerEventData eventData)
+    public override bool TryDrop(ItemInstance item, DragPose pose, PointerEventData eventData)
     {
         if(CanAccept != null && !CanAccept(item))
         {
@@ -19,6 +19,6 @@ public class SellAreaView : LootAreaView
         if(Area != null && !Area.Contains(item))
             Entering?.Invoke(item);
 
-        return base.TryDrop(item, rotation, eventData);
+        return base.TryDrop(item, pose, eventData);
     }
 }

@@ -12,6 +12,7 @@ public class PlayerStats
     private float cooldownReduction;
     private float critChanceBonus;
     private float critMultiplierBonus;
+    private float elementChanceBonus;
 
     private readonly Dictionary<WeaponType, float> typeDamageBonus = new();
     private readonly Dictionary<WeaponType, float> typeCooldownReduction = new();
@@ -21,6 +22,14 @@ public class PlayerStats
     public void AddCooldownReduction(float value) => cooldownReduction += value;
     public void AddCritChance(float value) => critChanceBonus += value;
     public void AddCritMultiplier(float value) => critMultiplierBonus += value;
+    public void AddElementChance(float value) => elementChanceBonus += value;
+
+
+    public float DamageBonus => damageBonus;
+    public float CooldownReduction => cooldownReduction;
+    public float CritChanceBonus => critChanceBonus;
+    public float CritMultiplierBonus => critMultiplierBonus;
+    public float ElementChanceBonus => elementChanceBonus;
 
     public void AddTypeDamageBonus(WeaponType type, float value)
     {
@@ -45,6 +54,23 @@ public class PlayerStats
 
         float chance = Mathf.Clamp01(data.CritChance + critChanceBonus);
         float multiplier = data.CritMultiplier + critMultiplierBonus;
-        return data.WithDamage(damage).WithCooldown(data.Cooldown * cooldownRate).WithCrit(chance, multiplier);
+        AttackData result = data.WithDamage(damage).WithCooldown(data.Cooldown * cooldownRate).WithCrit(chance, multiplier);
+
+        if(data.Element == DamageElement.None || elementChanceBonus <= 0f)
+            return result;
+
+        float elementChance = Mathf.Clamp01(result.ElementChance + elementChanceBonus);
+        return new AttackData(result.Damage, result.Cooldown, result.CritChance, result.CritMultiplier, result.Element, elementChance, result.ElementValue, result.ElementDuration);
+    }
+    public float GetTypeDamageBonus(WeaponType type)
+    {
+        typeDamageBonus.TryGetValue(type, out float value);
+        return value;
+    }
+
+    public float GetTypeCooldownReduction(WeaponType type)
+    {
+        typeCooldownReduction.TryGetValue(type, out float value);
+        return value;
     }
 }

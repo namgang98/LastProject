@@ -18,7 +18,7 @@ public class ClassListView : MonoBehaviour
     {
         BuildCards();
 
-        foreach (ClassCardView card in cards)
+        foreach(ClassCardView card in cards)
         {
             ClassAvailability state = session.GetAvailability(card.Info);
             card.gameObject.SetActive(state != ClassAvailability.Fallen || showFallen);
@@ -30,13 +30,13 @@ public class ClassListView : MonoBehaviour
 
     private void BuildCards()
     {
-        if (cards.Count > 0)
+        if(cards.Count > 0)
             return;
 
         var classes = new List<ClassInfo>(DataManager.instance.Classes);
         classes.Sort((a, b) => a.Id.CompareTo(b.Id));
 
-        foreach (ClassInfo info in classes)
+        foreach(ClassInfo info in classes)
         {
             ClassCardView card = Instantiate(cardPrefab, cardRoot);
             card.Bind(info);
@@ -47,12 +47,12 @@ public class ClassListView : MonoBehaviour
 
     private static string GetStatus(GameSession session, ClassInfo info, ClassAvailability state)
     {
-        switch (state)
+        switch(state)
         {
             case ClassAvailability.Fallen:
                 return "석상이 되었다";
             case ClassAvailability.Locked:
-                return "훈련장에서 해금";
+                return $"{info.UnlockFloor}층 해금";
             default:
                 return $"Lv.{session.Training.GetProgress(info).Level}";
         }
@@ -60,15 +60,15 @@ public class ClassListView : MonoBehaviour
 
     private void Select(ClassCardView card)
     {
-        if (card != null && card.IsLocked)
+        if(card != null && card.IsLocked)
             return;
 
-        if (selected != null)
+        if(selected != null)
             selected.SetSelected(false);
 
         selected = card;
 
-        if (selected != null)
+        if(selected != null)
             selected.SetSelected(true);
 
         SelectionChanged?.Invoke(Selected);
@@ -78,15 +78,15 @@ public class ClassListView : MonoBehaviour
     {
         ClassCardView first = null;
 
-        foreach (ClassCardView card in cards)
+        foreach(ClassCardView card in cards)
         {
-            if (card.IsLocked)
+            if(card.IsLocked)
                 continue;
 
-            if (card.Info == preferred)
+            if(card.Info == preferred)
                 return card;
 
-            if (first == null)
+            if(first == null)
                 first = card;
         }
 

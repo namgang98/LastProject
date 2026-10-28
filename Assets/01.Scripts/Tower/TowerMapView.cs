@@ -13,7 +13,7 @@ public class TowerMapView : MonoBehaviour
 
     private void Awake()
     {
-        foreach (TowerSlotView slot in slots)
+        foreach(TowerSlotView slot in slots)
         {
             slot.Clicked += HandleClicked;
         }
@@ -23,12 +23,12 @@ public class TowerMapView : MonoBehaviour
     {
         root.SetActive(true);
 
-        foreach (TowerSlotView slot in slots)
+        foreach(TowerSlotView slot in slots)
         {
             bool visible = progress.TryGetTower(slot.TowerId, out TowerInfo info) && progress.IsRisen(info);
             slot.gameObject.SetActive(visible);
 
-            if (!visible)
+            if(!visible)
                 continue;
 
             slot.Bind(info, progress.IsCollapsed(info), progress.CanEnter(info));
@@ -48,9 +48,9 @@ public class TowerMapView : MonoBehaviour
 
     public IEnumerator Enter(TowerInfo tower)
     {
-        foreach (TowerSlotView slot in slots)
+        foreach(TowerSlotView slot in slots)
         {
-            if (slot.Info != tower)
+            if(slot.Info != tower)
                 continue;
 
             yield return slot.PlayEnter().WaitForCompletion();

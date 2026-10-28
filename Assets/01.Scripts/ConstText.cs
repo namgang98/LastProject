@@ -72,6 +72,10 @@ public static class CSVStamp
     public const string TopFloor = "topfloor";
     public const string AbyssFloor = "abyssfloor";
     public const string Prologue = "prologue";
+    public const string Stat2 = "stat2";
+    public const string Value2 = "value2";
+    public const string MaxStack = "maxstack";
+    public const string StarterWeapon = "starterweapon";
 
     public const string Target = "target";
     public const string RewardItem = "rewarditem";
@@ -110,6 +114,7 @@ public static class DataTag
     public const string Quests = "quests";
     public const string Forge = "forge";
     public const string Towers = "towers";
+    public const string Blessings = "blessings";
 }
 #endregion
 

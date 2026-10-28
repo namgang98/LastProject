@@ -36,7 +36,7 @@ public class RunSetupView : MonoBehaviour
 
     public void Close()
     {
-        if (departing)
+        if(departing)
             return;
 
         PopupManager.instance.Close(popup);
@@ -44,7 +44,7 @@ public class RunSetupView : MonoBehaviour
 
     private void ShowTowers(TowerProgress progress)
     {
-        if (progress.IsPrologueCollapsed)
+        if(progress.IsPrologueCollapsed)
         {
             front.Hide();
             map.Show(progress);
@@ -83,7 +83,7 @@ public class RunSetupView : MonoBehaviour
     {
         GameSession session = GameSession.instance;
 
-        if (departing || classList.Selected == null || tower == null || !session.Towers.CanEnter(tower))
+        if(departing || classList.Selected == null || tower == null || !session.Towers.CanEnter(tower))
             return;
 
         departing = true;

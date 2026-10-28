@@ -26,7 +26,7 @@ public class StoryPlayer : MonoBehaviour
         SetIndicator(false);
         StartCoroutine(typewriter.Type(line));
 
-        while (typewriter.IsTyping)
+        while(typewriter.IsTyping)
         {
             if(AdvanceInput.WasPressed())
                 typewriter.Skip();

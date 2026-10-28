@@ -29,15 +29,15 @@ public class TowerProgress
         collapsed.UnionWith(data.collapsedTowers);
         fallen.UnionWith(data.fallenClasses);
 
-        if (prologue != null && data.clearCount > 0)
+        if(prologue != null && data.clearCount > 0)
             cleared.Add(prologue.Id);
     }
 
     public bool TryGetTower(int id, out TowerInfo info)
     {
-        foreach (TowerInfo tower in towers)
+        foreach(TowerInfo tower in towers)
         {
-            if (tower.Id != id)
+            if(tower.Id != id)
                 continue;
 
             info = tower;
@@ -85,16 +85,16 @@ public class TowerProgress
 
     public ConquestResult Conquer(TowerInfo tower, ClassInfo hero)
     {
-        if (IsFreeMode || IsCollapsed(tower))
+        if(IsFreeMode || IsCollapsed(tower))
             return ConquestResult.Replay;
 
         collapsed.Add(tower.Id);
         fallen.Add(hero.Id);
 
-        if (IsFreeMode)
+        if(IsFreeMode)
             return ConquestResult.Ending;
 
-        if (tower.IsPrologue)
+        if(tower.IsPrologue)
             return ConquestResult.TowersRisen;
 
         return ConquestResult.Collapsed;

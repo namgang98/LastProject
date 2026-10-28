@@ -21,6 +21,9 @@ public class StageController : MonoBehaviour
     [SerializeField] HudFader playerHud;
     [SerializeField] HudFader monsterHud;
 
+    [Header("층 보상")]
+    [SerializeField] BlessingRewardController blessingReward;
+
     [SerializeField] int bossInterval = 10;
     [SerializeField] Transform spawnPoint;
     [SerializeField] BattleController battle;
@@ -31,6 +34,7 @@ public class StageController : MonoBehaviour
     [SerializeField] StatusIconView statusIconView;
     [SerializeField] StageBackgroundView background;
     [SerializeField] StageAmbienceView ambience;
+    private IRunBonus runBonus = EmptyRunBonus.Instance;
     private StagePlanner planner;
 
     [SerializeField] private float hpGrowth = 0.05f;
@@ -212,7 +216,8 @@ public class StageController : MonoBehaviour
 
     private void StartRest()
     {
-        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * restHealRate));
+        float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal));
+        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
         phase = Phase.Looting;
         ShowButtons();
     }
@@ -223,13 +228,17 @@ public class StageController : MonoBehaviour
         currentMonster.Health.OnDie -= HandleMonsterDead;
         EventManager.instance.PostNotification(new OnMonsterKilled(spawnPoint.position, currentInfo));
 
-        if (stage >= finalFloor && currentInfo.IsBoss)
+        if(stage >= finalFloor && currentInfo.IsBoss)
         {
             EndRun(stage >= tower.LastFloor ? RunEndReason.Conquest : RunEndReason.Victory);
             return;
         }
 
         phase = Phase.Looting;
+        
+        if(blessingReward != null && blessingReward.TryOffer(stage, ShowButtons))
+            return;
+        
         ShowButtons();
     }
 
@@ -284,7 +293,10 @@ public class StageController : MonoBehaviour
         StageInfo area = planner.Get(floor);
         return area != null ? area.Name : null;
     }
-
+    public void SetRunBonus(IRunBonus bonus)
+    {
+        runBonus = bonus ?? EmptyRunBonus.Instance;
+    }
     private enum Phase
     {
         Moving,

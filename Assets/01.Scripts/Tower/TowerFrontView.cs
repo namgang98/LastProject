@@ -22,11 +22,17 @@ public class TowerFrontView : MonoBehaviour
     [SerializeField] float zoomTime = 1f;
     [SerializeField] SfxType openSfx = SfxType.None;
 
+    [Header("경첩 위치 (그림 가로 비율)")]
+    [SerializeField, Range(0f, 1f)] float leftHinge = 0.2997f;
+    [SerializeField, Range(0f, 1f)] float rightHinge = 0.7035f;
+
     public event Action DoorClicked;
 
     private void Awake()
     {
         doorButton.onClick.AddListener(HandleDoorClick);
+        SetPivotKeepRect(leftDoor.rectTransform, new Vector2(leftHinge, 0.5f));
+        SetPivotKeepRect(rightDoor.rectTransform, new Vector2(rightHinge, 0.5f));
     }
 
     public void Show(TowerInfo tower)
@@ -91,9 +97,19 @@ public class TowerFrontView : MonoBehaviour
 
     private static void PlaySfx(SfxType type)
     {
-        if (type == SfxType.None || !SoundManager.HasInstance)
+        if(type == SfxType.None || !SoundManager.HasInstance)
             return;
 
         SoundManager.instance.PlaySfx(type);
+    }
+
+    private static void SetPivotKeepRect(RectTransform rect, Vector2 pivot)
+    {
+        Vector2 min = rect.offsetMin;
+        Vector2 max = rect.offsetMax;
+
+        rect.pivot = pivot;
+        rect.offsetMin = min;
+        rect.offsetMax = max;
     }
 }

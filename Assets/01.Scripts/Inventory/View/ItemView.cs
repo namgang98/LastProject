@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 // 아이템 1개의 화면 표시 + 드래그 입력 받기
 // 로직은 없고, 드래그 입력은 전부 DragController에 넘긴다
 // 구조 : ItemView(틀, 피벗 왼쪽 아래) > Icon(Image, 피벗 가운데, 회전 담당)
 [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
-public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ICanvasRaycastFilter
 {
     [SerializeField] Image icon;
     [SerializeField] ItemCooldownView cooldown;
+    [SerializeField] ItemShapeTiles shapeTiles;
     public ItemCooldownView Cooldown => cooldown;
     private RectTransform rect;
     private CanvasGroup canvasGroup;
@@ -19,7 +21,8 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public ItemInstance Item { get; private set; }
     public IItemDropTarget Home { get; private set; }
     public RectTransform Rect => rect;
-
+    private readonly HashSet<Vector2Int> occupied = new();
+    private Vector2Int layoutBounds;
     // 풀에서 처음 만들어질 때 1번만 호출
     public void Init(DragController dragController)
     {
@@ -47,16 +50,26 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         icon.sprite = item.Info.Icon;
     }
 
-    // 회전된 모양에 맞춰 틀 크기를 정하고, 아이콘은 원래 크기 그대로 돌린다
     public void ApplyLayout(float cellSize, int rotation, float tilt)
     {
         Vector2Int rotatedSize = GetBounds(Item, rotation);
         Vector2Int originalSize = GetBounds(Item, 0);
+        Vector2 iconSize = (Vector2)originalSize * cellSize;
+        float angle = -90f * rotation + tilt;
 
         rect.sizeDelta = (Vector2)rotatedSize * cellSize;
-        icon.rectTransform.sizeDelta = (Vector2)originalSize * cellSize;
-        icon.rectTransform.localEulerAngles = new Vector3(0f, 0f, -90f * rotation + tilt);
+        icon.rectTransform.sizeDelta = iconSize;
+        icon.rectTransform.localEulerAngles = new Vector3(0f, 0f, angle);
+        shapeTiles.Show(Item.Info, cellSize, iconSize, angle);
         cooldown.SetOrientation(originalSize.x > originalSize.y);
+        occupied.Clear();
+
+        foreach(Vector2Int cell in Item.Info.Shape.GetRotatedCells(rotation))
+        {
+            occupied.Add(cell);
+        }
+
+        layoutBounds = rotatedSize;
     }
 
     public void SetRaycastBlocking(bool block)
@@ -72,6 +85,8 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         canvasGroup.blocksRaycasts = true;
         icon.rectTransform.localEulerAngles = Vector3.zero;
         Cooldown.Unbind();
+        shapeTiles.Hide();
+        occupied.Clear();
     }
 
     public static Vector2Int GetBounds(ItemInstance item, int rotation)
@@ -146,5 +161,22 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             return;
 
         EventManager.instance.PostNotification(new OnItemHoverExit());
+    }
+    public bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera)
+    {
+        if(Item == null || occupied.Count == 0)
+            return true;
+
+        if(!RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, eventCamera, out Vector2 local))
+            return false;
+
+        Vector2 size = rect.rect.size;
+
+        if(size.x <= 0f || size.y <= 0f)
+            return false;
+
+        int x = Mathf.FloorToInt(local.x / size.x * layoutBounds.x);
+        int y = Mathf.FloorToInt(local.y / size.y * layoutBounds.y);
+        return occupied.Contains(new Vector2Int(x, y));
     }
 }

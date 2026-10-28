@@ -14,18 +14,18 @@ public class DropRoller
         this.bossEquipRolls = bossEquipRolls;
     }
 
-    public void Roll(MonsterInfo monster, int stage, List<ItemInfo> results)
+    public void Roll(MonsterInfo monster, int stage, List<ItemInfo> results, float materialRate = 1f, float equipRate = 1f)
     {
         results.Clear();
-        RollDrops(monster, results);
-        RollEquipment(monster, stage, results);
+        RollDrops(monster, results, materialRate);
+        RollEquipment(monster, stage, results, equipRate);
     }
 
-    private static void RollDrops(MonsterInfo monster, List<ItemInfo> results)
+    private static void RollDrops(MonsterInfo monster, List<ItemInfo> results, float materialRate)
     {
         foreach(MonsterDropInfo drop in monster.Drops)
         {
-            int count = drop.RollCount();
+            int count = drop.RollCount(materialRate);
 
             for(int i = 0; i < count; i++)
             {
@@ -34,7 +34,7 @@ public class DropRoller
         }
     }
 
-    private void RollEquipment(MonsterInfo monster, int stage, List<ItemInfo> results)
+    private void RollEquipment(MonsterInfo monster, int stage, List<ItemInfo> results, float equipRate)
     {
         if(equipTable.IsEmpty)
             return;
@@ -43,10 +43,13 @@ public class DropRoller
 
         for(int i = 0; i < rolls; i++)
         {
-            if(Random.value >= monster.EquipChance)
+            if(Random.value >= monster.EquipChance * equipRate)
                 continue;
 
-            results.Add(equipTable.Pick(rarity.Roll(stage)));
+            ItemInfo picked = equipTable.Pick(rarity.Roll(stage));
+
+            if(picked != null)
+                results.Add(picked);
         }
     }
 }

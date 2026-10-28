@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 1725342752026757447}
   - component: {fileID: 8522822390686801066}
   - component: {fileID: 1279346075889341561}
+  - component: {fileID: 1030704315949571704}
   m_Layer: 5
   m_Name: ClassTrainingCard
   m_TagString: Untagged
@@ -139,8 +140,10 @@ MonoBehaviour:
   descText: {fileID: 5014150343421898464}
   selectedMark: {fileID: 4205118277212298276}
   lockMark: {fileID: 7627318007612250194}
+  fallenMark: {fileID: 0}
   statusText: {fileID: 5014150343421898464}
   lockedTint: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+  fallenTint: {r: 0.55, g: 0.55, b: 0.6, a: 1}
 --- !u!222 &1016785674477040423
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -236,6 +239,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonSound
   sfx: 100
+--- !u!114 &1030704315949571704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885017870852018833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: 280.3763
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &2180484141861943390
 GameObject:
   m_ObjectHideFlags: 0

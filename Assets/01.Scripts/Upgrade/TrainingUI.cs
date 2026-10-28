@@ -124,16 +124,16 @@ public class TrainingUI : MonoBehaviour
     {
         TowerProgress towers = GameSession.instance.Towers;
 
-        foreach (var card in cards)
+        foreach(var card in cards)
         {
             ClassInfo info = card.Info;
             bool fallen = towers.IsFallen(info);
             card.gameObject.SetActive(!fallen);
 
-            if (fallen)
+            if(fallen)
                 continue;
 
-            if (training.IsUnlocked(info))
+            if(training.IsUnlocked(info))
                 card.SetState(ClassAvailability.Available, $"Lv.{training.GetProgress(info).Level}");
             else
                 card.SetState(ClassAvailability.Locked, $"{info.UnlockFloor}층 도달");

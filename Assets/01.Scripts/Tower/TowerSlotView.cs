@@ -53,7 +53,7 @@ public class TowerSlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         nameplate.SetActive(true);
 
-        if (!button.interactable)
+        if(!button.interactable)
             return;
 
         transform.DOScale(hoverScale, hoverTime).SetUpdate(true).SetLink(gameObject);

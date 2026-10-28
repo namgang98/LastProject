@@ -6,6 +6,8 @@ public enum ItemGrade
     Normal,
     Rare,
     Epic,
+    Unique,
+    Legendary,
 }
 public abstract class ItemInfo
 {

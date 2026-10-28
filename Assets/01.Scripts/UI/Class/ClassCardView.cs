@@ -47,6 +47,9 @@ public class ClassCardView : MonoBehaviour
 
     private static Sprite FindPortrait(ClassInfo info)
     {
+        if(info.Icon != null)
+            return info.Icon;
+
         if(info.Prefab == null)
             return null;
 
@@ -81,24 +84,18 @@ public class ClassCardView : MonoBehaviour
 
     private static string BuildDescription(ClassInfo info)
     {
-        string text = $"체력 {info.MaxHp}\n{ToKorean(info.Type)} 데미지 +{(info.DamageRate - 1f) * 100f:0}%";
+        string type = WeaponTypeText.ToKorean(info.Type);
+        string text = $"체력 {info.MaxHp}\n{type} 데미지 +{(info.DamageRate - 1f) * 100f:0}%";
 
         if(info.CooldownRate < 1f)
-            text += $"\n{ToKorean(info.Type)} 쿨타임 -{(1f - info.CooldownRate) * 100f:0}%";
+            text += $"\n{type} 쿨타임 -{(1f - info.CooldownRate) * 100f:0}%";
+
+        if(info.CritChance > 0f)
+            text += $"\n치명타 확률 +{info.CritChance * 100f:0}%";
+
+        if(info.ElementChance > 0f)
+            text += $"\n속성 확률 +{info.ElementChance * 100f:0}%";
 
         return text;
-    }
-
-    private static string ToKorean(WeaponType type)
-    {
-        switch(type)
-        {
-            case WeaponType.Axe:
-                return "도끼";
-            case WeaponType.Bow:
-                return "활";
-            default:
-                return "검";
-        }
     }
 }

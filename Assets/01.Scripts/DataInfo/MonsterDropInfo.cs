@@ -26,9 +26,9 @@ public class MonsterDropInfo
         Item = item;
     }
 
-    public int RollCount()
+    public int RollCount(float chanceRate = 1f)
     {
-        if(Random.value >= Chance)
+        if(Random.value >= Chance * chanceRate)
             return 0;
 
         return Random.Range(Min, Max + 1);

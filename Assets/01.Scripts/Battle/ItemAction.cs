@@ -55,4 +55,9 @@ public class ItemAction : ICooldownSource
         timer += cooldown;
         windupFired = false;
     }
+
+    public void Advance(float ratio)
+    {
+        timer = Mathf.Max(0f, timer - cooldown * Mathf.Clamp01(ratio));
+    }
 }

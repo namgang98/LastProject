@@ -82,7 +82,7 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
     }
 
     #region 드롭 대상
-    public override void ShowPreview(ItemInstance item, int rotation, PointerEventData eventData)
+    public override void ShowPreview(ItemInstance item, DragPose pose, PointerEventData eventData)
     {
         if(Backpack == null || item == Current)
             return;
@@ -97,7 +97,7 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
         highlight.enabled = false;
     }
 
-    public override bool TryDrop(ItemInstance item, int rotation, PointerEventData eventData)
+    public override bool TryDrop(ItemInstance item, DragPose pose, PointerEventData eventData)
     {
         if(Backpack == null)
             return false;

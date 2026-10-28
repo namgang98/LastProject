@@ -5,6 +5,8 @@ public enum WeaponType
     Sword,
     Axe,
     Bow,
+    Staff,
+    Dagger,
 }
 
 [Serializable]

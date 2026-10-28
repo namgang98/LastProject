@@ -186,7 +186,22 @@ public static class InfoParser
         if(!row.TryGetInt(CSVStamp.UnlockCost, out int unlockCost) || unlockCost < 0)
             return Fail(row, errors, CSVStamp.UnlockCost);
 
-        info = new ClassInfo(b.id, b.name, maxHp, type, damageRate, cooldownRate, desc, prefab, unlockFloor, unlockCost);
+        string icon = row.GetString(CSVStamp.Icon);
+        float critChance = 0f;
+        float elementChance = 0f;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.CritChance)) && (!row.TryGetFloat(CSVStamp.CritChance, out critChance) || critChance < 0f))
+            return Fail(row, errors, CSVStamp.CritChance);
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Elementchance)) && (!row.TryGetFloat(CSVStamp.Elementchance, out elementChance) || elementChance < 0f))
+            return Fail(row, errors, CSVStamp.Elementchance);
+
+        int starterWeapon = 0;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.StarterWeapon)) && (!row.TryGetInt(CSVStamp.StarterWeapon, out starterWeapon) || starterWeapon < 0))
+            return Fail(row, errors, CSVStamp.StarterWeapon);
+
+        info = new ClassInfo(b.id, b.name, maxHp, type, damageRate, cooldownRate, desc, prefab, unlockFloor, unlockCost, icon, critChance, elementChance, starterWeapon);
         return true;
     }
     #endregion
@@ -401,6 +416,59 @@ public static class InfoParser
             return Fail(row, errors, CSVStamp.Tower);
 
         info = new StageInfo(b.id, b.name, background, monsterIds, bossId, minFloor, maxFloor, ambience, towerId);
+        return true;
+    }
+    #endregion
+    #region 축복
+    public static bool TryParseBlessing(CsvRow row, List<string> errors, out BlessingInfo info)
+    {
+        info = null;
+
+        if(!TryParseInfoBase(row, errors, out InfoBase b))
+            return false;
+
+        if(!row.TryGetEnum(CSVStamp.Grade, out ItemGrade grade))
+            return Fail(row, errors, CSVStamp.Grade);
+
+        var modifiers = new List<BlessingModifier>(2);
+
+        if(!TryParseBlessingModifier(row, errors, CSVStamp.Stat, CSVStamp.Value, true, modifiers))
+            return false;
+
+        if(!TryParseBlessingModifier(row, errors, CSVStamp.Stat2, CSVStamp.Value2, false, modifiers))
+            return false;
+
+        int maxStack = 1;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.MaxStack)) && (!row.TryGetInt(CSVStamp.MaxStack, out maxStack) || maxStack < 1))
+            return Fail(row, errors, CSVStamp.MaxStack);
+
+        if(!row.TryGetInt(CSVStamp.Weight, out int weight) || weight <= 0)
+            return Fail(row, errors, CSVStamp.Weight);
+
+        info = new BlessingInfo(b.id, b.name, grade, modifiers, maxStack, weight, row.GetString(CSVStamp.Description));
+        return true;
+    }
+
+    private static bool TryParseBlessingModifier(CsvRow row, List<string> errors, string statColumn, string valueColumn, bool required, List<BlessingModifier> result)
+    {
+        string raw = row.GetString(statColumn);
+
+        if(string.IsNullOrEmpty(raw) && !required)
+            return true;
+
+        if(!row.TryGetEnum(statColumn, out BlessingStat stat) || stat == BlessingStat.None)
+        {
+            if(!required && stat == BlessingStat.None && raw.Equals("none", System.StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            return Fail(row, errors, statColumn);
+        }
+
+        if(!row.TryGetFloat(valueColumn, out float value) || value == 0f)
+            return Fail(row, errors, valueColumn);
+
+        result.Add(new BlessingModifier(stat, value));
         return true;
     }
     #endregion

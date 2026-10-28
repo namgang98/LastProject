@@ -36,6 +36,7 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange QuestIds = new(9600, 9699);
     private static readonly IdRange ForgeIds = new(9700, 9799);
     private static readonly IdRange TowerIds = new(9800, 9899);
+    private static readonly IdRange BlessingIds = new(9900, 9999);
 
     #endregion
 
@@ -61,6 +62,7 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset questCsv;
     [SerializeField] TextAsset forgeCsv;
     [SerializeField] TextAsset towerCsv;
+    [SerializeField] TextAsset blessingCsv;
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
     [SerializeField] PrefabLibrary prefabLibrary;
@@ -81,6 +83,7 @@ public class DataManager : Singleton<DataManager>
     private readonly Dictionary<int, QuestInfo> quests = new();
     private readonly ForgeTable forge = new();
     private readonly List<TowerInfo> towers = new();
+    private readonly List<BlessingInfo> blessings = new();
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
@@ -98,6 +101,7 @@ public class DataManager : Singleton<DataManager>
     public ForgeTable Forge => forge;
     public IReadOnlyList<TowerInfo> Towers => towers;
     public TowerInfo PrologueTower { get; private set; }
+    public IReadOnlyList<BlessingInfo> Blessings => blessings;
     #endregion
 
     #region 초기화
@@ -139,6 +143,7 @@ public class DataManager : Singleton<DataManager>
         string questText = ReadText(questCsv, nameof(questCsv));
         string forgeText = ReadText(forgeCsv, nameof(forgeCsv));
         string towerText = ReadText(towerCsv, nameof(towerCsv));
+        string blessingText = ReadText(blessingCsv, nameof(blessingCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -165,6 +170,7 @@ public class DataManager : Singleton<DataManager>
         List<QuestInfo> questList = ParseTable<QuestInfo>(DataTag.Quests, questText, errors, InfoParser.TryParseQuest);
         List<ForgeLevelInfo> forgeList = ParseTable<ForgeLevelInfo>(DataTag.Forge, forgeText, errors, InfoParser.TryParseForge);
         List<TowerInfo> towerList = ParseTable<TowerInfo>(DataTag.Towers, towerText, errors, InfoParser.TryParseTower);
+        List<BlessingInfo> blessingList = ParseTable<BlessingInfo>(DataTag.Blessings, blessingText, errors, InfoParser.TryParseBlessing);
         #endregion
 
         //메인 스레드
@@ -199,6 +205,7 @@ public class DataManager : Singleton<DataManager>
         RegisterTrainingStats(DataTag.TrainingStats, trainingStatList, errors);
         RegisterShopStocks(DataTag.ShopStock, shopStockList, errors);
         RegisterTowers(DataTag.Towers, towerList, TowerIds, errors);
+        RegisterBlessings(DataTag.Blessings, blessingList, BlessingIds, errors);
         RegisterStages(DataTag.Stages, stageList, StageIds, errors);
         RegisterForge(DataTag.Forge, forgeList, ForgeIds, errors);
         RegisterQuests(DataTag.Quests, questList, QuestIds, errors);
@@ -296,6 +303,16 @@ public class DataManager : Singleton<DataManager>
             }
 
             info.SetPrefab(FindPrefab(sheetName, info.Id, info.PrefabName, errors));
+            info.SetIcon(FindIcon(sheetName, info.Id, info.IconName, errors));
+
+            if(info.StarterWeaponId != 0)
+            {
+                if(TryGetItem(info.StarterWeaponId, out WeaponInfo starter))
+                    info.SetStarterWeapon(starter);
+                else
+                    errors.Add($"{sheetName} : 직업 {info.Name} 의 시작 무기 {info.StarterWeaponId} 가 없거나 무기가 아닙니다");
+            }
+
             classes.Add(info.Id, info);
         }
     }
@@ -500,6 +517,12 @@ public class DataManager : Singleton<DataManager>
                 continue;
             }
 
+            if(item.Grade == ItemGrade.Legendary)
+            {
+                errors.Add($"{sheetName} : 레전더리 {item.Name} 은 상점에 진열할 수 없습니다 → 진열 제외");
+                continue;
+            }
+
             stock.SetItem(item);
             shopStocks.Add(stock);
         }
@@ -563,6 +586,30 @@ public class DataManager : Singleton<DataManager>
 
             stages.Add(info);
         }
+    }
+
+    private void RegisterBlessings(string sheetName, List<BlessingInfo> list, IdRange range, List<string> errors)
+    {
+        var ids = new HashSet<int>();
+
+        foreach(BlessingInfo info in list)
+        {
+            if(!range.Contains(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} ({info.Name}) 가 구간 {range.Min}~{range.Max} 밖입니다");
+                continue;
+            }
+
+            if(!ids.Add(info.Id))
+            {
+                errors.Add($"{sheetName} : ID {info.Id} 중복 → 뒤의 것은 무시");
+                continue;
+            }
+
+            blessings.Add(info);
+        }
+
+        blessings.Sort((a, b) => a.Id.CompareTo(b.Id));
     }
 
     private void RegisterTowers(string sheetName, List<TowerInfo> list, IdRange range, List<string> errors)
@@ -755,6 +802,21 @@ public class DataManager : Singleton<DataManager>
             return sprite;
 
         return null;
+    }
+
+    public bool TryGetBlessing(int id, out BlessingInfo info)
+    {
+        foreach(BlessingInfo blessing in blessings)
+        {
+            if(blessing.Id != id)
+                continue;
+
+            info = blessing;
+            return true;
+        }
+
+        info = null;
+        return false;
     }
 
     public bool TryGetTower(int id, out TowerInfo info)

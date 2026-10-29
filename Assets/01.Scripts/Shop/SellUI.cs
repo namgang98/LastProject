@@ -137,6 +137,7 @@ public class SellUI : MonoBehaviour
         if(earned <= 0)
             return;
 
+        Sfx.Play(SfxType.Coins);
         GameSession.instance.SaveInVillage();
     }
     private void RememberOrigin(ItemInstance item)

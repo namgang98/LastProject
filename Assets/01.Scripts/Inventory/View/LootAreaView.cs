@@ -104,7 +104,7 @@ public class LootAreaView : ItemContainerView
         if(!area.TryGetEntry(view.Item, out LootArea.Entry entry))
             return;
 
-        view.ApplyLayout(context.CellSize, 0, entry.Tilt);
+        view.ApplyLayout(context.CellSize, 0, entry.Tilt, false);
         view.Rect.anchoredPosition = entry.Position - view.Rect.sizeDelta * 0.5f;
         view.transform.SetAsLastSibling();
     }

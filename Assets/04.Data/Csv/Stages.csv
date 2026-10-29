@@ -1,11 +1,18 @@
-﻿id,name,background,monsters,boss,minfloor,maxfloor,ambience
-9501,썩은 숲,Forest_bg,2001|2004|2005,2102,1,40,Ambience_Forest
-9502,고블린 굴,Cave_bg,2002|2004|2005,2101,1,40,Ambience_Cave
-9503,지하 묘지,Catacomb_bg,2003|2006|2008,2103,11,40,Ambience_Catacomb
-9504,얼어붙은 회랑,IceMap_bg,2007|2003|2006,2104,21,40,Ambience_Ice
-9505,용의 둥지,Lair_bg,2003|2006|2007|2008,2105,41,50,Ambience_Lair
-9511,저주받은 썩은 숲,Forest_Abyss_bg,2201|2204|2205,2302,51,90,Ambience_Abyss
-9512,저주받은 고블린 굴,Cave_Abyss_bg,2202|2204|2205,2301,51,90,Ambience_Abyss
-9513,저주받은 지하 묘지,Catacomb_Abyss_bg,2203|2206|2208,2303,61,90,Ambience_Abyss
-9514,저주받은 얼어붙은 회랑,IceMap_Abyss_bg,2207|2203|2206,2304,71,90,Ambience_Abyss
-9515,무너진 용의 둥지,Lair_Abyss_bg,2203|2206|2207|2208,2305,91,100,Ambience_Abyss
+﻿id,name,background,monsters,boss,minfloor,maxfloor,ambience,tower
+9501,썩은 숲,Forest_bg,2001|2004|2005,2102,1,40,Ambience_Forest,
+9502,고블린 굴,Cave_bg,2002|2004|2005,2101,1,40,Ambience_Cave,
+9503,지하 묘지,Catacomb_bg,2003|2006|2008,2103,11,40,Ambience_Catacomb,
+9504,얼어붙은 회랑,IceMap_bg,2007|2003|2006,2104,21,40,Ambience_Ice,
+9505,용의 둥지,Lair_bg,2003|2006|2007|2008,2105,41,50,Ambience_Lair,
+9511,저주받은 썩은 숲,Forest_Abyss_bg,2201|2204|2205,2302,1,30,Ambience_Abyss,9804
+9512,저주받은 고블린 굴,Cave_Abyss_bg,2202|2204|2205,2301,1,30,Ambience_Abyss,9804
+9513,저주받은 지하 묘지,Catacomb_Abyss_bg,2203|2206|2208,2303,11,40,Ambience_Abyss,9804
+9514,저주받은 얼어붙은 회랑,IceMap_Abyss_bg,2207|2203|2206,2304,21,40,Ambience_Abyss,9804
+9515,무너진 용의 둥지,Lair_Abyss_bg,2203|2206|2207|2208,2305,41,50,Ambience_Abyss,9804
+9521,불타는 관문,Cave_bg,2009|2010|2008,2106,1,30,Ambience_Cave,9801
+9522,마왕의 옥좌,Lair_bg,2009|2010|2011,2107,31,50,Ambience_Lair,9801
+9523,서리 회랑,IceMap_bg,2007|2003|2006,2104,1,50,Ambience_Ice,9802
+9524,얼어붙은 묘지,Catacomb_bg,2007|2003|2006,2103,11,40,Ambience_Ice,9802
+9525,역병의 숲,Forest_bg,2001|2004|2005,2102,1,50,Ambience_Forest,9803
+9526,썩은 굴,Cave_bg,2004|2005|2001,2101,11,40,Ambience_Cave,9803
+9527,용암 회랑,Lair_bg,2010|2011|2008,2106,11,40,Ambience_Lair,9801

@@ -101,6 +101,7 @@ public class DataManager : Singleton<DataManager>
     public ForgeTable Forge => forge;
     public IReadOnlyList<TowerInfo> Towers => towers;
     public TowerInfo PrologueTower { get; private set; }
+    public TowerInfo OriginTower { get; private set; }
     public IReadOnlyList<BlessingInfo> Blessings => blessings;
     #endregion
 
@@ -639,13 +640,46 @@ public class DataManager : Singleton<DataManager>
                 PrologueTower = info;
             }
 
+            if(info.IsEndless)
+            {
+                if(OriginTower != null)
+                {
+                    errors.Add($"{sheetName} : 근원의 탑이 여러 개입니다 ({OriginTower.Name} / {info.Name}) → {info.Name} 무시");
+                    continue;
+                }
+
+                OriginTower = info;
+            }
+
             towers.Add(info);
         }
 
         towers.Sort((a, b) => a.Id.CompareTo(b.Id));
+        LinkStageSources();
 
         if(PrologueTower == null)
-            errors.Add($"{sheetName} : prologue 가 1 인 첫 탑이 없습니다");
+            errors.Add($"{sheetName} : kind 가 Prologue 인 첫 탑이 없습니다");
+
+        if(OriginTower == null)
+            errors.Add($"{sheetName} : kind 가 Origin 인 근원의 탑이 없습니다");
+    }
+
+    private void LinkStageSources()
+    {
+        foreach(TowerInfo tower in towers)
+        {
+            if(!tower.IsEndless)
+            {
+                tower.AddStageSource(tower.Id);
+                continue;
+            }
+
+            foreach(TowerInfo source in towers)
+            {
+                if(source.IsThemed)
+                    tower.AddStageSource(source.Id);
+            }
+        }
     }
 
     private void RegisterForge(string sheetName, List<ForgeLevelInfo> list, IdRange range, List<string> errors)

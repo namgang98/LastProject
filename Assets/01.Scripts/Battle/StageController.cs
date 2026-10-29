@@ -53,7 +53,7 @@ public class StageController : MonoBehaviour
     private UnitController currentMonster;
     private MonsterInfo currentInfo;
     private MonsterAttackSet currentAttacks;
-
+    private TowerRuleSet towerRules = new();
     private void Awake()
     {
         scaling = new StageScaling(hpGrowth, hpCurve, damageGrowth, damageCurve);
@@ -85,8 +85,7 @@ public class StageController : MonoBehaviour
         player = runner;
         player.Health.OnDie += HandlePlayerDead;
 
-        planner = new StagePlanner(DataManager.instance.Stages, DataManager.instance.Monsters, bossInterval, tower.Id);
-
+        planner = new StagePlanner(DataManager.instance.Stages, DataManager.instance.Monsters, bossInterval, tower);
         stage = 1;
         phase = Phase.Moving;
         HideButtons();
@@ -141,6 +140,7 @@ public class StageController : MonoBehaviour
         {
             background.Show(area.Background);
             ambience.Show(area.AmbiencePrefab);
+            ApplyAreaRules(area);
         }
 
         bool isRest = rule.IsRestStage(stage);
@@ -183,8 +183,8 @@ public class StageController : MonoBehaviour
         currentMonster.Health.Init(stats.MaxHp);
 
         if(currentMonster.Health is IRevivable revivable)
-            revivable.SetRevive(info.ReviveRate);
-        
+            revivable.SetRevive(Mathf.Max(info.ReviveRate, towerRules.MonsterRevive));
+
         currentAttacks = MonsterAttackSet.Create(info, stats.Damage);
 
         monsterHpbar.Bind(currentMonster.Health);
@@ -216,6 +216,7 @@ public class StageController : MonoBehaviour
 
     private void StartRest()
     {
+        Sfx.Play(SfxType.RestEnter);
         float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal));
         player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
         phase = Phase.Looting;
@@ -230,7 +231,7 @@ public class StageController : MonoBehaviour
 
         if(stage >= finalFloor && currentInfo.IsBoss)
         {
-            EndRun(stage >= tower.LastFloor ? RunEndReason.Conquest : RunEndReason.Victory);
+            EndRun(RunEndReason.Conquest);
             return;
         }
 
@@ -241,7 +242,10 @@ public class StageController : MonoBehaviour
         
         ShowButtons();
     }
-
+    public void SetTowerRules(TowerRuleSet rules)
+    {
+        towerRules = rules ?? new TowerRuleSet();
+    }
     private void HandlePlayerDead()
     {
         EndRun(RunEndReason.Death);
@@ -291,11 +295,23 @@ public class StageController : MonoBehaviour
             return null;
 
         StageInfo area = planner.Get(floor);
-        return area != null ? area.Name : null;
+
+        if(area == null)
+            return null;
+
+        if(!tower.IsEndless || !DataManager.instance.TryGetTower(area.TowerId, out TowerInfo source))
+            return area.Name;
+
+        return $"{area.Name} · {source.Name}";
     }
     public void SetRunBonus(IRunBonus bonus)
     {
         runBonus = bonus ?? EmptyRunBonus.Instance;
+    }
+    private void ApplyAreaRules(StageInfo area)
+    {
+        DataManager.instance.TryGetTower(area.TowerId, out TowerInfo source);
+        towerRules.SetSource(source);
     }
     private enum Phase
     {

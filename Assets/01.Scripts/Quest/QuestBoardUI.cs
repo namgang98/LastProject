@@ -46,6 +46,8 @@ public class QuestBoardUI : MonoBehaviour
 
         if(dim != null)
             dim.SetActive(true);
+
+        Sfx.Play(SfxType.BookOpen);
     }
 
     public void Close()
@@ -93,7 +95,10 @@ public class QuestBoardUI : MonoBehaviour
         if(result == QuestClaimResult.NoSpace)
             EventManager.instance.PostNotification(new OnFeedback("가방과 창고에 자리가 없습니다"));
         else if(result == QuestClaimResult.Ok)
+        {
+            Sfx.Play(SfxType.QuestComplete);
             PostClaimFeedback(name, favor, levelUps);
+        }
 
         Refresh();
     }

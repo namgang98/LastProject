@@ -41,8 +41,10 @@ public class ResultView : MonoBehaviour
     {
         switch(kind)
         {
-            case CutsceneKind.AbyssRise:
-                return SceneNames.TowerRise;
+            case CutsceneKind.Collapse:
+            case CutsceneKind.TowersRise:
+            case CutsceneKind.OriginRise:
+                return SceneNames.TowerMap;
             default:
                 return SceneNames.Village;
         }
@@ -51,9 +53,19 @@ public class ResultView : MonoBehaviour
     private void Show(RunEndReason reason, int stage)
     {
         titleText.text = GetTitle(reason);
-        stageText.text = $"{stage}F";
+        stageText.text = GetStageText(stage);
 
         PopupManager.instance.Open(panel, closeOnEscape: false);
+    }
+
+    private static string GetStageText(int stage)
+    {
+        GameSession session = GameSession.instance;
+
+        if(!session.CurrentTower.IsEndless)
+            return $"{stage}F";
+
+        return $"{stage}F  (최고 {session.Towers.OriginBestFloor}F)";
     }
 
     private static string GetTitle(RunEndReason reason)
@@ -62,8 +74,6 @@ public class ResultView : MonoBehaviour
         {
             case RunEndReason.Death:
                 return "쓰러졌다...";
-            case RunEndReason.Victory:
-                return "정상의 주인을 쓰러뜨렸다!";
             case RunEndReason.Conquest:
                 return $"{GameSession.instance.CurrentTower.Name}이 무너진다...";
             default:

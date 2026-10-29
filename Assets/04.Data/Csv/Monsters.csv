@@ -7,11 +7,16 @@
 2006,구울,Monster_Ghoul,80,9,3,0.1,Normal,0.2,1.8,None,0,0,0,,0.15,1.6,
 2007,서리 망령,Monster_FrostWraith,55,6,2.5,0.1,Normal,0.1,1.5,ice,0.4,30,3,,0.15,1.6,
 2008,광신도 화염술사,Monster_Cultist,40,7,2.5,0.12,Normal,0.1,1.5,fire,0.5,3,4,,0.15,1.6,
+2009,임프,Monster_Imp,40,6,1.8,0.08,Normal,0.1,1.5,fire,0.35,3,3,,0.15,1.6,
+2010,지옥견,Monster_Hellhound,70,8,2.2,0.1,Normal,0.15,1.6,fire,0.4,4,4,,0.2,1.7,
+2011,악마 전사,Monster_DemonWarrior,110,11,3,0.12,Normal,0.2,1.8,None,0,0,0,,0.2,1.8,
 2101,고블린 족장,Monster_GoblinKing,180,9,3,1,Boss,0.15,2,None,0,0,0,,0.25,1.8,
 2102,포자 모체,Monster_SporeMother,240,7,3.5,1,Boss,0.05,1.5,poison,0.6,5,6,,0.25,1.8,
 2103,해골 군주,Monster_SkeletonLord,320,11,3,1,Boss,0.15,2,None,0,0,0,,0.25,1.8,
 2104,서리 여왕,Monster_FrostQueen,300,9,3,1,Boss,0.1,1.5,ice,0.5,40,4,,0.25,1.8,
 2105,고대 용,Monster_Dragon,350,12,3,1,Boss,0.1,1.5,fire,0.4,5,4,Hidden,0.3,2,
+2106,화염 지휘관,Monster_FlameCommander,300,11,3,1,Boss,0.15,2,fire,0.5,5,4,,0.25,1.8,
+2107,마왕,Monster_DemonLord,420,14,3,1,Boss,0.15,2,fire,0.5,6,5,Hidden,0.3,2.2,
 2201,되살아난 버섯,Monster_Mushroom_Undead,50,5,3,0.07,Normal,0.05,1.5,None,0,0,0,,0.25,1.8,0.3
 2202,되살아난 고블린,Monster_Goblin_Undead,35,5,2,0.1,Normal,0.15,1.5,poison,0.2,3,4,,0.25,1.8,0.3
 2203,강화된 스켈레톤,Monster_Skeleton_Undead,60,7,2.5,0.1,Normal,0.1,1.5,None,0,0,0,,0.25,1.8,0.3

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlessingRewardController : MonoBehaviour
 {
-    [Header("등급 확률")] 
+    [Header("등급 확률")]
     [SerializeField] BlessingGradeOdds normalOdds = new() { normal = 68f, rare = 25f, epic = 5.5f, unique = 1.3f, legendary = 0.2f };
     [SerializeField] BlessingGradeOdds bossOdds = new() { normal = 40f, rare = 38f, epic = 16f, unique = 5f, legendary = 1f };
     [SerializeField, Min(1)] int bossInterval = 10;

@@ -15,6 +15,7 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
     [SerializeField] ItemDropper dropper;
     private RunBlessings blessings;
     private IStatModifier training;
+    private TowerRuleSet towerRules;
     public Backpack CurrentBackpack => GameSession.instance.Backpack;
     public Backpack Backpack => GameSession.instance.Backpack;
     public RunBlessings Blessings => blessings;
@@ -50,6 +51,10 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
 
         ui.Bind(session.Backpack);
         training = session.Training.GetBonus(session.CurrentClass);
+        towerRules = new TowerRuleSet();
+        towerRules.SetSource(session.CurrentTower);
+        battle.SetTowerRules(towerRules);
+        stage.SetTowerRules(towerRules);
         blessings = new RunBlessings();
         blessings.Changed += HandleBlessingChanged;
         blessingReward.Bind(blessings);
@@ -57,8 +62,8 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
         stage.SetRunBonus(blessings);
         dropper.SetRunBonus(blessings);
 
-        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings);
-        battle.Bind(session.Backpack, session.CurrentClass, training, blessings);
+        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings, towerRules);
+        battle.Bind(session.Backpack, session.CurrentClass, training, blessings, towerRules);
         toolTip.Bind(session.Backpack);
         playerHpBar.Bind(player.Health);
         playerStatusIcons.Bind(player);
@@ -89,10 +94,12 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
     }
     private void HandleStageStarted(OnStageStarted e)
     {
-        GameSession.instance.Training.ReportFloor(e.Stage);
+        GameSession.instance.ReportFloor(e.Stage);
 
         if(e.Stage <= 1 || blessings == null)
             return;
+
+        ApplyFloorPoison(e.Stage);
 
         int heal = Mathf.RoundToInt(blessings.Sum(BlessingStat.FloorHeal));
 
@@ -112,9 +119,20 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
         if(gained > 0)
             player.Health.Heal(gained);
     }
+    private void ApplyFloorPoison(int floor)
+    {
+        int damage = towerRules.GetFloorDamage(floor, player.Health.MaxHp);
+        damage = Mathf.Min(damage, player.Health.CurrentHP - 1);
+
+        if(damage <= 0)
+            return;
+
+        player.Health.TakeDamage(new DamageInfo(damage, false, DamageElement.Poison, true));
+        Sfx.Play(SfxType.FloorPoison);
+    }
     public PlayerStats BuildStats()
     {
         GameSession session = GameSession.instance;
-        return PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings);
+        return PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings, towerRules);
     }
 }

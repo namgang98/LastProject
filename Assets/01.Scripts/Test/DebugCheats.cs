@@ -56,8 +56,17 @@ public class DebugCheats : MonoBehaviour
 
         if(keyboard.f8Key.wasPressedThisFrame)
             SceneLoader.instance.Load(SceneNames.TowerRise);
-    }
 
+        if(keyboard.f9Key.wasPressedThisFrame)
+            ConquerNextTower();
+        if(keyboard.f10Key.wasPressedThisFrame)
+            ResetTowers();
+    }
+    private void ResetTowers()
+    {
+        GameSession.instance.ResetTowers();
+        SceneLoader.instance.Load(SceneNames.Village);
+    }
     private void AddGold()
     {
         GameSession.instance.Wallet.Earn(gold);
@@ -128,6 +137,22 @@ public class DebugCheats : MonoBehaviour
     private static void Notify(string text)
     {
         EventManager.instance.PostNotification(new OnFeedback($"[테스트] {text}", FeedbackType.Info));
+    }
+    private void ConquerNextTower()
+    {
+        GameSession session = GameSession.instance;
+
+        foreach(TowerInfo tower in session.Towers.Towers)
+        {
+            if(tower.IsEndless || !session.Towers.CanEnter(tower))
+                continue;
+
+            session.SelectTower(tower);
+            session.FinishRun(RunEndReason.Conquest);
+            string scene = session.ConsumeCutscene() == CutsceneKind.None ? SceneNames.Village : SceneNames.TowerMap;
+            SceneLoader.instance.Load(scene);
+            return;
+        }
     }
 #endif
 }

@@ -20,7 +20,7 @@ public class BattleController : MonoBehaviour
     public event Action<ItemInstance, ICooldownSource> OnActionReady;
     public event Action OnBattleEnded;
     private IRunBonus runBonus = EmptyRunBonus.Instance;
-
+    private TowerRuleSet towerRules = new();
     private void Update()
     {
         if(!isFighting)
@@ -133,17 +133,33 @@ public class BattleController : MonoBehaviour
     }
     private void AddMonsterAction(MonsterAttackSet attacks)
     {
-        IBattleEffect normal = new AttackEffect(player.Health, attacks.Normal, statuses);
-        IBattleEffect skill = attacks.HasSkill ? new AttackEffect(player.Health, attacks.Skill, statuses) : null;
+        var rules = new MonsterAttackRules(monster.Health, towerRules.MonsterLifesteal);
+        AttackData normalData = towerRules.ModifyMonsterAttack(attacks.Normal);
+        IBattleEffect normal = new AttackEffect(player.Health, normalData, statuses, rules);
+        IBattleEffect skill = attacks.HasSkill ? new AttackEffect(player.Health, towerRules.ModifyMonsterAttack(attacks.Skill), statuses, rules) : null;
         MonsterAttackPattern pattern = new MonsterAttackPattern(normal, skill, attacks.SkillChance);
 
-        AddAction(pattern, attacks.Normal.Cooldown, monster.AttackWindup, monster.Health, () => PlayMonsterAttack(pattern));
+        AddAction(pattern, normalData.Cooldown, monster.AttackWindup, monster.Health, () => PlayMonsterAttack(pattern));
+        AddMonsterRegen();
+    }
+
+    private void AddMonsterRegen()
+    {
+        int amount = Mathf.RoundToInt(monster.Health.MaxHp * towerRules.MonsterRegen);
+
+        if(amount <= 0)
+            return;
+
+        AddAction(new HealEffect(monster.Health, amount), 1f, 0f, monster.Health, null);
     }
     public void SetRunBonus(IRunBonus bonus)
     {
         runBonus = bonus ?? EmptyRunBonus.Instance;
     }
-
+    public void SetTowerRules(TowerRuleSet rules)
+    {
+        towerRules = rules ?? new TowerRuleSet(); 
+    }
     private void PlayMonsterAttack(MonsterAttackPattern pattern)
     {
         if(pattern.Prepare())

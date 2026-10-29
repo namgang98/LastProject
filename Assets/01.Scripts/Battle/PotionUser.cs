@@ -31,6 +31,7 @@ public class PotionUser
 
         float multiplier = 1f + potion.Value / 100f;
         statuses.Apply(new SpeedStatus(health, DamageElement.Haste, multiplier, potion.Duration));
+        Sfx.Play(SfxType.PotionDrink);
     }
 
     public void Tick(float dt)
@@ -57,6 +58,7 @@ public class PotionUser
             return false;
 
         health.Heal(Mathf.RoundToInt(health.MaxHp * potion.Value / 100f * (1f + potionPower)));
+        Sfx.Play(SfxType.PotionDrink);
         return true;
     }
 
@@ -69,6 +71,7 @@ public class PotionUser
             return false;
 
         statuses.Remove(health, DamageElement.Poison);
+        Sfx.Play(SfxType.PotionDrink);
         return true;
     }
 

@@ -37,6 +37,12 @@ public class StageInfo
         return towerId == TowerId && floor >= MinFloor && floor <= MaxFloor && monsters.Count > 0;
     }
 
+    public bool IsAvailable(TowerInfo tower, int floor)
+    {
+        int stageFloor = tower.ToStageFloor(floor);
+        return tower.UsesStagesOf(TowerId) && stageFloor >= MinFloor && stageFloor <= MaxFloor && monsters.Count > 0;
+    }
+
     internal void AddMonster(MonsterInfo monster)
     {
         monsters.Add(monster);

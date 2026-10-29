@@ -16,6 +16,10 @@ public class UnitController : MonoBehaviour
     [SerializeField] float attackWindup = 0.3f;
     [SerializeField] SfxType attackSfx = SfxType.None;
     [SerializeField] SfxType skillSfx = SfxType.None;
+    [SerializeField] SfxType hurtSfx = SfxType.None;
+    [SerializeField] SfxType deathSfx = SfxType.None;
+    [SerializeField] float hurtSfxCooldown = 0.25f;
+    private float nextHurtSfxTime;
     public float AttackWindup => attackWindup;
     private void Reset()
     {
@@ -31,7 +35,7 @@ public class UnitController : MonoBehaviour
         health.OnHit += HandleHit;
         health.OnHealed += HandleHealed;
         health.OnBlocked += HandleShield;
-        health.OnDie += animator.DeadAni;
+        health.OnDie += HandleDie;
         health.OnDodged += HandleDodged;
 
         revivable = health as IRevivable;
@@ -44,7 +48,7 @@ public class UnitController : MonoBehaviour
         health.OnHit -= HandleHit;
         health.OnHealed -= HandleHealed;
         health.OnBlocked -= HandleShield;
-        health.OnDie -= animator.DeadAni;
+        health.OnDie -= HandleDie;
         health.OnDodged -= HandleDodged;
 
         if(revivable != null)
@@ -73,14 +77,14 @@ public class UnitController : MonoBehaviour
             animator.AttackAni();
 
         SfxType sfx = isSkill && skillSfx != SfxType.None ? skillSfx : attackSfx;
-        SoundManager.instance.PlaySfx(sfx);
+        Sfx.Play(sfx);
     }
     private void HandleHit(DamageInfo info)
     {
         Vector3 pos = headPoint != null ? headPoint.position : transform.position;
 
         EventManager.instance.PostNotification(new OnUnitDamaged(pos, info, GetInstanceID()));
-
+        PlayHurtSfx(info);
         if(animator == null || info.IsTick || health.CurrentHP <= 0)
             return;
 
@@ -96,6 +100,22 @@ public class UnitController : MonoBehaviour
             return;
 
         animator.SetMoving(moving);
+    }
+    private void PlayHurtSfx(DamageInfo info)
+    {
+        if(info.IsTick || health.CurrentHP <= 0 || Time.time < nextHurtSfxTime)
+            return;
+
+        nextHurtSfxTime = Time.time + hurtSfxCooldown;
+        Sfx.Play(hurtSfx);
+    }
+
+    private void HandleDie()
+    {
+        Sfx.Play(deathSfx);
+
+        if(animator != null)
+            animator.DeadAni();
     }
     private void HandleHealed(int value)
     {

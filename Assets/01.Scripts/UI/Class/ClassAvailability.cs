@@ -7,8 +7,7 @@
 public enum CutsceneKind
 {
     None,
-    AbyssRise,
     Collapse,
     TowersRise,
-    Ending,
+    OriginRise,
 }

@@ -19,6 +19,9 @@ MonoBehaviour:
   - type: 2
     clip: {fileID: 8300000, guid: e0fc7548916c7af45a11308c3fc47cc4, type: 3}
     volume: 0.47
+  - type: 3
+    clip: {fileID: 8300000, guid: 13405c828b064ec789a75c5fe938eba1, type: 3}
+    volume: 0.5
   sfxs:
   - type: 100
     clips:
@@ -79,3 +82,255 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7e9dc4d0d8acd92409877d064eac1421, type: 3}
     volume: 1
     pitchRandom: 0.12
+  - type: 103
+    clips:
+    - {fileID: 8300000, guid: a66484c5cad5469b8f079155af199a76, type: 3}
+    volume: 0.8
+    pitchRandom: 0
+  - type: 104
+    clips:
+    - {fileID: 8300000, guid: 75f9a16c3891434983a0ba6271354897, type: 3}
+    volume: 0.8
+    pitchRandom: 0
+  - type: 105
+    clips:
+    - {fileID: 8300000, guid: f3aaf77007314b958a66991870e106f3, type: 3}
+    volume: 0.8
+    pitchRandom: 0
+  - type: 106
+    clips:
+    - {fileID: 8300000, guid: 788facca5e844c7abec331108ff910c3, type: 3}
+    volume: 0.8
+    pitchRandom: 0
+  - type: 107
+    clips:
+    - {fileID: 8300000, guid: 7e748bed853e49a083b5ad2fa91f36dd, type: 3}
+    volume: 0.8
+    pitchRandom: 0.05
+  - type: 206
+    clips:
+    - {fileID: 8300000, guid: c59893adbb2b46e2886577b6c1688601, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 207
+    clips:
+    - {fileID: 8300000, guid: 5b0428c7ff574b9fb4b9b186b19d7f1e, type: 3}
+    volume: 0.8
+    pitchRandom: 0.06
+  - type: 208
+    clips:
+    - {fileID: 8300000, guid: 4bec6b829a864f4c8a5ee97190bfca86, type: 3}
+    volume: 0.8
+    pitchRandom: 0.06
+  - type: 209
+    clips:
+    - {fileID: 8300000, guid: 21c574b18cea4484a7a069dc5856612b, type: 3}
+    volume: 0.7
+    pitchRandom: 0.08
+  - type: 210
+    clips:
+    - {fileID: 8300000, guid: b79ff419d75649eda9bc81559dea9b32, type: 3}
+    volume: 0.7
+    pitchRandom: 0.08
+  - type: 211
+    clips:
+    - {fileID: 8300000, guid: 2b0efddf9d7d45d4aa18f1296b0f2896, type: 3}
+    - {fileID: 8300000, guid: b8d7f34c42c64c2ab817ea08fe4ba939, type: 3}
+    volume: 0.8
+    pitchRandom: 0.05
+  - type: 212
+    clips:
+    - {fileID: 8300000, guid: f38bd91c2cdc4ce4b5a487869f25a2ce, type: 3}
+    volume: 0.7
+    pitchRandom: 0
+  - type: 300
+    clips:
+    - {fileID: 8300000, guid: f6caca8ab0d444e2b3ffb8fda75c9ab8, type: 3}
+    volume: 0.8
+    pitchRandom: 0.05
+  - type: 301
+    clips:
+    - {fileID: 8300000, guid: bd3d4dcf8d7a4d0a8308681ff39feca6, type: 3}
+    volume: 0.7
+    pitchRandom: 0
+  - type: 503
+    clips:
+    - {fileID: 8300000, guid: 54d21780160040d3849dc6f24b90f488, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 504
+    clips:
+    - {fileID: 8300000, guid: bf45763eea174549ae16af4b463d8aeb, type: 3}
+    volume: 0.8
+    pitchRandom: 0.06
+  - type: 505
+    clips:
+    - {fileID: 8300000, guid: 0176199903c0492ca1ebff31c454583c, type: 3}
+    volume: 0.8
+    pitchRandom: 0.06
+  - type: 506
+    clips:
+    - {fileID: 8300000, guid: 2232027fe33d47a0896bd8203b61c207, type: 3}
+    - {fileID: 8300000, guid: 320ec452d22741c1b92a033e90280eaf, type: 3}
+    - {fileID: 8300000, guid: ce7e163728c4410dbe694a5c2b4e8961, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 507
+    clips:
+    - {fileID: 8300000, guid: 02841e8db3f34fed9863d95cda996a7f, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 550
+    clips:
+    - {fileID: 8300000, guid: 6f85503199fc43b7b6e4271fb1bf4567, type: 3}
+    - {fileID: 8300000, guid: e7c63886dcbe447195737c66ce37b87a, type: 3}
+    - {fileID: 8300000, guid: b87487bb63834258b678bca746567b26, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 551
+    clips:
+    - {fileID: 8300000, guid: 302b0b52e85f4c8994dc2a1ca69aa175, type: 3}
+    volume: 0.8
+    pitchRandom: 0.05
+  - type: 552
+    clips:
+    - {fileID: 8300000, guid: 5a399a5994f5438ca761e97cad7424f1, type: 3}
+    volume: 0.8
+    pitchRandom: 0.06
+  - type: 553
+    clips:
+    - {fileID: 8300000, guid: 564cdafbfee5450b8fd3ac7cde978762, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 213
+    clips:
+    - {fileID: 8300000, guid: e40c0a19a22a4dc5bdbf27050057f103, type: 3}
+    - {fileID: 8300000, guid: 74b8108298f14332913fa550afe6ddd2, type: 3}
+    - {fileID: 8300000, guid: c0b13f170c9e45718b9d434670e5ece7, type: 3}
+    volume: 0.7
+    pitchRandom: 0.08
+  - type: 508
+    clips:
+    - {fileID: 8300000, guid: 86a55b295dde4cd1bed5a788ebbd1770, type: 3}
+    - {fileID: 8300000, guid: 3605e044d7fd4a7b833f5a14f6ff21e1, type: 3}
+    - {fileID: 8300000, guid: 269188ddd4124affa10b61ca3add9942, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 509
+    clips:
+    - {fileID: 8300000, guid: a73492e22b0e4c71ba1ec2ce8b17953e, type: 3}
+    - {fileID: 8300000, guid: 7226c228ea864d798c8b94dc8b545757, type: 3}
+    - {fileID: 8300000, guid: 98364ba9be074f4b8802e9e33b9d311a, type: 3}
+    - {fileID: 8300000, guid: f7913e350c8b4e718fcc9d535f202d1e, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 510
+    clips:
+    - {fileID: 8300000, guid: 590495f86f6c44108cceccdbde05b197, type: 3}
+    - {fileID: 8300000, guid: 18e5b4b781324846bb6096309df86134, type: 3}
+    - {fileID: 8300000, guid: 0289d64dedaf4504aa52ef6843e31d99, type: 3}
+    volume: 0.8
+    pitchRandom: 0.1
+  - type: 554
+    clips:
+    - {fileID: 8300000, guid: 93b8e850be6643bfbe814a9af00f2cdb, type: 3}
+    - {fileID: 8300000, guid: 6890c14fd902459eb7ca12e145219892, type: 3}
+    - {fileID: 8300000, guid: 73e35d6eaf084a718626b98bea5ceaf5, type: 3}
+    volume: 0.9
+    pitchRandom: 0.05
+  - type: 555
+    clips:
+    - {fileID: 8300000, guid: b4b5940d6a914403ac243da68c662d44, type: 3}
+    volume: 0.8
+    pitchRandom: 0.05
+  - type: 556
+    clips:
+    - {fileID: 8300000, guid: 7c7432cd606d4f6bb130ec04a5cb3d9d, type: 3}
+    volume: 0.8
+    pitchRandom: 0.08
+  - type: 557
+    clips:
+    - {fileID: 8300000, guid: c6884d722f9e4718a38949f1ed4f8194, type: 3}
+    volume: 0.8
+    pitchRandom: 0.06
+  - type: 558
+    clips:
+    - {fileID: 8300000, guid: 0f7f4acdff39454880fe626f41ce6155, type: 3}
+    volume: 0.8
+    pitchRandom: 0.06
+  - type: 108
+    clips:
+    - {fileID: 8300000, guid: ffe12909884e4116aaf62851220c1b94, type: 3}
+    - {fileID: 8300000, guid: b11fba3bd0c4477ba20ae2e4a2fb48a4, type: 3}
+    volume: 0.6
+    pitchRandom: 0.08
+  - type: 109
+    clips:
+    - {fileID: 8300000, guid: 55b3d004e07b471fa013cf106ac65b34, type: 3}
+    - {fileID: 8300000, guid: b0ee662b19b64e169fe3ab72847c5de2, type: 3}
+    volume: 0.6
+    pitchRandom: 0.08
+  - type: 110
+    clips:
+    - {fileID: 8300000, guid: d2ade2c6485b43ae8d6910a466ac8be7, type: 3}
+    - {fileID: 8300000, guid: 8745ed402792431da4aa52c195fc764f, type: 3}
+    volume: 0.7
+    pitchRandom: 0.05
+  - type: 111
+    clips:
+    - {fileID: 8300000, guid: 06c8430582e444c2855bcafb621da073, type: 3}
+    volume: 0.7
+    pitchRandom: 0.05
+  - type: 112
+    clips:
+    - {fileID: 8300000, guid: d1a37b08d01d4bc19de931734ce05025, type: 3}
+    volume: 0.6
+    pitchRandom: 0.08
+  - type: 214
+    clips:
+    - {fileID: 8300000, guid: 21cd92178ae9455e8f08f505de84cc45, type: 3}
+    volume: 0.7
+    pitchRandom: 0.08
+  - type: 400
+    clips:
+    - {fileID: 8300000, guid: 31373bbce26f412d9c6b6b1b0f918c41, type: 3}
+    volume: 0.9
+    pitchRandom: 0
+  - type: 401
+    clips:
+    - {fileID: 8300000, guid: b38e64d52a414e8dbe74701087501e02, type: 3}
+    volume: 0.9
+    pitchRandom: 0
+  - type: 402
+    clips:
+    - {fileID: 8300000, guid: ad9b7165b8b54220861c925574f9d1ea, type: 3}
+    volume: 0.9
+    pitchRandom: 0
+  - type: 403
+    clips:
+    - {fileID: 8300000, guid: 57a04c19fd194fd2bf205381f4dd5540, type: 3}
+    volume: 0.9
+    pitchRandom: 0
+  - type: 559
+    clips:
+    - {fileID: 8300000, guid: fe47d4e8d9b04ba9b40f336f7badc33d, type: 3}
+    - {fileID: 8300000, guid: 4710a840df8e46d284eded5721b04056, type: 3}
+    - {fileID: 8300000, guid: 1079092b9cf142ffa95bfedefd749d13, type: 3}
+    - {fileID: 8300000, guid: a1b87da87a914f7090e386e0545457a6, type: 3}
+    volume: 0.6
+    pitchRandom: 0.1
+  - type: 302
+    clips:
+    - {fileID: 8300000, guid: eed9d6eb6096d17409147c481e97faed, type: 3}
+    volume: 0.7
+    pitchRandom: 0.06
+  - type: 303
+    clips:
+    - {fileID: 8300000, guid: 593ac992956a37741b8112e7bbe3b9d1, type: 3}
+    volume: 0.7
+    pitchRandom: 0.06
+  - type: 304
+    clips:
+    - {fileID: 8300000, guid: ea91861ead8c7924384aed4e5525e3df, type: 3}
+    volume: 0.7
+    pitchRandom: 0.06

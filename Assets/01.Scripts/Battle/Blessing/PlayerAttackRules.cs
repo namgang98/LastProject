@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerAttackRules
+public class PlayerAttackRules : IAttackRules
 {
     private const float ExecuteThreshold = 0.3f;
     private const float LowHpThreshold = 0.5f;

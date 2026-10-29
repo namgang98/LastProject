@@ -72,7 +72,7 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
         Vector2 area = itemLayer.rect.size;
         float cellSize = Mathf.Min(area.x / bounds.x, area.y / bounds.y);
 
-        view.ApplyLayout(cellSize, 0, 0f);
+        view.ApplyLayout(cellSize, 0, 0f, false);
         view.Rect.anchoredPosition = (area - view.Rect.sizeDelta) * 0.5f;
     }
 

@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00.Scenes/TowerRise.unity
     guid: 90810c3476c4bec4f803ccf2a30367cb
+  - enabled: 1
+    path: Assets/00.Scenes/TowerMap.unity
+    guid: 9663353a9e6cbc24aad847ea50e33acc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

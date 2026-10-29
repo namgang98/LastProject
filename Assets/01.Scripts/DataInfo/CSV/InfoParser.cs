@@ -488,13 +488,49 @@ public static class InfoParser
         if(!string.IsNullOrEmpty(row.GetString(CSVStamp.AbyssFloor)) && (!row.TryGetInt(CSVStamp.AbyssFloor, out abyssFloor) || (abyssFloor != 0 && abyssFloor <= topFloor)))
             return Fail(row, errors, CSVStamp.AbyssFloor);
 
-        int prologue = 0;
+        TowerKind kind = TowerKind.Themed;
 
-        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Prologue)) && !row.TryGetInt(CSVStamp.Prologue, out prologue))
-            return Fail(row, errors, CSVStamp.Prologue);
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Kind)) && !row.TryGetEnum(CSVStamp.Kind, out kind))
+            return Fail(row, errors, CSVStamp.Kind);
 
-        info = new TowerInfo(b.id, b.name, row.GetString(CSVStamp.Description), topFloor, abyssFloor, prologue == 1);
+        if(!TryParseTowerRules(row.GetString(CSVStamp.Rules), out List<TowerRuleInfo> rules))
+            return Fail(row, errors, CSVStamp.Rules);
+
+        info = new TowerInfo(b.id, b.name, row.GetString(CSVStamp.Description), topFloor, abyssFloor, kind, rules);
         return true;
+    }
+
+    private static bool TryParseTowerRules(string text, out List<TowerRuleInfo> rules)
+    {
+        rules = new List<TowerRuleInfo>();
+
+        if(string.IsNullOrWhiteSpace(text))
+            return true;
+
+        foreach(string entry in text.Split('|'))
+        {
+            string[] parts = entry.Trim().Split(':');
+
+            if(parts.Length < 2 || !System.Enum.TryParse(parts[0].Trim(), true, out TowerRuleType type))
+                return false;
+
+            if(!TryParseRuleValue(parts, 1, out float value) || !TryParseRuleValue(parts, 2, out float value2) || !TryParseRuleValue(parts, 3, out float duration))
+                return false;
+
+            rules.Add(new TowerRuleInfo(type, value, value2, duration));
+        }
+
+        return true;
+    }
+
+    private static bool TryParseRuleValue(string[] parts, int index, out float value)
+    {
+        value = 0f;
+
+        if(index >= parts.Length)
+            return true;
+
+        return float.TryParse(parts[index].Trim(), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out value);
     }
     #endregion
     #region 강화

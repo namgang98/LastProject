@@ -5,11 +5,9 @@ public interface IGameEvent { }
 public struct OnChangeGold : IGameEvent
 {
     public int Gold;
-    public int RunGold;
-    public OnChangeGold(int gold, int runGold)
+    public OnChangeGold(int gold)
     {
         Gold = gold;
-        RunGold = runGold;
     }
 }
 
@@ -63,7 +61,6 @@ public enum RunEndReason
 {
     Death,
     Return,
-    Victory,
     Conquest,
 }
 public struct OnRunEnded : IGameEvent

@@ -13,8 +13,8 @@ public class TowerSlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] Sprite towerSprite;
     [SerializeField] float spriteScale = 0.2f;
     [SerializeField] Sprite ruinSprite;
-    [SerializeField] GameObject nameplate;
-    [SerializeField] TMP_Text nameText;
+    [SerializeField] GameObject tooltip;
+    [SerializeField] TMP_Text tooltipText;
     [SerializeField] float hoverScale = 1.05f;
     [SerializeField] float hoverTime = 0.15f;
     [SerializeField, Range(0f, 1f)] float hitAlpha = 0.1f;
@@ -27,7 +27,7 @@ public class TowerSlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         image.alphaHitTestMinimumThreshold = hitAlpha;
         button.onClick.AddListener(HandleClick);
-        nameplate.SetActive(false);
+        tooltip.SetActive(false);
     }
 
     public void Bind(TowerInfo info, bool collapsed, bool enterable)
@@ -37,8 +37,8 @@ public class TowerSlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         image.SetNativeSize();
         image.rectTransform.sizeDelta = image.sprite.rect.size * spriteScale;
         button.interactable = enterable;
-        nameText.text = collapsed ? $"{info.Name}\n<size=70%>무너진 탑</size>" : info.Name;
-        nameplate.SetActive(false);
+        tooltipText.text = TowerRuleText.Build(info, collapsed);
+        tooltip.SetActive(false);
         transform.DOKill();
         transform.localScale = Vector3.one;
     }
@@ -51,7 +51,7 @@ public class TowerSlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        nameplate.SetActive(true);
+        tooltip.SetActive(true);
 
         if(!button.interactable)
             return;
@@ -61,7 +61,7 @@ public class TowerSlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        nameplate.SetActive(false);
+        tooltip.SetActive(false);
         transform.DOScale(1f, hoverTime).SetUpdate(true).SetLink(gameObject);
     }
 

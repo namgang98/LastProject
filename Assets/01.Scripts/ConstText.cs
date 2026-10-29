@@ -74,6 +74,7 @@ public static class CSVStamp
     public const string Prologue = "prologue";
     public const string Stat2 = "stat2";
     public const string Value2 = "value2";
+    public const string Rules = "rules";
     public const string MaxStack = "maxstack";
     public const string StarterWeapon = "starterweapon";
 
@@ -137,5 +138,6 @@ public static class SceneNames
     public const string Village = "Village";
     public const string Dungeon = "Dungeon";
     public const string TowerRise = "TowerRise";
+    public const string TowerMap = "TowerMap";
 }
 #endregion

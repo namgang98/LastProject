@@ -95,6 +95,7 @@ public class DragController : MonoBehaviour
             return;
 
         dragging = view;
+        Sfx.Play(SfxType.ItemPick);
         origin = view.Home;
         lastEvent = eventData;
 
@@ -143,7 +144,7 @@ public class DragController : MonoBehaviour
             from?.Restore(item);
             return;
         }
-
+        Sfx.Play(SfxType.ItemDrop);
         if(target != from)
             from?.Release(item);
     }

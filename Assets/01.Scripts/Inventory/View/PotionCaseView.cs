@@ -66,6 +66,7 @@ public class PotionCaseView : MonoBehaviour
         current.Storage.Changed += Refresh;
         panel.SetActive(true);
         Refresh(current.Storage);
+        Sfx.Play(SfxType.PotionCaseOpen);
     }
 
     public void Close()

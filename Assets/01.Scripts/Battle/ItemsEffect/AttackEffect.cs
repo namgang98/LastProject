@@ -5,10 +5,10 @@ public class AttackEffect : IBattleEffect
     private readonly UnitHealth target;
     private readonly AttackData data;
     private readonly StatusEffects statuses;
-    private readonly PlayerAttackRules rules;
+    private readonly IAttackRules rules;
     private int hitCount;
 
-    public AttackEffect(UnitHealth target, AttackData data, StatusEffects statuses, PlayerAttackRules rules = null)
+    public AttackEffect(UnitHealth target, AttackData data, StatusEffects statuses, IAttackRules rules = null)
     {
         this.target = target;
         this.data = data;

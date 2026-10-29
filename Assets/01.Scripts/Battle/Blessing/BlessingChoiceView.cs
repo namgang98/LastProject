@@ -43,6 +43,7 @@ public class BlessingChoiceView : MonoBehaviour
         Action<BlessingInfo> callback = onChosen;
         onChosen = null;
         PopupManager.instance.Close(popup);
+        Sfx.Play(SfxType.BlessingPick);
         callback(info);
     }
 }

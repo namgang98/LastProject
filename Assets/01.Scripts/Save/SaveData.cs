@@ -11,6 +11,7 @@ public class SaveData
     public int gold;
     public bool inRun;
     public int bestFloor;
+    public int originBestFloor;
     public int clearCount;
     public int abyssClearCount;
     public BackpackSaveData backpack = new();

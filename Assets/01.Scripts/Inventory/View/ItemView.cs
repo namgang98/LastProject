@@ -50,7 +50,7 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         icon.sprite = item.Info.Icon;
     }
 
-    public void ApplyLayout(float cellSize, int rotation, float tilt)
+    public void ApplyLayout(float cellSize, int rotation, float tilt, bool showTiles = true)
     {
         Vector2Int rotatedSize = GetBounds(Item, rotation);
         Vector2Int originalSize = GetBounds(Item, 0);
@@ -60,7 +60,12 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         rect.sizeDelta = (Vector2)rotatedSize * cellSize;
         icon.rectTransform.sizeDelta = iconSize;
         icon.rectTransform.localEulerAngles = new Vector3(0f, 0f, angle);
-        shapeTiles.Show(Item.Info, cellSize, iconSize, angle);
+
+        if(showTiles)
+            shapeTiles.Show(Item.Info, cellSize, iconSize, angle);
+        else
+            shapeTiles.Hide();
+
         cooldown.SetOrientation(originalSize.x > originalSize.y);
         occupied.Clear();
 

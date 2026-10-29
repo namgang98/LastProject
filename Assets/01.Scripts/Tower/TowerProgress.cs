@@ -5,7 +5,7 @@ public enum ConquestResult
     Replay,
     Collapsed,
     TowersRisen,
-    Ending,
+    OriginRisen,
 }
 
 public class TowerProgress
@@ -16,14 +16,39 @@ public class TowerProgress
     private readonly HashSet<int> fallen = new();
 
     public TowerInfo Prologue { get; }
+    public TowerInfo Origin { get; }
     public IReadOnlyList<TowerInfo> Towers => towers;
-    public bool IsFreeMode => towers.Count > 0 && collapsed.Count >= towers.Count;
+    public int OriginBestFloor { get; private set; }
     public bool IsPrologueCollapsed => Prologue != null && collapsed.Contains(Prologue.Id);
+    public bool IsFreeMode => IsOriginRisen;
 
-    public TowerProgress(IReadOnlyList<TowerInfo> towers, TowerInfo prologue, SaveData data)
+    public bool IsOriginRisen
+    {
+        get
+        {
+            int themed = 0;
+
+            foreach(TowerInfo tower in towers)
+            {
+                if(!tower.IsThemed)
+                    continue;
+
+                themed++;
+
+                if(!collapsed.Contains(tower.Id))
+                    return false;
+            }
+
+            return themed > 0;
+        }
+    }
+
+    public TowerProgress(IReadOnlyList<TowerInfo> towers, TowerInfo prologue, TowerInfo origin, SaveData data)
     {
         this.towers = towers;
         Prologue = prologue;
+        Origin = origin;
+        OriginBestFloor = data.originBestFloor;
 
         cleared.UnionWith(data.clearedTowers);
         collapsed.UnionWith(data.collapsedTowers);
@@ -55,12 +80,20 @@ public class TowerProgress
 
     public bool IsRisen(TowerInfo tower)
     {
-        return tower.IsPrologue || IsPrologueCollapsed;
+        switch(tower.Kind)
+        {
+            case TowerKind.Prologue:
+                return true;
+            case TowerKind.Themed:
+                return IsPrologueCollapsed;
+            default:
+                return IsOriginRisen;
+        }
     }
 
     public bool CanEnter(TowerInfo tower)
     {
-        return IsRisen(tower) && (IsFreeMode || !IsCollapsed(tower));
+        return IsRisen(tower) && !IsCollapsed(tower);
     }
 
     public bool IsAbyssOpen(TowerInfo tower)
@@ -70,7 +103,10 @@ public class TowerProgress
 
     public int GetFinalFloor(TowerInfo tower)
     {
-        return IsAbyssOpen(tower) ? tower.AbyssFloor : tower.TopFloor;
+        if(IsAbyssOpen(tower))
+            return tower.AbyssFloor;
+
+        return tower.IsEndless ? tower.LastFloor : tower.TopFloor;
     }
 
     public bool IsFallen(ClassInfo info)
@@ -85,14 +121,14 @@ public class TowerProgress
 
     public ConquestResult Conquer(TowerInfo tower, ClassInfo hero)
     {
-        if(IsFreeMode || IsCollapsed(tower))
+        if(tower.IsEndless || IsCollapsed(tower))
             return ConquestResult.Replay;
 
         collapsed.Add(tower.Id);
         fallen.Add(hero.Id);
 
-        if(IsFreeMode)
-            return ConquestResult.Ending;
+        if(IsOriginRisen)
+            return ConquestResult.OriginRisen;
 
         if(tower.IsPrologue)
             return ConquestResult.TowersRisen;
@@ -100,10 +136,27 @@ public class TowerProgress
         return ConquestResult.Collapsed;
     }
 
+    public bool ReportFloor(TowerInfo tower, int floor)
+    {
+        if(!tower.IsEndless || floor <= OriginBestFloor)
+            return false;
+
+        OriginBestFloor = floor;
+        return true;
+    }
+
     public void WriteTo(SaveData data)
     {
         data.clearedTowers = new List<int>(cleared);
         data.collapsedTowers = new List<int>(collapsed);
         data.fallenClasses = new List<int>(fallen);
+        data.originBestFloor = OriginBestFloor;
+    }
+    public void ResetProgress()
+    {
+        cleared.Clear();
+        collapsed.Clear();
+        fallen.Clear();
+        OriginBestFloor = 0;
     }
 }

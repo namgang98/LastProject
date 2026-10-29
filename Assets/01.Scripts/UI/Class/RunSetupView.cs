@@ -11,7 +11,7 @@ public class RunSetupView : MonoBehaviour
     [SerializeField] TowerFrontView front;
     [SerializeField] TowerMapView map;
     [SerializeField] TMP_Text hintText;
-
+    private TowerInfo gateTower;
     private bool departing;
 
     private void Awake()
@@ -44,7 +44,9 @@ public class RunSetupView : MonoBehaviour
 
     private void ShowTowers(TowerProgress progress)
     {
-        if(progress.IsPrologueCollapsed)
+        gateTower = GetGateTower(progress);
+
+        if(gateTower == null)
         {
             front.Hide();
             map.Show(progress);
@@ -53,10 +55,19 @@ public class RunSetupView : MonoBehaviour
         }
 
         map.Hide();
-        front.Show(progress.Prologue);
+        front.Show(gateTower);
         hintText.text = "문을 눌러 출발";
     }
+    private static TowerInfo GetGateTower(TowerProgress progress)
+    {
+        if(!progress.IsPrologueCollapsed)
+            return progress.Prologue;
 
+        if(progress.IsOriginRisen)
+            return progress.Origin;
+
+        return null;
+    }
     private void RefreshInteractable()
     {
         bool ready = !departing && classList.Selected != null;
@@ -71,7 +82,7 @@ public class RunSetupView : MonoBehaviour
 
     private void HandleDoorClicked()
     {
-        TryDepart(GameSession.instance.Towers.Prologue, front.Open());
+        TryDepart(gateTower, front.Open());
     }
 
     private void HandleTowerClicked(TowerInfo tower)

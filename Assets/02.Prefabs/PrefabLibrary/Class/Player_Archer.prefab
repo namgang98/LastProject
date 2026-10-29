@@ -108,11 +108,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4a26c1a33c73742bbc8e5d3f384886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitController
+  hurtCooldown: 0.6
+  attackLock: 0.5
   health: {fileID: 3652135237095507006}
   animator: {fileID: 1134597111179307745}
   headPoint: {fileID: 799169451849926850}
   attackWindup: 0.3
   attackSfx: 201
+  skillSfx: 0
+  hurtSfx: 210
+  deathSfx: 0
+  hurtSfxCooldown: 0.25
 --- !u!114 &3652135237095507006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7796809120eb51459e38ad8513d0d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  reviveInvulnerableTime: 1
+  maxReduction: 0.75
+  maxDodge: 0.5
 --- !u!114 &1134597111179307745
 MonoBehaviour:
   m_ObjectHideFlags: 0

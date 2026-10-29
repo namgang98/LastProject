@@ -21,6 +21,6 @@ public class GoldUI : MonoBehaviour
 
     private void HandleChangeGold(OnChangeGold e)
     {
-        goldText.text = e.RunGold > 0 ? $"{e.Gold} (+{e.RunGold})" : $"{e.Gold}";
+        goldText.text = $"{e.Gold}";
     }
 }

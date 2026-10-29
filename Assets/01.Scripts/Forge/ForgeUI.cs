@@ -187,7 +187,7 @@ public class ForgeUI : MonoBehaviour
         GameSession session = GameSession.instance;
         string name = selected.Info.Name;
         ForgeResult result = session.Forge.TryForge(selected, session.Wallet, session);
-
+        PlayResultSfx(result);
         EventManager.instance.PostNotification(new OnFeedback(ToMessage(result, name, selected.Level), ToFeedbackType(result)));
 
         if(result == ForgeResult.Success || result == ForgeResult.Failed || result == ForgeResult.Downgraded)
@@ -228,5 +228,12 @@ public class ForgeUI : MonoBehaviour
             return;
 
         RefreshDetail();
+    }
+    private static void PlayResultSfx(ForgeResult result)
+    {
+        if(result == ForgeResult.Success)
+            Sfx.Play(SfxType.ForgeSuccess);
+        else if(result == ForgeResult.Failed || result == ForgeResult.Downgraded)
+            Sfx.Play(SfxType.ForgeFail);
     }
 }

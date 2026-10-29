@@ -56,7 +56,11 @@ MonoBehaviour:
   animator: {fileID: 1935057635139188295}
   headPoint: {fileID: 7897299789461663855}
   attackWindup: 0.3
-  attackSfx: 500
+  attackSfx: 508
+  skillSfx: 504
+  hurtSfx: 0
+  deathSfx: 557
+  hurtSfxCooldown: 0.25
 --- !u!114 &3748023692672963359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2393a0c877d33c4da34055d09efc1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealth
+  reviveInvulnerableTime: 1
 --- !u!114 &1935057635139188295
 MonoBehaviour:
   m_ObjectHideFlags: 0

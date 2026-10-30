@@ -7,16 +7,11 @@
 2006,구울,Monster_Ghoul,80,9,3,0.1,Normal,0.2,1.8,None,0,0,0,,0.15,1.6,
 2007,서리 망령,Monster_FrostWraith,55,6,2.5,0.1,Normal,0.1,1.5,ice,0.4,30,3,,0.15,1.6,
 2008,광신도 화염술사,Monster_Cultist,40,7,2.5,0.12,Normal,0.1,1.5,fire,0.5,3,4,,0.15,1.6,
-2009,임프,Monster_Imp,40,6,1.8,0.08,Normal,0.1,1.5,fire,0.35,3,3,,0.15,1.6,
-2010,지옥견,Monster_Hellhound,70,8,2.2,0.1,Normal,0.15,1.6,fire,0.4,4,4,,0.2,1.7,
-2011,악마 전사,Monster_DemonWarrior,110,11,3,0.12,Normal,0.2,1.8,None,0,0,0,,0.2,1.8,
 2101,고블린 족장,Monster_GoblinKing,180,9,3,1,Boss,0.15,2,None,0,0,0,,0.25,1.8,
 2102,포자 모체,Monster_SporeMother,240,7,3.5,1,Boss,0.05,1.5,poison,0.6,5,6,,0.25,1.8,
 2103,해골 군주,Monster_SkeletonLord,320,11,3,1,Boss,0.15,2,None,0,0,0,,0.25,1.8,
 2104,서리 여왕,Monster_FrostQueen,300,9,3,1,Boss,0.1,1.5,ice,0.5,40,4,,0.25,1.8,
 2105,고대 용,Monster_Dragon,350,12,3,1,Boss,0.1,1.5,fire,0.4,5,4,Hidden,0.3,2,
-2106,화염 지휘관,Monster_FlameCommander,300,11,3,1,Boss,0.15,2,fire,0.5,5,4,,0.25,1.8,
-2107,마왕,Monster_DemonLord,420,14,3,1,Boss,0.15,2,fire,0.5,6,5,Hidden,0.3,2.2,
 2201,되살아난 버섯,Monster_Mushroom_Undead,50,5,3,0.07,Normal,0.05,1.5,None,0,0,0,,0.25,1.8,0.3
 2202,되살아난 고블린,Monster_Goblin_Undead,35,5,2,0.1,Normal,0.15,1.5,poison,0.2,3,4,,0.25,1.8,0.3
 2203,강화된 스켈레톤,Monster_Skeleton_Undead,60,7,2.5,0.1,Normal,0.1,1.5,None,0,0,0,,0.25,1.8,0.3
@@ -30,3 +25,13 @@
 2303,되살아난 해골 군주,Monster_SkeletonLord_Undead,320,11,3,1,Boss,0.15,2,None,0,0,0,,0.3,2,0.4
 2304,되살아난 서리 여왕,Monster_FrostQueen_Undead,300,9,3,1,Boss,0.1,1.5,ice,0.5,40,4,,0.3,2,0.4
 2305,되살아난 고대 용,Monster_Dragon_Undead,400,14,3,1,Boss,0.1,1.5,fire,0.5,6,4,Hidden,0.35,2.2,0.5
+2009,임프,Monster_Imp,40,6,1.8,0.08,Normal,0.1,1.5,fire,0.35,3,3,,0.15,1.6,
+2010,지옥견,Monster_Hellhound,70,8,2.2,0.1,Normal,0.15,1.6,fire,0.4,4,4,,0.2,1.7,
+2011,악마 전사,Monster_DemonWarrior,110,11,3,0.12,Normal,0.2,1.8,None,0,0,0,,0.2,1.8,
+2106,화염 지휘관,Monster_FlameCommander,300,11,3,1,Boss,0.15,2,fire,0.5,5,4,,0.25,1.8,
+2107,마왕,Monster_DemonLord,420,14,3,1,Boss,0.15,2,fire,0.5,6,5,Hidden,0.3,2.2,
+2012,얼음 정령,Monster_IceElemental,45,6,2.2,0.08,Normal,0.1,1.5,ice,0.5,30,3,,0.15,1.6,
+2013,서리 늑대,Monster_FrostWolf,65,8,2,0.1,Normal,0.15,1.6,ice,0.3,25,2,,0.2,1.7,
+2014,빙결 기사,Monster_FrozenKnight,120,10,3,0.12,Normal,0.15,1.8,ice,0.3,30,3,,0.2,1.8,
+2108,설인,Monster_Yeti,320,12,3.2,1,Boss,0.15,2,ice,0.4,35,3,,0.25,1.8,
+2109,서리 군주,Monster_FrostLord,420,13,3,1,Boss,0.15,2,ice,0.5,40,4,Hidden,0.3,2.2,

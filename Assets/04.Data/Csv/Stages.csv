@@ -9,10 +9,12 @@
 9513,저주받은 지하 묘지,Catacomb_Abyss_bg,2203|2206|2208,2303,11,40,Ambience_Abyss,9804
 9514,저주받은 얼어붙은 회랑,IceMap_Abyss_bg,2207|2203|2206,2304,21,40,Ambience_Abyss,9804
 9515,무너진 용의 둥지,Lair_Abyss_bg,2203|2206|2207|2208,2305,41,50,Ambience_Abyss,9804
-9521,불타는 관문,Cave_bg,2009|2010|2008,2106,1,30,Ambience_Cave,9801
-9522,마왕의 옥좌,Lair_bg,2009|2010|2011,2107,31,50,Ambience_Lair,9801
+9521,불타는 고블린 굴,Cave_bg,2002|2008|2005,2106,1,30,Ambience_Cave,9801
+9522,불길의 둥지,Lair_bg,2008|2003|2006,2107,31,50,Ambience_Lair,9801
 9523,서리 회랑,IceMap_bg,2007|2003|2006,2104,1,50,Ambience_Ice,9802
 9524,얼어붙은 묘지,Catacomb_bg,2007|2003|2006,2103,11,40,Ambience_Ice,9802
 9525,역병의 숲,Forest_bg,2001|2004|2005,2102,1,50,Ambience_Forest,9803
 9526,썩은 굴,Cave_bg,2004|2005|2001,2101,11,40,Ambience_Cave,9803
-9527,용암 회랑,Lair_bg,2010|2011|2008,2106,11,40,Ambience_Lair,9801
+9523,얼어붙은 성벽,IceMap_bg,2012|2013|2014,2108,1,30,Ambience_Ice,9802
+9524,서리 군주의 왕좌,IceMap_bg,2013|2014|2007,2109,31,50,Ambience_Ice,9802
+9528,빙정 동굴,IceMap_bg,2012|2013|2007,2108,11,40,Ambience_Ice,9802

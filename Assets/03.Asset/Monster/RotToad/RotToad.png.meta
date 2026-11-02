@@ -1,0 +1,847 @@
+fileFormatVersion: 2
+guid: 1bfbf192ee98248132d3706ce04702a3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 538898629
+    second: RotToad_0
+  - first:
+      213: 1622729754
+    second: RotToad_1
+  - first:
+      213: -747874870
+    second: RotToad_2
+  - first:
+      213: 48914359
+    second: RotToad_3
+  - first:
+      213: -694307956
+    second: RotToad_4
+  - first:
+      213: -536353781
+    second: RotToad_5
+  - first:
+      213: -1948520561
+    second: RotToad_6
+  - first:
+      213: -1808074373
+    second: RotToad_7
+  - first:
+      213: -1415318066
+    second: RotToad_8
+  - first:
+      213: 1321435092
+    second: RotToad_9
+  - first:
+      213: -1083198450
+    second: RotToad_10
+  - first:
+      213: -1675018483
+    second: RotToad_11
+  - first:
+      213: -866566729
+    second: RotToad_12
+  - first:
+      213: -1511353268
+    second: RotToad_13
+  - first:
+      213: 186372289
+    second: RotToad_14
+  - first:
+      213: 1728580095
+    second: RotToad_15
+  - first:
+      213: 318642302
+    second: RotToad_16
+  - first:
+      213: -602268973
+    second: RotToad_17
+  - first:
+      213: -1818763878
+    second: RotToad_18
+  - first:
+      213: 349230547
+    second: RotToad_19
+  - first:
+      213: 181854333
+    second: RotToad_20
+  - first:
+      213: 1496273123
+    second: RotToad_21
+  - first:
+      213: 2136211838
+    second: RotToad_22
+  - first:
+      213: 905717838
+    second: RotToad_23
+  - first:
+      213: -1406918776
+    second: RotToad_24
+  - first:
+      213: 1619781649
+    second: RotToad_25
+  - first:
+      213: -1535800327
+    second: RotToad_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RotToad_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1074
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe24550a1684e911d21ecc799c768cb4
+      internalID: 538898629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_1
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 1074
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c699ab6975ad1aec661ee68e131d76ce
+      internalID: 1622729754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_2
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 1074
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eabccb1336934d2fa954a03952afc511
+      internalID: -747874870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_3
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 1074
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33eef132bc1f26c0757252ebad319b1c
+      internalID: 48914359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 895
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a135a94f2d90a24933bd37858dc022e3
+      internalID: -694307956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_5
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 895
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb39ede71f9cd3153c568746cf58372
+      internalID: -536353781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_6
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 895
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c8c42ff980b7eebcb8523cae7186871
+      internalID: -1948520561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_7
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 895
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f25e160bc5e6d0115782f59b1af7d17a
+      internalID: -1808074373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 716
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76a386a65e5821902da988f38e031d51
+      internalID: -1415318066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_9
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 716
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e8b83deed9ccca28b76ee8bbcc71f8
+      internalID: 1321435092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_10
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 716
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 439aaf79713a3a39f9f3ab28fe869df5
+      internalID: -1083198450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_11
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 716
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0438b907f6bddf51df14522230885ca
+      internalID: -1675018483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 537
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ca171e40bd08734c1c7d4ea36369475
+      internalID: -866566729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_13
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 537
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d39d3e5dc564a0c6bb55f0304ad7cd98
+      internalID: -1511353268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_14
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 537
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac6fcae5181195547d475af4926cafab
+      internalID: 186372289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_15
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 537
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa043a889a81325eddbc74e3d010398f
+      internalID: 1728580095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 358
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c0a01ea47bcd267f8f9d8773e0f38c1
+      internalID: 318642302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_17
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 358
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b187a77a4436774f611c75e1c7cc41b
+      internalID: -602268973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_18
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 358
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b44bcbcfb838d0a810a967013cfe1344
+      internalID: -1818763878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_19
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 358
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2729cffae2e4bb6f999db7eed753e401
+      internalID: 349230547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 179
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a32b3db5b9f192fa58ca520533918d8
+      internalID: 181854333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_21
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 179
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 385f58f15d5551949cb974eeccd1b76d
+      internalID: 1496273123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_22
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 179
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71bcfc477f9fcf3c27b48413825f9911
+      internalID: 2136211838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_23
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 179
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399148312ee61f01064448d87195b130
+      internalID: 905717838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60aa39a580b3e2a9c711b6faa42eef3d
+      internalID: -1406918776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_25
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 0
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55884a7e00d2b0a5ebf03cdfb92959a8
+      internalID: 1619781649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RotToad_26
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 0
+        width: 385
+        height: 179
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97b9f9f498f8d31c5ef0dd611a3f57b5
+      internalID: -1535800327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f2eed2c40f922dd0c78304a892c1fa2a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":385.0,"y":179.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5260000228881836,"y":0.03799999877810478},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      RotToad_0: 538898629
+      RotToad_1: 1622729754
+      RotToad_2: -747874870
+      RotToad_3: 48914359
+      RotToad_4: -694307956
+      RotToad_5: -536353781
+      RotToad_6: -1948520561
+      RotToad_7: -1808074373
+      RotToad_8: -1415318066
+      RotToad_9: 1321435092
+      RotToad_10: -1083198450
+      RotToad_11: -1675018483
+      RotToad_12: -866566729
+      RotToad_13: -1511353268
+      RotToad_14: 186372289
+      RotToad_15: 1728580095
+      RotToad_16: 318642302
+      RotToad_17: -602268973
+      RotToad_18: -1818763878
+      RotToad_19: 349230547
+      RotToad_20: 181854333
+      RotToad_21: 1496273123
+      RotToad_22: 2136211838
+      RotToad_23: 905717838
+      RotToad_24: -1406918776
+      RotToad_25: 1619781649
+      RotToad_26: -1535800327
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

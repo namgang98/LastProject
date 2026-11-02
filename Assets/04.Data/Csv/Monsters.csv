@@ -35,3 +35,8 @@
 2014,빙결 기사,Monster_FrozenKnight,120,10,3,0.12,Normal,0.15,1.8,ice,0.3,30,3,,0.2,1.8,
 2108,설인,Monster_Yeti,320,12,3.2,1,Boss,0.15,2,ice,0.4,35,3,,0.25,1.8,
 2109,서리 군주,Monster_FrostLord,420,13,3,1,Boss,0.15,2,ice,0.5,40,4,Hidden,0.3,2.2,
+2015,역병 의사,Monster_PlagueDoctor,60,8,2.5,0.1,Normal,0.15,1.6,poison,0.4,4,4,,0.2,1.7,
+2016,부풀어 오른 시체,Monster_BloatedCorpse,130,9,3.2,0.1,Normal,0.05,1.5,poison,0.5,5,5,,0.2,1.8,
+2017,역병 까마귀,Monster_PlagueCrow,35,5,1.5,0.08,Normal,0.15,1.5,poison,0.3,3,3,,0.15,1.6,
+2110,썩은 두꺼비,Monster_RotToad,330,11,3.2,1,Boss,0.1,1.8,poison,0.5,6,5,,0.25,1.8,
+2111,역병 군주,Monster_PlagueLord,420,12,3,1,Boss,0.15,2,poison,0.6,7,6,Hidden,0.3,2.2,

@@ -1,0 +1,847 @@
+fileFormatVersion: 2
+guid: 77a2a79ba1b01100282854a881bf93a4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 676004135
+    second: BloatedCorpse_0
+  - first:
+      213: 832307846
+    second: BloatedCorpse_1
+  - first:
+      213: -1338132866
+    second: BloatedCorpse_2
+  - first:
+      213: -1624796097
+    second: BloatedCorpse_3
+  - first:
+      213: -267601904
+    second: BloatedCorpse_4
+  - first:
+      213: 539798335
+    second: BloatedCorpse_5
+  - first:
+      213: -1696345473
+    second: BloatedCorpse_6
+  - first:
+      213: 1163384712
+    second: BloatedCorpse_7
+  - first:
+      213: -1925209896
+    second: BloatedCorpse_8
+  - first:
+      213: -74932469
+    second: BloatedCorpse_9
+  - first:
+      213: 1213906919
+    second: BloatedCorpse_10
+  - first:
+      213: 1323270287
+    second: BloatedCorpse_11
+  - first:
+      213: -1867736781
+    second: BloatedCorpse_12
+  - first:
+      213: -209901282
+    second: BloatedCorpse_13
+  - first:
+      213: -575032439
+    second: BloatedCorpse_14
+  - first:
+      213: 1412409332
+    second: BloatedCorpse_15
+  - first:
+      213: 761703269
+    second: BloatedCorpse_16
+  - first:
+      213: 1943542076
+    second: BloatedCorpse_17
+  - first:
+      213: -2074136052
+    second: BloatedCorpse_18
+  - first:
+      213: 256439132
+    second: BloatedCorpse_19
+  - first:
+      213: 2072327240
+    second: BloatedCorpse_20
+  - first:
+      213: -1898213882
+    second: BloatedCorpse_21
+  - first:
+      213: 1266834386
+    second: BloatedCorpse_22
+  - first:
+      213: -1967162697
+    second: BloatedCorpse_23
+  - first:
+      213: -143065873
+    second: BloatedCorpse_24
+  - first:
+      213: -1769863832
+    second: BloatedCorpse_25
+  - first:
+      213: 161312254
+    second: BloatedCorpse_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BloatedCorpse_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 996
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2318c3b4ba79ac88e18c53035c961e0
+      internalID: 676004135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_1
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 996
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bd8775485fe844612df074255845f0d
+      internalID: 832307846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_2
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 996
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b172c72dad5dd7d3a466fbc44eba5c3
+      internalID: -1338132866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_3
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 996
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7a5bf0af3d06e0f0bf88895cc258447
+      internalID: -1624796097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 830
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aa77bf02df17a93add2ce95e6056dbb
+      internalID: -267601904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_5
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 830
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebdc04fa03dac5621aaf36484294b95c
+      internalID: 539798335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_6
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 830
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbc770a77ce4b2009f917805c799d632
+      internalID: -1696345473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_7
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 830
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67bfcd835d2f1c26d27b7aa595b250e3
+      internalID: 1163384712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 664
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf50d204ba38265d75e34d7f627eba33
+      internalID: -1925209896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_9
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 664
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaf21e86bcd4f325724404f80288137f
+      internalID: -74932469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_10
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 664
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a2c82d03ab508975de99b1c522c3e64
+      internalID: 1213906919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_11
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 664
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 952241471572bd666437ac636b6ade86
+      internalID: 1323270287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 498
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2394868414b0e0261d1cd2c17a5ed743
+      internalID: -1867736781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_13
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 498
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9814a06d0048e2ce872c365e6c8b420d
+      internalID: -209901282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_14
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 498
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aba412a682b29d184e59625f87d6e1b
+      internalID: -575032439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_15
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 498
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 090e1942a88aae15863ee2951d174ad1
+      internalID: 1412409332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 332
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f2da4ec6de0cc243f05716e5b3db67
+      internalID: 761703269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_17
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 332
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ad399a591dcc4e9fa63b91029320a10
+      internalID: 1943542076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_18
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 332
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1883c04f87ce22556b59795b2ae826b
+      internalID: -2074136052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_19
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 332
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6e8c60ca2c39c8afcd4af5210eb0a36
+      internalID: 256439132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 166
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 828925a97582fd331b29be8ac353f22c
+      internalID: 2072327240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_21
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 166
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 092c44d5afe3fcbde1da6e101ddbd5cc
+      internalID: -1898213882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_22
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 166
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3020f77e138fd54303093c1db68cb7f3
+      internalID: 1266834386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_23
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 166
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 792c102728eb831196bce05a5d71ad7d
+      internalID: -1967162697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c953c3032f5f96ed21e4001e5933ae
+      internalID: -143065873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_25
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 0
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73f293399ab3acfbafae7048e7ea27f3
+      internalID: -1769863832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloatedCorpse_26
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 0
+        width: 326
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e4c3b9838e1bf21016c4564ec89f9ae
+      internalID: 161312254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 0c8da12a9bf77ad6b4015dcf540acee7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":326.0,"y":166.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5260000228881836,"y":0.03799999877810478},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      BloatedCorpse_0: 676004135
+      BloatedCorpse_1: 832307846
+      BloatedCorpse_2: -1338132866
+      BloatedCorpse_3: -1624796097
+      BloatedCorpse_4: -267601904
+      BloatedCorpse_5: 539798335
+      BloatedCorpse_6: -1696345473
+      BloatedCorpse_7: 1163384712
+      BloatedCorpse_8: -1925209896
+      BloatedCorpse_9: -74932469
+      BloatedCorpse_10: 1213906919
+      BloatedCorpse_11: 1323270287
+      BloatedCorpse_12: -1867736781
+      BloatedCorpse_13: -209901282
+      BloatedCorpse_14: -575032439
+      BloatedCorpse_15: 1412409332
+      BloatedCorpse_16: 761703269
+      BloatedCorpse_17: 1943542076
+      BloatedCorpse_18: -2074136052
+      BloatedCorpse_19: 256439132
+      BloatedCorpse_20: 2072327240
+      BloatedCorpse_21: -1898213882
+      BloatedCorpse_22: 1266834386
+      BloatedCorpse_23: -1967162697
+      BloatedCorpse_24: -143065873
+      BloatedCorpse_25: -1769863832
+      BloatedCorpse_26: 161312254
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

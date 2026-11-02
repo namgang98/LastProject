@@ -128,7 +128,6 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
             return;
 
         player.Health.TakeDamage(new DamageInfo(damage, false, DamageElement.Poison, true));
-        Sfx.Play(SfxType.FloorPoison);
     }
     public PlayerStats BuildStats()
     {

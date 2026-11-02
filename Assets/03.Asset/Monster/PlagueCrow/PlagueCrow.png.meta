@@ -1,0 +1,925 @@
+fileFormatVersion: 2
+guid: afbecd7848c98b731b0bf4d1e084ec40
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 906927370
+    second: PlagueCrow_0
+  - first:
+      213: -1566325484
+    second: PlagueCrow_1
+  - first:
+      213: 1789092422
+    second: PlagueCrow_2
+  - first:
+      213: 319738500
+    second: PlagueCrow_3
+  - first:
+      213: 849196624
+    second: PlagueCrow_4
+  - first:
+      213: 1889770749
+    second: PlagueCrow_5
+  - first:
+      213: -54841609
+    second: PlagueCrow_6
+  - first:
+      213: -434546357
+    second: PlagueCrow_7
+  - first:
+      213: -246799243
+    second: PlagueCrow_8
+  - first:
+      213: -408143870
+    second: PlagueCrow_9
+  - first:
+      213: 1241139856
+    second: PlagueCrow_10
+  - first:
+      213: 1719654419
+    second: PlagueCrow_11
+  - first:
+      213: 1578926415
+    second: PlagueCrow_12
+  - first:
+      213: 2129298094
+    second: PlagueCrow_13
+  - first:
+      213: 1617491287
+    second: PlagueCrow_14
+  - first:
+      213: 1344424634
+    second: PlagueCrow_15
+  - first:
+      213: 1613890525
+    second: PlagueCrow_16
+  - first:
+      213: -1471153379
+    second: PlagueCrow_17
+  - first:
+      213: -200276970
+    second: PlagueCrow_18
+  - first:
+      213: 273658536
+    second: PlagueCrow_19
+  - first:
+      213: -1821966822
+    second: PlagueCrow_20
+  - first:
+      213: 1520647958
+    second: PlagueCrow_21
+  - first:
+      213: 574736170
+    second: PlagueCrow_22
+  - first:
+      213: -1519743679
+    second: PlagueCrow_23
+  - first:
+      213: 1806797335
+    second: PlagueCrow_24
+  - first:
+      213: -1409670138
+    second: PlagueCrow_25
+  - first:
+      213: -100081500
+    second: PlagueCrow_26
+  - first:
+      213: -990143610
+    second: PlagueCrow_27
+  - first:
+      213: 1024509402
+    second: PlagueCrow_28
+  - first:
+      213: 1699830912
+    second: PlagueCrow_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlagueCrow_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 645
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 459ccd2a042467eb2d5889c5b637379e
+      internalID: 906927370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 645
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6adc8852a8e260789bfdc9a315068931
+      internalID: -1566325484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 645
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d21d41c4bf13fb5d0332bb078b410721
+      internalID: 1789092422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_3
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 645
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4f725c35f30249b27f82f361e13f522
+      internalID: 319738500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_4
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 645
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 720299aea2d76b62a9182ae6ce9ccb2c
+      internalID: 849196624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 516
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 118594811eec1eeced1e5019267f6cf5
+      internalID: 1889770749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_6
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 516
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74e71ed14b5a6bdff543cec7a6e48a8
+      internalID: -54841609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_7
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 516
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae63c7d9c00b2be44a7dbe974837ba34
+      internalID: -434546357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_8
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 516
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81cc78bd4e95eee77ad2641688868d26
+      internalID: -246799243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_9
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 516
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aea8e5703ae63f2bd9b7ef027af2655c
+      internalID: -408143870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 387
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d686770a03bed640dbbf725099658154
+      internalID: 1241139856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_11
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 387
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f453d8b059b94606142ea4a017c5df25
+      internalID: 1719654419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_12
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 387
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d8f10928c586364d50c401611cef67d
+      internalID: 1578926415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_13
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 387
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b71c82c3337317ea896eb21a64e79c9d
+      internalID: 2129298094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_14
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 387
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c752e3278bbaccf46100adcb71ade88d
+      internalID: 1617491287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 258
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbb8ea50771b83e08d97d153f12e7174
+      internalID: 1344424634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_16
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 258
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae03df6a8fdcfcead6aca74cc91deffe
+      internalID: 1613890525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_17
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 258
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 441f00f78ba2bbd5b0c22099f2ea1709
+      internalID: -1471153379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_18
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 258
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9418ed080880182a68112067b3f2945
+      internalID: -200276970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_19
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 258
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3070f589a5fc81179a14ae8e7799d713
+      internalID: 273658536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 129
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6736192a4cde3c4014c3f902a5cb9d45
+      internalID: -1821966822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_21
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 129
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d961841cfc756ac9bb311eb6ebdea0de
+      internalID: 1520647958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_22
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 129
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f091334ef1c92a4a579f9e4b3f95f96
+      internalID: 574736170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_23
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 129
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 556b3f2c1a7c88cedfc042954650be68
+      internalID: -1519743679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_24
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 129
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff87f8c269932795c6cadcb2b79151c
+      internalID: 1806797335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ba1ad7cc1a114e5509c0913678a0cd2
+      internalID: -1409670138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_26
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c9cfb70af5f7e2f5e025ec7a537166
+      internalID: -100081500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_27
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 224df0c25f43db5a83844a96aab76428
+      internalID: -990143610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_28
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8a793acf0a851886e46eb2f9beb99a0
+      internalID: 1024509402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueCrow_29
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 200
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce909a39811580d0aded3b76608e7d96
+      internalID: 1699830912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7a5ff2d1ebe84b664f08840b0185be59
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":200.0,"y":129.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5260000228881836,"y":0.03799999877810478},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      PlagueCrow_0: 906927370
+      PlagueCrow_1: -1566325484
+      PlagueCrow_2: 1789092422
+      PlagueCrow_3: 319738500
+      PlagueCrow_4: 849196624
+      PlagueCrow_5: 1889770749
+      PlagueCrow_6: -54841609
+      PlagueCrow_7: -434546357
+      PlagueCrow_8: -246799243
+      PlagueCrow_9: -408143870
+      PlagueCrow_10: 1241139856
+      PlagueCrow_11: 1719654419
+      PlagueCrow_12: 1578926415
+      PlagueCrow_13: 2129298094
+      PlagueCrow_14: 1617491287
+      PlagueCrow_15: 1344424634
+      PlagueCrow_16: 1613890525
+      PlagueCrow_17: -1471153379
+      PlagueCrow_18: -200276970
+      PlagueCrow_19: 273658536
+      PlagueCrow_20: -1821966822
+      PlagueCrow_21: 1520647958
+      PlagueCrow_22: 574736170
+      PlagueCrow_23: -1519743679
+      PlagueCrow_24: 1806797335
+      PlagueCrow_25: -1409670138
+      PlagueCrow_26: -100081500
+      PlagueCrow_27: -990143610
+      PlagueCrow_28: 1024509402
+      PlagueCrow_29: 1699830912
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

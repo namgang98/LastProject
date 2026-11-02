@@ -1,0 +1,847 @@
+fileFormatVersion: 2
+guid: b5531a0a9c845c23bff896d80fb00445
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -949149386
+    second: PlagueLord_0
+  - first:
+      213: 2064603919
+    second: PlagueLord_1
+  - first:
+      213: -1172185205
+    second: PlagueLord_2
+  - first:
+      213: -1485222470
+    second: PlagueLord_3
+  - first:
+      213: 326621052
+    second: PlagueLord_4
+  - first:
+      213: -304925966
+    second: PlagueLord_5
+  - first:
+      213: 1629043419
+    second: PlagueLord_6
+  - first:
+      213: -155381952
+    second: PlagueLord_7
+  - first:
+      213: -662767397
+    second: PlagueLord_8
+  - first:
+      213: -407117965
+    second: PlagueLord_9
+  - first:
+      213: 109100445
+    second: PlagueLord_10
+  - first:
+      213: -1491121506
+    second: PlagueLord_11
+  - first:
+      213: 310316772
+    second: PlagueLord_12
+  - first:
+      213: 605182728
+    second: PlagueLord_13
+  - first:
+      213: -286909597
+    second: PlagueLord_14
+  - first:
+      213: -2126832209
+    second: PlagueLord_15
+  - first:
+      213: -1781856060
+    second: PlagueLord_16
+  - first:
+      213: 1723938792
+    second: PlagueLord_17
+  - first:
+      213: 1233438878
+    second: PlagueLord_18
+  - first:
+      213: -212304826
+    second: PlagueLord_19
+  - first:
+      213: -1027476858
+    second: PlagueLord_20
+  - first:
+      213: 962762622
+    second: PlagueLord_21
+  - first:
+      213: -279049441
+    second: PlagueLord_22
+  - first:
+      213: 990341760
+    second: PlagueLord_23
+  - first:
+      213: -1053700858
+    second: PlagueLord_24
+  - first:
+      213: 1769227076
+    second: PlagueLord_25
+  - first:
+      213: 1681835776
+    second: PlagueLord_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlagueLord_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1332
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d678724f65e4a4aec7f285894639e99
+      internalID: -949149386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_1
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 1332
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3673ad7308f03098abf14ae26520336
+      internalID: 2064603919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_2
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 1332
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1492cc02011c55a4c20746d8ee541359
+      internalID: -1172185205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_3
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 1332
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58c50ccdaf3c78693f8ea31cabe7da7b
+      internalID: -1485222470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1110
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4167b2bc573982c6566bbf341ea3bb12
+      internalID: 326621052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_5
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 1110
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2b8e429cbdf0eda3fab0b969f368fbf
+      internalID: -304925966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_6
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 1110
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5d0e218d93f943cbc7b3a7f8b346715
+      internalID: 1629043419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_7
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 1110
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e994c1728e9db3467a1dd348c96499
+      internalID: -155381952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 888
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb95643d71f98c6a01075476a97e9641
+      internalID: -662767397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_9
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 888
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2958096911a64e983ec2e14b19d1d08e
+      internalID: -407117965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_10
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 888
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffe0ca395353d6f494b3ddb503c086d1
+      internalID: 109100445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_11
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 888
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d0d48dc68dc4e3be6b83d7c09320595
+      internalID: -1491121506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 666
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fe6912f5837df6e5b38feeade905200
+      internalID: 310316772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_13
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 666
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a160f50f4eda7b50a50275ec80b72f7
+      internalID: 605182728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_14
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 666
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d6d9e02bbf10288e029eb4ac16a5c03
+      internalID: -286909597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_15
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 666
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8b7703e7057a9b6ca39462fc635b411
+      internalID: -2126832209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 444
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcb54f6314e06abd47b4b327c2247230
+      internalID: -1781856060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_17
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 444
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 615508d653d3ec0a3be6eafa561e5d89
+      internalID: 1723938792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_18
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 444
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53d2a34c83418837ada8388519e8de98
+      internalID: 1233438878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_19
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 444
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a35799f9e99cc8b9492c3040202e8ab
+      internalID: -212304826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 222
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97ede680a242c3f74629fb9ab6722e1e
+      internalID: -1027476858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_21
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 222
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b16ef7611ca76b4efc216de4ece31b4
+      internalID: 962762622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_22
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 222
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16ac30ad856bba780aca2b0b77971fed
+      internalID: -279049441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_23
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 222
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a97dc770e6db5907918a45135cb12a6b
+      internalID: 990341760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c90294ebc1f4c45667c26f105183be1
+      internalID: -1053700858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_25
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 0
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9345a02fbe05946d4bb379eb4a44ba95
+      internalID: 1769227076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlagueLord_26
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 0
+        width: 367
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9a16b3210408327dcea942748cd82bf
+      internalID: 1681835776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 35beeab1c56daf501d7e8dbc067066f9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":367.0,"y":222.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5260000228881836,"y":0.03799999877810478},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      PlagueLord_0: -949149386
+      PlagueLord_1: 2064603919
+      PlagueLord_2: -1172185205
+      PlagueLord_3: -1485222470
+      PlagueLord_4: 326621052
+      PlagueLord_5: -304925966
+      PlagueLord_6: 1629043419
+      PlagueLord_7: -155381952
+      PlagueLord_8: -662767397
+      PlagueLord_9: -407117965
+      PlagueLord_10: 109100445
+      PlagueLord_11: -1491121506
+      PlagueLord_12: 310316772
+      PlagueLord_13: 605182728
+      PlagueLord_14: -286909597
+      PlagueLord_15: -2126832209
+      PlagueLord_16: -1781856060
+      PlagueLord_17: 1723938792
+      PlagueLord_18: 1233438878
+      PlagueLord_19: -212304826
+      PlagueLord_20: -1027476858
+      PlagueLord_21: 962762622
+      PlagueLord_22: -279049441
+      PlagueLord_23: 990341760
+      PlagueLord_24: -1053700858
+      PlagueLord_25: 1769227076
+      PlagueLord_26: 1681835776
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

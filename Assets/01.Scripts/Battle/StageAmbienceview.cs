@@ -9,7 +9,7 @@ public class StageAmbienceView : MonoBehaviour
 
     public void Show(GameObject prefab)
     {
-        if(prefab == currentPrefab)
+        if(prefab == currentPrefab) 
             return;
 
         if(currentInstance != null)

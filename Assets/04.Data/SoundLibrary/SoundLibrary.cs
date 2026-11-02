@@ -27,6 +27,7 @@ public enum SfxType
     [InspectorName("UI/Coins")] Coins = 110,
     [InspectorName("UI/BookOpen")] BookOpen = 111,
     [InspectorName("UI/BookFlip")] BookFlip = 112,
+    [InspectorName("UI/RouletteSpin")] RouletteSpin = 113,
 
     //Class
     [InspectorName("직업/공격/SwordAttack")] SwordAttack = 200,

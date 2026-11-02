@@ -24,7 +24,7 @@
 2302,되살아난 포자 모체,Monster_SporeMother_Undead,240,7,3.5,1,Boss,0.05,1.5,poison,0.6,5,6,,0.3,2,0.4
 2303,되살아난 해골 군주,Monster_SkeletonLord_Undead,320,11,3,1,Boss,0.15,2,None,0,0,0,,0.3,2,0.4
 2304,되살아난 서리 여왕,Monster_FrostQueen_Undead,300,9,3,1,Boss,0.1,1.5,ice,0.5,40,4,,0.3,2,0.4
-2305,되살아난 고대 용,Monster_Dragon_Undead,400,14,3,1,Boss,0.1,1.5,fire,0.5,6,4,Hidden,0.35,2.2,0.5
+2305,되살아난 고대 용,Monster_Dragon_Undead,400,14,3,1,Boss,0.1,1.5,fire,0.5,6,4,Hidden,0.35,2.2,0.3
 2009,임프,Monster_Imp,40,6,1.8,0.08,Normal,0.1,1.5,fire,0.35,3,3,,0.15,1.6,
 2010,지옥견,Monster_Hellhound,70,8,2.2,0.1,Normal,0.15,1.6,fire,0.4,4,4,,0.2,1.7,
 2011,악마 전사,Monster_DemonWarrior,110,11,3,0.12,Normal,0.2,1.8,None,0,0,0,,0.2,1.8,
@@ -32,7 +32,7 @@
 2107,마왕,Monster_DemonLord,420,14,3,1,Boss,0.15,2,fire,0.5,6,5,Hidden,0.3,2.2,
 2012,얼음 정령,Monster_IceElemental,45,6,2.2,0.08,Normal,0.1,1.5,ice,0.5,30,3,,0.15,1.6,
 2013,서리 늑대,Monster_FrostWolf,65,8,2,0.1,Normal,0.15,1.6,ice,0.3,25,2,,0.2,1.7,
-2014,빙결 기사,Monster_FrozenKnight,120,10,3,0.12,Normal,0.15,1.8,ice,0.3,30,3,,0.2,1.8,
+2014,빙결 기사,Monster_FrozenKnight,100,10,3,0.12,Normal,0.15,1.8,ice,0.3,30,3,,0.2,1.8,
 2108,설인,Monster_Yeti,320,12,3.2,1,Boss,0.15,2,ice,0.4,35,3,,0.25,1.8,
 2109,서리 군주,Monster_FrostLord,420,13,3,1,Boss,0.15,2,ice,0.5,40,4,Hidden,0.3,2.2,
 2015,역병 의사,Monster_PlagueDoctor,60,8,2.5,0.1,Normal,0.15,1.6,poison,0.4,4,4,,0.2,1.7,

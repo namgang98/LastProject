@@ -71,6 +71,7 @@ public static class CSVStamp
     public const string Tower = "tower";
     public const string TopFloor = "topfloor";
     public const string AbyssFloor = "abyssfloor";
+    public const string LevelOffset = "leveloffset";
     public const string Prologue = "prologue";
     public const string Stat2 = "stat2";
     public const string Value2 = "value2";
@@ -139,5 +140,6 @@ public static class SceneNames
     public const string Dungeon = "Dungeon";
     public const string TowerRise = "TowerRise";
     public const string TowerMap = "TowerMap";
+    public const string Title = "Title";
 }
 #endregion

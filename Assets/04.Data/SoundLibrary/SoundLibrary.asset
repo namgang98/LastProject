@@ -334,3 +334,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ea91861ead8c7924384aed4e5525e3df, type: 3}
     volume: 0.7
     pitchRandom: 0.06
+  - type: 113
+    clips:
+    - {fileID: 8300000, guid: 074268b9246501c49b10edf2181480c2, type: 3}
+    volume: 0.7
+    pitchRandom: 0.06

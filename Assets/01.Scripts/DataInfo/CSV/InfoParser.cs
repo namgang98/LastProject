@@ -496,7 +496,12 @@ public static class InfoParser
         if(!TryParseTowerRules(row.GetString(CSVStamp.Rules), out List<TowerRuleInfo> rules))
             return Fail(row, errors, CSVStamp.Rules);
 
-        info = new TowerInfo(b.id, b.name, row.GetString(CSVStamp.Description), topFloor, abyssFloor, kind, rules);
+        int levelOffset = 0;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.LevelOffset)) && (!row.TryGetInt(CSVStamp.LevelOffset, out levelOffset) || levelOffset < 0))
+            return Fail(row, errors, CSVStamp.LevelOffset);
+
+        info = new TowerInfo(b.id, b.name, row.GetString(CSVStamp.Description), topFloor, abyssFloor, kind, rules, levelOffset);
         return true;
     }
 

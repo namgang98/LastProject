@@ -3,6 +3,7 @@ using UnityEngine;
 
 public interface ISaveStorage
 {
+    bool Exists { get; }
     bool TryLoad(out string json);
     void Save(string json);
     void Delete();
@@ -20,6 +21,7 @@ public class FileSaveStorage : ISaveStorage
         path = Path.Combine(Application.persistentDataPath, fileName);
         tempPath = path + ".tmp";
     }
+    public bool Exists => File.Exists(path);
 
     public bool TryLoad(out string json)
     {

@@ -9,6 +9,11 @@ public class StageController : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float restHealRate = 0.5f;
     [SerializeField] GameObject restVisual;
 
+    [Header("휴식층 습격")]
+    [SerializeField, Range(0f, 1f)] float ambushChance = 0.1f;
+    [SerializeField, Range(0f, 2f)] float ambushHealRatio = 0.5f;
+    private bool isAmbush;
+
     [Header("층 이동 연출")]
     [SerializeField] FloorTransitionView transition;
     [SerializeField] PlayerWalk walker;
@@ -143,10 +148,12 @@ public class StageController : MonoBehaviour
             ApplyAreaRules(area);
         }
 
-        bool isRest = rule.IsRestStage(stage);
+        bool isRestStage = rule.IsRestStage(stage);
+        isAmbush = isRestStage && UnityEngine.Random.value < ambushChance;
+        bool isRest = isRestStage && !isAmbush;
 
         EventManager.instance.PostNotification(new OnStageStarted(stage, isRest));
-        stageText.text = isRest ? $"{stage} F 휴식" : $"{stage} F";
+        stageText.text = GetStageLabel(isRest);
 
         if(restVisual != null)
             restVisual.SetActive(isRest);
@@ -155,6 +162,17 @@ public class StageController : MonoBehaviour
             return;
 
         SpawnMonster();
+    }
+
+    private string GetStageLabel(bool isRest)
+    {
+        if(isAmbush)
+            return $"{stage} F\n습격";
+
+        if(isRest)
+            return $"{stage} F\n휴식";
+
+        return $"{stage} F";
     }
 
     private void SpawnMonster()
@@ -179,7 +197,7 @@ public class StageController : MonoBehaviour
         currentInfo = info;
         currentMonster = monster;
 
-        MonsterStats stats = scaling.Apply(info, stage);
+        MonsterStats stats = scaling.Apply(info, GetScalingFloor());
         currentMonster.Health.Init(stats.MaxHp);
 
         if(currentMonster.Health is IRevivable revivable)
@@ -199,13 +217,13 @@ public class StageController : MonoBehaviour
 
         playerHud.Show();
 
-        if(rule.IsRestStage(stage))
+        if(rule.IsRestStage(stage) && !isAmbush)
         {
             StartRest();
             return;
         }
 
-        if(currentMonster == null)
+        if (currentMonster == null)
             return;
 
         monsterHud.Show();
@@ -235,6 +253,9 @@ public class StageController : MonoBehaviour
             return;
         }
 
+        if(isAmbush)
+            HealAfterAmbush();
+
         phase = Phase.Looting;
         
         if(blessingReward != null && blessingReward.TryOffer(stage, ShowButtons))
@@ -260,7 +281,13 @@ public class StageController : MonoBehaviour
         Destroy(currentMonster.gameObject);
         currentMonster = null;
     }
+    private int GetScalingFloor()
+    {
+        if (tower == null)
+            return stage;
 
+        return tower.ToScalingFloor(stage);
+    }
     private FloorKind GetKind(int floor)
     {
         if(rule.IsRestStage(floor))
@@ -313,6 +340,13 @@ public class StageController : MonoBehaviour
         DataManager.instance.TryGetTower(area.TowerId, out TowerInfo source);
         towerRules.SetSource(source);
     }
+
+    private void HealAfterAmbush()
+    {
+        float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal)) * ambushHealRatio;
+        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
+    }
+
     private enum Phase
     {
         Moving,

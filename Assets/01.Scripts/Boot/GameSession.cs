@@ -19,6 +19,11 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     [SerializeField] Vector2Int chestTabSize = new(10, 8);
     [SerializeField, Min(1)] int startTabCount = 1;
 
+    [Header("초보 지원")]
+    [SerializeField, Min(0)] int beginnerFloor = 10;
+    [SerializeField] int beginnerPotionId = 8505;
+    [SerializeField, Min(0)] int beginnerPotionCount = 2;
+
     [Header("상점")]
     [SerializeField, Range(1, Shop.MaxSlots)] int shopSlotCount = 3;
     [SerializeField] float buyMultiplier = 3f;
@@ -155,7 +160,13 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     {
         Save(false);
     }
+    public bool HasSave => saveService != null && saveService.HasSave;
 
+    public bool ResetSave()
+    {
+        DeleteSave();
+        return TryLoad();
+    }
     public void DeleteSave()
     {
         saveService.Delete();
@@ -167,7 +178,19 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public void BeginRun()
     {
         Storage.GiveStarterWeapon(CurrentClass);
+        GiveBeginnerSupport();
         Save(true);
+    }
+
+    private void GiveBeginnerSupport()
+    {
+        if(BestFloor >= beginnerFloor)
+            return;
+
+        if(!DataManager.instance.TryGetItem(beginnerPotionId, out ItemInfo potion))
+            return;
+
+        Storage.FillBackpack(potion, beginnerPotionCount);
     }
 
     public void FinishRun(RunEndReason reason)
@@ -178,10 +201,20 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         if(reason == RunEndReason.Conquest)
             HandleConquest();
 
+        RemoveBeginnerSupport();
         Shop.Restock();
         Save(false);
     }
 
+    private void RemoveBeginnerSupport()
+    {
+        int count = Storage.CountItem(beginnerPotionId);
+
+        if(count <= 0)
+            return;
+
+        Storage.TakeItems(beginnerPotionId, count);
+    }
     private void HandleConquest()
     {
         saveData.abyssClearCount++;

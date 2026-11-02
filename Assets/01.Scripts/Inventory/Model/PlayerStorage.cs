@@ -147,7 +147,29 @@ public class PlayerStorage : IMaterialStorage
 
         Debug.LogWarning($"[PlayerStorage] {starter.Name}을(를) 넣을 자리가 없습니다.");
     }
+    public void FillBackpack(ItemInfo info, int target)
+    {
+        int missing = target - CountInBackpack(info.Id);
 
+        for(int i = 0; i < missing; i++)
+        {
+            if(TryPlaceInBackpack(info.CreateInstance()))
+                continue;
+
+            Debug.LogWarning($"[PlayerStorage] {info.Name}을(를) 넣을 자리가 없습니다.");
+            return;
+        }
+    }
+
+    private int CountInBackpack(int itemId)
+    {
+        int count = ItemSearch.Count(Backpack.Grid, itemId);
+
+        if(Backpack.PouchStorage != null)
+            count += ItemSearch.Count(Backpack.PouchStorage, itemId);
+
+        return count;
+    }
     public bool TryReceive(ItemInstance item)
     {
         if(Backpack.EquippedPouch == null && Backpack.TryEquipPouch(item))

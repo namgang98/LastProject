@@ -17,6 +17,7 @@ public class TowerInfo
     public string Description { get; }
     public int TopFloor { get; }
     public int AbyssFloor { get; }
+    public int LevelOffset { get; }
     public TowerKind Kind { get; }
 
     public bool IsPrologue => Kind == TowerKind.Prologue;
@@ -27,7 +28,7 @@ public class TowerInfo
     public IReadOnlyList<int> StageSources => stageSources;
     public IReadOnlyList<TowerRuleInfo> Rules => rules;
 
-    public TowerInfo(int id, string name, string description, int topFloor, int abyssFloor, TowerKind kind, List<TowerRuleInfo> rules = null)
+    public TowerInfo(int id, string name, string description, int topFloor, int abyssFloor, TowerKind kind, List<TowerRuleInfo> rules = null, int levelOffset = 0)
     {
         Id = id;
         Name = name;
@@ -35,12 +36,18 @@ public class TowerInfo
         TopFloor = topFloor;
         AbyssFloor = abyssFloor;
         Kind = kind;
+        LevelOffset = levelOffset;
         this.rules = rules ?? new List<TowerRuleInfo>();
     }
 
     public bool UsesStagesOf(int towerId)
     {
         return stageSources.Contains(towerId);
+    }
+
+    public int ToScalingFloor(int floor)
+    {
+        return floor + LevelOffset;
     }
 
     public int ToStageFloor(int floor)

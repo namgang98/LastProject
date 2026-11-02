@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StarterKit
   m_EditorClassIdentifier: Assembly-CSharp::StarterKit
   bagId: 100
-  itemIds: e9030000
+  itemIds: 

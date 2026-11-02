@@ -3,24 +3,17 @@ using UnityEngine;
 
 public class ItemDropper : MonoBehaviour
 {
-    [SerializeField] int normalDropCount = 1;
-    [SerializeField] int bossDropMultiplier = 2;
+    [SerializeField] int bossEquipRolls = 2;
 
-    [Header("드랍 확률")]
-    [SerializeField] float normalWeight = 70f;
-    [SerializeField] float rareWeight = 25f;
-    [SerializeField] float epicWeight = 5f;
-    [SerializeField] float rarePerStage = 1f;
-    [SerializeField] float epicPerStage = 0.5f;
+    [Header("장비 등급 확률 (레전더리, 유니크, 에픽, 레어, 노말)")]
+    [SerializeField] float[] gradeWeights = { 0.1f, 0.8f, 5f, 25f, 70f };
+    [SerializeField] float[] gradePerStage = { 0.015f, 0.08f, 0.5f, 1f, 0f };
 
-    private LootTable table;
-    private DropRarity rarity;
+    private IRunBonus runBonus = EmptyRunBonus.Instance;
+    private readonly List<ItemInfo> results = new();
+    private DropRoller roller;
     private int currentStage = 1;
 
-    private void Awake()
-    {
-        rarity = new DropRarity(normalWeight, rareWeight, epicWeight, rarePerStage, epicPerStage);
-    }
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnMonsterKilled>(HandleMonsterKilled);
@@ -35,30 +28,32 @@ public class ItemDropper : MonoBehaviour
         EventManager.instance.RemoveListener<OnMonsterKilled>(HandleMonsterKilled);
         EventManager.instance.RemoveListener<OnStageStarted>(HandleStageStarted);
     }
-    private ItemInfo PickItem()
-    {
-        return table.Pick(rarity.Roll(currentStage));
-    }
 
     private void HandleMonsterKilled(OnMonsterKilled e)
     {
-        if(table == null)
-            table = new LootTable(DataManager.instance.Items);
+        if(roller == null)
+            roller = CreateRoller();
 
-        if(table.IsEmpty)
+        float materialRate = 1f + runBonus.Sum(BlessingStat.MaterialDrop);
+        float equipRate = 1f + runBonus.Sum(BlessingStat.DropChance);
+        roller.Roll(e.Monster, currentStage, results, materialRate, equipRate);
+
+        foreach(ItemInfo info in results)
         {
-            Debug.LogWarning("[ItemDropper] Normal 등급 아이템이 없습니다.");
-            return;
+            EventManager.instance.PostNotification(new OnItemDropped(info.CreateInstance(), e.Position));
         }
+    }
 
-        int dropCount = e.Monster.IsBoss ? normalDropCount * bossDropMultiplier : normalDropCount;
+    private DropRoller CreateRoller()
+    {
+        var table = new LootTable(DataManager.instance.Items);
+        var rarity = new DropRarity(gradeWeights, gradePerStage);
+        return new DropRoller(table, rarity, bossEquipRolls);
+    }
 
-        for(int i = 0; i < dropCount; i++)
-        {
-            ItemInstance item = PickItem().CreateInstance();
-            EventManager.instance.PostNotification(new OnItemDropped(item, e.Position));
-        }
-
+    public void SetRunBonus(IRunBonus bonus)
+    {
+        runBonus = bonus ?? EmptyRunBonus.Instance;
     }
     private void HandleStageStarted(OnStageStarted e)
     {

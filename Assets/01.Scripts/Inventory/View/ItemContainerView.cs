@@ -87,9 +87,9 @@ public abstract class ItemContainerView : MonoBehaviour, IItemDropTarget, IPoint
     protected abstract void PlaceView(ItemView view);
 
     #region IItemDropTarget
-    public abstract void ShowPreview(ItemInstance item, int rotation, PointerEventData eventData);
+    public abstract void ShowPreview(ItemInstance item, DragPose pose, PointerEventData eventData);
     public abstract void HidePreview();
-    public abstract bool TryDrop(ItemInstance item, int rotation, PointerEventData eventData);
+    public abstract bool TryDrop(ItemInstance item, DragPose pose, PointerEventData eventData);
     public abstract void Release(ItemInstance item);
 
     public void Restore(ItemInstance item)

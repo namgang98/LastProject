@@ -24,6 +24,10 @@ public class TrainingUI : MonoBehaviour
     [SerializeField] Button trainButton;
     [SerializeField] TMP_Text trainText;
 
+    [Header("초기화")]
+    [SerializeField] Button resetButton;
+    [SerializeField] TMP_Text resetText;
+
     [Header("해금")]
     [SerializeField] GameObject unlockGroup;
     [SerializeField] TMP_Text conditionText;
@@ -42,6 +46,7 @@ public class TrainingUI : MonoBehaviour
         closeButton.onClick.AddListener(Close);
         trainButton.onClick.AddListener(Train);
         unlockButton.onClick.AddListener(Unlock);
+        resetButton.onClick.AddListener(ResetPoints);
 
         foreach(var row in statRows)
         {
@@ -106,7 +111,7 @@ public class TrainingUI : MonoBehaviour
         var classes = new List<ClassInfo>(DataManager.instance.Classes);
         classes.Sort((a, b) => a.Id.CompareTo(b.Id));
 
-        foreach (ClassInfo info in classes)
+        foreach(ClassInfo info in classes)
         {
             ClassCardView card = Instantiate(cardPrefab, cardRoot);
             card.Bind(info);
@@ -117,14 +122,21 @@ public class TrainingUI : MonoBehaviour
 
     private void RefreshCards()
     {
+        TowerProgress towers = GameSession.instance.Towers;
+
         foreach(var card in cards)
         {
             ClassInfo info = card.Info;
+            bool fallen = towers.IsFallen(info);
+            card.gameObject.SetActive(!fallen);
+
+            if(fallen)
+                continue;
 
             if(training.IsUnlocked(info))
-                card.SetStatus($"Lv.{training.GetProgress(info).Level}", false);
+                card.SetState(ClassAvailability.Available, $"Lv.{training.GetProgress(info).Level}");
             else
-                card.SetStatus($"{info.UnlockFloor}층 도달", true);
+                card.SetState(ClassAvailability.Locked, $"{info.UnlockFloor}층 도달");
         }
     }
 
@@ -143,13 +155,21 @@ public class TrainingUI : MonoBehaviour
 
     private ClassCardView Find(ClassInfo info)
     {
-        foreach (var card in cards)
+        ClassCardView first = null;
+
+        foreach(var card in cards)
         {
-            if (card.Info == info)
+            if(!card.gameObject.activeSelf)
+                continue;
+
+            if(card.Info == info)
                 return card;
+
+            if(first == null)
+                first = card;
         }
 
-        return cards.Count > 0 ? cards[0] : null;
+        return first;
     }
     #endregion
 
@@ -203,6 +223,7 @@ public class TrainingUI : MonoBehaviour
 
         trainText.text = $"훈련하기 {cost}G";
         trainButton.interactable = wallet.Gold >= cost;
+        RefreshReset(info);
     }
 
     private void RefreshUnlock(ClassInfo info)
@@ -212,12 +233,40 @@ public class TrainingUI : MonoBehaviour
         unlockText.text = $"해금 {info.UnlockCost}G";
         unlockButton.interactable = training.CanUnlock(info, wallet);
     }
+
+    private void RefreshReset(ClassInfo info)
+    {
+        int scrolls = GameSession.instance.CountConsumable(ConsumeType.ResetPoints);
+        bool spent = training.GetProgress(info).SpentPoints > 0;
+
+        resetText.text = $"초기화 (두루마리 {scrolls}개)";
+        resetButton.interactable = spent && scrolls > 0;
+    }
+
+    private void ResetPoints()
+    {
+        if(selected == null)
+            return;
+
+        ClassInfo info = selected.Info;
+
+        if(!training.IsUnlocked(info) || training.GetProgress(info).SpentPoints <= 0)
+            return;
+
+        GameSession session = GameSession.instance;
+
+        if(!session.TryTakeConsumable(ConsumeType.ResetPoints, out _))
+            return;
+
+        training.ResetPoints(info);
+        session.SaveInVillage();
+    }
     #endregion
 
     #region 버튼
     private void Train()
     {
-        if (selected == null || !training.TryTrain(selected.Info, wallet))
+        if(selected == null || !training.TryTrain(selected.Info, wallet))
             return;
 
         GameSession.instance.SaveInVillage();

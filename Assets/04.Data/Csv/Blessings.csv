@@ -1,0 +1,74 @@
+﻿id,name,grade,stat,value,stat2,value2,maxstack,weight,description
+9900,강인함,Normal,MaxHp,15,,0,5,30,최대 체력 +15
+9901,거인의 심장,Rare,MaxHp,35,,0,3,15,최대 체력 +35
+9902,불굴,Epic,MaxHp,70,,0,1,6,최대 체력 +70
+9903,날카로움,Normal,Damage,0.06,,0,5,30,공격력 +6%
+9904,투지,Rare,Damage,0.12,,0,3,15,공격력 +12%
+9905,전쟁의 신,Epic,Damage,0.25,,0,1,6,공격력 +25%
+9906,민첩,Normal,Cooldown,0.04,,0,5,30,쿨타임 -4%
+9907,신속,Rare,Cooldown,0.08,,0,3,15,쿨타임 -8%
+9908,시간 왜곡,Epic,Cooldown,0.15,,0,1,6,쿨타임 -15%
+9909,예리한 눈,Normal,CritChance,0.04,,0,5,25,치명타 확률 +4%
+9910,급소 찌르기,Rare,CritChance,0.08,,0,3,12,치명타 확률 +8%
+9911,잔혹함,Rare,CritMultiplier,0.2,,0,3,12,치명타 배율 +0.2
+9912,처형인,Epic,CritMultiplier,0.5,,0,1,5,치명타 배율 +0.5
+9913,검술 수련,Normal,SwordDamage,0.1,,0,5,20,검 데미지 +10%
+9914,검무,Rare,SwordCooldown,0.1,,0,3,10,검 쿨타임 -10%
+9915,검성,Epic,SwordDamage,0.3,SwordCooldown,0.1,1,4,"검 데미지 +30%, 검 쿨타임 -10%"
+9916,벌목꾼의 팔,Normal,AxeDamage,0.1,,0,5,20,도끼 데미지 +10%
+9917,묵직한 일격,Rare,AxeDamage,0.2,AxeCooldown,-0.05,3,10,"도끼 데미지 +20%, 도끼 쿨타임 +5%"
+9918,파괴자,Epic,AxeDamage,0.35,CritMultiplier,0.3,1,4,"도끼 데미지 +35%, 치명타 배율 +0.3"
+9919,사수의 호흡,Normal,BowDamage,0.1,,0,5,20,활 데미지 +10%
+9920,속사,Rare,BowCooldown,0.12,,0,3,10,활 쿨타임 -12%
+9921,명궁,Epic,BowDamage,0.25,CritChance,0.1,1,4,"활 데미지 +25%, 치명타 확률 +10%"
+9922,유리 대포,Rare,Damage,0.3,MaxHp,-25,1,6,"공격력 +30%, 최대 체력 -25"
+9923,광전사,Epic,Damage,0.45,MaxHp,-50,1,3,"공격력 +45%, 최대 체력 -50"
+9924,철벽,Rare,MaxHp,60,Damage,-0.1,1,6,"최대 체력 +60, 공격력 -10%"
+9925,성급함,Rare,Cooldown,0.15,Damage,-0.08,1,6,"쿨타임 -15%, 공격력 -8%"
+9926,도박사,Rare,CritChance,0.15,Damage,-0.1,1,6,"치명타 확률 +15%, 공격력 -10%"
+9927,응급처치,Normal,FloorHeal,5,,0,5,20,층을 넘어갈 때 체력 5 회복
+9928,재생,Rare,FloorHeal,12,,0,3,10,층을 넘어갈 때 체력 12 회복
+9929,야영의 달인,Normal,RestHeal,0.15,,0,3,15,휴식층 회복량 +15%
+9930,약초학,Normal,PotionPower,0.2,,0,3,15,물약 회복량 +20%
+9931,연금술사,Rare,PotionPower,0.5,,0,1,6,물약 회복량 +50%
+9932,흡혈,Rare,Lifesteal,0.04,,0,3,8,준 피해의 4% 회복
+9933,피의 계약,Epic,Lifesteal,0.1,MaxHp,-20,1,3,"준 피해의 10% 회복, 최대 체력 -20"
+9934,선제 방어,Normal,StartShield,1,,0,3,15,전투 시작 시 실드 1회
+9935,단단한 피부,Rare,DamageReduction,0.06,,0,3,10,받는 피해 -6%
+9936,가시 피부,Rare,Thorns,0.2,,0,3,8,받은 피해의 20%를 되돌려줌
+9937,회피,Rare,Dodge,0.05,,0,3,8,5% 확률로 공격 회피
+9938,불사,Epic,Revive,0.4,,0,1,3,"판당 1회, 쓰러지면 체력 40%로 부활"
+9939,보스 사냥꾼,Rare,BossDamage,0.2,,0,3,10,보스에게 주는 피해 +20%
+9940,처형,Rare,ExecuteDamage,0.3,,0,3,8,체력 30% 이하인 적에게 피해 +30%
+9941,궁지의 쥐,Rare,LowHpDamage,0.3,,0,3,8,내 체력 50% 이하일 때 공격력 +30%
+9942,기선 제압,Normal,FirstStrike,1,,0,1,12,전투 시작 시 모든 무기 쿨타임 50% 진행
+9943,연쇄,Epic,FirstStrike,1,Cooldown,0.08,1,3,"전투 시작 시 쿨타임 50% 진행, 쿨타임 -8%"
+9944,불씨,Normal,ElementChance,0.05,,0,5,15,속성 발동 확률 +5%
+9945,타오르는 혼,Rare,BurnDamage,0.5,,0,3,8,화상 피해 +50%
+9946,맹독,Rare,PoisonDamage,0.5,,0,3,8,중독 피해 +50%
+9947,혹한,Rare,FreezeDuration,0.5,,0,3,8,빙결 지속시간 +50%
+9948,원소 지배,Epic,ElementChance,0.15,BurnDamage,0.3,1,3,"속성 발동 확률 +15%, 화상 피해 +30%"
+9949,약탈자,Normal,MaterialDrop,0.15,,0,5,15,기타템 드랍 확률 +15%
+9950,보물 사냥꾼,Rare,DropChance,0.15,,0,3,8,장비 드랍 확률 +15%
+9951,약탈 본능,Rare,MaterialDrop,0.4,Damage,-0.05,1,6,"기타템 드랍 확률 +40%, 공격력 -5%"
+9952,행운,Epic,DropChance,0.3,MaterialDrop,0.3,1,3,"장비 드랍 확률 +30%, 기타템 드랍 확률 +30%"
+9953,집중,Rare,CritEvery,4,,0,1,8,4번째 공격마다 치명타 확정
+9954,필살,Epic,CritEvery,3,,0,1,3,3번째 공격마다 치명타 확정
+9955,세트 공명,Epic,SetResonance,1,,0,1,3,모든 세트가 1개 더 장착된 것으로 취급
+9956,학살자,Unique,Damage,0.3,CritChance,0.1,1,5,"공격력 +30%, 치명타 확률 +10%"
+9957,불멸의 의지,Unique,Revive,0.7,MaxHp,30,1,4,"판당 1회 체력 70%로 부활, 최대 체력 +30"
+9958,피의 군주,Unique,Lifesteal,0.08,LowHpDamage,0.4,1,5,"준 피해의 8% 회복, 체력 50% 이하일 때 공격력 +40%"
+9959,시간의 지배자,Unique,Cooldown,0.2,FirstStrike,1,1,5,"쿨타임 -20%, 전투 시작 시 쿨타임 50% 진행"
+9960,원소술사,Unique,ElementChance,0.2,BurnDamage,0.6,1,5,"속성 발동 확률 +20%, 화상 피해 +60%"
+9961,철옹성,Unique,DamageReduction,0.15,Thorns,0.3,1,5,"받는 피해 -15%, 받은 피해의 30% 반사"
+9962,거인 사냥꾼,Unique,BossDamage,0.4,ExecuteDamage,0.3,1,5,"보스에게 피해 +40%, 체력 30% 이하 적에게 피해 +30%"
+9963,전쟁의 화신,Legendary,Damage,0.5,Cooldown,0.15,1,3,"공격력 +50%, 쿨타임 -15%"
+9964,신의 가호,Legendary,Revive,1,StartShield,3,1,3,"판당 1회 체력 100%로 부활, 전투 시작 시 실드 3회"
+9965,무한 연격,Legendary,CritEvery,2,CritMultiplier,0.5,1,3,"2번째 공격마다 치명타 확정, 치명타 배율 +0.5"
+9966,만물의 공명,Legendary,SetResonance,1,Damage,0.25,1,3,"모든 세트 1개 더 장착 취급, 공격력 +25%"
+9967,지팡이 수련,Normal,StaffDamage,0.1,,0,5,20,지팡이 데미지 +10%
+9968,비전 순환,Rare,StaffCooldown,0.1,,0,3,10,지팡이 쿨타임 -10%
+9969,대마법사,Epic,StaffDamage,0.3,ElementChance,0.1,1,4,"지팡이 데미지 +30%, 속성 발동 확률 +10%"
+9970,단검 수련,Normal,DaggerDamage,0.1,,0,5,20,단검 데미지 +10%
+9971,연속 찌르기,Rare,DaggerCooldown,0.12,,0,3,10,단검 쿨타임 -12%
+9972,그림자 춤,Epic,DaggerDamage,0.3,CritChance,0.1,1,4,"단검 데미지 +30%, 치명타 확률 +10%"

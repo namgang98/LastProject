@@ -1,0 +1,1119 @@
+fileFormatVersion: 2
+guid: 2be323defff94e57b550676d5414520b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1455413188825800926
+    second: FrostQueen_packed_0
+  - first:
+      213: -2860983628122631141
+    second: FrostQueen_packed_1
+  - first:
+      213: 8865375726535257502
+    second: FrostQueen_packed_2
+  - first:
+      213: -7900082012589902614
+    second: FrostQueen_packed_3
+  - first:
+      213: 6126265681071441097
+    second: FrostQueen_packed_4
+  - first:
+      213: 5734730385098974770
+    second: FrostQueen_packed_5
+  - first:
+      213: -2541068315349915374
+    second: FrostQueen_packed_6
+  - first:
+      213: 7232204058029847958
+    second: FrostQueen_packed_7
+  - first:
+      213: -6442558637718164111
+    second: FrostQueen_packed_8
+  - first:
+      213: -7864237333569777413
+    second: FrostQueen_packed_9
+  - first:
+      213: -1060652823275921909
+    second: FrostQueen_packed_10
+  - first:
+      213: 3248410790660124242
+    second: FrostQueen_packed_11
+  - first:
+      213: -8943908801941833986
+    second: FrostQueen_packed_12
+  - first:
+      213: 1442743406927016520
+    second: FrostQueen_packed_13
+  - first:
+      213: -6296735593309821651
+    second: FrostQueen_packed_14
+  - first:
+      213: -5990845033662125468
+    second: FrostQueen_packed_15
+  - first:
+      213: -2370556572945212314
+    second: FrostQueen_packed_16
+  - first:
+      213: 6620928302320849153
+    second: FrostQueen_packed_17
+  - first:
+      213: 7521414194186189510
+    second: FrostQueen_packed_18
+  - first:
+      213: -1040700127387158309
+    second: FrostQueen_packed_19
+  - first:
+      213: 3798166506195558669
+    second: FrostQueen_packed_20
+  - first:
+      213: 9102929015318156960
+    second: FrostQueen_packed_21
+  - first:
+      213: 291987480439924309
+    second: FrostQueen_packed_22
+  - first:
+      213: -234126384012955767
+    second: FrostQueen_packed_23
+  - first:
+      213: -6029104027480646014
+    second: FrostQueen_packed_24
+  - first:
+      213: 1084765884981939439
+    second: FrostQueen_packed_25
+  - first:
+      213: 8922018395090544118
+    second: FrostQueen_packed_26
+  - first:
+      213: 1527270647998227005
+    second: FrostQueen_packed_27
+  - first:
+      213: 7267233510494030304
+    second: FrostQueen_packed_28
+  - first:
+      213: 2485804009878867433
+    second: FrostQueen_packed_29
+  - first:
+      213: -4411746022052123306
+    second: FrostQueen_packed_30
+  - first:
+      213: 1823533936908775558
+    second: FrostQueen_packed_31
+  - first:
+      213: 3705535102812803840
+    second: FrostQueen_packed_32
+  - first:
+      213: 7250561102283534926
+    second: FrostQueen_packed_33
+  - first:
+      213: -8337263648156149272
+    second: FrostQueen_packed_34
+  - first:
+      213: 6940083254351120209
+    second: FrostQueen_packed_35
+  - first:
+      213: -1825338232435568054
+    second: FrostQueen_packed_36
+  - first:
+      213: -4503019215932020879
+    second: FrostQueen_packed_37
+  - first:
+      213: 6412270686319936491
+    second: FrostQueen_packed_38
+  - first:
+      213: 5556237791763398687
+    second: FrostQueen_packed_39
+  - first:
+      213: 4735789255758993262
+    second: FrostQueen_packed_40
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FrostQueen_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 965
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4184eedff93fc1049bcb89e5dcefaf24
+      internalID: -804285853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_1
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 965
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eddc3ac1efe34ff46a34204a12c1ab77
+      internalID: -2099880761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_2
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 965
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be17f6b1bbeb8b24f8c95393901086b1
+      internalID: 787650118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_3
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 965
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66d3532b181f84e4fa955dbea0bd3f28
+      internalID: 494693206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 772
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b49f8496e8a9e7f479aca623adfbc9c9
+      internalID: -1410255416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_5
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 772
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25bca0d9538a4ab48a0dd4a4deda44d5
+      internalID: 510556690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_6
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 772
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 499b9198ae5bde341a39b9af178925ef
+      internalID: -334392518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_7
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 772
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 597b7a8510a9b5c40974ae9266b5b31e
+      internalID: -1762966234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_8
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 772
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d298289bacfdd1f4a8e5273115bfadb4
+      internalID: 491290520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_9
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 772
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52a86c8b5d9a82d44b1c1f571797bb05
+      internalID: 895575585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_10
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 772
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 483369818425236449add8f2ed9668ba
+      internalID: 188048550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_11
+      rect:
+        serializedVersion: 2
+        x: 2310
+        y: 772
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89d0ed7a7ae77684aa6868822163c470
+      internalID: 1351750903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 579
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de913c21d54a82a4cbda1ca04ec36b6f
+      internalID: 1427298300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_13
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 579
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0965b147ee5799b43b45ed060c7ea3cd
+      internalID: -78506671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_14
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 579
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ea5d52b8292b134ea4c3c99b3f2efed
+      internalID: 1358040397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_15
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 579
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff241d7c099c8454184ce99c1fe1e11a
+      internalID: 1545754943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_16
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 579
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1f469253f085174a88b8ef5a26e67ff
+      internalID: 919170287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_17
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 579
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ed93e222c3c4a24cbf1a51bf8d3bb23
+      internalID: -92442716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_18
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 579
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d9b8d3c1fce6a441815d02bdaa5fc86
+      internalID: 1016228425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_19
+      rect:
+        serializedVersion: 2
+        x: 2310
+        y: 579
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de7fde234fcaf4043b6aebf26112dcaf
+      internalID: 2023762036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 386
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e45b27019a0d87f4b8e687ec37b41856
+      internalID: 1712547723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_21
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 386
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 553f7eee39215394faf421724a074278
+      internalID: 2091726933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_22
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 386
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66f7177acf549d74ca065b4beb0bdcf9
+      internalID: -1132237072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_23
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 386
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64e1f0e185d6f624c889bab15f9cca6d
+      internalID: -941112097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_24
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 386
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d19b5e61bb525cb4285128a1fc127f1b
+      internalID: -269074377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_25
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 386
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 528f96c0b96957b4895e81cdbef2399b
+      internalID: 620310473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_26
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 386
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 782b24a92d3bccb46bf061ace4be0d24
+      internalID: 1051741737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_27
+      rect:
+        serializedVersion: 2
+        x: 2310
+        y: 386
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8af5cd2d4163fff4b8e8c0c110864b56
+      internalID: 107300794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 193
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad02a66267682474fb1adfb9a044556b
+      internalID: 1294535461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_29
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 193
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f94c9c786b060d84398827cc97a44552
+      internalID: -103005133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_30
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 193
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9981f3270519f44f905281996a7c3d7
+      internalID: -1081486254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9418dec31f571b94b8bb878276a76bad
+      internalID: -1092124780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_32
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96877a94d1008ae4abd4a303a7ca4d1f
+      internalID: 1859170064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_33
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 0
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b748ad4c9de49e4294263f23f97166f
+      internalID: -1251285760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_34
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 0
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f036311bdc9c6d438d0b20b623eb4d9
+      internalID: -550144036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_35
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 0
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e48afe7353eb994b978b3418f0f822a
+      internalID: -121035698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostQueen_36
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 0
+        width: 330
+        height: 193
+      alignment: 9
+      pivot: {x: 0.43, y: 0.031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11934c434e028cb448a035def82c4cc2
+      internalID: -10840094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e574ae7f7d54e204f94aad2c4c5555ab
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":330.0,"y":193.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.4300000071525574,"y":0.03099999949336052},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      FrostQueen_0: -804285853
+      FrostQueen_1: -2099880761
+      FrostQueen_10: 188048550
+      FrostQueen_11: 1351750903
+      FrostQueen_12: 1427298300
+      FrostQueen_13: -78506671
+      FrostQueen_14: 1358040397
+      FrostQueen_15: 1545754943
+      FrostQueen_16: 919170287
+      FrostQueen_17: -92442716
+      FrostQueen_18: 1016228425
+      FrostQueen_19: 2023762036
+      FrostQueen_2: 787650118
+      FrostQueen_20: 1712547723
+      FrostQueen_21: 2091726933
+      FrostQueen_22: -1132237072
+      FrostQueen_23: -941112097
+      FrostQueen_24: -269074377
+      FrostQueen_25: 620310473
+      FrostQueen_26: 1051741737
+      FrostQueen_27: 107300794
+      FrostQueen_28: 1294535461
+      FrostQueen_29: -103005133
+      FrostQueen_3: 494693206
+      FrostQueen_30: -1081486254
+      FrostQueen_31: -1092124780
+      FrostQueen_32: 1859170064
+      FrostQueen_33: -1251285760
+      FrostQueen_34: -550144036
+      FrostQueen_35: -121035698
+      FrostQueen_36: -10840094
+      FrostQueen_4: -1410255416
+      FrostQueen_5: 510556690
+      FrostQueen_6: -334392518
+      FrostQueen_7: -1762966234
+      FrostQueen_8: 491290520
+      FrostQueen_9: 895575585
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

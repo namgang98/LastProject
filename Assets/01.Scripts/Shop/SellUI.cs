@@ -40,6 +40,7 @@ public class SellUI : MonoBehaviour
     {
         context = new InventoryUIContext(cellSize, itemViewPool, dragController);
         sellArea.CanAccept = CanAccept;
+        sellArea.Rejected += HandleRejected;
         sellArea.Entering += RememberOrigin;
 
         for(int i = 0; i < tabButtons.Length; i++)
@@ -55,11 +56,14 @@ public class SellUI : MonoBehaviour
     private void OnEnable()
     {
         basket.Changed += HandleBasketChanged;
+        EventManager.instance.AddListener<OnItemQuickMove>(HandleQuickMove);
     }
 
     private void OnDisable()
     {
         basket.Changed -= HandleBasketChanged;
+        if(EventManager.HasInstance)
+            EventManager.instance.RemoveListener<OnItemQuickMove>(HandleQuickMove);
     }
 
     public void Open()
@@ -133,6 +137,7 @@ public class SellUI : MonoBehaviour
         if(earned <= 0)
             return;
 
+        Sfx.Play(SfxType.Coins);
         GameSession.instance.SaveInVillage();
     }
     private void RememberOrigin(ItemInstance item)
@@ -153,7 +158,7 @@ public class SellUI : MonoBehaviour
             if(TryReturn(item))
                 basket.Remove(item);
             else
-                Debug.LogWarning($"[SellUI] {item.Info.Name}을(를) 돌려놓을 자리가 없습니다.", this);
+                EventManager.instance.PostNotification(new OnFeedback($"{item.Info.Name}을(를) 돌려놓을 자리가 없습니다"));
         }
     }
     private bool TryReturn(ItemInstance item)
@@ -184,6 +189,11 @@ public class SellUI : MonoBehaviour
     {
         RefreshTotal();
     }
+    private void HandleRejected(ItemInstance item)
+    {
+        if(item is ContainerInstance)
+            EventManager.instance.PostNotification(new OnFeedback("안에 물건이 들어있습니다."));
+    }
     private void FitChest()
     {
         Vector2 size = chestView.PixelSize;
@@ -204,5 +214,40 @@ public class SellUI : MonoBehaviour
             Anchor = anchor;
             Rotation = rotation;
         }
+    }
+    private void HandleQuickMove(OnItemQuickMove e)
+    {
+        if(!popup.activeSelf)
+            return;
+
+        if(basket.Contains(e.Item))
+        {
+            ReturnFromBasket(e.Item);
+            return;
+        }
+
+        if(e.Item.Owner == null)
+            return;
+
+        if(!CanAccept(e.Item))
+        {
+            HandleRejected(e.Item);
+            return;
+        }
+
+        RememberOrigin(e.Item);
+        e.Item.Owner.Remove(e.Item);
+        sellArea.Scatter(e.Item);
+    }
+
+    private void ReturnFromBasket(ItemInstance item)
+    {
+        if(!TryReturn(item))
+        {
+            EventManager.instance.PostNotification(new OnFeedback($"{item.Info.Name}을(를) 돌려놓을 자리가 없습니다"));
+            return;
+        }
+
+        basket.Remove(item);
     }
 }

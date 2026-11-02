@@ -103,27 +103,27 @@ public class ShopUI : MonoBehaviour
             return;
         }
 
-        ItemInfo info = shop.Offers[i];
+        ShopStockInfo stock = shop.Offers[i];
 
-        if(info == null)
+        if(stock == null)
         {
             slots[i].ShowEmpty();
             return;
         }
 
-        int price = shop.Pricing.BuyPrice(info);
-        slots[i].ShowItem(info, price, wallet.Gold >= price);
+        int price = shop.Pricing.BuyPrice(stock);
+        slots[i].ShowItem(stock.Item, price, wallet.Gold >= price);
     }
 
     private void Select(int index)
     {
-        ItemInfo info = shop.Offers[index];
+        ShopStockInfo stock = shop.Offers[index];
 
-        if(info == null)
+        if(stock == null)
             return;
 
         selected = index;
-        confirmText.text = $"{info.Name}\n{shop.Pricing.BuyPrice(info)}G에 구매할까요?";
+        confirmText.text = $"{stock.Item.Name}\n{shop.Pricing.BuyPrice(stock)}G에 구매할까요?";
         confirmPanel.SetActive(true);
     }
 
@@ -133,9 +133,12 @@ public class ShopUI : MonoBehaviour
             return;
 
         GameSession session = GameSession.instance;
+        ShopStockInfo stock = shop.Offers[selected];
 
-        if(!shop.TryBuy(selected, wallet, session.TryReceive))
-            Debug.LogWarning("[ShopUI] 골드가 부족하거나 가방과 창고에 자리가 없습니다.", this); //피드맥이벤트만들면 거기로 연결
+        if(stock != null && wallet.Gold < shop.Pricing.BuyPrice(stock))
+            Feedback("골드가 부족합니다");
+        else if(!shop.TryBuy(selected, wallet, session.TryReceive))
+            Feedback("가방과 창고에 자리가 없습니다");
         else
             session.SaveInVillage();
 
@@ -164,5 +167,9 @@ public class ShopUI : MonoBehaviour
             return;
 
         Refresh();
+    }
+    private static void Feedback(string message)
+    {
+        EventManager.instance.PostNotification(new OnFeedback(message));
     }
 }

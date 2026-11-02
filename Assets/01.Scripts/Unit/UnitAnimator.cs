@@ -6,11 +6,21 @@ public abstract class UnitAnimator : MonoBehaviour
     
     public virtual void AttackAni()
     {
+        animator.ResetTrigger(AnimatorTag.Hurt);
         animator.SetTrigger(AnimatorTag.Attack);
+    }
+    public virtual void SkillAni()
+    {
+        AttackAni();
     }
     public virtual void HurtAni()
     {
         animator.SetTrigger(AnimatorTag.Hurt);
+    }
+
+    public virtual void SetMoving(bool moving)
+    {
+        animator.SetBool(AnimatorTag.Walk, moving);
     }
     public virtual void DeadAni()
     {
@@ -18,12 +28,4 @@ public abstract class UnitAnimator : MonoBehaviour
         animator.ResetTrigger(AnimatorTag.Hurt);
         animator.SetTrigger(AnimatorTag.Death);
     }
-
-    public virtual void ResetAni()
-    {
-        animator.ResetTrigger(AnimatorTag.Hurt);
-        animator.ResetTrigger(AnimatorTag.Attack);
-        animator.SetTrigger(AnimatorTag.Recover);
-    }
-
 }

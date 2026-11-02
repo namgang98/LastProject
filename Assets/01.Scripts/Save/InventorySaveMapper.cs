@@ -45,7 +45,8 @@ public static class InventorySaveMapper
             x = item.Anchor.x,
             y = item.Anchor.y,
             rotation = item.Rotation,
-            parent = parent
+            parent = parent,
+            forge = item is ForgeableInstance forged ? forged.Level : 0
         });
 
         if(item is not ContainerInstance container)
@@ -108,6 +109,8 @@ public static class InventorySaveMapper
             }
 
             instances[i] = info.CreateInstance();
+            if(instances[i] is ForgeableInstance forged)
+                forged.SetLevel(data.items[i].forge);
         }
 
         return instances;

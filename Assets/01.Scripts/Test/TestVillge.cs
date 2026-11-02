@@ -7,21 +7,21 @@ public class TestVillge : MonoBehaviour
     [SerializeField] private List<int> itemIds = new();
     void Update()
     {
-        if (!DataManager.HasInstance || !DataManager.instance.IsLoaded)
+        if(!DataManager.HasInstance || !DataManager.instance.IsLoaded)
             return;
 
         Keyboard keyboard = Keyboard.current;
 
-        if (keyboard.digit6Key.wasPressedThisFrame)
+        if(keyboard.digit6Key.wasPressedThisFrame)
             SpawnTest();
 
-        if (keyboard.digit7Key.wasPressedThisFrame)
+        if(keyboard.digit7Key.wasPressedThisFrame)
             DonateTest();
 
-        if (keyboard.digit8Key.wasPressedThisFrame)
+        if(keyboard.digit8Key.wasPressedThisFrame)
             TrainTest();
 
-        if (keyboard.digit9Key.wasPressedThisFrame)
+        if(keyboard.digit9Key.wasPressedThisFrame)
             PointTest();
     }
     private void DonateTest()
@@ -36,7 +36,7 @@ public class TestVillge : MonoBehaviour
     }
     private void SpawnTest()
     {
-        if (itemIds.Count == 0)
+        if(itemIds.Count == 0)
         {
             Debug.LogWarning("[TestVillge] itemIds가 비어 있습니다.", this);
             return;
@@ -44,7 +44,7 @@ public class TestVillge : MonoBehaviour
 
         int id = itemIds[Random.Range(0, itemIds.Count)];
 
-        if (!DataManager.instance.TryGetItem(id, out ItemInfo info))
+        if(!DataManager.instance.TryGetItem(id, out ItemInfo info))
             return;
 
         GameSession.instance.Chest.Tabs[0].TryAutoPlace(info.CreateInstance());

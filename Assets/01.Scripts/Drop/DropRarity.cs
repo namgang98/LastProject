@@ -2,34 +2,42 @@
 
 public class DropRarity
 {
-    private readonly float normal;
-    private readonly float rare;
-    private readonly float epic;
-    private readonly float rarePerStage;
-    private readonly float epicPerStage;
+    private static readonly ItemGrade[] Grades = { ItemGrade.Legendary, ItemGrade.Unique, ItemGrade.Epic, ItemGrade.Rare, ItemGrade.Normal };
 
-    public DropRarity(float normal, float rare, float epic, float rarePerStage, float epicPerStage)
+    private readonly float[] baseWeights;
+    private readonly float[] perStage;
+
+    public DropRarity(float[] baseWeights, float[] perStage)
     {
-        this.normal = normal;
-        this.rare = rare;
-        this.epic = epic;
-        this.rarePerStage = rarePerStage;
-        this.epicPerStage = epicPerStage;
+        this.baseWeights = baseWeights;
+        this.perStage = perStage;
     }
+
     public ItemGrade Roll(int stage)
     {
-        float r = rare + rarePerStage * stage;
-        float e = epic + epicPerStage * stage;
-        float total = normal + r + e;
+        float total = 0f;
+
+        for(int i = 0; i < Grades.Length; i++)
+        {
+            total += GetWeight(i, stage);
+        }
+
         float roll = Random.Range(0f, total);
 
-        if(roll < e)
-            return ItemGrade.Epic;
+        for(int i = 0; i < Grades.Length; i++)
+        {
+            roll -= GetWeight(i, stage);
 
-        if(roll < e + r)
-            return ItemGrade.Rare;
+            if(roll < 0f)
+                return Grades[i];
+        }
 
         return ItemGrade.Normal;
     }
 
+    private float GetWeight(int index, int stage)
+    {
+        float growth = index < perStage.Length ? perStage[index] * stage : 0f;
+        return Mathf.Max(0f, baseWeights[index] + growth);
+    }
 }

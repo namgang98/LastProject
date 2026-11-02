@@ -31,6 +31,7 @@ public class GridView : ItemContainerView
     public GridContainer Container => container;
     public Vector2 PixelSize => rect.sizeDelta;
 
+    private ContainerInstance insertTarget;
     protected override void Awake()
     {
         base.Awake();
@@ -139,22 +140,30 @@ public class GridView : ItemContainerView
     #endregion
 
     #region 드래그 대상 (IItemDropTarget)
-    public override void ShowPreview(ItemInstance item, int rotation, PointerEventData eventData)
+    public override void ShowPreview(ItemInstance item, DragPose pose, PointerEventData eventData)
     {
         if(container == null)
             return;
 
-        Vector2Int anchor = GetAnchor(item, rotation, eventData);
+        if(TryGetInsertTarget(item, eventData, out ContainerInstance target))
+        {
+            ShowInsertPreview(item, target);
+            return;
+        }
 
-        if(previewVisible && anchor == lastPreviewAnchor && rotation == lastPreviewRotation)
+        insertTarget = null;
+
+        Vector2Int anchor = GetAnchor(pose, eventData);
+
+        if(previewVisible && anchor == lastPreviewAnchor && pose.Rotation == lastPreviewRotation)
             return;
 
         previewVisible = true;
         lastPreviewAnchor = anchor;
-        lastPreviewRotation = rotation;
+        lastPreviewRotation = pose.Rotation;
 
-        List<Vector2Int> targetCells = item.GetCellsAt(anchor, rotation);
-        Color color = container.CanPlace(item, anchor, rotation) ? validColor : invalidColor;
+        List<Vector2Int> targetCells = item.GetCellsAt(anchor, pose.Rotation);
+        Color color = container.CanPlace(item, anchor, pose.Rotation) ? validColor : invalidColor;
         EnsureCount(previews, previewPrefab, previewLayer, targetCells.Count);
 
         for(int i = 0; i < previews.Count; i++)
@@ -183,12 +192,15 @@ public class GridView : ItemContainerView
         previewVisible = false;
     }
 
-    public override bool TryDrop(ItemInstance item, int rotation, PointerEventData eventData)
+    public override bool TryDrop(ItemInstance item, DragPose pose, PointerEventData eventData)
     {
         if(container == null)
             return false;
 
-        return container.TryPlace(item, GetAnchor(item, rotation, eventData), rotation);
+        if(TryGetInsertTarget(item, eventData, out ContainerInstance target))
+            return target.Storage.TryAutoPlace(item);
+
+        return container.TryPlace(item, GetAnchor(pose, eventData), pose.Rotation);
     }
 
     public override void Release(ItemInstance item)
@@ -199,15 +211,53 @@ public class GridView : ItemContainerView
         container.Remove(item);
     }
 
-    // 마우스 위치 = 아이템 중심이 되도록 왼쪽 아래 칸(anchor)을 계산
-    private Vector2Int GetAnchor(ItemInstance item, int rotation, PointerEventData eventData)
+    private Vector2Int GetAnchor(DragPose pose, PointerEventData eventData)
     {
         if(!TryGetLocalPoint(eventData, out Vector2 local))
             return new Vector2Int(-999, -999);
 
-        Vector2 size = ItemView.GetBounds(item, rotation);
-        Vector2 origin = local / context.CellSize - size * 0.5f;
-        return new Vector2Int(Mathf.RoundToInt(origin.x), Mathf.RoundToInt(origin.y));
+        return pose.GetAnchor(local / context.CellSize);
+    }
+
+    private bool TryGetInsertTarget(ItemInstance item, PointerEventData eventData, out ContainerInstance target)
+    {
+        target = null;
+
+        if(!TryGetLocalPoint(eventData, out Vector2 local))
+            return false;
+
+        Vector2Int cell = new Vector2Int(Mathf.FloorToInt(local.x / context.CellSize), Mathf.FloorToInt(local.y / context.CellSize));
+
+        if(container.GetItemAt(cell) is not ContainerInstance found || found == item)
+            return false;
+
+        target = found;
+        return true;
+    }
+
+    private void ShowInsertPreview(ItemInstance item, ContainerInstance target)
+    {
+        if(previewVisible && insertTarget == target)
+            return;
+
+        insertTarget = target;
+        previewVisible = true;
+
+        List<Vector2Int> targetCells = target.GetOccupiedCells();
+        Color color = target.Storage.CanAutoPlace(item) ? validColor : invalidColor;
+        EnsureCount(previews, previewPrefab, previewLayer, targetCells.Count);
+
+        for(int i = 0; i < previews.Count; i++)
+        {
+            bool show = i < targetCells.Count;
+            previews[i].gameObject.SetActive(show);
+
+            if(!show)
+                continue;
+
+            previews[i].color = color;
+            SetCellRect(previews[i], targetCells[i]);
+        }
     }
     #endregion
 }

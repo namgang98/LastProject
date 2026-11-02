@@ -25,15 +25,35 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     [Header("클릭했을 때")]
     [SerializeField] UnityEvent onClick;
 
+    [Header("줌")]
+    [SerializeField] VillageZoom zoom;
+    [SerializeField] Transform focusPoint;
+
+    [Header("확대 대상 (비우면 자기 자신)")]
+    [SerializeField] RectTransform scaleTarget;
+
+    private Vector2 opaqueCenter;
+    private Tween hoverTween;
+    private float currentScale = 1f;
+    private Vector2 baseAnchored;
+    private Vector2 focusOffset;
+    private bool hasBase;
     private void Awake()
     {
+        if(scaleTarget == null)
+            scaleTarget = (RectTransform)transform;
+
         SetupHitTest();
-        ApplyHover(false, true);
+
+        if(nameLabel != null)
+            nameLabel.SetActive(false);
+
+        SetOutlineAlpha(idleAlpha);
     }
 
     private void OnDisable()
     {
-        transform.DOKill();
+        hoverTween?.Kill();
 
         if(outline != null)
             outline.DOKill();
@@ -52,33 +72,75 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     public void OnPointerClick(PointerEventData eventData)
     {
         ApplyHover(false, true);
-        onClick.Invoke();
+
+        if(zoom == null || focusPoint == null)
+        {
+            onClick.Invoke();
+            return;
+        }
+
+        zoom.Focus(focusPoint.position, onClick.Invoke);
     }
 
     private void ApplyHover(bool on, bool instant)
     {
-        float scale = on ? hoverScale : 1f;
+        float target = on ? hoverScale : 1f;
         float alpha = on ? hoverAlpha : idleAlpha;
 
         if(nameLabel != null)
             nameLabel.SetActive(on);
 
-        transform.DOKill();
+        hoverTween?.Kill();
 
         if(outline != null)
             outline.DOKill();
 
+        if(on && Mathf.Approximately(currentScale, 1f))
+            CaptureBase();
+
         if(instant)
         {
-            transform.localScale = Vector3.one * scale;
+            SetScale(target);
             SetOutlineAlpha(alpha);
             return;
         }
 
-        transform.DOScale(scale, duration).SetEase(on ? Ease.OutBack : Ease.OutQuad);
+        hoverTween = DOTween.To(() => currentScale, SetScale, target, duration)
+            .SetEase(on ? Ease.OutBack : Ease.OutQuad)
+            .SetLink(gameObject);
 
         if(outline != null)
             outline.DOFade(alpha, duration);
+    }
+    private void CaptureBase()
+    {
+        hasBase = true;
+        baseAnchored = scaleTarget.anchoredPosition;
+
+        if(focusPoint == null)
+        {
+            focusOffset = Vector2.zero;
+            return;
+        }
+
+        RectTransform parent = (RectTransform)scaleTarget.parent;
+        Vector3 worldOffset = scaleTarget.position - focusPoint.position;
+        focusOffset = parent.InverseTransformVector(worldOffset);
+    }
+
+    private void SetScale(float scale)
+    {
+        currentScale = scale;
+        scaleTarget.localScale = Vector3.one * scale;
+
+        if(Mathf.Approximately(scale, 1f))
+        {
+            if(hasBase)
+                scaleTarget.anchoredPosition = baseAnchored;
+
+            return;
+        }
+        scaleTarget.anchoredPosition = baseAnchored + focusOffset * (scale - 1f);
     }
 
     private void SetOutlineAlpha(float alpha)
@@ -96,11 +158,74 @@ public class CampSpot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         Image image = GetComponent<Image>();
 
         if(image.sprite == null || !image.sprite.texture.isReadable)
-        {
-            Debug.LogWarning($"[CampSpot] {name} : 그림이 없거나 Read/Write가 꺼져 있어 사각형 전체로 클릭됩니다.", this);
             return;
-        }
 
         image.alphaHitTestMinimumThreshold = alphaHitThreshold;
+    }
+
+    private Vector3 GetFocusWorldPoint()
+    {
+        if(focusPoint != null)
+            return focusPoint.position;
+
+        return transform.TransformPoint(opaqueCenter);
+    }
+
+    private void CacheOpaqueCenter()
+    {
+        RectTransform rect = (RectTransform)transform;
+        opaqueCenter = rect.rect.center;
+
+        Sprite sprite = GetComponent<Image>().sprite;
+
+        if(sprite == null || !sprite.texture.isReadable)
+            return;
+
+        Rect area = sprite.textureRect;
+        int width = (int)area.width;
+        int height = (int)area.height;
+        Color[] pixels = sprite.texture.GetPixels((int)area.x, (int)area.y, width, height);
+
+        int minX = width;
+        int minY = height;
+        int maxX = -1;
+        int maxY = -1;
+
+        for(int y = 0; y < height; y++)
+        {
+            for(int x = 0; x < width; x++)
+            {
+                if(pixels[y * width + x].a < alphaHitThreshold)
+                    continue;
+
+                minX = Mathf.Min(minX, x);
+                maxX = Mathf.Max(maxX, x);
+                minY = Mathf.Min(minY, y);
+                maxY = Mathf.Max(maxY, y);
+            }
+        }
+
+        if(maxX < 0)
+            return;
+
+        Vector2 center01 = new((minX + maxX + 1) * 0.5f / width, (minY + maxY + 1) * 0.5f / height);
+        opaqueCenter = rect.rect.min + Vector2.Scale(center01, rect.rect.size);
+    }
+
+    private void MovePivotToFocus()
+    {
+        if(focusPoint == null)
+            return;
+
+        Vector2 size = scaleTarget.rect.size;
+
+        if(size.x <= 0f || size.y <= 0f)
+            return;
+
+        Vector2 local = scaleTarget.InverseTransformPoint(focusPoint.position);
+        Vector2 pivotShift = new(local.x / size.x, local.y / size.y);
+
+        scaleTarget.pivot += pivotShift;
+        scaleTarget.localPosition += (Vector3)Vector2.Scale(local, (Vector2)scaleTarget.localScale);
     }
 }

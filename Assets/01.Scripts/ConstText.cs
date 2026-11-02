@@ -1,4 +1,5 @@
-﻿public static class CSVStamp
+﻿#region CSV용 단어CSVStamp.
+public static class CSVStamp
 {
     public const string Id = "id";
     public const string Name = "name";
@@ -14,7 +15,12 @@
     public const string StorageY = "storageY";
 
     public const string MaxHp = "maxhp";
-    public const string DropGold = "dropgold";
+    public const string EquipChance = "equipchance";
+    public const string MonsterId = "monsterid";
+    public const string ItemId = "itemid";
+    public const string Chance = "chance";
+    public const string Min = "min";
+    public const string Max = "max";
     public const string Type = "type";
     public const string Prefab = "prefab";
 
@@ -46,8 +52,47 @@
     public const string Increase = "increase";
     public const string MaxPoints = "maxpoints";
 
-}
+    public const string Weight = "weight";
+    public const string MinLevel = "minlevel";
+    public const string Kind = "kind";
+    public const string Duration = "duration";
+    public const string Slots = "slots";
 
+    public const string Background = "background";
+    public const string Monsters = "monsters";
+    public const string Boss = "boss";
+    public const string MinFloor = "minfloor";
+    public const string MaxFloor = "maxfloor";
+    public const string Ambience = "ambience";
+    public const string HpDisplay = "hpdisplay";
+    public const string SkillChance = "skillchance";
+    public const string SkillMultiplier = "skillmultiplier";
+    public const string Revive = "revive";
+    public const string Tower = "tower";
+    public const string TopFloor = "topfloor";
+    public const string AbyssFloor = "abyssfloor";
+    public const string Prologue = "prologue";
+    public const string Stat2 = "stat2";
+    public const string Value2 = "value2";
+    public const string Rules = "rules";
+    public const string MaxStack = "maxstack";
+    public const string StarterWeapon = "starterweapon";
+
+    public const string Target = "target";
+    public const string RewardItem = "rewarditem";
+    public const string RewardCount = "rewardcount";
+    public const string RewardGold = "rewardgold";
+    public const string Repeatable = "repeatable";
+    public const string Prereq = "prereq";
+    public const string Npc = "npc";
+    public const string Favor = "favor";
+    public const string Materials = "materials";
+    public const string Bonus = "bonus";
+    public const string Downgrade = "downgrade";
+}
+#endregion
+
+#region 데이터테그 DataTag.
 public static class DataTag
 {
     public const string Weapons = "weapons";
@@ -61,20 +106,38 @@ public static class DataTag
     public const string SetBonuses = "setbonuses";
     public const string Upgrades = "upgrades";
     public const string TrainingStats = "trainingstats";
+    public const string Materials = "materials";
+    public const string MonsterDrops = "monsterdrops";
+    public const string ShopStock = "shopstock";
+    public const string Consumables = "consumables";
+    public const string PotionCases = "potioncases";
+    public const string Stages = "stages";
+    public const string Quests = "quests";
+    public const string Forge = "forge";
+    public const string Towers = "towers";
+    public const string Blessings = "blessings";
 }
+#endregion
 
+#region 애니메이션태그 AnimatorTag. 
 public static class AnimatorTag
 {
     public const string Idle = "Idle";
     public const string Attack = "Attack";
+    public const string Attack2 = "Attack2";
     public const string Hurt = "Hurt";
     public const string Death = "Death";
-    public const string Recover = "Recover";
+    public const string Walk = "Walk";
 }
+#endregion
 
+#region 씬이름들 SceneNames.
 public static class SceneNames
 {
     public const string Boot = "Boot";
     public const string Village = "Village";
     public const string Dungeon = "Dungeon";
+    public const string TowerRise = "TowerRise";
+    public const string TowerMap = "TowerMap";
 }
+#endregion

@@ -64,4 +64,31 @@ public class StatusEffects
         }
         list.Clear();
     }
+    public bool Has(UnitHealth target, DamageElement element)
+    {
+        foreach(IStatusEffect status in list)
+        {
+            if(status.Target == target && status.Element == element)
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool Remove(UnitHealth target, DamageElement element)
+    {
+        for(int i = list.Count - 1; i >= 0; i--)
+        {
+            IStatusEffect status = list[i];
+
+            if(status.Target != target || status.Element != element)
+                continue;
+
+            list.RemoveAt(i);
+            EventManager.instance.PostNotification(new OnStatusRemoved(target, element));
+            return true;
+        }
+
+        return false;
+    }
 }

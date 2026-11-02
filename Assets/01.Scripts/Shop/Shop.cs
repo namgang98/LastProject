@@ -6,21 +6,22 @@ public class Shop
 {
     public const int MaxSlots = 9;
 
-    private readonly List<ItemInfo> offers = new();
+    private readonly List<ShopStockInfo> offers = new();
+    private readonly ShopCatalog catalog;
+
+    public IReadOnlyList<ShopStockInfo> Offers => offers;
     private readonly LootTable table;
     private readonly DropRarity rarity;
 
     public ShopPricing Pricing { get; }
     public int Level { get; private set; } = 1;
     public int SlotCount { get; private set; }
-    public IReadOnlyList<ItemInfo> Offers => offers;
 
     public event Action Changed;
 
-    public Shop(LootTable table, DropRarity rarity, ShopPricing pricing, int level, int slotCount)
+    public Shop(ShopCatalog catalog, ShopPricing pricing, int level, int slotCount)
     {
-        this.table = table;
-        this.rarity = rarity;
+        this.catalog = catalog;
         Pricing = pricing;
         Level = level;
         SlotCount = Mathf.Clamp(slotCount, 1, MaxSlots);
@@ -32,13 +33,13 @@ public class Shop
 
         for(int i = 0; i < SlotCount; i++)
         {
-            offers.Add(table.Pick(rarity.Roll(Level)));
+            offers.Add(catalog.Pick(Level));
         }
 
         Changed?.Invoke();
     }
 
-    public void Restore(IReadOnlyList<ItemInfo> saved)
+    public void Restore(IReadOnlyList<ShopStockInfo> saved)
     {
         offers.Clear();
 
@@ -55,17 +56,17 @@ public class Shop
         if(index < 0 || index >= offers.Count)
             return false;
 
-        ItemInfo info = offers[index];
+        ShopStockInfo stock = offers[index];
 
-        if(info == null)
+        if(stock == null)
             return false;
 
-        int price = Pricing.BuyPrice(info);
+        int price = Pricing.BuyPrice(stock);
 
         if(wallet.Gold < price)
             return false;
 
-        if(!receive(info.CreateInstance()))
+        if(!receive(stock.Item.CreateInstance()))
             return false;
 
         wallet.TrySpend(price);
@@ -142,7 +143,7 @@ public class Shop
 
         while(offers.Count < SlotCount)
         {
-            offers.Add(table.Pick(rarity.Roll(Level)));
+            offers.Add(catalog.Pick(Level));
         }
 
         Changed?.Invoke();

@@ -1,32 +1,31 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuView : MonoBehaviour
 {
     [SerializeField] GameObject panel;
-    [SerializeField] Button menuButton;
     [SerializeField] Button continueButton;
     [SerializeField] GameSpeedController speedCon;
 
-
     private void Awake()
     {
-        menuButton.onClick.AddListener(Open);
-        continueButton.onClick.AddListener(Close);
+        if(continueButton != null)
+            continueButton.onClick.AddListener(Close);
     }
 
-    private void Open()
+    public void Open()
     {
         PopupManager.instance.Open(panel, Close);
-        speedCon.SetPaused(true);
+
+        if(speedCon != null)
+            speedCon.SetPaused(true);
     }
-    private void Close()
+
+    public void Close()
     {
         PopupManager.instance.Close(panel);
+
         if(speedCon != null)
-        {
             speedCon.SetPaused(false);
-        }
     }
 }

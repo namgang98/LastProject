@@ -16,6 +16,7 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
 
 
     private bool isDead;
+    protected virtual bool IsInvulnerable => false;
     public bool IsDead => isDead;
 
     public event Action<DamageInfo> OnHit;
@@ -23,6 +24,8 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
     public event Action OnBlocked;
     public event Action<int, int> OnHpChanged;
     public event Action<int> OnHealed;
+    public event Action OnDodged;
+
     public virtual void Init(int maxHP)
     {
         this.maxHP = maxHP;
@@ -39,28 +42,42 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
         nowHP = Mathf.Min(nowHP, maxHP);
         OnHpChanged?.Invoke(nowHP, maxHP);
     }
-    public void TakeDamage(DamageInfo info)
+    public int TakeDamage(DamageInfo info)
     {
-        if(isDead || info.Amount <= 0)
-            return;
+        if(isDead || info.Amount <= 0 || IsInvulnerable)
+            return 0;
+
+        if(!info.IsTick && TryDodge(info))
+        {
+            OnDodged?.Invoke();
+            return 0;
+        }
 
         if(shieldCount > 0 && !info.IsTick)
         {
             shieldCount--;
             OnBlocked?.Invoke();
-            return;
+            return 0;
         }
 
-        nowHP = Mathf.Max(nowHP - info.Amount, 0);
-        OnHit?.Invoke(info);
+        int amount = Mathf.Max(1, ReduceDamage(info.Amount));
+        int before = nowHP;
+        nowHP = Mathf.Max(nowHP - amount, 0);
+        int dealt = before - nowHP;
+
+        OnHit?.Invoke(new DamageInfo(amount, info.IsCritical, info.Element, info.IsTick));
         OnHpChanged?.Invoke(nowHP, maxHP);
 
         if(nowHP > 0)
-            return;
+            return dealt;
+
+        if(TryCheatDeath())
+            return dealt;
 
         isDead = true;
         OnDie?.Invoke();
         Die();
+        return dealt;
     }
 
     public void Heal(int value)
@@ -77,6 +94,15 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
 
         OnHpChanged?.Invoke(nowHP, maxHP);
         OnHealed?.Invoke(healed);
+    }
+    protected virtual bool TryDodge(DamageInfo info)
+    {
+        return false;
+    }
+
+    protected virtual int ReduceDamage(int amount)
+    {
+        return amount;
     }
 
     public bool IsFullHP()
@@ -95,5 +121,15 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
     public void ClearShield()
     {
         shieldCount = 0;
+    }
+    protected virtual bool TryCheatDeath()
+    {
+        return false;
+    }
+
+    protected void ReviveTo(int hp)
+    {
+        nowHP = Mathf.Clamp(hp, 1, maxHP);
+        OnHpChanged?.Invoke(nowHP, maxHP);
     }
 }

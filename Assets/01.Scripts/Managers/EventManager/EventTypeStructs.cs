@@ -5,11 +5,9 @@ public interface IGameEvent { }
 public struct OnChangeGold : IGameEvent
 {
     public int Gold;
-    public int RunGold;
-    public OnChangeGold(int gold, int runGold)
+    public OnChangeGold(int gold)
     {
         Gold = gold;
-        RunGold = runGold;
     }
 }
 
@@ -51,13 +49,19 @@ public struct OnPouchChanged : IGameEvent
 public struct OnStageStarted : IGameEvent
 {
     public int Stage;
-    public OnStageStarted(int stage) => Stage = stage;
+    public bool IsRest;
+    public OnStageStarted(int stage, bool isRest)
+    {
+        Stage = stage;
+        IsRest = isRest;
+    }
 }
 
 public enum RunEndReason
 {
     Death,
     Return,
+    Conquest,
 }
 public struct OnRunEnded : IGameEvent
 {
@@ -76,13 +80,23 @@ public struct OnUnitDamaged : IGameEvent
 {
     public Vector3 Position;
     public DamageInfo Info;
-    public OnUnitDamaged(Vector3 pos, DamageInfo info)
+    public int SourceId;
+    public OnUnitDamaged(Vector3 pos, DamageInfo info, int sourceId)
     {
         Position = pos;
         Info = info;
+        SourceId = sourceId;
     }
 }
+public struct OnUnitDodged : IGameEvent
+{
+    public Vector3 Position;
 
+    public OnUnitDodged(Vector3 pos)
+    {
+        Position = pos;
+    }
+}
 public struct OnUnitHealed : IGameEvent
 {
     public Vector3 Position;
@@ -117,7 +131,15 @@ public struct OnItemHoverEnter : IGameEvent
     }
 }
 public struct OnItemHoverExit : IGameEvent {}
+public struct OnItemQuickMove : IGameEvent
+{
+    public ItemInstance Item;
 
+    public OnItemQuickMove(ItemInstance item)
+    {
+        Item = item;
+    }
+}
 public struct OnStatusApplied : IGameEvent
 {
     public UnitHealth Target;
@@ -150,4 +172,48 @@ public struct OnChestExpanded : IGameEvent
 {
     public int TabCount;
     public OnChestExpanded(int tabCount) => TabCount = tabCount;
+}
+
+public struct OnItemClicked : IGameEvent
+{
+    public ItemInstance Item;
+    public OnItemClicked(ItemInstance item) => Item = item;
+}
+
+public enum FeedbackType
+{
+    Info,
+    Warning,
+}
+
+public struct OnFeedback : IGameEvent
+{
+    public string Message;
+    public FeedbackType Type;
+
+    public OnFeedback(string message, FeedbackType type = FeedbackType.Warning)
+    {
+        Message = message;
+        Type = type;
+    }
+}
+
+public struct OnPopupCountChanged : IGameEvent
+{
+    public int Count;
+
+    public OnPopupCountChanged(int count)
+    {
+        Count = count;
+    }
+}
+
+public struct OnUnitRevived : IGameEvent
+{
+    public Vector3 Position;
+
+    public OnUnitRevived(Vector3 pos)
+    {
+        Position = pos;
+    }
 }

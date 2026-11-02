@@ -1,5 +1,5 @@
 ﻿stat,increase,maxpoints,description
 MaxHp,10,5,최대체력증가
 Damage,0.1,5,주무기 데미지증가
-Cooldown,0.1,5,주무기 쿨타임 감소
+Cooldown,0.06,5,주무기 쿨타임 감소
 Crit,0.1,5,치명타 확률 증가

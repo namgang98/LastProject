@@ -1,0 +1,847 @@
+fileFormatVersion: 2
+guid: 07b9b7a7bdbf6bb16ba510f19242255c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1834900048
+    second: FrozenKnight_0
+  - first:
+      213: -1517802714
+    second: FrozenKnight_1
+  - first:
+      213: -1121682751
+    second: FrozenKnight_2
+  - first:
+      213: -1471362037
+    second: FrozenKnight_3
+  - first:
+      213: 2077651255
+    second: FrozenKnight_4
+  - first:
+      213: -392751378
+    second: FrozenKnight_5
+  - first:
+      213: 1114487272
+    second: FrozenKnight_6
+  - first:
+      213: 1841712272
+    second: FrozenKnight_7
+  - first:
+      213: 1614783639
+    second: FrozenKnight_8
+  - first:
+      213: 2130027083
+    second: FrozenKnight_9
+  - first:
+      213: 1755574201
+    second: FrozenKnight_10
+  - first:
+      213: -659027326
+    second: FrozenKnight_11
+  - first:
+      213: 1543754564
+    second: FrozenKnight_12
+  - first:
+      213: 175323331
+    second: FrozenKnight_13
+  - first:
+      213: -1272739075
+    second: FrozenKnight_14
+  - first:
+      213: 1611265849
+    second: FrozenKnight_15
+  - first:
+      213: 336716280
+    second: FrozenKnight_16
+  - first:
+      213: -755105178
+    second: FrozenKnight_17
+  - first:
+      213: 1070028674
+    second: FrozenKnight_18
+  - first:
+      213: 1928620217
+    second: FrozenKnight_19
+  - first:
+      213: 1631318286
+    second: FrozenKnight_20
+  - first:
+      213: 29746628
+    second: FrozenKnight_21
+  - first:
+      213: 66226041
+    second: FrozenKnight_22
+  - first:
+      213: 1412968425
+    second: FrozenKnight_23
+  - first:
+      213: -669052098
+    second: FrozenKnight_24
+  - first:
+      213: 1466270863
+    second: FrozenKnight_25
+  - first:
+      213: 1442585195
+    second: FrozenKnight_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FrozenKnight_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 984
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 300b2bcdad11a93a5552511806c3f8a7
+      internalID: 1834900048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 984
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 522dbc0e0113900349f9c247956417fa
+      internalID: -1517802714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_2
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 984
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58a0bb63bb64fc2ec95f5400387ab542
+      internalID: -1121682751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_3
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 984
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 866f1b9f8d038be114576a13f14af429
+      internalID: -1471362037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 820
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab56c0ff6c0ad2742663c45827f1ab9a
+      internalID: 2077651255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_5
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 820
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13b17dfa6a22f1070ccf6ffcefebcb1b
+      internalID: -392751378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_6
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 820
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02a148a0413317c90e81764a93c66d2e
+      internalID: 1114487272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_7
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 820
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c120a346de065bbb11fe6b228371dfb
+      internalID: 1841712272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 656
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b77b64b77a448d9d4e5ee5c498bfd14
+      internalID: 1614783639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 656
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec9fa463a622999f9b27f010b116fb3c
+      internalID: 2130027083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_10
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 656
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d1db9b560be715afedc46d5c51e580e
+      internalID: 1755574201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_11
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 656
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9714a132235b1596464ff820aa38a45c
+      internalID: -659027326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 492
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07c5cea7127b9e55d04a718e02186ab
+      internalID: 1543754564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_13
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 492
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb7ada3852a545aa4d7967ed56b6320a
+      internalID: 175323331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_14
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 492
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c64e67eb7e50c95099f5a320fc4bfb3a
+      internalID: -1272739075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_15
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 492
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e9273f9f8fa36e85616465e1cdf04a2
+      internalID: 1611265849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 328
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0267940ec3a8d3afe07bb691f845f18
+      internalID: 336716280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_17
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 328
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d120256b20a3b5f570692fa1ba66b459
+      internalID: -755105178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_18
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 328
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ece988be59da8e49562ca95b08c21b
+      internalID: 1070028674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_19
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 328
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09218288552b79b869ab408abc67af68
+      internalID: 1928620217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 164
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e23251c72f5060d29f0baf672fae09a
+      internalID: 1631318286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_21
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 164
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 983d3ae94b81e523f5c1eb88edfac34c
+      internalID: 29746628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_22
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 164
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c240306e958f56d1275b713682844a7
+      internalID: 66226041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_23
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 164
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bd530216cc6670fd503fb6037e710e0
+      internalID: 1412968425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e2ee8962ccfcd160a0c048138b3b389
+      internalID: -669052098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_25
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0399ddf4eee804285692f352d284e29
+      internalID: 1466270863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrozenKnight_26
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 288
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0427}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dd927f6fabe9f5c77b31d2366c2b978
+      internalID: 1442585195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d5abddd430599cf90dfa6aa28874947c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":288.0,"y":164.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5260000228881836,"y":0.03799999877810478},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      FrozenKnight_0: 1834900048
+      FrozenKnight_1: -1517802714
+      FrozenKnight_2: -1121682751
+      FrozenKnight_3: -1471362037
+      FrozenKnight_4: 2077651255
+      FrozenKnight_5: -392751378
+      FrozenKnight_6: 1114487272
+      FrozenKnight_7: 1841712272
+      FrozenKnight_8: 1614783639
+      FrozenKnight_9: 2130027083
+      FrozenKnight_10: 1755574201
+      FrozenKnight_11: -659027326
+      FrozenKnight_12: 1543754564
+      FrozenKnight_13: 175323331
+      FrozenKnight_14: -1272739075
+      FrozenKnight_15: 1611265849
+      FrozenKnight_16: 336716280
+      FrozenKnight_17: -755105178
+      FrozenKnight_18: 1070028674
+      FrozenKnight_19: 1928620217
+      FrozenKnight_20: 1631318286
+      FrozenKnight_21: 29746628
+      FrozenKnight_22: 66226041
+      FrozenKnight_23: 1412968425
+      FrozenKnight_24: -669052098
+      FrozenKnight_25: 1466270863
+      FrozenKnight_26: 1442585195
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

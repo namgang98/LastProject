@@ -4,7 +4,7 @@
     Poison,
     Fire,
     Ice,
-
+    Haste,
 }
 
 public readonly struct DamageInfo

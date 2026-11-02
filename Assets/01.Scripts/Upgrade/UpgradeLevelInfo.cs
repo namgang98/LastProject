@@ -4,6 +4,9 @@ public enum UpgradeTrack
     Shop,
     Chest,
     Training,
+    FavorMerchant,
+    FavorTrainer,
+    FavorBlacksmith,
 }
 public class UpgradeLevelInfo
 {

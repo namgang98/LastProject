@@ -11,12 +11,21 @@ public class SaveData
     public int gold;
     public bool inRun;
     public int bestFloor;
+    public int originBestFloor;
+    public int clearCount;
+    public int abyssClearCount;
     public BackpackSaveData backpack = new();
     public List<GridSaveData> chestTabs = new();
     public List<int> shopOffers = new();
     public List<UpgradeSaveData> upgrades = new();
     public List<int> unlockedClasses = new();
     public List<ClassProgressSaveData> classProgress = new();
+    public List<QuestSaveData> quests = new();
+
+    public int towerId;
+    public List<int> clearedTowers = new();
+    public List<int> collapsedTowers = new();
+    public List<int> fallenClasses = new();
 }
 
 [Serializable]
@@ -41,6 +50,7 @@ public class ItemSaveData
     public int y;
     public int rotation;
     public int parent = -1;
+    public int forge;
 }
 
 [Serializable]
@@ -57,4 +67,12 @@ public class ClassProgressSaveData
     public int classId;
     public int level = 1;
     public List<int> points = new();
+}
+
+[Serializable]
+public class QuestSaveData
+{
+    public int id;
+    public int progress;
+    public int claimed;
 }

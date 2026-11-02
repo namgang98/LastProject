@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ClassSelectView : MonoBehaviour
@@ -57,7 +56,7 @@ public class ClassSelectView : MonoBehaviour
         {
             bool locked = !training.IsUnlocked(card.Info);
             string status = locked ? "훈련장에서 해금" : $"Lv.{training.GetProgress(card.Info).Level}";
-            card.SetStatus(status, locked);
+            //card.SetState(status, locked);
         }
     }
     private void Select(ClassCardView card)
@@ -65,7 +64,7 @@ public class ClassSelectView : MonoBehaviour
         if(card != null && card.IsLocked)
             return;
 
-        if (selected != null)
+        if(selected != null)
             selected.SetSelected(false);
 
         selected = card;
@@ -92,6 +91,6 @@ public class ClassSelectView : MonoBehaviour
         departButton.interactable = false;
         GameSession.instance.SelectClass(selected.Info);
         GameSession.instance.BeginRun();
-        SceneManager.LoadScene(SceneNames.Dungeon);
+        SceneLoader.instance.Load(SceneNames.Dungeon);
     }
 }

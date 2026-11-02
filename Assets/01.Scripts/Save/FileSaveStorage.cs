@@ -13,6 +13,8 @@ public class FileSaveStorage : ISaveStorage
     private readonly string path;
     private readonly string tempPath;
 
+    private const int MaxRetry = 3;
+    private const int RetryDelayMs = 50;
     public FileSaveStorage(string fileName)
     {
         path = Path.Combine(Application.persistentDataPath, fileName);
@@ -34,13 +36,26 @@ public class FileSaveStorage : ISaveStorage
     {
         File.WriteAllText(tempPath, json);
 
-        if(File.Exists(path))
+        if(!File.Exists(path))
         {
-            File.Replace(tempPath, path, null);
+            File.Move(tempPath, path);
             return;
         }
 
-        File.Move(tempPath, path);
+        for(int i = 0; i < MaxRetry; i++)
+        {
+            try
+            {
+                File.Replace(tempPath, path, null);
+                return;
+            }
+            catch (IOException)
+            {
+                System.Threading.Thread.Sleep(RetryDelayMs);
+            }
+        }
+        File.Copy(tempPath, path, true);
+        File.Delete(tempPath);
     }
 
     public void Delete()

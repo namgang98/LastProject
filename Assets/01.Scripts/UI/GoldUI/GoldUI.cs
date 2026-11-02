@@ -8,6 +8,8 @@ public class GoldUI : MonoBehaviour
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnChangeGold>(HandleChangeGold);
+        if(GameSession.HasInstance)
+            GameSession.instance.RefreshGold();
     }
     private void OnDisable()
     {
@@ -19,6 +21,6 @@ public class GoldUI : MonoBehaviour
 
     private void HandleChangeGold(OnChangeGold e)
     {
-        goldText.text = e.RunGold > 0 ? $"{e.Gold} (+{e.RunGold})" : $"{e.Gold}";
+        goldText.text = $"{e.Gold}";
     }
 }

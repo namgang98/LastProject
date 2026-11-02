@@ -72,7 +72,7 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
         Vector2 area = itemLayer.rect.size;
         float cellSize = Mathf.Min(area.x / bounds.x, area.y / bounds.y);
 
-        view.ApplyLayout(cellSize, 0, 0f);
+        view.ApplyLayout(cellSize, 0, 0f, false);
         view.Rect.anchoredPosition = (area - view.Rect.sizeDelta) * 0.5f;
     }
 
@@ -82,13 +82,14 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
     }
 
     #region 드롭 대상
-    public override void ShowPreview(ItemInstance item, int rotation, PointerEventData eventData)
+    public override void ShowPreview(ItemInstance item, DragPose pose, PointerEventData eventData)
     {
         if(Backpack == null || item == Current)
             return;
 
+        bool canEquip = !locked && CanEquip(item);
         highlight.enabled = true;
-        highlight.color = !locked && CanEquip(item) ? validColor : invalidColor;
+        highlight.color = canEquip || CanInsert(item) ? validColor : invalidColor;
     }
 
     public override void HidePreview()
@@ -96,12 +97,18 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
         highlight.enabled = false;
     }
 
-    public override bool TryDrop(ItemInstance item, int rotation, PointerEventData eventData)
+    public override bool TryDrop(ItemInstance item, DragPose pose, PointerEventData eventData)
     {
-        if(Backpack == null || locked)
+        if(Backpack == null)
             return false;
 
-        return Equip(item);
+        if(!locked && CanEquip(item))
+            return Equip(item);
+
+        if(!CanInsert(item))
+            return false;
+
+        return ((ContainerInstance)Current).Storage.TryAutoPlace(item);
     }
 
     public override void Release(ItemInstance item)
@@ -110,6 +117,10 @@ public abstract class EquipSlotView : ItemContainerView, IItemDragSource
             return;
 
         Unequip(item);
+    }
+    private bool CanInsert(ItemInstance item)
+    {
+        return Current is ContainerInstance target && item != target && item.Owner != target.Storage && target.Storage.CanAutoPlace(item);
     }
     #endregion
 }

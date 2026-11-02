@@ -24,9 +24,14 @@ public class LootTable
 
     public ItemInfo Pick(ItemGrade grade)
     {
-        if(!table.TryGetValue(grade, out List<ItemInfo> list))
-            list = table[ItemGrade.Normal];
+        for(int g = (int)grade; g >= (int)ItemGrade.Normal; g--)
+        {
+            if(!table.TryGetValue((ItemGrade)g, out List<ItemInfo> list) || list.Count == 0)
+                continue;
 
-        return list[Random.Range(0, list.Count)];
+            return list[Random.Range(0, list.Count)];
+        }
+
+        return null;
     }
 }

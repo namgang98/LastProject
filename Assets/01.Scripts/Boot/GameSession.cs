@@ -2,37 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSession : Singleton<GameSession>
+public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestContext
 {
     private const string SaveFileName = "save.json";
+    private static readonly UpgradeTrack[] SessionTracks =
+    {
+        UpgradeTrack.Shop,
+        UpgradeTrack.Chest,
+        UpgradeTrack.FavorMerchant,
+        UpgradeTrack.FavorTrainer,
+        UpgradeTrack.FavorBlacksmith
+    };
 
     [SerializeField] int defaultClassId = 3000;
     [SerializeField] StarterKit kit;
-    [SerializeField] Vector2Int chestTabSize = new (10, 8);
+    [SerializeField] Vector2Int chestTabSize = new(10, 8);
     [SerializeField, Min(1)] int startTabCount = 1;
 
     [Header("상점")]
     [SerializeField, Range(1, Shop.MaxSlots)] int shopSlotCount = 3;
     [SerializeField] float buyMultiplier = 3f;
     [SerializeField] int rerollCost = 20;
-    [SerializeField] float shopNormal = 70f;
-    [SerializeField] float shopRare = 25f;
-    [SerializeField] float shopEpic = 5f;
-    [SerializeField] float shopRarePerLevel = 5f;
-    [SerializeField] float shopEpicPerLevel = 2f;
 
-    public Shop Shop { get; private set; }
-    public UpgradeService Upgrades { get; private set; }
-    private static readonly UpgradeTrack[] DonationTracks = { UpgradeTrack.Shop, UpgradeTrack.Chest };
-    public ClassTraining Training { get; private set; }
-    public Chest Chest { get; private set; }
     private SaveService saveService;
     private SaveData saveData;
 
-    public ClassInfo CurrentClass { get; private set; }
-    public Backpack Backpack { get; private set; }
+    public PlayerStorage Storage { get; private set; }
+    public ClassSelection Classes { get; private set; }
     public Wallet Wallet { get; private set; }
+    public UpgradeService Upgrades { get; private set; }
+    public NpcFavor Favor { get; private set; }
+    public Shop Shop { get; private set; }
+    public ClassTraining Training { get; private set; }
+    public TowerProgress Towers { get; private set; }
+    public QuestBook Quests { get; private set; }
+    public ForgeService Forge { get; private set; }
+    public TowerInfo CurrentTower { get; private set; }
+    public CutsceneKind PlayingCutscene { get; private set; }
+    public CutsceneKind PendingCutscene { get; private set; }
 
+    public Backpack Backpack => Storage.Backpack;
+    public Chest Chest => Storage.Chest;
+    public ClassInfo CurrentClass => Classes.Current;
+    public int BestFloor => Training.BestFloor;
+    public int MaxForgeLevel => Storage.MaxForgeLevel;
+
+    #region 불러오기
     public bool TryLoad()
     {
         saveService = new SaveService(new FileSaveStorage(SaveFileName));
@@ -40,55 +55,105 @@ public class GameSession : Singleton<GameSession>
         if(!saveService.TryLoad(out saveData))
             saveData = new SaveData { classId = defaultClassId };
 
-        if(!DataManager.instance.TryGetClass(saveData.classId, out ClassInfo playerClass))
+        if(!DataManager.instance.TryGetClass(saveData.classId, out ClassInfo savedClass))
         {
             Debug.LogError($"[GameSession] 직업 ID {saveData.classId}를 찾을 수 없습니다.", this);
             return false;
         }
 
-        CurrentClass = playerClass;
         Wallet = new Wallet(saveData.gold);
         Wallet.Changed += PostGold;
+        Storage = new PlayerStorage(kit, chestTabSize);
 
-        if(!TryLoadBackpack())
+        if(!Storage.TryLoad(saveData, startTabCount))
             return false;
-        
+
         LoadUpgrades();
-        LoadChest();
         LoadShop();
         LoadTraining();
-        if (!saveData.inRun)
+        LoadTowers();
+        LoadClasses(savedClass);
+        Quests = new QuestBook(DataManager.instance.Quests, saveData.quests, this);
+        Forge = new ForgeService(DataManager.instance.Forge, () => Favor.GetRate(NpcType.Blacksmith));
+
+        if(!saveData.inRun)
             return true;
 
-        Debug.Log("[GameSession] 런 도중 종료 기록 → 사망 처리", this);
-        LoseBackpack();
+        Storage.LoseOnDeath();
         Save(false);
         return true;
     }
 
-    public void BeginRun()
+    private void LoadUpgrades()
     {
-        Save(true);
+        Upgrades = UpgradeLoader.Load(saveData.upgrades, SessionTracks);
+        Favor = new NpcFavor(Upgrades);
+        SubscribeLevelUp(UpgradeTrack.Shop, HandleShopLevelUp);
+        SubscribeLevelUp(UpgradeTrack.Chest, HandleChestLevelUp);
     }
-    public void FinishRun(RunEndReason reason)
+
+    private void SubscribeLevelUp(UpgradeTrack track, Action<UpgradeProgress> handler)
     {
-        if(reason == RunEndReason.Death)
+        if(!Upgrades.TryGet(track, out UpgradeProgress progress))
+            return;
+
+        progress.LevelUp -= handler;
+        progress.LevelUp += handler;
+    }
+
+    private void LoadShop()
+    {
+        var pricing = new ShopPricing(buyMultiplier, rerollCost, () => Favor.GetRate(NpcType.Merchant));
+        Upgrades.TryGet(UpgradeTrack.Shop, out UpgradeProgress progress);
+        Shop = ShopLoader.Create(pricing, progress, shopSlotCount, saveData.shopOffers);
+    }
+
+    private void LoadTraining()
+    {
+        DataManager.instance.TryGetUpgrade(UpgradeTrack.Training, out UpgradeTrackInfo costs);
+        Training = new ClassTraining(saveData, costs, DataManager.instance.TryGetTrainingStat, () => 1f - Favor.GetRate(NpcType.Trainer));
+    }
+
+    private void LoadTowers()
+    {
+        DataManager data = DataManager.instance;
+        Towers = new TowerProgress(data.Towers, data.PrologueTower, data.OriginTower, saveData);
+
+        if(Towers.TryGetTower(saveData.towerId, out TowerInfo saved) && Towers.CanEnter(saved))
         {
-            LoseBackpack();
-            Wallet.LoseRun();
-        }
-        else
-        {
-            Wallet.CommitRun();
+            CurrentTower = saved;
+            return;
         }
 
-        Shop.Restock();
+        CurrentTower = data.PrologueTower;
+    }
+
+    private void LoadClasses(ClassInfo savedClass)
+    {
+        DataManager.instance.TryGetClass(defaultClassId, out ClassInfo fallback);
+        Classes = new ClassSelection(Training, Towers, savedClass, fallback);
+    }
+    #endregion
+
+    #region 저장
+    private void Save(bool inRun)
+    {
+        saveData.classId = CurrentClass.Id;
+        saveData.gold = Wallet.Gold;
+        saveData.upgrades = Upgrades.ToData();
+        saveData.towerId = CurrentTower != null ? CurrentTower.Id : 0;
+        saveData.inRun = inRun;
+        Storage.WriteTo(saveData);
+        ShopLoader.WriteTo(Shop, saveData.shopOffers);
+        Training.WriteTo(saveData);
+        Towers.WriteTo(saveData);
+        Quests.WriteTo(saveData.quests);
+        saveService.Save(saveData);
+    }
+
+    public void SaveInVillage()
+    {
         Save(false);
-    }
-
-    public void RefreshGold()
-    {
-        PostGold(Wallet);
     }
 
     public void DeleteSave()
@@ -96,224 +161,190 @@ public class GameSession : Singleton<GameSession>
         saveService.Delete();
         Debug.Log($"[GameSession] 세이브 삭제 : {Application.persistentDataPath}", this);
     }
+    #endregion
 
-    private bool TryLoadBackpack()
+    #region 인게임
+    public void BeginRun()
     {
-        var errors = new List<string>();
-
-        if(saveData.backpack.bagId != 0 && InventorySaveMapper.TryRestore(saveData.backpack, errors, out Backpack restored))
-        {
-            foreach(var error in errors)
-            {
-                Debug.LogWarning($"[GameSession] {error}", this);
-            }
-
-            Backpack = restored;
-            return true;
-        }
-
-        if(!kit.TryCreate(out Backpack created))
-            return false;
-
-        Backpack = created;
-        return true;
+        Storage.GiveStarterWeapon(CurrentClass);
+        Save(true);
     }
 
-    public bool TrySwapBag(BagInstance newBag)
+    public void FinishRun(RunEndReason reason)
     {
-        GridContainer from = newBag.Owner;
+        if(reason == RunEndReason.Death)
+            Storage.LoseOnDeath();
 
-        if(from == null || newBag == Backpack.Bag)
-            return false;
+        if(reason == RunEndReason.Conquest)
+            HandleConquest();
 
-        Vector2Int anchor = newBag.Anchor;
-        int rotation = newBag.Rotation;
-        BagInstance oldBag = Backpack.Bag;
-
-        from.Remove(newBag);
-
-        if(!from.TryPlace(oldBag, anchor, rotation) && !from.TryAutoPlace(oldBag))
-        {
-            from.TryPlace(newBag, anchor, rotation);
-            return false;
-        }
-
-        Backpack old = Backpack;
-        Backpack = new Backpack(newBag);
-
-        PouchInstance pouch = old.UnequipPouch();
-
-        if(pouch != null)
-            Backpack.TryEquipPouch(pouch);
-
-        EventManager.instance.PostNotification(new OnBackpackChanged(Backpack));
-        return true;
-    }
-    private void LoseBackpack()
-    {
-        PouchInstance pouch = Backpack.LoseAllOnDeath();
-
-        if(!kit.TryCreate(out Backpack newPack))
-            return;
-
-        if(pouch != null)
-            newPack.TryEquipPouch(pouch);
-
-        Backpack = newPack;
-    }
-
-    private void LoadChest()
-    {
-        var errors = new List<string>();
-        Chest = new Chest(chestTabSize);
-        int count = Mathf.Max(startTabCount, saveData.chestTabs.Count);
-        Chest.EnsureTabCount(count);
-
-        for(int i = 0; i < saveData.chestTabs.Count; i++)
-        {
-            InventorySaveMapper.Restore(saveData.chestTabs[i], Chest.Tabs[i], errors);
-        }
-
-        foreach(var error in errors)
-        {
-            Debug.LogWarning($"[GameSession] 창고 : {error}", this);
-        }
-
-        if(!Upgrades.TryGet(UpgradeTrack.Chest, out UpgradeProgress progress))
-            return;
-
-        progress.LevelUp -= HandleChestLevelUp;
-        progress.LevelUp += HandleChestLevelUp;
-    }
-
-    private void Save(bool inRun)
-    {
-        saveData.chestTabs.Clear();
-        saveData.shopOffers.Clear();
-        saveData.upgrades = Upgrades.ToData();
-
-        foreach(var tab in Chest.Tabs)
-        {
-            saveData.chestTabs.Add(InventorySaveMapper.ToData(tab));
-        }
-
-        foreach(var offer in Shop.Offers)
-        {
-            saveData.shopOffers.Add(offer != null ? offer.Id : 0);
-        }
-        saveData.classId = CurrentClass.Id;
-        saveData.gold = Wallet.Gold;
-        Training.WriteTo(saveData);
-        saveData.inRun = inRun;
-        saveData.backpack = InventorySaveMapper.ToData(Backpack);
-        saveService.Save(saveData);
-    }
-    public void SaveInVillage()
-    {
+        Shop.Restock();
         Save(false);
     }
-    private void PostGold(Wallet wallet)
+
+    private void HandleConquest()
     {
-        EventManager.instance.PostNotification(new OnChangeGold(wallet.Gold, wallet.RunGold));
+        saveData.abyssClearCount++;
+        PendingCutscene = ToCutscene(Towers.Conquer(CurrentTower, CurrentClass));
+        Classes.EnsurePlayable();
     }
+
+    private static CutsceneKind ToCutscene(ConquestResult result)
+    {
+        switch(result)
+        {
+            case ConquestResult.Collapsed:
+                return CutsceneKind.Collapse;
+            case ConquestResult.TowersRisen:
+                return CutsceneKind.TowersRise;
+            case ConquestResult.OriginRisen:
+                return CutsceneKind.OriginRise;
+            default:
+                return CutsceneKind.None;
+        }
+    }
+
+    public CutsceneKind ConsumeCutscene()
+    {
+        PlayingCutscene = PendingCutscene;
+        PendingCutscene = CutsceneKind.None;
+        return PlayingCutscene;
+    }
+
+    public void ReportFloor(int floor)
+    {
+        Training.ReportFloor(floor);
+        Towers.ReportFloor(CurrentTower, floor);
+    }
+    public void ResetTowers()
+    {
+        Towers.ResetProgress();
+        CurrentTower = Towers.Prologue;
+        SaveInVillage();
+    }
+    #endregion
+
+    #region 선택창
     public void SelectClass(ClassInfo info)
     {
-        if(info == null)
-            return;
-        CurrentClass = info;
+        Classes.Select(info);
     }
-    private void LoadShop()
+
+    public ClassAvailability GetAvailability(ClassInfo info)
     {
-        var rarity = new DropRarity(shopNormal, shopRare, shopEpic, shopRarePerLevel, shopEpicPerLevel);
-        var pricing = new ShopPricing(buyMultiplier, rerollCost);
+        return Classes.GetAvailability(info);
+    }
 
-        int level = 1;
-        int slotCount = shopSlotCount;
-
-        if(Upgrades.TryGet(UpgradeTrack.Shop, out UpgradeProgress progress))
-        {
-            level = progress.Level;
-            slotCount = progress.Current.Value;
-            progress.LevelUp -= HandleShopLevelUp;
-            progress.LevelUp += HandleShopLevelUp;
-        }
-
-        Shop = new Shop(new LootTable(DataManager.instance.Items), rarity, pricing, level, slotCount);
-
-        if(saveData.shopOffers.Count == 0)
-        {
-            Shop.Restock();
+    public void SelectTower(TowerInfo tower)
+    {
+        if(tower == null || !Towers.CanEnter(tower))
             return;
-        }
 
-        var saved = new List<ItemInfo>();
+        CurrentTower = tower;
+    }
+    #endregion
 
-        foreach(int id in saveData.shopOffers)
-        {
-            DataManager.instance.TryGetItem(id, out ItemInfo info);
-            saved.Add(info);
-        }
-
-        Shop.Restore(saved);
+    #region 창고
+    public bool TrySwapBag(BagInstance newBag)
+    {
+        return Storage.TrySwapBag(newBag);
     }
 
     public bool TryReceive(ItemInstance item)
     {
-        if(Backpack.EquippedPouch == null && Backpack.TryEquipPouch(item))
-            return true;
-
-        if(Backpack.Grid.TryAutoPlace(item))
-            return true;
-
-        if(Backpack.PouchStorage != null && Backpack.PouchStorage.TryAutoPlace(item))
-            return true;
-
-        return Chest.TryStore(item);
+        return Storage.TryReceive(item);
     }
 
-    private void LoadUpgrades()
+    public int CountConsumable(ConsumeType kind)
     {
-        Upgrades = new UpgradeService();
+        return Storage.CountConsumable(kind);
+    }
 
-        foreach(UpgradeTrack track in DonationTracks)
+    public bool TryTakeConsumable(ConsumeType kind, out ConsumableInfo info)
+    {
+        return Storage.TryTakeConsumable(kind, out info);
+    }
+
+    public int CountItem(int itemId)
+    {
+        return Storage.CountItem(itemId);
+    }
+
+    public void TakeItems(int itemId, int amount)
+    {
+        Storage.TakeItems(itemId, amount);
+    }
+
+    public void CollectForgeables(List<ForgeableInstance> results)
+    {
+        Storage.CollectForgeables(results);
+    }
+    #endregion
+
+    #region 퀘스트
+    public QuestClaimResult TryClaimQuest(QuestProgress quest, out int favorLevelUps)
+    {
+        favorLevelUps = 0;
+
+        if(!Quests.IsVisible(quest) || !Quests.IsReady(quest))
+            return QuestClaimResult.NotReady;
+
+        QuestInfo info = quest.Info;
+
+        if(info.HasRewardItem && !TryGiveRewards(info))
+            return QuestClaimResult.NoSpace;
+
+        if(info.Type == QuestType.Deliver)
+            TakeItems(info.Target, info.Count);
+
+        Wallet.Earn(info.RewardGold);
+        favorLevelUps = Favor.AddFavor(info.Npc, info.Favor);
+        Quests.MarkClaimed(quest);
+        SaveInVillage();
+        return QuestClaimResult.Ok;
+    }
+
+    private bool TryGiveRewards(QuestInfo info)
+    {
+        var given = new List<ItemInstance>();
+
+        for(int i = 0; i < info.RewardCount; i++)
         {
-            if(!DataManager.instance.TryGetUpgrade(track, out UpgradeTrackInfo info))
+            ItemInstance item = info.RewardItem.CreateInstance();
+
+            if(TryReceive(item))
             {
-                Debug.LogWarning($"[GameSession] 강화 데이터 {track} 가 없습니다.", this);
+                given.Add(item);
                 continue;
             }
 
-            UpgradeSaveData saved = FindUpgradeSave(track);
-            int level = saved != null ? saved.level : 1;
-            int deposited = saved != null ? saved.deposited : 0;
-            Upgrades.Register(new UpgradeProgress(info, level, deposited));
+            foreach(ItemInstance placed in given)
+            {
+                placed.Owner?.Remove(placed);
+            }
+
+            return false;
         }
+
+        return true;
+    }
+    #endregion
+
+    #region 이벤트
+    public void RefreshGold()
+    {
+        PostGold(Wallet);
     }
 
-    private UpgradeSaveData FindUpgradeSave(UpgradeTrack track)
+    private void PostGold(Wallet wallet)
     {
-        string key = track.ToString();
-
-        foreach(var data in saveData.upgrades)
-        {
-            if(data.track == key)
-                return data;
-        }
-
-        return null;
+        EventManager.instance.PostNotification(new OnChangeGold(wallet.Gold));
     }
 
     private void HandleShopLevelUp(UpgradeProgress progress)
     {
         Shop.ApplyLevel(progress.Level, progress.Current.Value);
         SaveInVillage();
-    }
-    private int GetUnlockedTabCount()
-    {
-        if(Upgrades.TryGet(UpgradeTrack.Chest, out UpgradeProgress progress))
-            return Mathf.Max(1, progress.Current.Value);
-
-        return startTabCount;
     }
 
     private void HandleChestLevelUp(UpgradeProgress progress)
@@ -322,15 +353,5 @@ public class GameSession : Singleton<GameSession>
         EventManager.instance.PostNotification(new OnChestExpanded(Chest.Tabs.Count));
         SaveInVillage();
     }
-    private void LoadTraining()
-    {
-        DataManager.instance.TryGetUpgrade(UpgradeTrack.Training, out UpgradeTrackInfo costs);
-        Training = new ClassTraining(saveData, costs, DataManager.instance.TryGetTrainingStat);
-
-        if (Training.IsUnlocked(CurrentClass))
-            return;
-
-        if (DataManager.instance.TryGetClass(defaultClassId, out ClassInfo starter))
-            CurrentClass = starter;
-    }
+    #endregion
 }

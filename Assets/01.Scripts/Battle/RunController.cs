@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class RunController : MonoBehaviour
+public class RunController : MonoBehaviour, IPlayerStatsSource
 {
     [SerializeField] InventoryUI ui;
     [SerializeField] BattleController battle;
@@ -11,11 +11,18 @@ public class RunController : MonoBehaviour
     private UnitController player;
     [SerializeField] ToolTipView toolTip;
     [SerializeField] HpBarView playerHpBar;
+    [SerializeField] BlessingRewardController blessingReward;
+    [SerializeField] ItemDropper dropper;
+    private RunBlessings blessings;
+    private IStatModifier training;
+    private TowerRuleSet towerRules;
     public Backpack CurrentBackpack => GameSession.instance.Backpack;
+    public Backpack Backpack => GameSession.instance.Backpack;
+    public RunBlessings Blessings => blessings;
+
     private void OnEnable()
     {
         EventManager.instance.AddListener<OnRunEnded>(HandleRunEnded);
-        EventManager.instance.AddListener<OnMonsterKilled>(HandleMonsterKilled);
         EventManager.instance.AddListener<OnStageStarted>(HandleStageStarted);
     }
 
@@ -25,8 +32,14 @@ public class RunController : MonoBehaviour
             return;
 
         EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);
-        EventManager.instance.RemoveListener<OnMonsterKilled>(HandleMonsterKilled);
         EventManager.instance.RemoveListener<OnStageStarted>(HandleStageStarted);
+    }
+    private void OnDestroy()
+    {
+        if(blessings == null)
+            return;
+
+        blessings.Changed -= HandleBlessingChanged;
     }
     private void Start()
     {
@@ -37,13 +50,24 @@ public class RunController : MonoBehaviour
 
 
         ui.Bind(session.Backpack);
-        IStatModifier training = session.Training.GetBonus(session.CurrentClass);
-        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training);
-        battle.Bind(session.Backpack, session.CurrentClass, training);
+        training = session.Training.GetBonus(session.CurrentClass);
+        towerRules = new TowerRuleSet();
+        towerRules.SetSource(session.CurrentTower);
+        battle.SetTowerRules(towerRules);
+        stage.SetTowerRules(towerRules);
+        blessings = new RunBlessings();
+        blessings.Changed += HandleBlessingChanged;
+        blessingReward.Bind(blessings);
+        battle.SetRunBonus(blessings);
+        stage.SetRunBonus(blessings);
+        dropper.SetRunBonus(blessings);
+
+        var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings, towerRules);
+        battle.Bind(session.Backpack, session.CurrentClass, training, blessings, towerRules);
         toolTip.Bind(session.Backpack);
         playerHpBar.Bind(player.Health);
         playerStatusIcons.Bind(player);
-        player.ResetUnit(stats.MaxHp);
+        player.Init(stats.MaxHp);
         session.RefreshGold();
         stage.Begin(player);
     }
@@ -68,12 +92,46 @@ public class RunController : MonoBehaviour
     {
         GameSession.instance.FinishRun(e.Reason);
     }
-    private void HandleMonsterKilled(OnMonsterKilled e)
-    {
-        GameSession.instance.Wallet.AddRunGold(e.Monster.DropGold);
-    }
     private void HandleStageStarted(OnStageStarted e)
     {
-        GameSession.instance.Training.ReportFloor(e.Stage);
+        GameSession.instance.ReportFloor(e.Stage);
+
+        if(e.Stage <= 1 || blessings == null)
+            return;
+
+        ApplyFloorPoison(e.Stage);
+
+        int heal = Mathf.RoundToInt(blessings.Sum(BlessingStat.FloorHeal));
+
+        if(heal > 0)
+            player.Health.Heal(heal);
+    }
+    private void HandleBlessingChanged(BlessingInfo info)
+    {
+        GameSession session = GameSession.instance;
+        var stats = BuildStats();
+        int before = player.Health.MaxHp;
+
+        player.Health.SetMaxHp(stats.MaxHp);
+
+        int gained = stats.MaxHp - before;
+
+        if(gained > 0)
+            player.Health.Heal(gained);
+    }
+    private void ApplyFloorPoison(int floor)
+    {
+        int damage = towerRules.GetFloorDamage(floor, player.Health.MaxHp);
+        damage = Mathf.Min(damage, player.Health.CurrentHP - 1);
+
+        if(damage <= 0)
+            return;
+
+        player.Health.TakeDamage(new DamageInfo(damage, false, DamageElement.Poison, true));
+    }
+    public PlayerStats BuildStats()
+    {
+        GameSession session = GameSession.instance;
+        return PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings, towerRules);
     }
 }

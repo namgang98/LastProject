@@ -9,7 +9,6 @@ public class ToolTipView : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI descText;
     [SerializeField] TextMeshProUGUI infoText;
-    [SerializeField] Color[] gradeColors;
 
     [SerializeField] RectTransform rect;
 
@@ -39,13 +38,18 @@ public class ToolTipView : MonoBehaviour
     {
         ItemInfo info = e.Item.Info;
 
-        nameText.text = $"{info.Name}\n등급 : {info.Grade}";
-        nameText.color = gradeColors[(int)info.Grade];
+        nameText.text = $"{info.Name}\n등급 : {GradeStyle.ToKorean(info.Grade)}";
+        nameText.color = GradeStyle.GetColor(info.Grade);
 
         descText.text = info.Description;
 
         sb.Clear();
         info.AppendTooltip(sb);
+        e.Item.AppendStateTooltip(sb);
+        
+        if(GameSession.HasInstance && GameSession.instance.Quests != null)
+            GameSession.instance.Quests.AppendItemNeeds(info.Id, sb);
+        
         if(backpack != null)
             SetTooltipWriter.Append(sb, info, SetCounter.CollectEquippedIds(backpack));
         infoText.text = sb.ToString();

@@ -1,26 +1,35 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PopupEscapeCloser : MonoBehaviour
 {
+    [SerializeField] UnityEvent onEscapeIdle;
+
     private void Update()
     {
         Keyboard keyboard = Keyboard.current;
 
-        if (keyboard == null || !keyboard.escapeKey.wasPressedThisFrame)
+        if(keyboard == null || !keyboard.escapeKey.wasPressedThisFrame)
             return;
 
-        if (!PopupManager.HasInstance || IsTyping())
+        if(!PopupManager.HasInstance || IsTyping())
             return;
 
-        PopupManager.instance.CloseTop();
+        if(PopupManager.instance.OpenCount > 0)
+        {
+            PopupManager.instance.CloseTop();
+            return;
+        }
+
+        onEscapeIdle?.Invoke();
     }
 
     private static bool IsTyping()
     {
-        if (EventSystem.current == null)
+        if(EventSystem.current == null)
             return false;
 
         GameObject selected = EventSystem.current.currentSelectedGameObject;

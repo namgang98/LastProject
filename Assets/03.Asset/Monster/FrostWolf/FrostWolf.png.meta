@@ -1,0 +1,847 @@
+fileFormatVersion: 2
+guid: a07d1db76bf9aa5ee200858e4aa84506
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1921385641
+    second: FrostWolf_0
+  - first:
+      213: 1952907935
+    second: FrostWolf_1
+  - first:
+      213: -647992032
+    second: FrostWolf_2
+  - first:
+      213: -2070848834
+    second: FrostWolf_3
+  - first:
+      213: 1001342622
+    second: FrostWolf_4
+  - first:
+      213: -1787531667
+    second: FrostWolf_5
+  - first:
+      213: 115557215
+    second: FrostWolf_6
+  - first:
+      213: -303075009
+    second: FrostWolf_7
+  - first:
+      213: -2101020969
+    second: FrostWolf_8
+  - first:
+      213: -1807015985
+    second: FrostWolf_9
+  - first:
+      213: -701361895
+    second: FrostWolf_10
+  - first:
+      213: 104348579
+    second: FrostWolf_11
+  - first:
+      213: 607302713
+    second: FrostWolf_12
+  - first:
+      213: -300300809
+    second: FrostWolf_13
+  - first:
+      213: 928914868
+    second: FrostWolf_14
+  - first:
+      213: -770656778
+    second: FrostWolf_15
+  - first:
+      213: -1026177692
+    second: FrostWolf_16
+  - first:
+      213: 1647906845
+    second: FrostWolf_17
+  - first:
+      213: 296670498
+    second: FrostWolf_18
+  - first:
+      213: -70361427
+    second: FrostWolf_19
+  - first:
+      213: 780889753
+    second: FrostWolf_20
+  - first:
+      213: 1687426551
+    second: FrostWolf_21
+  - first:
+      213: 885784162
+    second: FrostWolf_22
+  - first:
+      213: 793996739
+    second: FrostWolf_23
+  - first:
+      213: 248072081
+    second: FrostWolf_24
+  - first:
+      213: -747876784
+    second: FrostWolf_25
+  - first:
+      213: 364973150
+    second: FrostWolf_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FrostWolf_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 876
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d61b834429358e36017359493c88f3ac
+      internalID: -1921385641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_1
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 876
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e69a68daf2306175ac3a8c86873760f5
+      internalID: 1952907935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_2
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 876
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7903635a229b3d1ef7ab62a8316bff3d
+      internalID: -647992032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_3
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 876
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 559ea509dc73a05a37cdbc8852a0194a
+      internalID: -2070848834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 730
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8840795d1965b95bbcceb7b1005a4627
+      internalID: 1001342622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_5
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 730
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 564b586ca7a601cfbecabbc3786acdf0
+      internalID: -1787531667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_6
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 730
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb01877781dfb3a7ce0e2702738b17ae
+      internalID: 115557215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_7
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 730
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1931606383a052cadb1cd6b5fcc76cc9
+      internalID: -303075009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 584
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02a7dfeb2f8720aea31212ebd6dc3458
+      internalID: -2101020969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_9
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 584
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46f28a6bd4b42b608b2b7d3f161aa253
+      internalID: -1807015985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_10
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 584
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 268841cab7948865e03031726912fa85
+      internalID: -701361895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_11
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 584
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53a10a48f52a05242de14c37b16e49d5
+      internalID: 104348579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 438
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b63d94e3ce6288573fe5c87b01f11202
+      internalID: 607302713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_13
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 438
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04de7ce96e94c432d28b177f14353f1b
+      internalID: -300300809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_14
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 438
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95a06313eec0d34ce8563226f6967435
+      internalID: 928914868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_15
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 438
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd1741d9760c7e57c259652de37fb141
+      internalID: -770656778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 292
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 288c1c959ed1b2994cdb0fbbd4e122ec
+      internalID: -1026177692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_17
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 292
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f8cf19e5daffb67e738a70820de4341
+      internalID: 1647906845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_18
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 292
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f753bc25491bd0715a4e2bb2940521fb
+      internalID: 296670498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_19
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 292
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d76a147b48367d42cd0aa743e518cb71
+      internalID: -70361427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 146
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f039495f40efa9c39a5b8a5b8e750f2
+      internalID: 780889753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_21
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 146
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35cd362184760765309fc3e7b9f5c005
+      internalID: 1687426551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_22
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 146
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80306e7ba6739a4df02bfd124079b1ae
+      internalID: 885784162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_23
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 146
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f6757548628070c720de96e18bdfaa
+      internalID: 793996739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d548582ab1734c2d5bb41557b96fcf5e
+      internalID: 248072081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_25
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 0
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5614f2b367e5e80344f503f3a4672e30
+      internalID: -747876784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrostWolf_26
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 0
+        width: 290
+        height: 146
+      alignment: 9
+      pivot: {x: 0.5000, y: 0.0616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec238138db2fae9bdd3cd64b3386d279
+      internalID: 364973150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e3b7f99dfa747dfc320d0b40fcb50f51
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":290.0,"y":146.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5260000228881836,"y":0.03799999877810478},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      FrostWolf_0: -1921385641
+      FrostWolf_1: 1952907935
+      FrostWolf_2: -647992032
+      FrostWolf_3: -2070848834
+      FrostWolf_4: 1001342622
+      FrostWolf_5: -1787531667
+      FrostWolf_6: 115557215
+      FrostWolf_7: -303075009
+      FrostWolf_8: -2101020969
+      FrostWolf_9: -1807015985
+      FrostWolf_10: -701361895
+      FrostWolf_11: 104348579
+      FrostWolf_12: 607302713
+      FrostWolf_13: -300300809
+      FrostWolf_14: 928914868
+      FrostWolf_15: -770656778
+      FrostWolf_16: -1026177692
+      FrostWolf_17: 1647906845
+      FrostWolf_18: 296670498
+      FrostWolf_19: -70361427
+      FrostWolf_20: 780889753
+      FrostWolf_21: 1687426551
+      FrostWolf_22: 885784162
+      FrostWolf_23: 793996739
+      FrostWolf_24: 248072081
+      FrostWolf_25: -747876784
+      FrostWolf_26: 364973150
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

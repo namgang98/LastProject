@@ -109,6 +109,7 @@ public class PopupManager : Singleton<PopupManager>
     private void RefreshDim()
     {
         dim.SetActive(openPopups.Count > 0);
+        EventManager.instance.PostNotification(new OnPopupCountChanged(openPopups.Count));
     }
 
     private readonly struct Entry

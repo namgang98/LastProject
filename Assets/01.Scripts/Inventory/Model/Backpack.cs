@@ -11,6 +11,7 @@ public class Backpack
     {
         Bag = bag;
     }
+
     #region 파우치 장착
     public bool CanEquipPouch(ItemInstance item)
     {
@@ -57,7 +58,26 @@ public class Backpack
         Grid.TakeAll();
         return survived;
     }
+    public bool TryTakeConsumable(ConsumeType kind, out ConsumableInfo info)
+    {
+        if(ConsumableSearch.TryTake(Grid, kind, out info))
+            return true;
 
+        if(PouchStorage == null)
+            return false;
+
+        return ConsumableSearch.TryTake(PouchStorage, kind, out info);
+    }
+
+    public int CountConsumable(ConsumeType kind)
+    {
+        int count = ConsumableSearch.Count(Grid, kind);
+
+        if(PouchStorage != null)
+            count += ConsumableSearch.Count(PouchStorage, kind);
+
+        return count;
+    }
     public IEnumerable<ItemInstance> EquippedItems()
     {
         foreach(var item in Grid.Items)

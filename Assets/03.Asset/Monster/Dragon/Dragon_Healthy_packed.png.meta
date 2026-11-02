@@ -1,0 +1,928 @@
+fileFormatVersion: 2
+guid: bba72f2df820fc44ab0df602450f10b6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4808604774102455594
+    second: Dragon_Healthy_packed_0
+  - first:
+      213: 2262058998987326285
+    second: Dragon_Healthy_packed_1
+  - first:
+      213: -7130302185492171455
+    second: Dragon_Healthy_packed_2
+  - first:
+      213: -1513351931352035836
+    second: Dragon_Healthy_packed_3
+  - first:
+      213: -5497290171850674695
+    second: Dragon_Healthy_packed_4
+  - first:
+      213: -7566792590375041811
+    second: Dragon_Healthy_packed_5
+  - first:
+      213: -7036140939689301638
+    second: Dragon_Healthy_packed_6
+  - first:
+      213: 8846249956626973357
+    second: Dragon_Healthy_packed_7
+  - first:
+      213: -8209711359658803035
+    second: Dragon_Healthy_packed_8
+  - first:
+      213: 7754138224108879457
+    second: Dragon_Healthy_packed_9
+  - first:
+      213: 350607959110452617
+    second: Dragon_Healthy_packed_10
+  - first:
+      213: 7037671573393850951
+    second: Dragon_Healthy_packed_11
+  - first:
+      213: -7193070245750417430
+    second: Dragon_Healthy_packed_12
+  - first:
+      213: -3709922808880690990
+    second: Dragon_Healthy_packed_13
+  - first:
+      213: 6275370533252320627
+    second: Dragon_Healthy_packed_14
+  - first:
+      213: -7772444458463375048
+    second: Dragon_Healthy_packed_15
+  - first:
+      213: -7526941987922843355
+    second: Dragon_Healthy_packed_16
+  - first:
+      213: 4667144450617189889
+    second: Dragon_Healthy_packed_17
+  - first:
+      213: -1356873786593773687
+    second: Dragon_Healthy_packed_18
+  - first:
+      213: 8630298125981821715
+    second: Dragon_Healthy_packed_19
+  - first:
+      213: 2790403996767766445
+    second: Dragon_Healthy_packed_20
+  - first:
+      213: -5568785134451446535
+    second: Dragon_Healthy_packed_21
+  - first:
+      213: 5731574684906476174
+    second: Dragon_Healthy_packed_22
+  - first:
+      213: 8225808157494307636
+    second: Dragon_Healthy_packed_23
+  - first:
+      213: 6766909860918625902
+    second: Dragon_Healthy_packed_24
+  - first:
+      213: 6354548633922337280
+    second: Dragon_Healthy_packed_25
+  - first:
+      213: 917890512020361424
+    second: Dragon_Healthy_packed_26
+  - first:
+      213: 2052221816608337779
+    second: Dragon_Healthy_packed_27
+  - first:
+      213: -1060338989106248017
+    second: Dragon_Healthy_packed_28
+  - first:
+      213: 6699799763800377918
+    second: Dragon_Healthy_packed_29
+  - first:
+      213: 7968933915582654837
+    second: Dragon_Healthy_packed_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 860
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6da206e5f67644db0800000000000000
+      internalID: -4808604774102455594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_1
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 860
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d438d97bca2746f10800000000000000
+      internalID: 2262058998987326285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_2
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 860
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1453c84b0f31c0d90800000000000000
+      internalID: -7130302185492171455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_3
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 860
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40e4c9fbf6e7ffae0800000000000000
+      internalID: -1513351931352035836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_4
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 860
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fd289fe6b3b5b3b0800000000000000
+      internalID: -5497290171850674695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_5
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 860
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de443a9ca3a5df690800000000000000
+      internalID: -7566792590375041811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 645
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a796c3c281b9a5e90800000000000000
+      internalID: -7036140939689301638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_7
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 645
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da2c013577134ca70800000000000000
+      internalID: 8846249956626973357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_8
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 645
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a04c0be30f311e80800000000000000
+      internalID: -8209711359658803035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_9
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 645
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16eb943b1ab3c9b60800000000000000
+      internalID: 7754138224108879457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_10
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 645
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985043ac41c9dd400800000000000000
+      internalID: 350607959110452617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_11
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 645
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74241024205daa160800000000000000
+      internalID: 7037671573393850951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 430
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae75d95d8b41d2c90800000000000000
+      internalID: -7193070245750417430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_13
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 430
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d80c808cd4b38cc0800000000000000
+      internalID: -3709922808880690990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_14
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 430
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37d457c6048961750800000000000000
+      internalID: 6275370533252320627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_15
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 430
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83156d8f1fab22490800000000000000
+      internalID: -7772444458463375048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_16
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 430
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 529e2e4342eea8790800000000000000
+      internalID: -7526941987922843355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_17
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 430
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1062976762705c040800000000000000
+      internalID: 4667144450617189889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 215
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 987f909ea7a6b2de0800000000000000
+      internalID: -1356873786593773687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_19
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 215
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31badd89b6af4c770800000000000000
+      internalID: 8630298125981821715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_20
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 215
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da74c2f96a189b620800000000000000
+      internalID: 2790403996767766445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_21
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 215
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fcab86cc63b7b2b0800000000000000
+      internalID: -5568785134451446535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_22
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 215
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e82d8790fc4aa8f40800000000000000
+      internalID: 5731574684906476174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_23
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 215
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43b65f1efe0f72270800000000000000
+      internalID: 8225808157494307636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6684277aa4e8ed50800000000000000
+      internalID: 6766909860918625902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_25
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 0
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00a72e09054ef2850800000000000000
+      internalID: 6354548633922337280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_26
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 0
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d0dca7be800dbc00800000000000000
+      internalID: 917890512020361424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_27
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 0
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37f2f3b7ed4fa7c10800000000000000
+      internalID: 2052221816608337779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_28
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 0
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa643dcae4be841f0800000000000000
+      internalID: -1060338989106248017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dragon_Healthy_packed_29
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 0
+        width: 269
+        height: 215
+      alignment: 9
+      pivot: {x: 0.509, y: 0.047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3a419b53687afc50800000000000000
+      internalID: 6699799763800377918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2242b053f835b69479f07c4deef8fff7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":269.0,"y":215.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5090000033378601,"y":0.04699999839067459},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Dragon_Healthy_packed_0: -4808604774102455594
+      Dragon_Healthy_packed_1: 2262058998987326285
+      Dragon_Healthy_packed_10: 350607959110452617
+      Dragon_Healthy_packed_11: 7037671573393850951
+      Dragon_Healthy_packed_12: -7193070245750417430
+      Dragon_Healthy_packed_13: -3709922808880690990
+      Dragon_Healthy_packed_14: 6275370533252320627
+      Dragon_Healthy_packed_15: -7772444458463375048
+      Dragon_Healthy_packed_16: -7526941987922843355
+      Dragon_Healthy_packed_17: 4667144450617189889
+      Dragon_Healthy_packed_18: -1356873786593773687
+      Dragon_Healthy_packed_19: 8630298125981821715
+      Dragon_Healthy_packed_2: -7130302185492171455
+      Dragon_Healthy_packed_20: 2790403996767766445
+      Dragon_Healthy_packed_21: -5568785134451446535
+      Dragon_Healthy_packed_22: 5731574684906476174
+      Dragon_Healthy_packed_23: 8225808157494307636
+      Dragon_Healthy_packed_24: 6766909860918625902
+      Dragon_Healthy_packed_25: 6354548633922337280
+      Dragon_Healthy_packed_26: 917890512020361424
+      Dragon_Healthy_packed_27: 2052221816608337779
+      Dragon_Healthy_packed_28: -1060338989106248017
+      Dragon_Healthy_packed_29: 6699799763800377918
+      Dragon_Healthy_packed_3: -1513351931352035836
+      Dragon_Healthy_packed_4: -5497290171850674695
+      Dragon_Healthy_packed_5: -7566792590375041811
+      Dragon_Healthy_packed_6: -7036140939689301638
+      Dragon_Healthy_packed_7: 8846249956626973357
+      Dragon_Healthy_packed_8: -8209711359658803035
+      Dragon_Healthy_packed_9: 7754138224108879457
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

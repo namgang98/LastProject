@@ -217,3 +217,26 @@ public struct OnUnitRevived : IGameEvent
         Position = pos;
     }
 }
+
+public struct OnRunSettled : IGameEvent
+{
+    public int Stage;
+    public RunEndReason Reason;
+    public int SavedCount;
+
+    public OnRunSettled(int stage, RunEndReason reason, int savedCount)
+    {
+        Stage = stage;
+        Reason = reason;
+        SavedCount = savedCount;
+    }
+}
+public struct OnTutorialSignal : IGameEvent
+{
+    public string Key;
+
+    public OnTutorialSignal(string key)
+    {
+        Key = key;
+    }
+}

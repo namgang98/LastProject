@@ -12,8 +12,7 @@ public class RouletteView : MonoBehaviour
     [Header("칩")]
     [SerializeField] Button[] chipButtons;
     [SerializeField] int[] chipValues = { 10, 100, 500 };
-    [SerializeField] Color chipNormal = Color.white;
-    [SerializeField] Color chipSelected = new(1f, 0.82f, 0.4f, 1f);
+    [SerializeField] GameObject[] chipDims;
 
     [Header("버튼")]
     [SerializeField] Button clearButton;
@@ -23,6 +22,7 @@ public class RouletteView : MonoBehaviour
     [Header("표시")]
     [SerializeField] TMP_Text totalText;
     [SerializeField] TMP_Text resultText;
+    [SerializeField] CoinBurstView coinBurst;
 
     [Header("규칙")]
     [SerializeField, Min(0.5f)] float messageTime = 2f;
@@ -86,7 +86,10 @@ public class RouletteView : MonoBehaviour
 
         for(int i = 0; i < chipButtons.Length; i++)
         {
-            chipButtons[i].image.color = i == index ? chipSelected : chipNormal;
+            bool selected = i == index;
+
+            if(i < chipDims.Length && chipDims[i] != null)
+                chipDims[i].SetActive(selected);
         }
     }
 
@@ -138,6 +141,9 @@ public class RouletteView : MonoBehaviour
         int payout = bet.GetPayout(multiplier);
 
         Wallet.Earn(payout);
+        if(payout > 0 && coinBurst != null)
+            coinBurst.Play(multiplier);
+
         resultText.text = payout > 0 ? $"x{multiplier} 당첨! +{payout}" : $"x{multiplier}... 꽝";
         Sfx.Play(payout > 0 ? SfxType.Coins : SfxType.UiClick);
 

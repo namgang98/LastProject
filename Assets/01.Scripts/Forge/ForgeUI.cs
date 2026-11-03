@@ -141,7 +141,7 @@ public class ForgeUI : MonoBehaviour
         if(risky)
             warningText.text = $"실패하면 +{selected.Level - 1}(으)로 떨어집니다";
 
-        goldText.text = $"{session.Wallet.Gold} / {cost}G";
+        goldText.text = $"{cost}G";
         goldText.color = session.Wallet.Gold >= cost ? enoughColor : lackColor;
 
         ShowMaterials(next.Materials, session);

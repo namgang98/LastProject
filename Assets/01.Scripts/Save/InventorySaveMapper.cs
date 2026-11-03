@@ -46,7 +46,9 @@ public static class InventorySaveMapper
             y = item.Anchor.y,
             rotation = item.Rotation,
             parent = parent,
-            forge = item is ForgeableInstance forged ? forged.Level : 0
+            forge = item is ForgeableInstance forged ? forged.Level : 0,
+            orb = item is ForgeableInstance socketed && socketed.Orb != null ? socketed.Orb.Id : 0,
+            ward = item.Ward != null ? item.Ward.Id : 0
         });
 
         if(item is not ContainerInstance container)
@@ -109,11 +111,21 @@ public static class InventorySaveMapper
             }
 
             instances[i] = info.CreateInstance();
-            if(instances[i] is ForgeableInstance forged)
-                forged.SetLevel(data.items[i].forge);
+            RestoreWard(instances[i], data.items[i].ward, errors);
+
+            if(instances[i] is not ForgeableInstance forged)
+                continue;
+
+            forged.SetLevel(data.items[i].forge);
+            RestoreOrb(forged, data.items[i].orb, errors);
         }
 
         return instances;
+    }
+    private static void RestoreOrb(ForgeableInstance item, int orbId, List<string> errors)
+    {
+        if(TryFindOrb(item, orbId, errors, out OrbInfo orb))
+            item.SetOrb(orb);
     }
     private static GridContainer FindDestination(int parent, int index, ItemInstance[] instances, GridContainer target, List<string> errors)
     {
@@ -164,5 +176,23 @@ public static class InventorySaveMapper
 
         return true;
     }
+    private static void RestoreWard(ItemInstance item, int orbId, List<string> errors)
+    {
+        if(TryFindOrb(item, orbId, errors, out OrbInfo orb))
+            item.SetWard(orb);
+    }
 
+    private static bool TryFindOrb(ItemInstance item, int orbId, List<string> errors, out OrbInfo orb)
+    {
+        orb = null;
+
+        if(orbId == 0)
+            return false;
+
+        if(DataManager.instance.TryGetItem(orbId, out orb))
+            return true;
+
+        errors.Add($"{item.Info.Name}의 보주 ID {orbId} 가 데이터에 없습니다 → 보주 제거");
+        return false;
+    }
 }

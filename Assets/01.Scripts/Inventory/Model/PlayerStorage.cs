@@ -122,24 +122,26 @@ public class PlayerStorage : IMaterialStorage
         return true;
     }
 
-    public void LoseOnDeath()
+    public int LoseOnDeath()
     {
+        List<ItemInstance> warded = CollectWarded(Backpack.Grid);
         PouchInstance pouch = Backpack.LoseAllOnDeath();
 
         if(!kit.TryCreate(out Backpack newPack))
-            return;
+            return 0;
 
         if(pouch != null)
             newPack.TryEquipPouch(pouch);
 
         Backpack = newPack;
+        return RestoreWarded(warded);
     }
 
     public void GiveStarterWeapon(ClassInfo info)
     {
         WeaponInfo starter = info.StarterWeapon;
 
-        if(starter == null || HasWeapon(info.Type))
+        if(starter == null || HasAnyWeapon())
             return;
 
         if(TryPlaceInBackpack(starter.CreateInstance()))
@@ -198,6 +200,68 @@ public class PlayerStorage : IMaterialStorage
         }
 
         return false;
+    }
+
+    public bool TryTakeFromBackpack(int itemId)
+    {
+        if(ItemSearch.Take(Backpack.Grid, itemId, 1) > 0)
+            return true;
+
+        return Backpack.PouchStorage != null && ItemSearch.Take(Backpack.PouchStorage, itemId, 1) > 0;
+    }
+    private static List<ItemInstance> CollectWarded(GridContainer grid)
+    {
+        var result = new List<ItemInstance>();
+
+        foreach(ItemInstance item in grid.Items)
+        {
+            if(item.Ward != null)
+                result.Add(item);
+
+            if(item is ContainerInstance container)
+                result.AddRange(CollectWarded(container.Storage));
+        }
+
+        return result;
+    }
+    private bool HasAnyWeapon()
+    {
+        foreach(ItemInstance item in Backpack.EquippedItems())
+        {
+            if(item.Info is WeaponInfo)
+                return true;
+        }
+
+        return false;
+    }
+    private int RestoreWarded(List<ItemInstance> warded)
+    {
+        int saved = 0;
+
+        foreach(ItemInstance item in warded)
+        {
+            item.Owner?.Remove(item);
+            item.BreakWard();
+
+            if(TryPlaceInBackpack(item) || Chest.TryStore(item))
+                saved++;
+        }
+
+        return saved;
+    }
+
+    public void CollectEquipment(List<ItemInstance> results)
+    {
+        results.Clear();
+
+        foreach(GridContainer grid in AllGrids())
+        {
+            foreach(ItemInstance item in grid.Items)
+            {
+                if(item.CanWard)
+                    results.Add(item);
+            }
+        }
     }
     #endregion
 

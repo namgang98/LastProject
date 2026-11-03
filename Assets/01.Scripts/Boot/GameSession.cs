@@ -42,6 +42,8 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public TowerProgress Towers { get; private set; }
     public QuestBook Quests { get; private set; }
     public ForgeService Forge { get; private set; }
+    public OrbService Socket { get; private set; }
+    public int WardSaved { get; private set; }
     public TowerInfo CurrentTower { get; private set; }
     public CutsceneKind PlayingCutscene { get; private set; }
     public CutsceneKind PendingCutscene { get; private set; }
@@ -51,6 +53,8 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public ClassInfo CurrentClass => Classes.Current;
     public int BestFloor => Training.BestFloor;
     public int MaxForgeLevel => Storage.MaxForgeLevel;
+
+    public TutorialBook Tutorials { get; private set; }
 
     #region 불러오기
     public bool TryLoad()
@@ -80,13 +84,16 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         LoadClasses(savedClass);
         Quests = new QuestBook(DataManager.instance.Quests, saveData.quests, this);
         Forge = new ForgeService(DataManager.instance.Forge, () => Favor.GetRate(NpcType.Blacksmith));
+        Tutorials = new TutorialBook(saveData.tutorials ?? new List<string>());
+        Socket = new OrbService(() => Favor.GetRate(NpcType.Blacksmith));
 
         if(!saveData.inRun)
             return true;
 
-        Storage.LoseOnDeath();
+        HandleDeath();
         Save(false);
         return true;
+
     }
 
     private void LoadUpgrades()
@@ -153,6 +160,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         Training.WriteTo(saveData);
         Towers.WriteTo(saveData);
         Quests.WriteTo(saveData.quests);
+        Tutorials.WriteTo(saveData.tutorials);
         saveService.Save(saveData);
     }
 
@@ -177,6 +185,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     #region 인게임
     public void BeginRun()
     {
+        WardSaved = 0;
         Storage.GiveStarterWeapon(CurrentClass);
         GiveBeginnerSupport();
         Save(true);
@@ -196,7 +205,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public void FinishRun(RunEndReason reason)
     {
         if(reason == RunEndReason.Death)
-            Storage.LoseOnDeath();
+            HandleDeath();
 
         if(reason == RunEndReason.Conquest)
             HandleConquest();
@@ -255,6 +264,11 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         CurrentTower = Towers.Prologue;
         SaveInVillage();
     }
+
+    private void HandleDeath()
+    {
+        WardSaved = Storage.LoseOnDeath();
+    }
     #endregion
 
     #region 선택창
@@ -311,6 +325,10 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public void CollectForgeables(List<ForgeableInstance> results)
     {
         Storage.CollectForgeables(results);
+    }
+    public void CollectEquipment(List<ItemInstance> results)
+    {
+        Storage.CollectEquipment(results);
     }
     #endregion
 

@@ -16,7 +16,7 @@ public class ResultView : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.instance.AddListener<OnRunEnded>(HandleRunEnded);
+        EventManager.instance.AddListener<OnRunSettled>(HandleRunSettled);
     }
 
     private void OnDisable()
@@ -24,12 +24,12 @@ public class ResultView : MonoBehaviour
         if(!EventManager.HasInstance)
             return;
 
-        EventManager.instance.RemoveListener<OnRunEnded>(HandleRunEnded);
+        EventManager.instance.RemoveListener<OnRunSettled>(HandleRunSettled);
     }
 
-    private void HandleRunEnded(OnRunEnded e)
+    private void HandleRunSettled(OnRunSettled e)
     {
-        Show(e.Reason, e.Stage);
+        Show(e.Reason, e.Stage, e.SavedCount);
     }
 
     private void ReturnToVillage()
@@ -50,10 +50,10 @@ public class ResultView : MonoBehaviour
         }
     }
 
-    private void Show(RunEndReason reason, int stage)
+    private void Show(RunEndReason reason, int stage, int savedCount)
     {
         titleText.text = GetTitle(reason);
-        stageText.text = GetStageText(stage);
+        stageText.text = GetStageText(stage) + (savedCount > 0 ? $"\n<size=70%>망자의 가호로 장비 {savedCount}개를 지켜 냈다</size>" : string.Empty);
 
         PopupManager.instance.Open(panel, closeOnEscape: false);
     }

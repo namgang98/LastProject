@@ -1260,6 +1260,8 @@ MonoBehaviour:
   forgeCsv: {fileID: 4900000, guid: 1bc0518636954864da25f6c82e9a4324, type: 3}
   towerCsv: {fileID: 4900000, guid: ead78a7e86f647718104bbd63e4aac8e, type: 3}
   blessingCsv: {fileID: 4900000, guid: c963e9e1562f4195a67476a50be34d56, type: 3}
+  orbCsv: {fileID: 4900000, guid: 8750dd7405944f2689113c9bf07ebfb0, type: 3}
+  tutorialCsv: {fileID: 4900000, guid: 287c62661af24b66b1fbe753a3588b49, type: 3}
   iconLibrary: {fileID: 11400000, guid: 20216c8c80df7864eb072731d2e539c4, type: 2}
   prefabLibrary: {fileID: 11400000, guid: 56cf11582a5258c458ffb7ec871b7b33, type: 2}
   backgroundLibrary: {fileID: 11400000, guid: bc83198d2c36c9b45a067d38498400a4, type: 2}

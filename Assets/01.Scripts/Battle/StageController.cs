@@ -223,7 +223,7 @@ public class StageController : MonoBehaviour
             return;
         }
 
-        if (currentMonster == null)
+        if(currentMonster == null)
             return;
 
         monsterHud.Show();
@@ -283,7 +283,7 @@ public class StageController : MonoBehaviour
     }
     private int GetScalingFloor()
     {
-        if (tower == null)
+        if(tower == null)
             return stage;
 
         return tower.ToScalingFloor(stage);
@@ -354,4 +354,20 @@ public class StageController : MonoBehaviour
         Looting,
         Ended,
     }
+
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    public void DebugJumpTo(int floor)
+    {
+        if(phase == Phase.Ended || phase == Phase.Moving)
+            return;
+
+        battle.EndBattle();
+        monsterHud.Hide();
+        stage = Mathf.Max(1, floor) - 1;
+        phase = Phase.Looting;
+        NextStage();
+    }
+#endif
+
 }

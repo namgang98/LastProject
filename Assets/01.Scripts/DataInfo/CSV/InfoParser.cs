@@ -129,6 +129,76 @@ public static class InfoParser
         return true;
     }
     #endregion
+    #region 튜토리얼
+    public static bool TryParseTutorialLine(CsvRow row, List<string> errors, out TutorialLineInfo info)
+    {
+        info = null;
+        string key = row.GetString(CSVStamp.Key);
+
+        if(string.IsNullOrEmpty(key))
+            return Fail(row, errors, CSVStamp.Key);
+
+        if(!row.TryGetInt(CSVStamp.Order, out int order))
+            return Fail(row, errors, CSVStamp.Order);
+
+        string line = row.GetString(CSVStamp.Line);
+
+        if(string.IsNullOrEmpty(line))
+            return Fail(row, errors, CSVStamp.Line);
+
+        if(!row.TryGetEnum(CSVStamp.Wait, out TutorialWait wait))
+            return Fail(row, errors, CSVStamp.Wait);
+
+        string signal = row.GetString(CSVStamp.Signal);
+
+        if(wait == TutorialWait.Signal && string.IsNullOrEmpty(signal))
+            return Fail(row, errors, CSVStamp.Signal);
+
+        int pause = 0;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Pause)) && (!row.TryGetInt(CSVStamp.Pause, out pause) || pause < 0 || pause > 1))
+            return Fail(row, errors, CSVStamp.Pause);
+
+        info = new TutorialLineInfo(key, order, line, wait, signal, row.GetString(CSVStamp.Focus), pause == 1);
+        return true;
+    }
+    #endregion
+    #region 보주
+    public static bool TryParseOrb(CsvRow row, List<string> errors, out OrbInfo info)
+    {
+        info = null;
+
+        if(!TryParseItemBase(row, errors, out ItemBase b))
+            return false;
+
+        if(!row.TryGetEnum(CSVStamp.Kind, out OrbKind kind))
+            return Fail(row, errors, CSVStamp.Kind);
+
+        if(!row.TryGetInt(CSVStamp.Cost, out int cost) || cost < 0)
+            return Fail(row, errors, CSVStamp.Cost);
+
+        if(kind == OrbKind.Ward)
+        {
+            info = new OrbInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc, kind, DamageElement.None, 0f, 0, 0f, cost);
+            return true;
+        }
+
+        if(!row.TryGetEnum(CSVStamp.Element, out DamageElement element) || element == DamageElement.None)
+            return Fail(row, errors, CSVStamp.Element);
+
+        if(!row.TryGetFloat(CSVStamp.Elementchance, out float chance) || chance <= 0f || chance > 1f)
+            return Fail(row, errors, CSVStamp.Elementchance);
+
+        if(!row.TryGetInt(CSVStamp.Elementvalue, out int value) || value <= 0)
+            return Fail(row, errors, CSVStamp.Elementvalue);
+
+        if(!row.TryGetFloat(CSVStamp.Elementduration, out float duration) || duration <= 0f)
+            return Fail(row, errors, CSVStamp.Elementduration);
+
+        info = new OrbInfo(b.common.id, b.common.name, b.iconName, b.shape, b.grade, b.sellPrice, b.desc, kind, element, chance, value, duration, cost);
+        return true;
+    }
+    #endregion
     #region 몬스터 드랍테이블
     public static bool TryParseMonsterDrop(CsvRow row, List<string> errors, out MonsterDropInfo info)
     {

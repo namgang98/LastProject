@@ -5,6 +5,7 @@ public class GameBootStrap : MonoBehaviour
 {
     private async Awaitable Start()
     {
+        DG.Tweening.DOTween.SetTweensCapacity(500, 150);
         await DataManager.instance.InitAsync();
 
         if(!GameSession.instance.TryLoad())

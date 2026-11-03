@@ -59,7 +59,7 @@ public class StatsView : MonoBehaviour
     {
         Canvas.ForceUpdateCanvases();
 
-        foreach (ScrollRect scroll in scrolls)
+        foreach(ScrollRect scroll in scrolls)
         {
             scroll.verticalNormalizedPosition = 1f;
         }

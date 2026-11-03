@@ -90,6 +90,14 @@ public static class CSVStamp
     public const string Materials = "materials";
     public const string Bonus = "bonus";
     public const string Downgrade = "downgrade";
+
+    public const string Key = "key";
+    public const string Order = "order";
+    public const string Line = "line";
+    public const string Wait = "wait";
+    public const string Signal = "signal";
+    public const string Focus = "focus";
+    public const string Pause = "pause";
 }
 #endregion
 
@@ -117,6 +125,8 @@ public static class DataTag
     public const string Forge = "forge";
     public const string Towers = "towers";
     public const string Blessings = "blessings";
+    public const string Orbs = "orbs";
+    public const string Tutorials = "tutorials";
 }
 #endregion
 

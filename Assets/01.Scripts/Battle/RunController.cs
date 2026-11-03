@@ -90,7 +90,9 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
     }
     private void HandleRunEnded(OnRunEnded e)
     {
-        GameSession.instance.FinishRun(e.Reason);
+        GameSession session = GameSession.instance;
+        session.FinishRun(e.Reason);
+        EventManager.instance.PostNotification(new OnRunSettled(e.Stage, e.Reason, session.WardSaved));
     }
     private void HandleStageStarted(OnStageStarted e)
     {

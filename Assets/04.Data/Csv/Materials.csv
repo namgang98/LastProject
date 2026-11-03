@@ -1,5 +1,5 @@
 ﻿id,name,icon,shape,grade,sellprice,description
-8001,버섯 포자,Mat_Spore, X,Normal,15,축축한 포자 가루
+8001,버섯 포자,Mat_Spore,X,Normal,15,축축한 포자 가루
 8002,버섯 갓,Mat_MushroomCap,X,Normal,40,독이 없는 쪽이길 바란다.
 8003,고블린 귀,Mat_GoblinEar,X|X,Normal,20,현상금 증표로 쓰인다.
 8004,녹슨 동전 꾸러미,Mat_CoinPouch,X,Rare,80,누군가 빼앗긴 돈
@@ -20,3 +20,18 @@
 8101,영혼 파편,Mat_SoulShard,X,Normal,60,되살아난 자들에게서 흘러나온 영혼의 조각
 8102,속삭이는 두개골,Mat_WhisperSkull,XX|XX,Rare,500,귀를 대면 누군가의 이름을 부르는 소리가 들린다
 8103,고대 용의 영혼석,Mat_DragonSoulstone,X|X,Epic,3000,두 번 죽은 용의 마지막 숨결이 갇혀 있다
+8201,임프 뿔,Mat_ImpHorn,X|X,Normal,40,작지만 끝이 아직 뜨겁다.
+8202,지옥견 송곳니,Mat_HellhoundFang,X|X,Rare,140,잿불이 뚝뚝 떨어진다.
+8203,악마 전사 철편,Mat_DemonIronShard,XX|XX,Normal,70,지옥의 대장간에서 두드린 쇳조각.
+8204,화염 지휘관 깃발 조각,Mat_FlameBanner,XX|XX,Epic,900,불타던 군기의 마지막 조각.
+8205,마왕의 뿔,Mat_DemonLordHorn,XX|XX,Epic,1500,쥐고 있으면 누군가 노려보는 느낌이 든다.
+8206,얼음 정령 핵,Mat_IceSpiritCore,X|X,Rare,140,녹지 않는 냉기가 고동친다.
+8207,서리 늑대 가죽,Mat_FrostWolfPelt,XX|XX,Normal,60,눈보라도 막아 줄 두툼한 가죽.
+8208,빙결 기사 투구 파편,Mat_FrozenHelmShard,XX|XX,Normal,70,안쪽까지 얼어붙어 있다.
+8209,설인 털,Mat_YetiFur,XX|XX,Epic,900,한 줌만으로도 따뜻하다.
+8210,서리 군주의 왕관,Mat_FrostCrown,XX,Epic,1500,얼음으로 빚은 왕관. 손끝이 시리다.
+8211,역병 의사 가면,Mat_PlagueMask,XX|XX,Rare,140,부리 안에 마른 약초가 가득하다.
+8212,부푼 시체 고름주머니,Mat_PusSac,X|X,Normal,50,터뜨리지 않게 조심하자.
+8213,역병 까마귀 깃털,Mat_PlagueFeather,X|X,Normal,40,깃 끝이 초록빛으로 썩어 있다.
+8214,썩은 두꺼비 독샘,Mat_ToadGland,XX|XX,Epic,900,아직도 독이 배어 나온다.
+8215,역병 군주의 향로,Mat_PlagueCenser,XX|XX,Epic,1500,꺼지지 않는 역병의 연기가 피어오른다.

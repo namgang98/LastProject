@@ -23,4 +23,5 @@
     public AttackData WithDamage(int damage) => new AttackData(damage, Cooldown, CritChance, CritMultiplier, Element, ElementChance, ElementValue, ElementDuration);
     public AttackData WithCooldown(float cooldown) => new AttackData(Damage, cooldown, CritChance, CritMultiplier, Element, ElementChance, ElementValue, ElementDuration);
     public AttackData WithCrit(float chance, float multiplier) => new AttackData(Damage, Cooldown, chance, multiplier, Element, ElementChance, ElementValue, ElementDuration);
+    public AttackData WithElement(DamageElement element, float chance, int value, float duration) => new AttackData(Damage, Cooldown, CritChance, CritMultiplier, element, chance, value, duration);
 }

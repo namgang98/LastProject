@@ -42,6 +42,7 @@ public class QuestInfo
         Favor = favor;
     }
 
+    public string DisplayName => Repeatable ? $"{Name} (반복)" : Name;
     public bool HasRewardItem => RewardItem != null && RewardCount > 0;
     public bool UsesTargetAsGoal => Type == QuestType.ReachFloor || Type == QuestType.ForgeLevel;
     public int Goal => UsesTargetAsGoal ? Target : Count;

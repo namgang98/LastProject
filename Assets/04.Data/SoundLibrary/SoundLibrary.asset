@@ -14,13 +14,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
   bgms:
   - type: 1
-    clip: {fileID: 8300000, guid: 7619ec15f671986408aec3a2825c0bc5, type: 3}
-    volume: 0.58
+    clip: {fileID: 8300000, guid: 33ef8f190f9e47da91968955d92e7230, type: 3}
+    volume: 0.5
   - type: 2
-    clip: {fileID: 8300000, guid: e0fc7548916c7af45a11308c3fc47cc4, type: 3}
-    volume: 0.47
+    clip: {fileID: 8300000, guid: 13405c828b064ec789a75c5fe938eba1, type: 3}
+    volume: 0.5
   - type: 3
     clip: {fileID: 8300000, guid: 13405c828b064ec789a75c5fe938eba1, type: 3}
+    volume: 0.5
+  - type: 10
+    clip: {fileID: 8300000, guid: 94484334a1ee495185c41251293a1e1a, type: 3}
+    volume: 0.5
+  - type: 11
+    clip: {fileID: 8300000, guid: ddb27987840b4502b84ff021ee4cd6bb, type: 3}
+    volume: 0.5
+  - type: 12
+    clip: {fileID: 8300000, guid: d8c8965973b44049b8c42f91bd14acd7, type: 3}
+    volume: 0.5
+  - type: 13
+    clip: {fileID: 8300000, guid: 7c9ce288de1e46828d77e0151e13d5ac, type: 3}
+    volume: 0.5
+  - type: 14
+    clip: {fileID: 8300000, guid: 2b4a4a20d93a4ae091777b980ce3893e, type: 3}
+    volume: 0.5
+  - type: 15
+    clip: {fileID: 8300000, guid: 24f090ba73774f9891a322c279395786, type: 3}
+    volume: 0.5
+  - type: 16
+    clip: {fileID: 8300000, guid: e2c2b1f5b7104417bc1352ad381a2295, type: 3}
+    volume: 0.5
+  - type: 17
+    clip: {fileID: 8300000, guid: aafead2b9e924cf985597b96aca42c2a, type: 3}
+    volume: 0.5
+  - type: 18
+    clip: {fileID: 8300000, guid: f3a55b8fd1b04fec9b22d714be80d673, type: 3}
+    volume: 0.5
+  - type: 19
+    clip: {fileID: 8300000, guid: 980e3ed5ec394f409f0a49a937167266, type: 3}
+    volume: 0.5
+  - type: 20
+    clip: {fileID: 8300000, guid: 24f308b0b4d547858dc4bec66662356b, type: 3}
+    volume: 0.5
+  - type: 21
+    clip: {fileID: 8300000, guid: 84b1f3752634447ab8597a8c13eb9f26, type: 3}
+    volume: 0.5
+  - type: 22
+    clip: {fileID: 8300000, guid: 04e1cce0268e4c6985cff8d14a3e87e0, type: 3}
     volume: 0.5
   sfxs:
   - type: 100
@@ -339,3 +378,18 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 074268b9246501c49b10edf2181480c2, type: 3}
     volume: 0.7
     pitchRandom: 0.06
+  - type: 600
+    clips:
+    - {fileID: 8300000, guid: 41a17187a98544dea6d93772f16e091f, type: 3}
+    volume: 0.6
+    pitchRandom: 0
+  - type: 601
+    clips:
+    - {fileID: 8300000, guid: f5c63074e17a4250b51a4bcdf0d5d987, type: 3}
+    volume: 0.6
+    pitchRandom: 0
+  - type: 602
+    clips:
+    - {fileID: 8300000, guid: 885f4d8ed10840d0b5c442edae34b774, type: 3}
+    volume: 0.6
+    pitchRandom: 0

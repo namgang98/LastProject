@@ -53,9 +53,27 @@ public class ResultView : MonoBehaviour
     private void Show(RunEndReason reason, int stage, int savedCount)
     {
         titleText.text = GetTitle(reason);
-        stageText.text = GetStageText(stage) + (savedCount > 0 ? $"\n<size=70%>망자의 가호로 장비 {savedCount}개를 지켜 냈다</size>" : string.Empty);
+        stageText.text = GetStageText(stage) + GetNote(reason, savedCount);
 
+        if(SoundManager.HasInstance)
+        {
+            SoundManager.instance.StopBgm(0.3f);
+            SoundManager.instance.PlayJingle(GetJingle(reason));
+        }
         PopupManager.instance.Open(panel, closeOnEscape: false);
+    }
+
+    private static string GetNote(RunEndReason reason, int savedCount)
+    {
+        string note = string.Empty;
+
+        if(reason == RunEndReason.Conquest)
+            note += "\n<size=70%>무너지는 탑에 가방 속 물건이 묻혔다. 주머니와 에고 장비만 남았다</size>";
+
+        if(savedCount > 0)
+            note += $"\n<size=70%>망자의 가호로 장비 {savedCount}개를 지켜 냈다</size>";
+
+        return note;
     }
 
     private static string GetStageText(int stage)
@@ -78,6 +96,19 @@ public class ResultView : MonoBehaviour
                 return $"{GameSession.instance.CurrentTower.Name}이 무너진다...";
             default:
                 return "안전 귀환 성공!";
+        }
+    }
+
+    private static SfxType GetJingle(RunEndReason reason)
+    {
+        switch(reason)
+        {
+            case RunEndReason.Death:
+                return SfxType.JingleDeath;
+            case RunEndReason.Conquest:
+                return SfxType.JingleConquest;
+            default:
+                return SfxType.JingleReturn;
         }
     }
 }

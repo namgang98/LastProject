@@ -47,7 +47,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public TowerInfo CurrentTower { get; private set; }
     public CutsceneKind PlayingCutscene { get; private set; }
     public CutsceneKind PendingCutscene { get; private set; }
-
+    public int BestCleared => Training.BestCleared;
     public Backpack Backpack => Storage.Backpack;
     public Chest Chest => Storage.Chest;
     public ClassInfo CurrentClass => Classes.Current;
@@ -193,7 +193,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
 
     private void GiveBeginnerSupport()
     {
-        if(BestFloor >= beginnerFloor)
+        if(BestCleared >= beginnerFloor)
             return;
 
         if(!DataManager.instance.TryGetItem(beginnerPotionId, out ItemInfo potion))
@@ -226,6 +226,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     }
     private void HandleConquest()
     {
+        WardSaved = Storage.LoseOnDeath();
         saveData.abyssClearCount++;
         PendingCutscene = ToCutscene(Towers.Conquer(CurrentTower, CurrentClass));
         Classes.EnsurePlayable();
@@ -257,6 +258,10 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     {
         Training.ReportFloor(floor);
         Towers.ReportFloor(CurrentTower, floor);
+    }
+    public void ReportCleared(int floor)
+    {
+        Training.ReportCleared(floor);
     }
     public void ResetTowers()
     {

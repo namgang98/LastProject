@@ -11,6 +11,11 @@ public class RunSetupView : MonoBehaviour
     [SerializeField] TowerFrontView front;
     [SerializeField] TowerMapView map;
     [SerializeField] TMP_Text hintText;
+
+    [Header("BGM")]
+    [SerializeField] BgmType bgm = BgmType.TowerMap;
+    [SerializeField] BgmType returnBgm = BgmType.Camp;
+    
     private TowerInfo gateTower;
     private bool departing;
 
@@ -32,6 +37,7 @@ public class RunSetupView : MonoBehaviour
         classList.Refresh(session);
         ShowTowers(session.Towers);
         RefreshInteractable();
+        PlayBgm(bgm);
     }
 
     public void Close()
@@ -40,6 +46,7 @@ public class RunSetupView : MonoBehaviour
             return;
 
         PopupManager.instance.Close(popup);
+        PlayBgm(returnBgm);
     }
 
     private void ShowTowers(TowerProgress progress)
@@ -113,5 +120,12 @@ public class RunSetupView : MonoBehaviour
         yield return effect;
 
         SceneLoader.instance.Load(SceneNames.Dungeon);
+    }
+    private static void PlayBgm(BgmType type)
+    {
+        if(!SoundManager.HasInstance)
+            return;
+
+        SoundManager.instance.PlayBgm(type);
     }
 }

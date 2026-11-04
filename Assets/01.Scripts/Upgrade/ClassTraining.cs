@@ -10,7 +10,7 @@ public class ClassTraining
     private readonly Func<float> costRate;
 
     public int BestFloor { get; private set; }
-
+    public int BestCleared { get; private set; }
     public event Action<ClassInfo> Changed;
 
     public ClassTraining(SaveData data, UpgradeTrackInfo costs, TrainingStatLookup findStat, Func<float> costRate = null)
@@ -19,7 +19,8 @@ public class ClassTraining
         this.findStat = findStat;
         this.costRate = costRate;
         BestFloor = Math.Max(0, data.bestFloor);
-
+        BestCleared = Math.Max(Math.Max(0, data.bestCleared), BestFloor - 1);
+        
         foreach(int id in data.unlockedClasses)
         {
             unlocked.Add(id);
@@ -68,6 +69,13 @@ public class ClassTraining
             return;
 
         BestFloor = floor;
+    }
+    public void ReportCleared(int floor)
+    {
+        if(floor <= BestCleared)
+            return;
+
+        BestCleared = floor;
     }
     #endregion
 
@@ -151,6 +159,7 @@ public class ClassTraining
     public void WriteTo(SaveData data)
     {
         data.bestFloor = BestFloor;
+        data.bestCleared = BestCleared;
         data.unlockedClasses = new List<int>(unlocked);
         data.classProgress.Clear();
 

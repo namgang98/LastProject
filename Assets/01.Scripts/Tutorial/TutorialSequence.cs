@@ -15,6 +15,7 @@ public class TutorialSequence : MonoBehaviour
     [SerializeField] TutorialTrigger trigger = TutorialTrigger.OnStart;
     [SerializeField, Min(0f)] float delay = 0.3f;
     [SerializeField] TutorialDirector director;
+    [SerializeField, Min(0)] int minCleared;
 
     private void Start()
     {
@@ -45,9 +46,14 @@ public class TutorialSequence : MonoBehaviour
 
     private bool IsReady()
     {
-        if (!GameSession.HasInstance)
+        if(!GameSession.HasInstance)
             return false;
 
-        return string.IsNullOrEmpty(requires) || GameSession.instance.Tutorials.IsDone(requires);
+        GameSession session = GameSession.instance;
+
+        if(session.BestCleared < minCleared)
+            return false;
+
+        return string.IsNullOrWhiteSpace(requires) || session.Tutorials.IsDone(requires.Trim());
     }
 }

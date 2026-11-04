@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 public enum TowerKind
 {
@@ -17,6 +18,8 @@ public class TowerInfo
     public string Description { get; }
     public int TopFloor { get; }
     public int AbyssFloor { get; }
+    private const int OffsetRampFloors = 10;
+
     public int LevelOffset { get; }
     public TowerKind Kind { get; }
 
@@ -47,7 +50,8 @@ public class TowerInfo
 
     public int ToScalingFloor(int floor)
     {
-        return floor + LevelOffset;
+        float ramp = Mathf.Clamp01((floor - 1) / (float)OffsetRampFloors);
+        return floor + Mathf.RoundToInt(LevelOffset * ramp);
     }
 
     public int ToStageFloor(int floor)

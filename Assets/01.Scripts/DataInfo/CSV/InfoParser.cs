@@ -485,7 +485,12 @@ public static class InfoParser
         if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Tower)) && (!row.TryGetInt(CSVStamp.Tower, out towerId) || towerId < 0))
             return Fail(row, errors, CSVStamp.Tower);
 
-        info = new StageInfo(b.id, b.name, background, monsterIds, bossId, minFloor, maxFloor, ambience, towerId);
+        BgmType bgm = BgmType.None;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.Bgm)) && !row.TryGetEnum(CSVStamp.Bgm, out bgm))
+            return Fail(row, errors, CSVStamp.Bgm);
+
+        info = new StageInfo(b.id, b.name, background, monsterIds, bossId, minFloor, maxFloor, ambience, towerId, bgm);
         return true;
     }
     #endregion

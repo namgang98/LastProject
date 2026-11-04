@@ -36,6 +36,7 @@ public abstract class ItemInfo
     public virtual bool CanStoreInPouch => true;
     public virtual bool CanStoreInBag => true;
     public virtual bool IsLootable => false;
+    public bool IsSoulbound => Grade == ItemGrade.Legendary;
 
     public virtual ItemInstance CreateInstance()
     {
@@ -43,6 +44,12 @@ public abstract class ItemInfo
     }
     public virtual void AppendTooltip(StringBuilder sb)
     {
+        if(IsSoulbound)
+        {
+            sb.AppendLine();
+            sb.Append("<color=#FFB347>에고 · 쓰러져도 주인 곁에 남는다</color>");
+        }
+
         sb.AppendLine();
         sb.Append($"판매금액 : {SellPrice}G");
     }

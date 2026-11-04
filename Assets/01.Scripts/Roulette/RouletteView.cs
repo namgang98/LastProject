@@ -33,6 +33,10 @@ public class RouletteView : MonoBehaviour
         10, 1, 2, 1, 5, 3, 2, 1, 1, 2, 3, 1, 5, 20, 2, 1, 3, 10, 1, 2, 1, 5, 3, 2, 1
     };
 
+    [Header("BGM")]
+    [SerializeField] BgmType bgm = BgmType.Gamble;
+    [SerializeField] BgmType returnBgm = BgmType.Camp;
+
     private RouletteTable table;
     private RouletteBet bet;
     private int chipIndex;
@@ -69,6 +73,7 @@ public class RouletteView : MonoBehaviour
         resultText.text = string.Empty;
         SelectChip(chipIndex);
         RefreshBets();
+        PlayBgm(bgm);
     }
 
     public void Close()
@@ -78,6 +83,7 @@ public class RouletteView : MonoBehaviour
 
         bet.Clear();
         PopupManager.instance.Close(panel);
+        PlayBgm(returnBgm);
     }
 
     private void SelectChip(int index)
@@ -190,5 +196,12 @@ public class RouletteView : MonoBehaviour
         DOVirtual.DelayedCall(hideAfter, () => resultText.text = string.Empty)
             .SetTarget(resultText)
             .SetLink(resultText.gameObject);
+    }
+    private static void PlayBgm(BgmType type)
+    {
+        if(!SoundManager.HasInstance)
+            return;
+
+        SoundManager.instance.PlayBgm(type);
     }
 }

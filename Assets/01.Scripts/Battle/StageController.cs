@@ -75,7 +75,7 @@ public class StageController : MonoBehaviour
 
     public void Begin(UnitController runner)
     {
-        bool isVeteran = GameSession.instance.BestFloor >= veteranFloor;
+        bool isVeteran = GameSession.instance.BestCleared >= veteranFloor;
         rule = new StageRule(bossInterval, isVeteran);
 
         tower = GameSession.instance.CurrentTower;
@@ -141,11 +141,12 @@ public class StageController : MonoBehaviour
     {
         StageInfo area = planner.Get(stage);
 
-        if(area != null)
+        if (area != null)
         {
             background.Show(area.Background);
             ambience.Show(area.AmbiencePrefab);
             ApplyAreaRules(area);
+            PlayAreaBgm(area);
         }
 
         bool isRestStage = rule.IsRestStage(stage);
@@ -229,6 +230,7 @@ public class StageController : MonoBehaviour
         monsterHud.Show();
         currentMonster.Health.OnDie += HandleMonsterDead;
         battle.StartBattle(player, currentMonster, currentAttacks, currentInfo.IsBoss);
+        GameSession.instance.ReportCleared(stage);
         phase = Phase.Fighting;
     }
 
@@ -246,6 +248,7 @@ public class StageController : MonoBehaviour
         monsterHud.Hide();
         currentMonster.Health.OnDie -= HandleMonsterDead;
         EventManager.instance.PostNotification(new OnMonsterKilled(spawnPoint.position, currentInfo));
+        GameSession.instance.ReportCleared(stage);
 
         if(stage >= finalFloor && currentInfo.IsBoss)
         {
@@ -346,7 +349,13 @@ public class StageController : MonoBehaviour
         float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal)) * ambushHealRatio;
         player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
     }
+    private static void PlayAreaBgm(StageInfo area)
+    {
+        if(area.Bgm == BgmType.None || !SoundManager.HasInstance)
+            return;
 
+        SoundManager.instance.PlayBgm(area.Bgm);
+    }
     private enum Phase
     {
         Moving,

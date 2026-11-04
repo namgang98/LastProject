@@ -12,6 +12,9 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private int sfxPoolSize = 12;
     [SerializeField] private float bgmFadeTime = 1.5f;
     [SerializeField] private float sfxMinInterval = 0.05f;
+    [SerializeField] private float jingleFadeTime = 0.8f;
+    private AudioSource jingleSource;
+    private Coroutine jingleFade;
     private readonly Dictionary<SfxType, float> lastSfxTime = new();
     private BgmType currentBgm = BgmType.None;
     private readonly AudioSource[] bgmSources = new AudioSource[2];
@@ -40,6 +43,8 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayBgm(BgmType type)
     {
+        FadeOutJingle();
+
         if(type == currentBgm)
             return;
 
@@ -167,6 +172,8 @@ public class SoundManager : Singleton<SoundManager>
 
         for(int i = 0; i < sfxPoolSize; i++)
             sfxSources[i] = CreateSource($"SFX_{i}", sfxGroup, false);
+
+        jingleSource = CreateSource("Jingle", bgmGroup, false);
     }
 
     private AudioSource CreateSource(string sourceName, AudioMixerGroup group, bool loop)
@@ -193,4 +200,89 @@ public class SoundManager : Singleton<SoundManager>
         Volume?.Save();
         base.OnApplicationQuit();
     }
+
+    public void PlayJingle(SfxType type)
+    {
+        if(type == SfxType.None || !HasLibrary())
+            return;
+
+        if(!library.TryGetSfx(type, out SoundLibrary.SfxEntry entry))
+        {
+            Debug.LogWarning($"[SoundManager] 등록 안 된 징글 : {type}");
+            return;
+        }
+
+        StopJingleFade();
+        jingleSource.clip = entry.PickClip();
+        jingleSource.volume = entry.volume;
+        jingleSource.Play();
+    }
+
+    private void FadeOutJingle()
+    {
+        if(jingleSource == null || !jingleSource.isPlaying)
+            return;
+
+        StopJingleFade();
+        jingleFade = StartCoroutine(FadeOutJingleRoutine());
+    }
+
+    private void StopJingleFade()
+    {
+        if(jingleFade == null)
+            return;
+
+        StopCoroutine(jingleFade);
+        jingleFade = null;
+    }
+
+    private IEnumerator FadeOutJingleRoutine()
+    {
+        float start = jingleSource.volume;
+        float time = 0f;
+
+        while(time < jingleFadeTime)
+        {
+            time += Time.unscaledDeltaTime;
+            jingleSource.volume = Mathf.Lerp(start, 0f, time / jingleFadeTime);
+            yield return null;
+        }
+
+        jingleSource.Stop();
+        jingleFade = null;
+    }
+    public void StopBgm(float fadeTime)
+    {
+        currentBgm = BgmType.None;
+        StartFade(bgmSources[bgmIndex], null, 0f, fadeTime);
+    }
+    private void StartFade(AudioSource from, AudioSource to, float target, float duration)
+    {
+        if(fadeRoutine != null)
+            StopCoroutine(fadeRoutine);
+
+        fadeRoutine = StartCoroutine(Crossfade(from, to, target, duration));
+    }
+
+    private IEnumerator Crossfade(AudioSource from, AudioSource to, float target, float duration)
+    {
+        float fromStart = from.volume;
+        float time = 0f;
+
+        while(time < duration)
+        {
+            time += Time.unscaledDeltaTime;
+            float rate = Mathf.Clamp01(time / duration);
+            from.volume = Mathf.Lerp(fromStart, 0f, rate);
+
+            if(to != null)
+                to.volume = Mathf.Lerp(0f, target, rate);
+
+            yield return null;
+        }
+
+        from.Stop();
+        fadeRoutine = null;
+    }
+
 }

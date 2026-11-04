@@ -64,6 +64,7 @@ public static class CSVStamp
     public const string MinFloor = "minfloor";
     public const string MaxFloor = "maxfloor";
     public const string Ambience = "ambience";
+    public const string Bgm = "bgm";
     public const string HpDisplay = "hpdisplay";
     public const string SkillChance = "skillchance";
     public const string SkillMultiplier = "skillmultiplier";

@@ -13,7 +13,7 @@ public class ItemInstance
 
     public bool IsPlaced => Owner != null;
     public OrbInfo Ward { get; private set; }
-    public bool CanWard => Info is WeaponInfo || Info is EquipmentInfo;
+    public bool CanWard => (Info is WeaponInfo || Info is EquipmentInfo) && !Info.IsSoulbound;
 
     public ItemInstance(ItemInfo info)
     {

@@ -124,7 +124,7 @@ public class PlayerStorage : IMaterialStorage
 
     public int LoseOnDeath()
     {
-        List<ItemInstance> warded = CollectWarded(Backpack.Grid);
+        List<ItemInstance> kept = CollectKept(Backpack.Grid);
         PouchInstance pouch = Backpack.LoseAllOnDeath();
 
         if(!kit.TryCreate(out Backpack newPack))
@@ -134,9 +134,49 @@ public class PlayerStorage : IMaterialStorage
             newPack.TryEquipPouch(pouch);
 
         Backpack = newPack;
-        return RestoreWarded(warded);
+        return RestoreKept(kept);
+    }
+    private static bool IsKeptOnDeath(ItemInstance item)
+    {
+        return item.Ward != null || item.Info.IsSoulbound;
     }
 
+    private static List<ItemInstance> CollectKept(GridContainer grid)
+    {
+        var result = new List<ItemInstance>();
+
+        foreach(ItemInstance item in grid.Items)
+        {
+            if(IsKeptOnDeath(item))
+                result.Add(item);
+
+            if(item is ContainerInstance container)
+                result.AddRange(CollectKept(container.Storage));
+        }
+
+        return result;
+    }
+
+    private int RestoreKept(List<ItemInstance> kept)
+    {
+        int warded = 0;
+
+        foreach(ItemInstance item in kept)
+        {
+            item.Owner?.Remove(item);
+
+            if(item.Ward != null)
+            {
+                item.BreakWard();
+                warded++;
+            }
+
+            if(!TryPlaceInBackpack(item))
+                Chest.TryStore(item);
+        }
+
+        return warded;
+    }
     public void GiveStarterWeapon(ClassInfo info)
     {
         WeaponInfo starter = info.StarterWeapon;

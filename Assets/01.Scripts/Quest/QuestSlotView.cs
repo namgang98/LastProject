@@ -32,7 +32,7 @@ public class QuestSlotView : MonoBehaviour
         int goal = info.Goal;
         bool ready = book.IsReady(quest);
 
-        nameText.text = info.Name;
+        nameText.text = info.DisplayName;
         descText.text = info.Description;
         progressText.text = $"{current} / {goal}";
         progressFill.fillAmount = goal > 0 ? (float)current / goal : 0f;

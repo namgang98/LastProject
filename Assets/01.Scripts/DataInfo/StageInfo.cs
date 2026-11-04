@@ -11,6 +11,7 @@ public class StageInfo
     public int MinFloor { get; }
     public int MaxFloor { get; }
     public string AmbienceName { get; }
+    public BgmType Bgm { get; }
     public int TowerId { get; private set; }
 
     private readonly List<MonsterInfo> monsters = new();
@@ -19,7 +20,7 @@ public class StageInfo
     public Sprite Background { get; private set; }
     public GameObject AmbiencePrefab { get; private set; }
 
-    public StageInfo(int id, string name, string backgroundName, List<int> monsterIds, int bossId, int minFloor, int maxFloor = int.MaxValue, string ambienceName = "", int towerId = 0)
+    public StageInfo(int id, string name, string backgroundName, List<int> monsterIds, int bossId, int minFloor, int maxFloor = int.MaxValue, string ambienceName = "", int towerId = 0, BgmType bgm = BgmType.None)
     {
         Id = id;
         Name = name;
@@ -30,6 +31,7 @@ public class StageInfo
         MaxFloor = maxFloor;
         AmbienceName = ambienceName;
         TowerId = towerId;
+        Bgm = bgm;
     }
 
     public bool IsAvailable(int towerId, int floor)

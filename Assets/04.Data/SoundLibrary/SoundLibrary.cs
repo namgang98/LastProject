@@ -8,6 +8,19 @@ public enum BgmType
     Camp = 1,
     Dungeon = 2,
     Catacomb = 3,
+    Forest = 10,
+    IceCorridor = 11,
+    DragonLair = 12,
+    Abyss = 13,
+    Hellgate = 14,
+    DemonThrone = 15,
+    FrozenRampart = 16,
+    FrostThrone = 17,
+    PlagueSwamp = 18,
+    RotNest = 19,
+    Title = 20,
+    TowerMap = 21,
+    Gamble = 22,
 }
 
 public enum SfxType
@@ -81,6 +94,10 @@ public enum SfxType
     [InspectorName("몬스터/죽음/BigDeath")] BigDeath = 557,
     [InspectorName("몬스터/기타/Stomp")] Stomp = 558,
     [InspectorName("몬스터/기타/MonsterHit")] MonsterHit = 559,
+
+    [InspectorName("징글/Conquest")] JingleConquest = 600,
+    [InspectorName("징글/Death")] JingleDeath = 601,
+    [InspectorName("징글/Return")] JingleReturn = 602,
 }
 
 [CreateAssetMenu(fileName = "SoundLibrary", menuName = "Sound/SoundLibrary")]

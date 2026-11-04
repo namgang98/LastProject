@@ -12,8 +12,4 @@ public class PopupCloseButton : MonoBehaviour
     {
         closeButton.onClick.AddListener(() => PopupManager.instance.Close(targetPopup));
     }
-    public void TriggerClose()
-    {
-        PopupManager.instance.Close(targetPopup);
-    }
 }

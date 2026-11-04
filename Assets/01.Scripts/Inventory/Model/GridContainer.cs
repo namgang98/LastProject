@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GridContainer
 {
-    private static readonly Vector2Int[] Dirs = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
-
     private readonly Dictionary<Vector2Int, ItemInstance> occupied = new();
     private readonly List<ItemInstance> items = new();
     private readonly Func<ItemInstance, bool> acceptRule;
@@ -154,29 +152,6 @@ public class GridContainer
         }
 
         items.Remove(item);
-    }
-    #endregion
-
-    #region 인접 (시너지 / 세트 효과 계산용)
-    public HashSet<ItemInstance> GetNeighbors(ItemInstance item)
-    {
-        var result = new HashSet<ItemInstance>();
-
-        if(!Contains(item))
-            return result;
-
-        foreach(var cell in item.GetOccupiedCells())
-        {
-            foreach(var dir in Dirs)
-            {
-                var other = GetItemAt(cell + dir);
-
-                if(other != null && other != item)
-                    result.Add(other);
-            }
-        }
-
-        return result;
     }
     #endregion
 }

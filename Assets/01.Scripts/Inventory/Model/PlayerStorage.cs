@@ -122,6 +122,27 @@ public class PlayerStorage : IMaterialStorage
         return true;
     }
 
+    public bool TryReceive(ItemInstance item)
+    {
+        if(Backpack.EquippedPouch == null && Backpack.TryEquipPouch(item))
+            return true;
+
+        if(TryPlaceInBackpack(item))
+            return true;
+
+        return Chest.TryStore(item);
+    }
+
+    private bool TryPlaceInBackpack(ItemInstance item)
+    {
+        if(Backpack.Grid.TryAutoPlace(item))
+            return true;
+
+        return Backpack.PouchStorage != null && Backpack.PouchStorage.TryAutoPlace(item);
+    }
+    #endregion
+
+    #region 사망 처리
     public int LoseOnDeath()
     {
         List<ItemInstance> kept = CollectKept(Backpack.Grid);
@@ -136,6 +157,7 @@ public class PlayerStorage : IMaterialStorage
         Backpack = newPack;
         return RestoreKept(kept);
     }
+
     private static bool IsKeptOnDeath(ItemInstance item)
     {
         return item.Ward != null || item.Info.IsSoulbound;
@@ -177,6 +199,9 @@ public class PlayerStorage : IMaterialStorage
 
         return warded;
     }
+    #endregion
+
+    #region 시작 지급
     public void GiveStarterWeapon(ClassInfo info)
     {
         WeaponInfo starter = info.StarterWeapon;
@@ -189,6 +214,18 @@ public class PlayerStorage : IMaterialStorage
 
         Debug.LogWarning($"[PlayerStorage] {starter.Name}을(를) 넣을 자리가 없습니다.");
     }
+
+    private bool HasAnyWeapon()
+    {
+        foreach(ItemInstance item in Backpack.EquippedItems())
+        {
+            if(item.Info is WeaponInfo)
+                return true;
+        }
+
+        return false;
+    }
+
     public void FillBackpack(ItemInfo info, int target)
     {
         int missing = target - CountInBackpack(info.Id);
@@ -211,97 +248,6 @@ public class PlayerStorage : IMaterialStorage
             count += ItemSearch.Count(Backpack.PouchStorage, itemId);
 
         return count;
-    }
-    public bool TryReceive(ItemInstance item)
-    {
-        if(Backpack.EquippedPouch == null && Backpack.TryEquipPouch(item))
-            return true;
-
-        if(TryPlaceInBackpack(item))
-            return true;
-
-        return Chest.TryStore(item);
-    }
-
-    private bool TryPlaceInBackpack(ItemInstance item)
-    {
-        if(Backpack.Grid.TryAutoPlace(item))
-            return true;
-
-        return Backpack.PouchStorage != null && Backpack.PouchStorage.TryAutoPlace(item);
-    }
-
-    private bool HasWeapon(WeaponType type)
-    {
-        foreach(ItemInstance item in Backpack.EquippedItems())
-        {
-            if(item.Info is WeaponInfo weapon && weapon.Type == type)
-                return true;
-        }
-
-        return false;
-    }
-
-    public bool TryTakeFromBackpack(int itemId)
-    {
-        if(ItemSearch.Take(Backpack.Grid, itemId, 1) > 0)
-            return true;
-
-        return Backpack.PouchStorage != null && ItemSearch.Take(Backpack.PouchStorage, itemId, 1) > 0;
-    }
-    private static List<ItemInstance> CollectWarded(GridContainer grid)
-    {
-        var result = new List<ItemInstance>();
-
-        foreach(ItemInstance item in grid.Items)
-        {
-            if(item.Ward != null)
-                result.Add(item);
-
-            if(item is ContainerInstance container)
-                result.AddRange(CollectWarded(container.Storage));
-        }
-
-        return result;
-    }
-    private bool HasAnyWeapon()
-    {
-        foreach(ItemInstance item in Backpack.EquippedItems())
-        {
-            if(item.Info is WeaponInfo)
-                return true;
-        }
-
-        return false;
-    }
-    private int RestoreWarded(List<ItemInstance> warded)
-    {
-        int saved = 0;
-
-        foreach(ItemInstance item in warded)
-        {
-            item.Owner?.Remove(item);
-            item.BreakWard();
-
-            if(TryPlaceInBackpack(item) || Chest.TryStore(item))
-                saved++;
-        }
-
-        return saved;
-    }
-
-    public void CollectEquipment(List<ItemInstance> results)
-    {
-        results.Clear();
-
-        foreach(GridContainer grid in AllGrids())
-        {
-            foreach(ItemInstance item in grid.Items)
-            {
-                if(item.CanWard)
-                    results.Add(item);
-            }
-        }
     }
     #endregion
 
@@ -339,6 +285,20 @@ public class PlayerStorage : IMaterialStorage
                 return;
 
             amount -= ItemSearch.Take(grid, itemId, amount);
+        }
+    }
+
+    public void CollectEquipment(List<ItemInstance> results)
+    {
+        results.Clear();
+
+        foreach(GridContainer grid in AllGrids())
+        {
+            foreach(ItemInstance item in grid.Items)
+            {
+                if(item.Info is WeaponInfo || item.Info is EquipmentInfo)
+                    results.Add(item);
+            }
         }
     }
 

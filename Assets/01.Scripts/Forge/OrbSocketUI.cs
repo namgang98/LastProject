@@ -42,6 +42,7 @@ public class OrbSocketUI : MonoBehaviour
     private ItemInstance selectedItem;
     private OrbInfo selectedOrb;
 
+    #region 초기화
     private void Awake()
     {
         closeButton.onClick.AddListener(Close);
@@ -61,7 +62,9 @@ public class OrbSocketUI : MonoBehaviour
 
         EventManager.instance.RemoveListener<OnChangeGold>(HandleGoldChanged);
     }
+    #endregion
 
+    #region 열기/닫기
     public void Open()
     {
         selectedItem = null;
@@ -74,7 +77,9 @@ public class OrbSocketUI : MonoBehaviour
     {
         PopupManager.instance.Close(popup);
     }
+    #endregion
 
+    #region 목록
     private void Refresh()
     {
         RefreshOrbs();
@@ -152,7 +157,9 @@ public class OrbSocketUI : MonoBehaviour
             slots.Add(Instantiate(prefab, root));
         }
     }
+    #endregion
 
+    #region 선택
     private void SelectItem(ItemInstance item)
     {
         selectedItem = item;
@@ -164,7 +171,9 @@ public class OrbSocketUI : MonoBehaviour
         selectedOrb = orb;
         Refresh();
     }
+    #endregion
 
+    #region 미리보기
     private void RefreshHeader()
     {
         bool has = selectedItem != null;
@@ -242,7 +251,9 @@ public class OrbSocketUI : MonoBehaviour
         AttackData current = forged.ApplyTo(weapon.Attack);
         return current.Element != DamageElement.None && current.Element != orb.Element;
     }
+    #endregion
 
+    #region 합성
     private void Socket()
     {
         GameSession session = GameSession.instance;
@@ -296,7 +307,9 @@ public class OrbSocketUI : MonoBehaviour
                 return "합성할 수 없습니다";
         }
     }
+    #endregion
 
+    #region 이벤트
     private void HandleGoldChanged(OnChangeGold e)
     {
         if(!popup.activeSelf)
@@ -304,4 +317,5 @@ public class OrbSocketUI : MonoBehaviour
 
         RefreshPreview();
     }
+    #endregion
 }

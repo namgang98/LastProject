@@ -114,11 +114,6 @@ public class TowerProgress
         return !IsFreeMode && fallen.Contains(info.Id);
     }
 
-    public bool MarkCleared(TowerInfo tower)
-    {
-        return cleared.Add(tower.Id);
-    }
-
     public ConquestResult Conquer(TowerInfo tower, ClassInfo hero)
     {
         if(tower.IsEndless || IsCollapsed(tower))

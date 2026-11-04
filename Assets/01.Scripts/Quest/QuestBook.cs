@@ -11,8 +11,6 @@ public class QuestBook
 {
     private readonly Dictionary<int, QuestProgress> table = new();
     private readonly List<QuestProgress> list = new();
-    private readonly Func<int> bestFloor;
-    private readonly Func<int, int> countItem;
     private readonly IQuestContext context;
 
     public IReadOnlyList<QuestProgress> All => list;

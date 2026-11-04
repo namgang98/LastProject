@@ -2,6 +2,7 @@
 
 public interface IGameEvent { }
 
+    #region 골드
 public struct OnChangeGold : IGameEvent
 {
     public int Gold;
@@ -10,7 +11,56 @@ public struct OnChangeGold : IGameEvent
         Gold = gold;
     }
 }
+    #endregion
 
+    #region 스테이지 / 런
+public struct OnStageStarted : IGameEvent
+{
+    public int Stage;
+    public bool IsRest;
+    public OnStageStarted(int stage, bool isRest)
+    {
+        Stage = stage;
+        IsRest = isRest;
+    }
+}
+
+public enum RunEndReason
+{
+    Death,
+    Return,
+    Conquest,
+}
+
+public struct OnRunEnded : IGameEvent
+{
+
+    public int Stage;
+    public RunEndReason Reason;
+
+    public OnRunEnded(int stage, RunEndReason reason)
+    {
+        Stage = stage;
+        Reason = reason;
+    }
+}
+
+public struct OnRunSettled : IGameEvent
+{
+    public int Stage;
+    public RunEndReason Reason;
+    public int SavedCount;
+
+    public OnRunSettled(int stage, RunEndReason reason, int savedCount)
+    {
+        Stage = stage;
+        Reason = reason;
+        SavedCount = savedCount;
+    }
+}
+    #endregion
+
+    #region 전투
 public struct OnMonsterKilled : IGameEvent
 {
     public Vector3 Position;
@@ -22,6 +72,86 @@ public struct OnMonsterKilled : IGameEvent
     }
 }
 
+public struct OnUnitDamaged : IGameEvent
+{
+    public Vector3 Position;
+    public DamageInfo Info;
+    public int SourceId;
+    public OnUnitDamaged(Vector3 pos, DamageInfo info, int sourceId)
+    {
+        Position = pos;
+        Info = info;
+        SourceId = sourceId;
+    }
+}
+
+public struct OnUnitDodged : IGameEvent
+{
+    public Vector3 Position;
+
+    public OnUnitDodged(Vector3 pos)
+    {
+        Position = pos;
+    }
+}
+
+public struct OnUnitHealed : IGameEvent
+{
+    public Vector3 Position;
+    public int Value;
+
+   public OnUnitHealed(Vector3 pos, int value)
+    {
+        Position = pos;
+        Value = value;
+    }
+}
+
+public struct OnUnitBlocked : IGameEvent
+{
+    public Vector3 Position;
+
+    public OnUnitBlocked(Vector3 pos)
+    {
+        Position = pos;
+    }
+}
+
+public struct OnUnitRevived : IGameEvent
+{
+    public Vector3 Position;
+
+    public OnUnitRevived(Vector3 pos)
+    {
+        Position = pos;
+    }
+}
+
+public struct OnStatusApplied : IGameEvent
+{
+    public UnitHealth Target;
+    public IStatusEffect Status;
+    public OnStatusApplied(UnitHealth target, IStatusEffect status)
+    {
+        Target = target;
+        Status = status;
+    }
+
+}
+
+public struct OnStatusRemoved : IGameEvent
+{
+    public UnitHealth Target;
+    public DamageElement Element;
+    public OnStatusRemoved(UnitHealth target, DamageElement element)
+    {
+        Target = target;
+        Element = element;
+    }
+}
+    #endregion
+
+    #region 아이템 / 가방
 public struct OnItemDropped : IGameEvent
 {
     public ItemInstance Item;
@@ -46,79 +176,6 @@ public struct OnPouchChanged : IGameEvent
     }
 }
 
-public struct OnStageStarted : IGameEvent
-{
-    public int Stage;
-    public bool IsRest;
-    public OnStageStarted(int stage, bool isRest)
-    {
-        Stage = stage;
-        IsRest = isRest;
-    }
-}
-
-public enum RunEndReason
-{
-    Death,
-    Return,
-    Conquest,
-}
-public struct OnRunEnded : IGameEvent
-{
-
-    public int Stage;
-    public RunEndReason Reason;
-
-    public OnRunEnded(int stage, RunEndReason reason)
-    {
-        Stage = stage;
-        Reason = reason;
-    }
-}
-
-public struct OnUnitDamaged : IGameEvent
-{
-    public Vector3 Position;
-    public DamageInfo Info;
-    public int SourceId;
-    public OnUnitDamaged(Vector3 pos, DamageInfo info, int sourceId)
-    {
-        Position = pos;
-        Info = info;
-        SourceId = sourceId;
-    }
-}
-public struct OnUnitDodged : IGameEvent
-{
-    public Vector3 Position;
-
-    public OnUnitDodged(Vector3 pos)
-    {
-        Position = pos;
-    }
-}
-public struct OnUnitHealed : IGameEvent
-{
-    public Vector3 Position;
-    public int Value;
-
-   public OnUnitHealed(Vector3 pos, int value)
-    {
-        Position = pos;
-        Value = value;
-    }
-}
-
-public struct OnUnitBlocked : IGameEvent
-{
-    public Vector3 Position;
-
-    public OnUnitBlocked(Vector3 pos)
-    {
-        Position = pos;
-    }
-}
-
 public struct OnItemHoverEnter : IGameEvent
 {
     public ItemInstance Item;
@@ -130,7 +187,9 @@ public struct OnItemHoverEnter : IGameEvent
         Target = target;
     }
 }
+
 public struct OnItemHoverExit : IGameEvent {}
+
 public struct OnItemQuickMove : IGameEvent
 {
     public ItemInstance Item;
@@ -140,26 +199,11 @@ public struct OnItemQuickMove : IGameEvent
         Item = item;
     }
 }
-public struct OnStatusApplied : IGameEvent
-{
-    public UnitHealth Target;
-    public IStatusEffect Status;
-    public OnStatusApplied(UnitHealth target, IStatusEffect status)
-    {
-        Target = target;
-        Status = status;
-    }
 
-}
-public struct OnStatusRemoved : IGameEvent
+public struct OnItemClicked : IGameEvent
 {
-    public UnitHealth Target;
-    public DamageElement Element;
-    public OnStatusRemoved(UnitHealth target, DamageElement element)
-    {
-        Target = target;
-        Element = element;
-    }
+    public ItemInstance Item;
+    public OnItemClicked(ItemInstance item) => Item = item;
 }
 
 public struct OnBackpackChanged : IGameEvent
@@ -173,13 +217,9 @@ public struct OnChestExpanded : IGameEvent
     public int TabCount;
     public OnChestExpanded(int tabCount) => TabCount = tabCount;
 }
+    #endregion
 
-public struct OnItemClicked : IGameEvent
-{
-    public ItemInstance Item;
-    public OnItemClicked(ItemInstance item) => Item = item;
-}
-
+    #region UI
 public enum FeedbackType
 {
     Info,
@@ -207,30 +247,9 @@ public struct OnPopupCountChanged : IGameEvent
         Count = count;
     }
 }
+    #endregion
 
-public struct OnUnitRevived : IGameEvent
-{
-    public Vector3 Position;
-
-    public OnUnitRevived(Vector3 pos)
-    {
-        Position = pos;
-    }
-}
-
-public struct OnRunSettled : IGameEvent
-{
-    public int Stage;
-    public RunEndReason Reason;
-    public int SavedCount;
-
-    public OnRunSettled(int stage, RunEndReason reason, int savedCount)
-    {
-        Stage = stage;
-        Reason = reason;
-        SavedCount = savedCount;
-    }
-}
+    #region 튜토리얼
 public struct OnTutorialSignal : IGameEvent
 {
     public string Key;
@@ -240,3 +259,4 @@ public struct OnTutorialSignal : IGameEvent
         Key = key;
     }
 }
+    #endregion

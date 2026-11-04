@@ -39,6 +39,7 @@ public class TowerMapCutscene : MonoBehaviour
     private TowerInfo focus;
     private bool finished;
 
+    #region 흐름
     private void Start()
     {
         Time.timeScale = 1f;
@@ -74,6 +75,18 @@ public class TowerMapCutscene : MonoBehaviour
 
         Finish();
     }
+
+    private void Finish()
+    {
+        if(finished)
+            return;
+
+        finished = true;
+        StopAllCoroutines();
+        DOTween.Kill(shakeRoot);
+        SceneLoader.instance.Load(kind == CutsceneKind.OriginRise ? SceneNames.TowerRise : SceneNames.Village);
+    }
+    #endregion
 
     #region 슬롯
     private void SetupSlots(TowerProgress progress)
@@ -167,6 +180,14 @@ public class TowerMapCutscene : MonoBehaviour
     {
         yield return blackScreen.DOFade(target, fadeDuration).SetUpdate(true).WaitForCompletion();
     }
+
+    private void PlaySfx(SfxType type)
+    {
+        if(type == SfxType.None || !SoundManager.HasInstance)
+            return;
+
+        SoundManager.instance.PlaySfx(type);
+    }
     #endregion
 
     #region 대사
@@ -196,23 +217,4 @@ public class TowerMapCutscene : MonoBehaviour
         yield return story.Play(formatted);
     }
     #endregion
-
-    private void Finish()
-    {
-        if(finished)
-            return;
-
-        finished = true;
-        StopAllCoroutines();
-        DOTween.Kill(shakeRoot);
-        SceneLoader.instance.Load(kind == CutsceneKind.OriginRise ? SceneNames.TowerRise : SceneNames.Village);
-    }
-
-    private void PlaySfx(SfxType type)
-    {
-        if(type == SfxType.None || !SoundManager.HasInstance)
-            return;
-
-        SoundManager.instance.PlaySfx(type);
-    }
 }

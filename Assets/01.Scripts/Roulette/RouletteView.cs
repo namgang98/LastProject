@@ -44,6 +44,7 @@ public class RouletteView : MonoBehaviour
 
     private Wallet Wallet => GameSession.instance.Wallet;
 
+    #region 초기화
     private void Awake()
     {
         table = new RouletteTable(slots);
@@ -66,7 +67,9 @@ public class RouletteView : MonoBehaviour
         closeButton.onClick.AddListener(Close);
         panel.SetActive(false);
     }
+    #endregion
 
+    #region 열기/닫기
     public void Open()
     {
         PopupManager.instance.Open(panel, Close);
@@ -86,6 +89,16 @@ public class RouletteView : MonoBehaviour
         PlayBgm(returnBgm);
     }
 
+    private static void PlayBgm(BgmType type)
+    {
+        if(!SoundManager.HasInstance)
+            return;
+
+        SoundManager.instance.PlayBgm(type);
+    }
+    #endregion
+
+    #region 베팅
     private void SelectChip(int index)
     {
         chipIndex = index;
@@ -121,6 +134,18 @@ public class RouletteView : MonoBehaviour
         bet.Clear();
     }
 
+    private void RefreshBets()
+    {
+        foreach(RouletteBetButton button in betButtons)
+        {
+            button.SetAmount(bet.Get(button.Multiplier));
+        }
+
+        totalText.text = $"{bet.Total} / {maxBet}";
+    }
+    #endregion
+
+    #region 회전
     private void Spin()
     {
         if(spinning || bet.Total <= 0)
@@ -158,17 +183,9 @@ public class RouletteView : MonoBehaviour
         spinning = false;
         SetInteractable(true);
     }
+    #endregion
 
-    private void RefreshBets()
-    {
-        foreach(RouletteBetButton button in betButtons)
-        {
-            button.SetAmount(bet.Get(button.Multiplier));
-        }
-
-        totalText.text = $"{bet.Total} / {maxBet}";
-    }
-
+    #region UI
     private void SetInteractable(bool interactable)
     {
         foreach(RouletteBetButton button in betButtons)
@@ -185,6 +202,7 @@ public class RouletteView : MonoBehaviour
         spinButton.interactable = interactable;
         closeButton.interactable = interactable;
     }
+
     private void ShowMessage(string message, float hideAfter = 0f)
     {
         resultText.DOKill();
@@ -197,11 +215,5 @@ public class RouletteView : MonoBehaviour
             .SetTarget(resultText)
             .SetLink(resultText.gameObject);
     }
-    private static void PlayBgm(BgmType type)
-    {
-        if(!SoundManager.HasInstance)
-            return;
-
-        SoundManager.instance.PlayBgm(type);
-    }
+    #endregion
 }

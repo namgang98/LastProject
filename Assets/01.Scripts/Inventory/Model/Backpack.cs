@@ -47,11 +47,6 @@ public class Backpack
     }
     #endregion
 
-    public List<ItemInstance> ExtractAll()
-    {
-        return Grid.TakeAll();
-    }
-
     public PouchInstance LoseAllOnDeath()
     {
         PouchInstance survived = EquippedPouch;

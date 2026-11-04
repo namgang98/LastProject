@@ -36,6 +36,7 @@ public class SellUI : MonoBehaviour
     private Shop shop;
     private int currentTab;
 
+    #region 초기화
     private void Awake()
     {
         context = new InventoryUIContext(cellSize, itemViewPool, dragController);
@@ -65,7 +66,9 @@ public class SellUI : MonoBehaviour
         if(EventManager.HasInstance)
             EventManager.instance.RemoveListener<OnItemQuickMove>(HandleQuickMove);
     }
+    #endregion
 
+    #region 열기/닫기
     public void Open()
     {
         GameSession session = GameSession.instance;
@@ -87,7 +90,9 @@ public class SellUI : MonoBehaviour
         PopupManager.instance.Close(popup);
         GameSession.instance.SaveInVillage();
     }
+    #endregion
 
+    #region 창고 탭
     private void ShowTab(int index)
     {
         Chest chest = GameSession.instance.Chest;
@@ -113,67 +118,25 @@ public class SellUI : MonoBehaviour
         }
     }
 
+    private void FitChest()
+    {
+        Vector2 size = chestView.PixelSize;
+        Vector2 room = chestArea.rect.size - Vector2.one * (chestPadding * 2f);
+        float scale = Mathf.Min(1f, room.x / size.x, room.y / size.y);
+
+        chestView.transform.localScale = Vector3.one * scale;
+    }
+    #endregion
+
+    #region 판매 바구니
     private bool CanAccept(ItemInstance item)
     {
         return shop != null && shop.CanSell(item);
     }
 
-    private void Sell()
-    {
-        int earned = shop.SellAll(basket, GameSession.instance.Wallet);
-
-        var sold = new List<ItemInstance>();
-
-        foreach(var item in origins.Keys)
-        {
-            if(!basket.Contains(item))
-                sold.Add(item);
-        }
-
-        foreach(var item in sold)
-        {
-            origins.Remove(item);
-        }
-        if(earned <= 0)
-            return;
-
-        Sfx.Play(SfxType.Coins);
-        GameSession.instance.SaveInVillage();
-    }
     private void RememberOrigin(ItemInstance item)
     {
         origins[item] = new Origin(item.Owner, item.Anchor, item.Rotation);
-    }
-    private void ReturnAll()
-    {
-        var items = new List<ItemInstance>();
-
-        foreach(var entry in basket.Entries)
-        {
-            items.Add(entry.Item);
-        }
-
-        foreach(var item in items)
-        {
-            if(TryReturn(item))
-                basket.Remove(item);
-            else
-                EventManager.instance.PostNotification(new OnFeedback($"{item.Info.Name}을(를) 돌려놓을 자리가 없습니다"));
-        }
-    }
-    private bool TryReturn(ItemInstance item)
-    {
-        if(origins.TryGetValue(item, out Origin origin) && origin.Grid != null && origin.Grid.TryPlace(item, origin.Anchor, origin.Rotation))
-        {
-            origins.Remove(item);
-            return true;
-        }
-
-        if(!GameSession.instance.TryReceive(item))
-            return false;
-
-        origins.Remove(item);
-        return true;
     }
 
     private void RefreshTotal()
@@ -189,32 +152,13 @@ public class SellUI : MonoBehaviour
     {
         RefreshTotal();
     }
+
     private void HandleRejected(ItemInstance item)
     {
         if(item is ContainerInstance)
             EventManager.instance.PostNotification(new OnFeedback("안에 물건이 들어있습니다."));
     }
-    private void FitChest()
-    {
-        Vector2 size = chestView.PixelSize;
-        Vector2 room = chestArea.rect.size - Vector2.one * (chestPadding * 2f);
-        float scale = Mathf.Min(1f, room.x / size.x, room.y / size.y);
 
-        chestView.transform.localScale = Vector3.one * scale;
-    }
-    private readonly struct Origin
-    {
-        public readonly GridContainer Grid;
-        public readonly Vector2Int Anchor;
-        public readonly int Rotation;
-
-        public Origin(GridContainer grid, Vector2Int anchor, int rotation)
-        {
-            Grid = grid;
-            Anchor = anchor;
-            Rotation = rotation;
-        }
-    }
     private void HandleQuickMove(OnItemQuickMove e)
     {
         if(!popup.activeSelf)
@@ -239,6 +183,66 @@ public class SellUI : MonoBehaviour
         e.Item.Owner.Remove(e.Item);
         sellArea.Scatter(e.Item);
     }
+    #endregion
+
+    #region 판매
+    private void Sell()
+    {
+        int earned = shop.SellAll(basket, GameSession.instance.Wallet);
+
+        var sold = new List<ItemInstance>();
+
+        foreach(var item in origins.Keys)
+        {
+            if(!basket.Contains(item))
+                sold.Add(item);
+        }
+
+        foreach(var item in sold)
+        {
+            origins.Remove(item);
+        }
+        if(earned <= 0)
+            return;
+
+        Sfx.Play(SfxType.Coins);
+        GameSession.instance.SaveInVillage();
+    }
+    #endregion
+
+    #region 되돌리기
+    private void ReturnAll()
+    {
+        var items = new List<ItemInstance>();
+
+        foreach(var entry in basket.Entries)
+        {
+            items.Add(entry.Item);
+        }
+
+        foreach(var item in items)
+        {
+            if(TryReturn(item))
+                basket.Remove(item);
+            else
+                EventManager.instance.PostNotification(new OnFeedback($"{item.Info.Name}을(를) 돌려놓을 자리가 없습니다"));
+        }
+    }
+
+    private bool TryReturn(ItemInstance item)
+    {
+        if(origins.TryGetValue(item, out Origin origin) && origin.Grid != null && origin.Grid.TryPlace(item, origin.Anchor, origin.Rotation))
+        {
+            origins.Remove(item);
+            return true;
+        }
+
+        if(!GameSession.instance.TryReceive(item))
+            return false;
+
+        origins.Remove(item);
+        return true;
+    }
 
     private void ReturnFromBasket(ItemInstance item)
     {
@@ -250,4 +254,19 @@ public class SellUI : MonoBehaviour
 
         basket.Remove(item);
     }
+
+    private readonly struct Origin
+    {
+        public readonly GridContainer Grid;
+        public readonly Vector2Int Anchor;
+        public readonly int Rotation;
+
+        public Origin(GridContainer grid, Vector2Int anchor, int rotation)
+        {
+            Grid = grid;
+            Anchor = anchor;
+            Rotation = rotation;
+        }
+    }
+    #endregion
 }

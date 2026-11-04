@@ -90,15 +90,6 @@ public class Shop
         return true;
     }
 
-    public bool TrySell(ItemInstance item, Wallet wallet)
-    {
-        if(!CanSell(item))
-            return false;
-
-        wallet.Earn(Pricing.SellPrice(item.Info));
-        return true;
-    }
-
     public int GetSellTotal(IEnumerable<LootArea.Entry> entries)
     {
         int total = 0;

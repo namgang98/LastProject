@@ -20,7 +20,6 @@ public class StageController : MonoBehaviour
 
     [Header("귀환 규칙")]
     [SerializeField] int veteranFloor = 10;
-    [SerializeField] bool returnOnlyAfterBoss;
 
     [Header("HUD")]
     [SerializeField] HudFader playerHud;
@@ -59,6 +58,8 @@ public class StageController : MonoBehaviour
     private MonsterInfo currentInfo;
     private MonsterAttackSet currentAttacks;
     private TowerRuleSet towerRules = new();
+
+    #region 초기화
     private void Awake()
     {
         scaling = new StageScaling(hpGrowth, hpCurve, damageGrowth, damageCurve);
@@ -98,6 +99,18 @@ public class StageController : MonoBehaviour
         transition.Play(stage, GetKind(stage), GetAreaTitle(stage), PrepareStage, WalkIn, null, true);
     }
 
+    public void SetTowerRules(TowerRuleSet rules)
+    {
+        towerRules = rules ?? new TowerRuleSet();
+    }
+
+    public void SetRunBonus(IRunBonus bonus)
+    {
+        runBonus = bonus ?? EmptyRunBonus.Instance;
+    }
+    #endregion
+
+    #region 층 이동
     public void NextStage()
     {
         if(phase != Phase.Looting)
@@ -118,18 +131,6 @@ public class StageController : MonoBehaviour
         EndRun(RunEndReason.Return);
     }
 
-    public void EndRun(RunEndReason reason)
-    {
-        if(phase == Phase.Ended)
-            return;
-
-        phase = Phase.Ended;
-        battle.EndBattle();
-        ClearMonster();
-        HideButtons();
-        EventManager.instance.PostNotification(new OnRunEnded(stage, reason));
-    }
-
     private void EnterNextFloor()
     {
         ClearMonster();
@@ -141,7 +142,7 @@ public class StageController : MonoBehaviour
     {
         StageInfo area = planner.Get(stage);
 
-        if (area != null)
+        if(area != null)
         {
             background.Show(area.Background);
             ambience.Show(area.AmbiencePrefab);
@@ -165,17 +166,36 @@ public class StageController : MonoBehaviour
         SpawnMonster();
     }
 
-    private string GetStageLabel(bool isRest)
+    private void WalkIn()
     {
-        if(isAmbush)
-            return $"{stage} F\n습격";
-
-        if(isRest)
-            return $"{stage} F\n휴식";
-
-        return $"{stage} F";
+        walker.WalkIn(BeginStage);
     }
 
+    private void BeginStage()
+    {
+        if(phase == Phase.Ended)
+            return;
+
+        playerHud.Show();
+
+        if(rule.IsRestStage(stage) && !isAmbush)
+        {
+            StartRest();
+            return;
+        }
+
+        if(currentMonster == null)
+            return;
+
+        monsterHud.Show();
+        currentMonster.Health.OnDie += HandleMonsterDead;
+        battle.StartBattle(player, currentMonster, currentAttacks, currentInfo.IsBoss);
+        GameSession.instance.ReportCleared(stage);
+        phase = Phase.Fighting;
+    }
+    #endregion
+
+    #region 몬스터
     private void SpawnMonster()
     {
         MonsterInfo info = planner.PickMonster(stage, rule.IsBossStage(stage));
@@ -211,38 +231,6 @@ public class StageController : MonoBehaviour
         statusIconView.Bind(currentMonster);
     }
 
-    private void BeginStage()
-    {
-        if(phase == Phase.Ended)
-            return;
-
-        playerHud.Show();
-
-        if(rule.IsRestStage(stage) && !isAmbush)
-        {
-            StartRest();
-            return;
-        }
-
-        if(currentMonster == null)
-            return;
-
-        monsterHud.Show();
-        currentMonster.Health.OnDie += HandleMonsterDead;
-        battle.StartBattle(player, currentMonster, currentAttacks, currentInfo.IsBoss);
-        GameSession.instance.ReportCleared(stage);
-        phase = Phase.Fighting;
-    }
-
-    private void StartRest()
-    {
-        Sfx.Play(SfxType.RestEnter);
-        float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal));
-        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
-        phase = Phase.Looting;
-        ShowButtons();
-    }
-
     private void HandleMonsterDead()
     {
         monsterHud.Hide();
@@ -266,14 +254,6 @@ public class StageController : MonoBehaviour
         
         ShowButtons();
     }
-    public void SetTowerRules(TowerRuleSet rules)
-    {
-        towerRules = rules ?? new TowerRuleSet();
-    }
-    private void HandlePlayerDead()
-    {
-        EndRun(RunEndReason.Death);
-    }
 
     private void ClearMonster()
     {
@@ -284,6 +264,7 @@ public class StageController : MonoBehaviour
         Destroy(currentMonster.gameObject);
         currentMonster = null;
     }
+
     private int GetScalingFloor()
     {
         if(tower == null)
@@ -291,6 +272,88 @@ public class StageController : MonoBehaviour
 
         return tower.ToScalingFloor(stage);
     }
+    #endregion
+
+    #region 휴식
+    private void StartRest()
+    {
+        Sfx.Play(SfxType.RestEnter);
+        float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal));
+        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
+        phase = Phase.Looting;
+        ShowButtons();
+    }
+
+    private void HealAfterAmbush()
+    {
+        float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal)) * ambushHealRatio;
+        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
+    }
+    #endregion
+
+    #region 런 종료
+    public void EndRun(RunEndReason reason)
+    {
+        if(phase == Phase.Ended)
+            return;
+
+        phase = Phase.Ended;
+        battle.EndBattle();
+        ClearMonster();
+        HideButtons();
+        EventManager.instance.PostNotification(new OnRunEnded(stage, reason));
+    }
+
+    private void HandlePlayerDead()
+    {
+        EndRun(RunEndReason.Death);
+    }
+    #endregion
+
+    #region 지역
+    private void ApplyAreaRules(StageInfo area)
+    {
+        DataManager.instance.TryGetTower(area.TowerId, out TowerInfo source);
+        towerRules.SetSource(source);
+    }
+
+    private static void PlayAreaBgm(StageInfo area)
+    {
+        if(area.Bgm == BgmType.None || !SoundManager.HasInstance)
+            return;
+
+        SoundManager.instance.PlayBgm(area.Bgm);
+    }
+
+    private string GetAreaTitle(int floor)
+    {
+        if(!planner.IsFirstFloor(floor))
+            return null;
+
+        StageInfo area = planner.Get(floor);
+
+        if(area == null)
+            return null;
+
+        if(!tower.IsEndless || !DataManager.instance.TryGetTower(area.TowerId, out TowerInfo source))
+            return area.Name;
+
+        return $"{area.Name} · {source.Name}";
+    }
+    #endregion
+
+    #region UI
+    private string GetStageLabel(bool isRest)
+    {
+        if(isAmbush)
+            return $"{stage} F\n습격";
+
+        if(isRest)
+            return $"{stage} F\n휴식";
+
+        return $"{stage} F";
+    }
+
     private FloorKind GetKind(int floor)
     {
         if(rule.IsRestStage(floor))
@@ -313,49 +376,9 @@ public class StageController : MonoBehaviour
         nextButton.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(false);
     }
+    #endregion
 
-    private void WalkIn()
-    {
-        walker.WalkIn(BeginStage);
-    }
-
-    private string GetAreaTitle(int floor)
-    {
-        if(!planner.IsFirstFloor(floor))
-            return null;
-
-        StageInfo area = planner.Get(floor);
-
-        if(area == null)
-            return null;
-
-        if(!tower.IsEndless || !DataManager.instance.TryGetTower(area.TowerId, out TowerInfo source))
-            return area.Name;
-
-        return $"{area.Name} · {source.Name}";
-    }
-    public void SetRunBonus(IRunBonus bonus)
-    {
-        runBonus = bonus ?? EmptyRunBonus.Instance;
-    }
-    private void ApplyAreaRules(StageInfo area)
-    {
-        DataManager.instance.TryGetTower(area.TowerId, out TowerInfo source);
-        towerRules.SetSource(source);
-    }
-
-    private void HealAfterAmbush()
-    {
-        float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal)) * ambushHealRatio;
-        player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
-    }
-    private static void PlayAreaBgm(StageInfo area)
-    {
-        if(area.Bgm == BgmType.None || !SoundManager.HasInstance)
-            return;
-
-        SoundManager.instance.PlayBgm(area.Bgm);
-    }
+    #region 상태
     private enum Phase
     {
         Moving,
@@ -363,8 +386,9 @@ public class StageController : MonoBehaviour
         Looting,
         Ended,
     }
+    #endregion
 
-
+    #region 디버그
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
     public void DebugJumpTo(int floor)
     {
@@ -378,5 +402,5 @@ public class StageController : MonoBehaviour
         NextStage();
     }
 #endif
-
+    #endregion
 }

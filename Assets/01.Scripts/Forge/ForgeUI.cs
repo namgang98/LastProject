@@ -36,6 +36,7 @@ public class ForgeUI : MonoBehaviour
     private readonly List<MaterialCostView> rows = new();
     private ForgeableInstance selected;
 
+    #region 초기화
     private void Awake()
     {
         closeButton.onClick.AddListener(Close);
@@ -55,7 +56,9 @@ public class ForgeUI : MonoBehaviour
 
         EventManager.instance.RemoveListener<OnChangeGold>(HandleGoldChanged);
     }
+    #endregion
 
+    #region 열기/닫기
     public void Open()
     {
         selected = null;
@@ -67,7 +70,9 @@ public class ForgeUI : MonoBehaviour
     {
         PopupManager.instance.Close(popup);
     }
+    #endregion
 
+    #region 목록
     private void RefreshList()
     {
         GameSession.instance.CollectForgeables(items);
@@ -109,7 +114,9 @@ public class ForgeUI : MonoBehaviour
 
         RefreshDetail();
     }
+    #endregion
 
+    #region 상세
     private void RefreshDetail()
     {
         detailRoot.SetActive(selected != null);
@@ -181,7 +188,9 @@ public class ForgeUI : MonoBehaviour
                 rows[i].Bind(materials[i], storage.CountItem(materials[i].ItemId));
         }
     }
+    #endregion
 
+    #region 강화
     private void Forge()
     {
         GameSession session = GameSession.instance;
@@ -222,13 +231,6 @@ public class ForgeUI : MonoBehaviour
         return result == ForgeResult.Success ? FeedbackType.Info : FeedbackType.Warning;
     }
 
-    private void HandleGoldChanged(OnChangeGold e)
-    {
-        if(!popup.activeSelf)
-            return;
-
-        RefreshDetail();
-    }
     private static void PlayResultSfx(ForgeResult result)
     {
         if(result == ForgeResult.Success)
@@ -236,4 +238,15 @@ public class ForgeUI : MonoBehaviour
         else if(result == ForgeResult.Failed || result == ForgeResult.Downgraded)
             Sfx.Play(SfxType.ForgeFail);
     }
+    #endregion
+
+    #region 이벤트
+    private void HandleGoldChanged(OnChangeGold e)
+    {
+        if(!popup.activeSelf)
+            return;
+
+        RefreshDetail();
+    }
+    #endregion
 }

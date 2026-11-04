@@ -16,6 +16,7 @@ public class CsvTable
     public string Name { get; }
     public int RowCount => rows.Count;
 
+    #region 생성 / 파싱
     private CsvTable(string name)
     {
         Name = name;
@@ -56,7 +57,9 @@ public class CsvTable
 
         return table;
     }
+    #endregion
 
+    #region 조회
     public bool HasColumn(string column)
     {
         return columns.ContainsKey(column);
@@ -77,7 +80,9 @@ public class CsvTable
 
         return cells[index].Trim();
     }
+    #endregion
 
+    #region CSV 분해
     // 문자 하나씩 읽으면서 "따옴표 안인지"를 기억하는 방식 (상태 머신)
     private static List<string[]> SplitRecords(string text)
     {
@@ -160,6 +165,7 @@ public class CsvTable
 
         fields.Clear();
     }
+    #endregion
 }
 
 // 표의 한 행. 열 이름으로 값을 꺼내고, 숫자/enum 변환은 TryGet 으로 실패 여부를 돌려준다
@@ -173,13 +179,16 @@ public readonly struct CsvRow
     // 에러 메시지용 위치
     public string Where => $"{table.Name} {LineNumber}행";
 
+    #region 생성
     public CsvRow(CsvTable table, string[] cells, int lineNumber)
     {
         this.table = table;
         this.cells = cells;
         LineNumber = lineNumber;
     }
+    #endregion
 
+    #region 값 읽기
     public string GetString(string column)
     {
         return table.GetCell(cells, column);
@@ -199,6 +208,7 @@ public readonly struct CsvRow
     {
         return Enum.TryParse(GetString(column), true, out value);
     }
+
     public bool TryGetIntList(string column, char separator, out List<int> values)
     {
         values = new List<int>();
@@ -217,4 +227,5 @@ public readonly struct CsvRow
 
         return true;
     }
+    #endregion
 }

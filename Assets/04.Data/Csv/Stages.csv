@@ -18,3 +18,7 @@
 9529,부패의 둥지,RotNest_bg,2015|2016|2017,2111,41,50,Ambience_Cave,9803,RotNest
 9527,용암 대전당,LavaHall_bg,2010|2011|2008,2106,11,40,Ambience_Lair,9801,Hellgate
 9528,빙정 동굴,CrystalCave_bg,2012|2013|2007,2108,11,40,Ambience_Ice,9802,FrozenRampart
+9531,썩은 숲,Forest_bg,2001|2004|2005,2102,1,20,Ambience_Forest,9803,Forest
+9532,고블린 굴,Cave_bg,2002|2004|2005,2101,1,20,Ambience_Cave,9801,Catacomb
+9533,지하 묘지,Catacomb_bg,2003|2006|2008,2103,1,20,Ambience_Catacomb,9804,Catacomb
+9534,얼어붙은 회랑,IceMap_bg,2007|2003|2006,2104,1,20,Ambience_Ice,9802,IceCorridor

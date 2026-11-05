@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa8afb475bc9e6f48b0c31bdcc695b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerCutsceneSlot
-  towerId: 9804
+  towerId: 9801
   mask: {fileID: 225389077}
   towerImage: {fileID: 1720714772}
   ruinImage: {fileID: 505136317}

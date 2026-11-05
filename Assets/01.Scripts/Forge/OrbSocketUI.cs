@@ -21,6 +21,8 @@ public class OrbSocketUI : MonoBehaviour
 
     [Header("선택한 장비")]
     [SerializeField] Image itemIcon;
+    [SerializeField] RectTransform itemIconArea;
+    [SerializeField, Min(1)] int detailFullCells = 3;
     [SerializeField] TMP_Text itemNameText;
     [SerializeField] TMP_Text itemOrbText;
 
@@ -185,6 +187,7 @@ public class OrbSocketUI : MonoBehaviour
             return;
 
         itemIcon.sprite = selectedItem.Info.Icon;
+        ItemIconFitter.Fit(itemIcon, selectedItem.Info, itemIconArea.rect.size, detailFullCells);
     }
 
     private void RefreshPreview()
@@ -252,7 +255,7 @@ public class OrbSocketUI : MonoBehaviour
         return current.Element != DamageElement.None && current.Element != orb.Element;
     }
     #endregion
-
+    
     #region 합성
     private void Socket()
     {

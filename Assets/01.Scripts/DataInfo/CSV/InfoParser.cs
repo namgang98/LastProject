@@ -576,7 +576,17 @@ public static class InfoParser
         if(!string.IsNullOrEmpty(row.GetString(CSVStamp.LevelOffset)) && (!row.TryGetInt(CSVStamp.LevelOffset, out levelOffset) || levelOffset < 0))
             return Fail(row, errors, CSVStamp.LevelOffset);
 
-        info = new TowerInfo(b.id, b.name, row.GetString(CSVStamp.Description), topFloor, abyssFloor, kind, rules, levelOffset);
+        int rampStart = 1;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.RampStart)) && (!row.TryGetInt(CSVStamp.RampStart, out rampStart) || rampStart < 1))
+            return Fail(row, errors, CSVStamp.RampStart);
+
+        int rampEnd = rampStart + 10;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.RampEnd)) && (!row.TryGetInt(CSVStamp.RampEnd, out rampEnd) || rampEnd < rampStart))
+            return Fail(row, errors, CSVStamp.RampEnd);
+
+        info = new TowerInfo(b.id, b.name, row.GetString(CSVStamp.Description), topFloor, abyssFloor, kind, rules, levelOffset, rampStart, rampEnd);
         return true;
     }
 

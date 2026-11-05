@@ -190,7 +190,6 @@ public class StageController : MonoBehaviour
         monsterHud.Show();
         currentMonster.Health.OnDie += HandleMonsterDead;
         battle.StartBattle(player, currentMonster, currentAttacks, currentInfo.IsBoss);
-        GameSession.instance.ReportCleared(stage);
         phase = Phase.Fighting;
     }
     #endregion
@@ -280,6 +279,7 @@ public class StageController : MonoBehaviour
         Sfx.Play(SfxType.RestEnter);
         float rate = restHealRate * (1f + runBonus.Sum(BlessingStat.RestHeal));
         player.Health.Heal(Mathf.RoundToInt(player.Health.MaxHp * rate));
+        GameSession.instance.ReportCleared(stage);
         phase = Phase.Looting;
         ShowButtons();
     }

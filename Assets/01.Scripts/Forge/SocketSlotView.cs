@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class SocketSlotView : MonoBehaviour
 {
     [SerializeField] Image icon;
+    [SerializeField] RectTransform iconArea;
+    [SerializeField, Min(1)] int fullCells = 2;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text levelText;
-    [SerializeField] GameObject wardMark;
+    [SerializeField] ItemBadgeView badges;
     [SerializeField] GameObject selectedMark;
     [SerializeField] Button button;
 
@@ -25,9 +27,10 @@ public class SocketSlotView : MonoBehaviour
         item = target;
         onSelect = select;
         icon.sprite = item.Info.Icon;
+        ItemIconFitter.Fit(icon, item.Info, iconArea.rect.size, fullCells);
         nameText.text = item.Info.Name;
         levelText.text = item is ForgeableInstance forged && forged.Level > 0 ? $"+{forged.Level}" : string.Empty;
-        wardMark.SetActive(item.Ward != null);
+        badges.Show(item);
     }
 
     public void SetSelected(bool selected)

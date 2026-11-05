@@ -73,6 +73,8 @@ public static class CSVStamp
     public const string TopFloor = "topfloor";
     public const string AbyssFloor = "abyssfloor";
     public const string LevelOffset = "leveloffset";
+    public const string RampStart = "rampstart";
+    public const string RampEnd = "rampend";
     public const string Prologue = "prologue";
     public const string Stat2 = "stat2";
     public const string Value2 = "value2";

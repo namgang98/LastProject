@@ -12,6 +12,7 @@ public class ItemView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [SerializeField] Image icon;
     [SerializeField] ItemCooldownView cooldown;
     [SerializeField] ItemShapeTiles shapeTiles;
+
     public ItemCooldownView Cooldown => cooldown;
     private RectTransform rect;
     private CanvasGroup canvasGroup;

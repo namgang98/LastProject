@@ -335,8 +335,9 @@ MonoBehaviour:
   bgmGroup: {fileID: -7492789288258976376, guid: 2eeb73274052a4b49af3a0177606a904, type: 2}
   sfxGroup: {fileID: 5724073723607879778, guid: 2eeb73274052a4b49af3a0177606a904, type: 2}
   sfxPoolSize: 12
-  bgmFadeTime: 1.5
+  bgmFadeTime: 0.6
   sfxMinInterval: 0.05
+  jingleFadeTime: 0.5
 --- !u!4 &779737978
 Transform:
   m_ObjectHideFlags: 0
@@ -843,7 +844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e7663513254b4a4fb445bd937ac2c8d2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

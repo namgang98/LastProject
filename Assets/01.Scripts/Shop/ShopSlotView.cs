@@ -34,7 +34,7 @@ public class ShopSlotView : MonoBehaviour
     {
         icon.enabled = true;
         icon.sprite = info.Icon;
-        FitIcon(info);
+        ItemIconFitter.Fit(icon, info, Vector2.Scale(((RectTransform)transform).rect.size, areaRatio), fullCells);
         priceText.text = $"{price}G";
         priceText.color = affordable ? affordableColor : poorColor;
         button.interactable = true;
@@ -66,29 +66,5 @@ public class ShopSlotView : MonoBehaviour
     private void HandleClick()
     {
         Clicked?.Invoke(index);
-    }
-    private void FitIcon(ItemInfo info)
-    {
-        Vector2 area = Vector2.Scale(((RectTransform)transform).rect.size, areaRatio);
-        float cellSize = Mathf.Min(area.x, area.y) / fullCells;
-        Vector2 size = GetBounds(info.Shape) * cellSize;
-        float scale = Mathf.Min(1f, area.x / size.x, area.y / size.y);
-
-        icon.preserveAspect = true;
-        icon.rectTransform.sizeDelta = size * scale;
-    }
-
-    private static Vector2 GetBounds(ItemShape shape)
-    {
-        int maxX = 0;
-        int maxY = 0;
-
-        foreach(Vector2Int cell in shape.Cells)
-        {
-            maxX = Mathf.Max(maxX, cell.x);
-            maxY = Mathf.Max(maxY, cell.y);
-        }
-
-        return new Vector2(maxX + 1, maxY + 1);
     }
 }

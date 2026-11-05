@@ -17,6 +17,8 @@ public class ForgeUI : MonoBehaviour
     [Header("상세")]
     [SerializeField] GameObject detailRoot;
     [SerializeField] Image itemIcon;
+    [SerializeField] RectTransform itemIconArea;
+    [SerializeField, Min(1)] int detailFullCells = 3;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text levelText;
     [SerializeField] TMP_Text statText;
@@ -129,6 +131,7 @@ public class ForgeUI : MonoBehaviour
         string stat = selected.Info is ArmorInfo ? "최대 체력" : "데미지";
 
         itemIcon.sprite = selected.Info.Icon;
+        ItemIconFitter.Fit(itemIcon, selected.Info, itemIconArea.rect.size, detailFullCells);
         nameText.text = selected.Info.Name;
 
         if(!forge.TryGetNext(selected, out ForgeLevelInfo next))

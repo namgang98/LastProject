@@ -64,7 +64,7 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
 
         var stats = PlayerStatsBuilder.Build(session.CurrentClass, session.Backpack, training, blessings, towerRules);
         battle.Bind(session.Backpack, session.CurrentClass, training, blessings, towerRules);
-        toolTip.Bind(session.Backpack);
+        toolTip.Bind(session.Backpack, blessings);
         playerHpBar.Bind(player.Health);
         playerStatusIcons.Bind(player);
         player.Init(stats.MaxHp);

@@ -368,13 +368,20 @@ public class StageController : MonoBehaviour
     private void ShowButtons()
     {
         nextButton.gameObject.SetActive(true);
-        returnButton.gameObject.SetActive(rule.CanReturn(stage));
+        returnButton.gameObject.SetActive(CanReturn());
     }
 
     private void HideButtons()
     {
         nextButton.gameObject.SetActive(false);
         returnButton.gameObject.SetActive(false);
+    }
+    private bool CanReturn()
+    {
+        if(runBonus.Sum(BlessingStat.FreeReturn) > 0f)
+            return true;
+
+        return rule.CanReturn(stage);
     }
     #endregion
 

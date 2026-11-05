@@ -39,6 +39,7 @@ public enum BlessingStat
     StaffCooldown,
     DaggerDamage,
     DaggerCooldown,
+    FreeReturn,
 }
 
 public readonly struct BlessingModifier

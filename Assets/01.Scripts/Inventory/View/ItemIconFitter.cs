@@ -5,6 +5,9 @@ public static class ItemIconFitter
 {
     public static void Fit(Image icon, ItemInfo info, Vector2 area, int fullCells)
     {
+        if(area.x <= 0f || area.y <= 0f)
+            return; 
+
         float cellSize = Mathf.Min(area.x, area.y) / fullCells;
         Vector2 size = GetBounds(info.Shape) * cellSize;
         float scale = Mathf.Min(1f, area.x / size.x, area.y / size.y);

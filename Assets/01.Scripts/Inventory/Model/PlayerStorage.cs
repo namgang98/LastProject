@@ -104,7 +104,7 @@ public class PlayerStorage : IMaterialStorage
 
         from.Remove(newBag);
 
-        if(!from.TryPlace(oldBag, anchor, rotation) && !from.TryAutoPlace(oldBag))
+        if(!TryStoreOldBag(oldBag, from, anchor, rotation))
         {
             from.TryPlace(newBag, anchor, rotation);
             return false;
@@ -120,6 +120,17 @@ public class PlayerStorage : IMaterialStorage
 
         EventManager.instance.PostNotification(new OnBackpackChanged(Backpack));
         return true;
+    }
+
+    private bool TryStoreOldBag(BagInstance oldBag, GridContainer from, Vector2Int anchor, int rotation)
+    {
+        if(from.TryPlace(oldBag, anchor, rotation))
+            return true;
+
+        if(from.TryAutoPlace(oldBag))
+            return true;
+
+        return Chest.TryStore(oldBag);
     }
 
     public bool TryReceive(ItemInstance item)

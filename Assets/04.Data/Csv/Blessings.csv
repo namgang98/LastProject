@@ -72,4 +72,4 @@
 9970,단검 수련,Normal,DaggerDamage,0.1,,0,5,20,단검 데미지 +10%
 9971,연속 찌르기,Rare,DaggerCooldown,0.12,,0,3,10,단검 쿨타임 -12%
 9972,그림자 춤,Epic,DaggerDamage,0.3,CritChance,0.1,1,4,"단검 데미지 +30%, 치명타 확률 +10%"
-9959,탈출 로프,Epic,FreeReturn,1,,0,1,4,이번 탐험 동안 매 층 귀환할 수 있다
+9973,탈출 로프,Epic,FreeReturn,1,,0,1,4,이번 탐험 동안 매 층 귀환할 수 있다

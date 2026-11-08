@@ -153,11 +153,11 @@ RectTransform:
   - {fileID: 1631078223}
   m_Father: {fileID: 55065019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.278, y: 0.46}
-  m_AnchorMax: {x: 0.278, y: 0.46}
+  m_AnchorMin: {x: 0.27600002, y: 0.44037038}
+  m_AnchorMax: {x: 0.27600002, y: 0.44037038}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 104, y: 316}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &36654061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,11 +402,11 @@ RectTransform:
   - {fileID: 2053927432}
   m_Father: {fileID: 55065019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7674, y: 0.2368}
-  m_AnchorMax: {x: 0.7674, y: 0.2368}
+  m_AnchorMin: {x: 0.76785415, y: 0.2136}
+  m_AnchorMax: {x: 0.76785415, y: 0.2136}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 97, y: 316}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &134115639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5557,11 +5557,11 @@ RectTransform:
   - {fileID: 136382752}
   m_Father: {fileID: 55065019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7162, y: 0.63}
-  m_AnchorMax: {x: 0.7162, y: 0.63}
+  m_AnchorMin: {x: 0.717, y: 0.6124445}
+  m_AnchorMax: {x: 0.717, y: 0.6124445}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 100, y: 316}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &419993571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5766,11 +5766,11 @@ RectTransform:
   - {fileID: 742330912}
   m_Father: {fileID: 55065019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.24, y: 0.69}
-  m_AnchorMax: {x: 0.24, y: 0.69}
+  m_AnchorMin: {x: 0.23776251, y: 0.6788892}
+  m_AnchorMax: {x: 0.23776251, y: 0.6788892}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 112, y: 313.55}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &509825122
 MonoBehaviour:
   m_ObjectHideFlags: 0

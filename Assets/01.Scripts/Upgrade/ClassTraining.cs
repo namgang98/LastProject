@@ -62,6 +62,14 @@ public class ClassTraining
         Changed?.Invoke(info);
         return true;
     }
+    public void GrantUnlock(ClassInfo info)
+    {
+        if(info == null || IsUnlocked(info))
+            return;
+
+        unlocked.Add(info.Id);
+        Changed?.Invoke(info);
+    }
 
     public void ReportFloor(int floor)
     {

@@ -740,9 +740,9 @@ public class DataManager : Singleton<DataManager>
                 continue;
             }
 
-            if(forge.HasLevel(info.Level))
+            if(forge.HasLevel(info.Level, info.Weapon))
             {
-                errors.Add($"{sheetName} : {info.Level}단계 중복 → 뒤의 것은 무시");
+                errors.Add($"{sheetName} : {info.Weapon?.ToString() ?? "공통"} {info.Level}단계 중복 → 뒤의 것은 무시");
                 continue;
             }
 

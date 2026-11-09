@@ -59,8 +59,12 @@ public class QuestSlotView : MonoBehaviour
     private static string BuildRewardText(QuestInfo info)
     {
         string item = info.HasRewardItem ? $"x{info.RewardCount}" : string.Empty;
-        string gold = info.RewardGold > 0 ? $"+{info.RewardGold}G" : string.Empty;
-        return $"{item}  {gold}".Trim();
+        string gold = info.RewardGold > 0 ? $"<nobr>+{info.RewardGold}G</nobr>" : string.Empty;
+
+        if(item.Length == 0 || gold.Length == 0)
+            return item + gold;
+
+        return $"{item}\n{gold}";
     }
 
     private static string GetLabel(QuestInfo info, bool ready)

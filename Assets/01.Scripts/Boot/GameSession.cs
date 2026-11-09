@@ -53,8 +53,9 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public ClassInfo CurrentClass => Classes.Current;
     public int BestFloor => Training.BestFloor;
     public int MaxForgeLevel => Storage.MaxForgeLevel;
-
+    public ClassInfo Newcomer { get; private set; }
     public TutorialBook Tutorials { get; private set; }
+    public TowerInfo LastRunTower { get; private set; }
 
     #region 불러오기
     public bool TryLoad()
@@ -204,6 +205,8 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
 
     public void FinishRun(RunEndReason reason)
     {
+        LastRunTower = CurrentTower;
+
         if(reason == RunEndReason.Death)
             HandleDeath();
 
@@ -230,6 +233,8 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         saveData.abyssClearCount++;
         PendingCutscene = ToCutscene(Towers.Conquer(CurrentTower, CurrentClass));
         Classes.EnsurePlayable();
+        GrantNewcomerIfNeeded();
+        CurrentTower = Towers.FindEnterable() ?? Towers.Prologue;
     }
 
     private static CutsceneKind ToCutscene(ConquestResult result)
@@ -273,6 +278,23 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     private void HandleDeath()
     {
         WardSaved = Storage.LoseOnDeath();
+    }
+
+    private void GrantNewcomerIfNeeded()
+    {
+        Newcomer = null;
+
+        if(Classes.HasPlayable)
+            return;
+
+        ClassInfo newcomer = Classes.FindNewcomer();
+
+        if(newcomer == null)
+            return;
+
+        Training.GrantUnlock(newcomer);
+        Classes.EnsurePlayable();
+        Newcomer = newcomer;
     }
     #endregion
 

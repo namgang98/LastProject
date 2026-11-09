@@ -9,6 +9,7 @@ public class ResultView : MonoBehaviour
     [SerializeField] TextMeshProUGUI stageText;
     [SerializeField] Button restartButton;
 
+    private static TowerInfo RunTower => GameSession.instance.LastRunTower ?? GameSession.instance.CurrentTower;
     private void Awake()
     {
         restartButton.onClick.AddListener(ReturnToVillage);
@@ -78,12 +79,10 @@ public class ResultView : MonoBehaviour
 
     private static string GetStageText(int stage)
     {
-        GameSession session = GameSession.instance;
-
-        if(!session.CurrentTower.IsEndless)
+        if(!RunTower.IsEndless)
             return $"{stage}F";
 
-        return $"{stage}F  (최고 {session.Towers.OriginBestFloor}F)";
+        return $"{stage}F  (최고 {GameSession.instance.Towers.OriginBestFloor}F)";
     }
 
     private static string GetTitle(RunEndReason reason)
@@ -93,7 +92,7 @@ public class ResultView : MonoBehaviour
             case RunEndReason.Death:
                 return "쓰러졌다...";
             case RunEndReason.Conquest:
-                return $"{GameSession.instance.CurrentTower.Name}이 무너진다...";
+                return $"{RunTower.Name}이 무너진다...";
             default:
                 return "안전 귀환 성공!";
         }

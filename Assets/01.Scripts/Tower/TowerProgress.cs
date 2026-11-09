@@ -154,4 +154,14 @@ public class TowerProgress
         fallen.Clear();
         OriginBestFloor = 0;
     }
+    public TowerInfo FindEnterable()
+    {
+        foreach(TowerInfo tower in towers)
+        {
+            if(CanEnter(tower))
+                return tower;
+        }
+
+        return null;
+    }
 }

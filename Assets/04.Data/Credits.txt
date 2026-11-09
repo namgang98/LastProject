@@ -1,0 +1,28 @@
+﻿<size=130%><b>Packbound</b></size>
+
+<size=110%><b>개발</b></size>
+NamGang
+
+<size=110%><b>폰트</b></size>
+Galmuri9 © 2019-2023 Minseo Lee
+Pirata One © The Pirata One Project Authors
+SIL Open Font License 1.1
+
+<size=110%><b>라이브러리</b></size>
+DOTween © Daniele Giardini - Demigiant
+
+<size=110%><b>음악</b></size>
+ElevenLabs Music으로 제작
+
+<size=110%><b>효과음</b></size>
+Sonniss GDC Game Audio Bundle
+Mixkit
+Kenney (CC0)
+rubberduck - 80 CC0 creature SFX (OpenGameArt)
+qubodup - Door Open/Close Set (CC0)
+leohpaz - RPG Essentials SFX Free
+
+<size=110%><b>그래픽</b></size>
+AI 생성 도구로 제작 후 편집
+
+Made with Unity

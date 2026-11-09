@@ -93,6 +93,7 @@ public static class CSVStamp
     public const string Materials = "materials";
     public const string Bonus = "bonus";
     public const string Downgrade = "downgrade";
+    public const string WeaponType = "weapontype";
 
     public const string Key = "key";
     public const string Order = "order";

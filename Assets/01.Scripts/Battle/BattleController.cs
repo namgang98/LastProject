@@ -116,7 +116,6 @@ public class BattleController : MonoBehaviour
         actions.Clear();
         potionUser?.Dispose();
         potionUser = null;
-        potionUser = null;
         OnBattleEnded?.Invoke();
         player.Health.OnDie -= EndBattle;
         monster.Health.OnDie -= EndBattle;

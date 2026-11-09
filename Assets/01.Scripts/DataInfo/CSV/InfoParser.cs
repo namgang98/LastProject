@@ -649,7 +649,17 @@ public static class InfoParser
         if(!ItemCost.TryParseList(row.GetString(CSVStamp.Materials), out List<ItemCost> materials))
             return Fail(row, errors, CSVStamp.Materials);
 
-        info = new ForgeLevelInfo(id, level, cost, chance, bonus, downgrade == 1, materials);
+        WeaponType? weapon = null;
+
+        if(!string.IsNullOrEmpty(row.GetString(CSVStamp.WeaponType)))
+        {
+            if(!row.TryGetEnum(CSVStamp.WeaponType, out WeaponType parsed))
+                return Fail(row, errors, CSVStamp.WeaponType);
+
+            weapon = parsed;
+        }
+
+        info = new ForgeLevelInfo(id, level, cost, chance, bonus, downgrade == 1, materials, weapon);
         return true;
     }
     #endregion

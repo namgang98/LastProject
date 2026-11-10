@@ -114,6 +114,7 @@ public class BattleController : MonoBehaviour
         player.Health.ClearShield();
         statuses.Clear();
         actions.Clear();
+        potionUser?.Dispose();
         potionUser = null;
         OnBattleEnded?.Invoke();
         player.Health.OnDie -= EndBattle;

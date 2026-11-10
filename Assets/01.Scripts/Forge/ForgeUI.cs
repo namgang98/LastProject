@@ -17,6 +17,8 @@ public class ForgeUI : MonoBehaviour
     [Header("상세")]
     [SerializeField] GameObject detailRoot;
     [SerializeField] Image itemIcon;
+    [SerializeField] RectTransform itemIconArea;
+    [SerializeField, Min(1)] int detailFullCells = 3;
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text levelText;
     [SerializeField] TMP_Text statText;
@@ -36,6 +38,7 @@ public class ForgeUI : MonoBehaviour
     private readonly List<MaterialCostView> rows = new();
     private ForgeableInstance selected;
 
+    #region 초기화
     private void Awake()
     {
         closeButton.onClick.AddListener(Close);
@@ -55,7 +58,9 @@ public class ForgeUI : MonoBehaviour
 
         EventManager.instance.RemoveListener<OnChangeGold>(HandleGoldChanged);
     }
+    #endregion
 
+    #region 열기/닫기
     public void Open()
     {
         selected = null;
@@ -67,7 +72,9 @@ public class ForgeUI : MonoBehaviour
     {
         PopupManager.instance.Close(popup);
     }
+    #endregion
 
+    #region 목록
     private void RefreshList()
     {
         GameSession.instance.CollectForgeables(items);
@@ -109,7 +116,9 @@ public class ForgeUI : MonoBehaviour
 
         RefreshDetail();
     }
+    #endregion
 
+    #region 상세
     private void RefreshDetail()
     {
         detailRoot.SetActive(selected != null);
@@ -122,6 +131,7 @@ public class ForgeUI : MonoBehaviour
         string stat = selected.Info is ArmorInfo ? "최대 체력" : "데미지";
 
         itemIcon.sprite = selected.Info.Icon;
+        ItemIconFitter.Fit(itemIcon, selected.Info, itemIconArea.rect.size, detailFullCells);
         nameText.text = selected.Info.Name;
 
         if(!forge.TryGetNext(selected, out ForgeLevelInfo next))
@@ -141,7 +151,7 @@ public class ForgeUI : MonoBehaviour
         if(risky)
             warningText.text = $"실패하면 +{selected.Level - 1}(으)로 떨어집니다";
 
-        goldText.text = $"{session.Wallet.Gold} / {cost}G";
+        goldText.text = $"{cost}G";
         goldText.color = session.Wallet.Gold >= cost ? enoughColor : lackColor;
 
         ShowMaterials(next.Materials, session);
@@ -181,7 +191,9 @@ public class ForgeUI : MonoBehaviour
                 rows[i].Bind(materials[i], storage.CountItem(materials[i].ItemId));
         }
     }
+    #endregion
 
+    #region 강화
     private void Forge()
     {
         GameSession session = GameSession.instance;
@@ -222,13 +234,6 @@ public class ForgeUI : MonoBehaviour
         return result == ForgeResult.Success ? FeedbackType.Info : FeedbackType.Warning;
     }
 
-    private void HandleGoldChanged(OnChangeGold e)
-    {
-        if(!popup.activeSelf)
-            return;
-
-        RefreshDetail();
-    }
     private static void PlayResultSfx(ForgeResult result)
     {
         if(result == ForgeResult.Success)
@@ -236,4 +241,15 @@ public class ForgeUI : MonoBehaviour
         else if(result == ForgeResult.Failed || result == ForgeResult.Downgraded)
             Sfx.Play(SfxType.ForgeFail);
     }
+    #endregion
+
+    #region 이벤트
+    private void HandleGoldChanged(OnChangeGold e)
+    {
+        if(!popup.activeSelf)
+            return;
+
+        RefreshDetail();
+    }
+    #endregion
 }

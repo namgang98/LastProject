@@ -40,7 +40,7 @@ public class ForgeService
         if(item == null)
             return false;
 
-        return table.TryGetLevel(item.Level + 1, out next);
+        return table.TryGetLevel(item.Level + 1, item.Info, out next);
     }
 
     public int GetCost(ForgeableInstance item, ForgeLevelInfo next)

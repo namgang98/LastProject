@@ -60,7 +60,7 @@ public class InventoryUI : MonoBehaviour
         Rect area = bagArea.rect;
         float fixedWidth = backpackPanel.PouchSpacing + backpackPanel.SlotColumnWidth * 2f;
         float byWidth = (area.width - fixedWidth) / (bagSize.x + pouchReserveColumns);
-        float byHeight = area.height / bagSize.y;
+        float byHeight = (area.height - backpackPanel.LabelSpace) / bagSize.y;
         return Mathf.Min(maxCellSize, byWidth, byHeight);
     }
     #endregion

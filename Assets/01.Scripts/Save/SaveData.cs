@@ -11,6 +11,7 @@ public class SaveData
     public int gold;
     public bool inRun;
     public int bestFloor;
+    public int bestCleared;
     public int originBestFloor;
     public int clearCount;
     public int abyssClearCount;
@@ -26,6 +27,7 @@ public class SaveData
     public List<int> clearedTowers = new();
     public List<int> collapsedTowers = new();
     public List<int> fallenClasses = new();
+    public List<string> tutorials = new();
 }
 
 [Serializable]
@@ -51,6 +53,8 @@ public class ItemSaveData
     public int rotation;
     public int parent = -1;
     public int forge;
+    public int orb;
+    public int ward;
 }
 
 [Serializable]

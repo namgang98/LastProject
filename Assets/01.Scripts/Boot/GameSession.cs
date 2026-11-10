@@ -19,6 +19,11 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     [SerializeField] Vector2Int chestTabSize = new(10, 8);
     [SerializeField, Min(1)] int startTabCount = 1;
 
+    [Header("초보 지원")]
+    [SerializeField, Min(0)] int beginnerFloor = 10;
+    [SerializeField] int beginnerPotionId = 8505;
+    [SerializeField, Min(0)] int beginnerPotionCount = 2;
+
     [Header("상점")]
     [SerializeField, Range(1, Shop.MaxSlots)] int shopSlotCount = 3;
     [SerializeField] float buyMultiplier = 3f;
@@ -37,15 +42,20 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public TowerProgress Towers { get; private set; }
     public QuestBook Quests { get; private set; }
     public ForgeService Forge { get; private set; }
+    public OrbService Socket { get; private set; }
+    public int WardSaved { get; private set; }
     public TowerInfo CurrentTower { get; private set; }
     public CutsceneKind PlayingCutscene { get; private set; }
     public CutsceneKind PendingCutscene { get; private set; }
-
+    public int BestCleared => Training.BestCleared;
     public Backpack Backpack => Storage.Backpack;
     public Chest Chest => Storage.Chest;
     public ClassInfo CurrentClass => Classes.Current;
     public int BestFloor => Training.BestFloor;
     public int MaxForgeLevel => Storage.MaxForgeLevel;
+    public ClassInfo Newcomer { get; private set; }
+    public TutorialBook Tutorials { get; private set; }
+    public TowerInfo LastRunTower { get; private set; }
 
     #region 불러오기
     public bool TryLoad()
@@ -75,13 +85,16 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         LoadClasses(savedClass);
         Quests = new QuestBook(DataManager.instance.Quests, saveData.quests, this);
         Forge = new ForgeService(DataManager.instance.Forge, () => Favor.GetRate(NpcType.Blacksmith));
+        Tutorials = new TutorialBook(saveData.tutorials ?? new List<string>());
+        Socket = new OrbService(() => Favor.GetRate(NpcType.Blacksmith));
 
         if(!saveData.inRun)
             return true;
 
-        Storage.LoseOnDeath();
+        HandleDeath();
         Save(false);
         return true;
+
     }
 
     private void LoadUpgrades()
@@ -148,6 +161,7 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         Training.WriteTo(saveData);
         Towers.WriteTo(saveData);
         Quests.WriteTo(saveData.quests);
+        Tutorials.WriteTo(saveData.tutorials);
         saveService.Save(saveData);
     }
 
@@ -155,7 +169,13 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     {
         Save(false);
     }
+    public bool HasSave => saveService != null && saveService.HasSave;
 
+    public bool ResetSave()
+    {
+        DeleteSave();
+        return TryLoad();
+    }
     public void DeleteSave()
     {
         saveService.Delete();
@@ -166,27 +186,55 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     #region 인게임
     public void BeginRun()
     {
+        WardSaved = 0;
         Storage.GiveStarterWeapon(CurrentClass);
+        GiveBeginnerSupport();
         Save(true);
+    }
+
+    private void GiveBeginnerSupport()
+    {
+        if(BestCleared >= beginnerFloor)
+            return;
+
+        if(!DataManager.instance.TryGetItem(beginnerPotionId, out ItemInfo potion))
+            return;
+
+        Storage.FillBackpack(potion, beginnerPotionCount);
     }
 
     public void FinishRun(RunEndReason reason)
     {
+        LastRunTower = CurrentTower;
+
         if(reason == RunEndReason.Death)
-            Storage.LoseOnDeath();
+            HandleDeath();
 
         if(reason == RunEndReason.Conquest)
             HandleConquest();
 
+        RemoveBeginnerSupport();
         Shop.Restock();
         Save(false);
     }
 
+    private void RemoveBeginnerSupport()
+    {
+        int count = Storage.CountItem(beginnerPotionId);
+
+        if(count <= 0)
+            return;
+
+        Storage.TakeItems(beginnerPotionId, count);
+    }
     private void HandleConquest()
     {
+        WardSaved = Storage.LoseOnDeath();
         saveData.abyssClearCount++;
         PendingCutscene = ToCutscene(Towers.Conquer(CurrentTower, CurrentClass));
         Classes.EnsurePlayable();
+        GrantNewcomerIfNeeded();
+        CurrentTower = Towers.FindEnterable() ?? Towers.Prologue;
     }
 
     private static CutsceneKind ToCutscene(ConquestResult result)
@@ -216,11 +264,37 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
         Training.ReportFloor(floor);
         Towers.ReportFloor(CurrentTower, floor);
     }
+    public void ReportCleared(int floor)
+    {
+        Training.ReportCleared(floor);
+    }
     public void ResetTowers()
     {
         Towers.ResetProgress();
         CurrentTower = Towers.Prologue;
         SaveInVillage();
+    }
+
+    private void HandleDeath()
+    {
+        WardSaved = Storage.LoseOnDeath();
+    }
+
+    private void GrantNewcomerIfNeeded()
+    {
+        Newcomer = null;
+
+        if(Classes.HasPlayable)
+            return;
+
+        ClassInfo newcomer = Classes.FindNewcomer();
+
+        if(newcomer == null)
+            return;
+
+        Training.GrantUnlock(newcomer);
+        Classes.EnsurePlayable();
+        Newcomer = newcomer;
     }
     #endregion
 
@@ -278,6 +352,10 @@ public class GameSession : Singleton<GameSession>, IMaterialStorage, IQuestConte
     public void CollectForgeables(List<ForgeableInstance> results)
     {
         Storage.CollectForgeables(results);
+    }
+    public void CollectEquipment(List<ItemInstance> results)
+    {
+        Storage.CollectEquipment(results);
     }
     #endregion
 

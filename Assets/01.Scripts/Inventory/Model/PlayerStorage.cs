@@ -104,7 +104,7 @@ public class PlayerStorage : IMaterialStorage
 
         from.Remove(newBag);
 
-        if(!from.TryPlace(oldBag, anchor, rotation) && !from.TryAutoPlace(oldBag))
+        if(!TryStoreOldBag(oldBag, from, anchor, rotation))
         {
             from.TryPlace(newBag, anchor, rotation);
             return false;
@@ -122,30 +122,15 @@ public class PlayerStorage : IMaterialStorage
         return true;
     }
 
-    public void LoseOnDeath()
+    private bool TryStoreOldBag(BagInstance oldBag, GridContainer from, Vector2Int anchor, int rotation)
     {
-        PouchInstance pouch = Backpack.LoseAllOnDeath();
+        if(from.TryPlace(oldBag, anchor, rotation))
+            return true;
 
-        if(!kit.TryCreate(out Backpack newPack))
-            return;
+        if(from.TryAutoPlace(oldBag))
+            return true;
 
-        if(pouch != null)
-            newPack.TryEquipPouch(pouch);
-
-        Backpack = newPack;
-    }
-
-    public void GiveStarterWeapon(ClassInfo info)
-    {
-        WeaponInfo starter = info.StarterWeapon;
-
-        if(starter == null || HasWeapon(info.Type))
-            return;
-
-        if(TryPlaceInBackpack(starter.CreateInstance()))
-            return;
-
-        Debug.LogWarning($"[PlayerStorage] {starter.Name}을(를) 넣을 자리가 없습니다.");
+        return Chest.TryStore(oldBag);
     }
 
     public bool TryReceive(ItemInstance item)
@@ -166,16 +151,114 @@ public class PlayerStorage : IMaterialStorage
 
         return Backpack.PouchStorage != null && Backpack.PouchStorage.TryAutoPlace(item);
     }
+    #endregion
 
-    private bool HasWeapon(WeaponType type)
+    #region 사망 처리
+    public int LoseOnDeath()
+    {
+        List<ItemInstance> kept = CollectKept(Backpack.Grid);
+        PouchInstance pouch = Backpack.LoseAllOnDeath();
+
+        if(!kit.TryCreate(out Backpack newPack))
+            return 0;
+
+        if(pouch != null)
+            newPack.TryEquipPouch(pouch);
+
+        Backpack = newPack;
+        return RestoreKept(kept);
+    }
+
+    private static bool IsKeptOnDeath(ItemInstance item)
+    {
+        return item.Ward != null || item.Info.IsSoulbound;
+    }
+
+    private static List<ItemInstance> CollectKept(GridContainer grid)
+    {
+        var result = new List<ItemInstance>();
+
+        foreach(ItemInstance item in grid.Items)
+        {
+            if(IsKeptOnDeath(item))
+                result.Add(item);
+
+            if(item is ContainerInstance container)
+                result.AddRange(CollectKept(container.Storage));
+        }
+
+        return result;
+    }
+
+    private int RestoreKept(List<ItemInstance> kept)
+    {
+        int warded = 0;
+
+        foreach(ItemInstance item in kept)
+        {
+            item.Owner?.Remove(item);
+
+            if(item.Ward != null)
+            {
+                item.BreakWard();
+                warded++;
+            }
+
+            if(!TryPlaceInBackpack(item))
+                Chest.TryStore(item);
+        }
+
+        return warded;
+    }
+    #endregion
+
+    #region 시작 지급
+    public void GiveStarterWeapon(ClassInfo info)
+    {
+        WeaponInfo starter = info.StarterWeapon;
+
+        if(starter == null || HasAnyWeapon())
+            return;
+
+        if(TryPlaceInBackpack(starter.CreateInstance()))
+            return;
+
+        Debug.LogWarning($"[PlayerStorage] {starter.Name}을(를) 넣을 자리가 없습니다.");
+    }
+
+    private bool HasAnyWeapon()
     {
         foreach(ItemInstance item in Backpack.EquippedItems())
         {
-            if(item.Info is WeaponInfo weapon && weapon.Type == type)
+            if(item.Info is WeaponInfo)
                 return true;
         }
 
         return false;
+    }
+
+    public void FillBackpack(ItemInfo info, int target)
+    {
+        int missing = target - CountInBackpack(info.Id);
+
+        for(int i = 0; i < missing; i++)
+        {
+            if(TryPlaceInBackpack(info.CreateInstance()))
+                continue;
+
+            Debug.LogWarning($"[PlayerStorage] {info.Name}을(를) 넣을 자리가 없습니다.");
+            return;
+        }
+    }
+
+    private int CountInBackpack(int itemId)
+    {
+        int count = ItemSearch.Count(Backpack.Grid, itemId);
+
+        if(Backpack.PouchStorage != null)
+            count += ItemSearch.Count(Backpack.PouchStorage, itemId);
+
+        return count;
     }
     #endregion
 
@@ -213,6 +296,20 @@ public class PlayerStorage : IMaterialStorage
                 return;
 
             amount -= ItemSearch.Take(grid, itemId, amount);
+        }
+    }
+
+    public void CollectEquipment(List<ItemInstance> results)
+    {
+        results.Clear();
+
+        foreach(GridContainer grid in AllGrids())
+        {
+            foreach(ItemInstance item in grid.Items)
+            {
+                if(item.Info is WeaponInfo || item.Info is EquipmentInfo)
+                    results.Add(item);
+            }
         }
     }
 

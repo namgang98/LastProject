@@ -14,7 +14,7 @@ public class StatsView : MonoBehaviour
     [SerializeField] Button openButton;
     [SerializeField] Button closeButton;
     [SerializeField] RunController source;
-
+    [SerializeField] ScrollRect[] scrolls;
     [Header("내용")]
     [SerializeField] TMP_Text statText;
     [SerializeField] TMP_Text weaponText;
@@ -38,6 +38,7 @@ public class StatsView : MonoBehaviour
 
         Refresh();
         popup.SetActive(true);
+        ResetScrolls();
     }
 
     public void Close()
@@ -54,6 +55,15 @@ public class StatsView : MonoBehaviour
         blessingText.text = BuildBlessingText();
     }
 
+    private void ResetScrolls()
+    {
+        Canvas.ForceUpdateCanvases();
+
+        foreach(ScrollRect scroll in scrolls)
+        {
+            scroll.verticalNormalizedPosition = 1f;
+        }
+    }
     private string BuildStatText(PlayerStats current)
     {
         sb.Clear();

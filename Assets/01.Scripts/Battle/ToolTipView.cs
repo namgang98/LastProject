@@ -15,7 +15,10 @@ public class ToolTipView : MonoBehaviour
     private readonly Vector3[] targetCorners = new Vector3[4];
     private readonly Vector3[] tipCorners = new Vector3[4];
     private Backpack backpack;
+    private ISetBonusModifier setBonus;
+
     StringBuilder sb = new();
+
     private void Awake()
     {
         panel.SetActive(false);
@@ -49,9 +52,9 @@ public class ToolTipView : MonoBehaviour
         
         if(GameSession.HasInstance && GameSession.instance.Quests != null)
             GameSession.instance.Quests.AppendItemNeeds(info.Id, sb);
-        
+
         if(backpack != null)
-            SetTooltipWriter.Append(sb, info, SetCounter.CollectEquippedIds(backpack));
+            SetTooltipWriter.Append(sb, info, SetCounter.CollectEquippedIds(backpack), setBonus != null ? setBonus.ExtraSetCount : 0);
         infoText.text = sb.ToString();
 
         panel.SetActive(true);
@@ -85,8 +88,9 @@ public class ToolTipView : MonoBehaviour
 
         rect.position += new Vector3(0f, -bottom, 0f);      // 넘친 픽셀만큼 위로
     }
-    public void Bind(Backpack backpack)
+    public void Bind(Backpack backpack, ISetBonusModifier setBonus = null)
     {
         this.backpack = backpack;
+        this.setBonus = setBonus;
     }
 }

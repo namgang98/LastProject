@@ -11,8 +11,6 @@ public class QuestBook
 {
     private readonly Dictionary<int, QuestProgress> table = new();
     private readonly List<QuestProgress> list = new();
-    private readonly Func<int> bestFloor;
-    private readonly Func<int, int> countItem;
     private readonly IQuestContext context;
 
     public IReadOnlyList<QuestProgress> All => list;
@@ -96,10 +94,10 @@ public class QuestBook
     {
         foreach(QuestProgress quest in list)
         {
-            if(!IsVisible(quest) || !Matches(quest.Info, monster))
+            if(quest.IsFinished || !Matches(quest.Info, monster))
                 continue;
 
-            if(quest.AddProgress(1))
+            if(quest.AddProgress(1) && IsVisible(quest))
                 newlyReady.Add(quest);
         }
 

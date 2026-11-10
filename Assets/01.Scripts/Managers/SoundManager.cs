@@ -12,6 +12,9 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private int sfxPoolSize = 12;
     [SerializeField] private float bgmFadeTime = 1.5f;
     [SerializeField] private float sfxMinInterval = 0.05f;
+    [SerializeField] private float jingleFadeTime = 0.8f;
+    private AudioSource jingleSource;
+    private Coroutine jingleFade;
     private readonly Dictionary<SfxType, float> lastSfxTime = new();
     private BgmType currentBgm = BgmType.None;
     private readonly AudioSource[] bgmSources = new AudioSource[2];
@@ -22,6 +25,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public VolumeSettings Volume { get; private set; }
 
+    #region 초기화
     protected override void Awake()
     {
         base.Awake();
@@ -38,8 +42,46 @@ public class SoundManager : Singleton<SoundManager>
         Volume?.Load();
     }
 
+    private void CreateSources()
+    {
+        for(int i = 0; i < bgmSources.Length; i++)
+            bgmSources[i] = CreateSource($"BGM_{i}", bgmGroup, true);
+
+        sfxSources = new AudioSource[sfxPoolSize];
+
+        for(int i = 0; i < sfxPoolSize; i++)
+            sfxSources[i] = CreateSource($"SFX_{i}", sfxGroup, false);
+
+        jingleSource = CreateSource("Jingle", bgmGroup, false);
+    }
+
+    private AudioSource CreateSource(string sourceName, AudioMixerGroup group, bool loop)
+    {
+        GameObject child = new(sourceName);
+        child.transform.SetParent(transform);
+
+        AudioSource source = child.AddComponent<AudioSource>();
+        source.outputAudioMixerGroup = group;
+        source.loop = loop;
+        source.playOnAwake = false;
+        source.spatialBlend = 0f;
+        return source;
+    }
+
+    private bool HasLibrary()
+    {
+        if(library != null)
+            return true;
+
+        return false;
+    }
+    #endregion
+
+    #region BGM
     public void PlayBgm(BgmType type)
     {
+        FadeOutJingle();
+
         if(type == currentBgm)
             return;
 
@@ -63,12 +105,79 @@ public class SoundManager : Singleton<SoundManager>
 
         StartFade(from, to, entry.volume);
     }
+
     public void StopBgm()
     {
         currentBgm = BgmType.None;
         StartFade(bgmSources[bgmIndex], null, 0f);
     }
 
+    public void StopBgm(float fadeTime)
+    {
+        currentBgm = BgmType.None;
+        StartFade(bgmSources[bgmIndex], null, 0f, fadeTime);
+    }
+
+    private void StartFade(AudioSource from, AudioSource to, float target)
+    {
+        if(fadeRoutine != null)
+            StopCoroutine(fadeRoutine);
+
+        fadeRoutine = StartCoroutine(Crossfade(from, to, target));
+    }
+
+    private void StartFade(AudioSource from, AudioSource to, float target, float duration)
+    {
+        if(fadeRoutine != null)
+            StopCoroutine(fadeRoutine);
+
+        fadeRoutine = StartCoroutine(Crossfade(from, to, target, duration));
+    }
+
+    private IEnumerator Crossfade(AudioSource from, AudioSource to, float target)
+    {
+        float fromStart = from.volume;
+        float time = 0f;
+
+        while(time < bgmFadeTime)
+        {
+            time += Time.unscaledDeltaTime;
+            float rate = Mathf.Clamp01(time / bgmFadeTime);
+            from.volume = Mathf.Lerp(fromStart, 0f, rate);
+
+            if(to != null)
+                to.volume = Mathf.Lerp(0f, target, rate);
+
+            yield return null;
+        }
+
+        from.Stop();
+        fadeRoutine = null;
+    }
+
+    private IEnumerator Crossfade(AudioSource from, AudioSource to, float target, float duration)
+    {
+        float fromStart = from.volume;
+        float time = 0f;
+
+        while(time < duration)
+        {
+            time += Time.unscaledDeltaTime;
+            float rate = Mathf.Clamp01(time / duration);
+            from.volume = Mathf.Lerp(fromStart, 0f, rate);
+
+            if(to != null)
+                to.volume = Mathf.Lerp(0f, target, rate);
+
+            yield return null;
+        }
+
+        from.Stop();
+        fadeRoutine = null;
+    }
+    #endregion
+
+    #region 효과음
     public void PlaySfx(SfxType type, float volumeScale = 1f)
     {
         if(type == SfxType.None)
@@ -120,68 +229,62 @@ public class SoundManager : Singleton<SoundManager>
                 yield return wait;
         }
     }
+    #endregion
 
-    private bool HasLibrary()
+    #region 징글
+    public void PlayJingle(SfxType type)
     {
-        if(library != null)
-            return true;
+        if(type == SfxType.None || !HasLibrary())
+            return;
 
-        return false;
+        if(!library.TryGetSfx(type, out SoundLibrary.SfxEntry entry))
+        {
+            Debug.LogWarning($"[SoundManager] 등록 안 된 징글 : {type}");
+            return;
+        }
+
+        StopJingleFade();
+        jingleSource.clip = entry.PickClip();
+        jingleSource.volume = entry.volume;
+        jingleSource.Play();
     }
 
-    private void StartFade(AudioSource from, AudioSource to, float target)
+    private void FadeOutJingle()
     {
-        if(fadeRoutine != null)
-            StopCoroutine(fadeRoutine);
+        if(jingleSource == null || !jingleSource.isPlaying)
+            return;
 
-        fadeRoutine = StartCoroutine(Crossfade(from, to, target));
+        StopJingleFade();
+        jingleFade = StartCoroutine(FadeOutJingleRoutine());
     }
 
-    private IEnumerator Crossfade(AudioSource from, AudioSource to, float target)
+    private void StopJingleFade()
     {
-        float fromStart = from.volume;
+        if(jingleFade == null)
+            return;
+
+        StopCoroutine(jingleFade);
+        jingleFade = null;
+    }
+
+    private IEnumerator FadeOutJingleRoutine()
+    {
+        float start = jingleSource.volume;
         float time = 0f;
 
-        while(time < bgmFadeTime)
+        while(time < jingleFadeTime)
         {
             time += Time.unscaledDeltaTime;
-            float rate = Mathf.Clamp01(time / bgmFadeTime);
-            from.volume = Mathf.Lerp(fromStart, 0f, rate);
-
-            if(to != null)
-                to.volume = Mathf.Lerp(0f, target, rate);
-
+            jingleSource.volume = Mathf.Lerp(start, 0f, time / jingleFadeTime);
             yield return null;
         }
 
-        from.Stop();
-        fadeRoutine = null;
+        jingleSource.Stop();
+        jingleFade = null;
     }
+    #endregion
 
-    private void CreateSources()
-    {
-        for(int i = 0; i < bgmSources.Length; i++)
-            bgmSources[i] = CreateSource($"BGM_{i}", bgmGroup, true);
-
-        sfxSources = new AudioSource[sfxPoolSize];
-
-        for(int i = 0; i < sfxPoolSize; i++)
-            sfxSources[i] = CreateSource($"SFX_{i}", sfxGroup, false);
-    }
-
-    private AudioSource CreateSource(string sourceName, AudioMixerGroup group, bool loop)
-    {
-        GameObject child = new(sourceName);
-        child.transform.SetParent(transform);
-
-        AudioSource source = child.AddComponent<AudioSource>();
-        source.outputAudioMixerGroup = group;
-        source.loop = loop;
-        source.playOnAwake = false;
-        source.spatialBlend = 0f;
-        return source;
-    }
-
+    #region 앱 상태
     private void OnApplicationPause(bool paused)
     {
         if(paused)
@@ -193,4 +296,5 @@ public class SoundManager : Singleton<SoundManager>
         Volume?.Save();
         base.OnApplicationQuit();
     }
+    #endregion
 }

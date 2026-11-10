@@ -50,9 +50,9 @@ public class ClassListView : MonoBehaviour
         switch(state)
         {
             case ClassAvailability.Fallen:
-                return "석상이 되었다";
+                return "탑과 묻히다..";
             case ClassAvailability.Locked:
-                return $"{info.UnlockFloor}층 해금";
+                return $"해금 필요";
             default:
                 return $"Lv.{session.Training.GetProgress(info).Level}";
         }

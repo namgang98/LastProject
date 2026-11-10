@@ -32,6 +32,8 @@ public class GridView : ItemContainerView
     public Vector2 PixelSize => rect.sizeDelta;
 
     private ContainerInstance insertTarget;
+
+    #region 초기화
     protected override void Awake()
     {
         base.Awake();
@@ -48,6 +50,7 @@ public class GridView : ItemContainerView
         container.Changed -= Refresh;
         container = null;
     }
+    #endregion
 
     #region 연결
     public void Bind(GridContainer target, InventoryUIContext ctx)
@@ -78,6 +81,7 @@ public class GridView : ItemContainerView
     {
         rect.anchoredPosition = position;
     }
+
     private void RectSet()
     {
         rect = (RectTransform)transform;
@@ -135,8 +139,6 @@ public class GridView : ItemContainerView
             list.Add(image);
         }
     }
-
-
     #endregion
 
     #region 드래그 대상 (IItemDropTarget)

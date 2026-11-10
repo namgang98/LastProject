@@ -32,7 +32,7 @@ public class QuestSlotView : MonoBehaviour
         int goal = info.Goal;
         bool ready = book.IsReady(quest);
 
-        nameText.text = info.Name;
+        nameText.text = info.DisplayName;
         descText.text = info.Description;
         progressText.text = $"{current} / {goal}";
         progressFill.fillAmount = goal > 0 ? (float)current / goal : 0f;
@@ -59,8 +59,12 @@ public class QuestSlotView : MonoBehaviour
     private static string BuildRewardText(QuestInfo info)
     {
         string item = info.HasRewardItem ? $"x{info.RewardCount}" : string.Empty;
-        string gold = info.RewardGold > 0 ? $"+{info.RewardGold}G" : string.Empty;
-        return $"{item}  {gold}".Trim();
+        string gold = info.RewardGold > 0 ? $"<nobr>+{info.RewardGold}G</nobr>" : string.Empty;
+
+        if(item.Length == 0 || gold.Length == 0)
+            return item + gold;
+
+        return $"{item}\n{gold}";
     }
 
     private static string GetLabel(QuestInfo info, bool ready)

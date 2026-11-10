@@ -64,6 +64,7 @@ public static class CSVStamp
     public const string MinFloor = "minfloor";
     public const string MaxFloor = "maxfloor";
     public const string Ambience = "ambience";
+    public const string Bgm = "bgm";
     public const string HpDisplay = "hpdisplay";
     public const string SkillChance = "skillchance";
     public const string SkillMultiplier = "skillmultiplier";
@@ -71,6 +72,9 @@ public static class CSVStamp
     public const string Tower = "tower";
     public const string TopFloor = "topfloor";
     public const string AbyssFloor = "abyssfloor";
+    public const string LevelOffset = "leveloffset";
+    public const string RampStart = "rampstart";
+    public const string RampEnd = "rampend";
     public const string Prologue = "prologue";
     public const string Stat2 = "stat2";
     public const string Value2 = "value2";
@@ -89,6 +93,15 @@ public static class CSVStamp
     public const string Materials = "materials";
     public const string Bonus = "bonus";
     public const string Downgrade = "downgrade";
+    public const string WeaponType = "weapontype";
+
+    public const string Key = "key";
+    public const string Order = "order";
+    public const string Line = "line";
+    public const string Wait = "wait";
+    public const string Signal = "signal";
+    public const string Focus = "focus";
+    public const string Pause = "pause";
 }
 #endregion
 
@@ -116,6 +129,8 @@ public static class DataTag
     public const string Forge = "forge";
     public const string Towers = "towers";
     public const string Blessings = "blessings";
+    public const string Orbs = "orbs";
+    public const string Tutorials = "tutorials";
 }
 #endregion
 
@@ -139,5 +154,6 @@ public static class SceneNames
     public const string Dungeon = "Dungeon";
     public const string TowerRise = "TowerRise";
     public const string TowerMap = "TowerMap";
+    public const string Title = "Title";
 }
 #endregion

@@ -56,7 +56,6 @@ public class ClassSelectView : MonoBehaviour
         {
             bool locked = !training.IsUnlocked(card.Info);
             string status = locked ? "훈련장에서 해금" : $"Lv.{training.GetProgress(card.Info).Level}";
-            //card.SetState(status, locked);
         }
     }
     private void Select(ClassCardView card)

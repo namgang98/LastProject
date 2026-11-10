@@ -29,7 +29,8 @@ public class DataManager : Singleton<DataManager>
     private static readonly IdRange AccessoryIds = new(5000, 5999);
     private static readonly IdRange PouchIds = new(9000, 9010);
     private static readonly IdRange UpgradeIds = new(7000, 7999);
-    private static readonly IdRange MaterialIds = new(8000, 8499);
+    private static readonly IdRange MaterialIds = new(8000, 8299);
+    private static readonly IdRange OrbIds = new(8300, 8499);
     private static readonly IdRange ConsumableIds = new(8500, 8999);
     private static readonly IdRange PotionCaseIds = new(9100, 9199);
     private static readonly IdRange StageIds = new(9500, 9599);
@@ -63,6 +64,8 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] TextAsset forgeCsv;
     [SerializeField] TextAsset towerCsv;
     [SerializeField] TextAsset blessingCsv;
+    [SerializeField] TextAsset orbCsv;
+    [SerializeField] TextAsset tutorialCsv;
     [Header("이미지,프리팹")]
     [SerializeField] IconLibrary iconLibrary;
     [SerializeField] PrefabLibrary prefabLibrary;
@@ -84,6 +87,8 @@ public class DataManager : Singleton<DataManager>
     private readonly ForgeTable forge = new();
     private readonly List<TowerInfo> towers = new();
     private readonly List<BlessingInfo> blessings = new();
+    private readonly List<OrbInfo> orbs = new();
+    private readonly Dictionary<string, List<TutorialLineInfo>> tutorials = new();
     #endregion
 
     private delegate bool RowParser<T>(CsvRow row, List<string> errors, out T info);
@@ -103,6 +108,7 @@ public class DataManager : Singleton<DataManager>
     public TowerInfo PrologueTower { get; private set; }
     public TowerInfo OriginTower { get; private set; }
     public IReadOnlyList<BlessingInfo> Blessings => blessings;
+    public IReadOnlyList<OrbInfo> Orbs => orbs;
     #endregion
 
     #region 초기화
@@ -145,6 +151,8 @@ public class DataManager : Singleton<DataManager>
         string forgeText = ReadText(forgeCsv, nameof(forgeCsv));
         string towerText = ReadText(towerCsv, nameof(towerCsv));
         string blessingText = ReadText(blessingCsv, nameof(blessingCsv));
+        string orbText = ReadText(orbCsv, nameof(orbCsv));
+        string tutorialText = ReadText(tutorialCsv, nameof(tutorialCsv));
         #endregion
 
         await Awaitable.BackgroundThreadAsync();
@@ -172,6 +180,8 @@ public class DataManager : Singleton<DataManager>
         List<ForgeLevelInfo> forgeList = ParseTable<ForgeLevelInfo>(DataTag.Forge, forgeText, errors, InfoParser.TryParseForge);
         List<TowerInfo> towerList = ParseTable<TowerInfo>(DataTag.Towers, towerText, errors, InfoParser.TryParseTower);
         List<BlessingInfo> blessingList = ParseTable<BlessingInfo>(DataTag.Blessings, blessingText, errors, InfoParser.TryParseBlessing);
+        List<OrbInfo> orbList = ParseTable<OrbInfo>(DataTag.Orbs, orbText, errors, InfoParser.TryParseOrb);
+        List<TutorialLineInfo> tutorialList = ParseTable<TutorialLineInfo>(DataTag.Tutorials, tutorialText, errors, InfoParser.TryParseTutorialLine);
         #endregion
 
         //메인 스레드
@@ -197,6 +207,7 @@ public class DataManager : Singleton<DataManager>
         RegisterItems(DataTag.Consumables, consumableList, ConsumableIds, errors);
         RegisterItems(DataTag.Materials, materialList, MaterialIds, errors);
         RegisterItems(DataTag.PotionCases, potionCaseList, PotionCaseIds, errors);
+        RegisterOrbs(DataTag.Orbs, orbList, errors);
         RegisterMonsters(DataTag.Monsters, monsterList, MonsterIds, errors);
         RegisterMonsterDrops(DataTag.MonsterDrops, monsterDropList, errors);
         RegisterClasses(DataTag.Classes, classList, ClassIds, errors);
@@ -210,6 +221,7 @@ public class DataManager : Singleton<DataManager>
         RegisterStages(DataTag.Stages, stageList, StageIds, errors);
         RegisterForge(DataTag.Forge, forgeList, ForgeIds, errors);
         RegisterQuests(DataTag.Quests, questList, QuestIds, errors);
+        RegisterTutorials(DataTag.Tutorials, tutorialList, errors);
         #endregion
 
         foreach(var error in errors)
@@ -247,6 +259,42 @@ public class DataManager : Singleton<DataManager>
     #endregion
 
     #region 등록 + 검증
+    private void RegisterTutorials(string sheetName, List<TutorialLineInfo> list, List<string> errors)
+    {
+        foreach(TutorialLineInfo info in list)
+        {
+            if(!tutorials.TryGetValue(info.Key, out List<TutorialLineInfo> lines))
+            {
+                lines = new List<TutorialLineInfo>();
+                tutorials.Add(info.Key, lines);
+            }
+
+            lines.Add(info);
+        }
+
+        foreach(var pair in tutorials)
+        {
+            pair.Value.Sort((a, b) => a.Order.CompareTo(b.Order));
+
+            for(int i = 1; i < pair.Value.Count; i++)
+            {
+                if(pair.Value[i].Order == pair.Value[i - 1].Order)
+                    errors.Add($"{sheetName} : {pair.Key} 의 순서 {pair.Value[i].Order} 가 중복됩니다");
+            }
+        }
+    }
+
+    private void RegisterOrbs(string sheetName, List<OrbInfo> list, List<string> errors)
+    {
+        RegisterItems(sheetName, list, OrbIds, errors);
+
+        foreach(OrbInfo orb in list)
+        {
+            if(items.TryGetValue(orb.Id, out ItemInfo registered) && registered == orb)
+                orbs.Add(orb);
+        }
+    }
+
     private void RegisterItems<T>(string sheetName, List<T> list, IdRange range, List<string> errors) where T : ItemInfo
     {
         foreach(var info in list)
@@ -692,9 +740,9 @@ public class DataManager : Singleton<DataManager>
                 continue;
             }
 
-            if(forge.HasLevel(info.Level))
+            if(forge.HasLevel(info.Level, info.Weapon))
             {
-                errors.Add($"{sheetName} : {info.Level}단계 중복 → 뒤의 것은 무시");
+                errors.Add($"{sheetName} : {info.Weapon?.ToString() ?? "공통"} {info.Level}단계 중복 → 뒤의 것은 무시");
                 continue;
             }
 
@@ -783,6 +831,17 @@ public class DataManager : Singleton<DataManager>
     #endregion
 
     #region 조회
+    public bool TryGetTutorial(string key, out IReadOnlyList<TutorialLineInfo> lines)
+    {
+        lines = null;
+
+        if(string.IsNullOrEmpty(key) || !tutorials.TryGetValue(key, out List<TutorialLineInfo> found))
+            return false;
+
+        lines = found;
+        return true;
+    }
+
     public bool TryGetItem(int id, out ItemInfo info)
     {
         return items.TryGetValue(id, out info);

@@ -1,0 +1,5 @@
+﻿id,name,icon,shape,grade,sellprice,description,kind,element,elementchance,elementvalue,elementduration,cost
+8301,서리 보주,Orb_Frost,X,Epic,500,대장간에서 무기에 깃들이면 냉기가 서린다.,Element,Ice,0.3,30,3,300
+8302,역병 보주,Orb_Plague,X,Epic,500,대장간에서 무기에 깃들이면 독이 서린다.,Element,Poison,0.3,4,4,300
+8303,마왕 보주,Orb_Demon,X,Epic,500,대장간에서 무기에 깃들이면 화염이 깃든다.,Element,Fire,0.3,4,4,300
+8304,망자 보주,Orb_Undead,X,Epic,500,장비에 깃들이면 쓰러져도 그 장비를 한 번 지켜 주고 부서진다.,Ward,None,0,0,0,0

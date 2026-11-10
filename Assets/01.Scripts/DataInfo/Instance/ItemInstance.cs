@@ -12,6 +12,8 @@ public class ItemInstance
     public GridContainer Owner { get; private set; }
 
     public bool IsPlaced => Owner != null;
+    public OrbInfo Ward { get; private set; }
+    public bool CanWard => (Info is WeaponInfo || Info is EquipmentInfo) && !Info.IsSoulbound;
 
     public ItemInstance(ItemInfo info)
     {
@@ -46,9 +48,26 @@ public class ItemInstance
     }
     public virtual void AppendStateTooltip(StringBuilder sb)
     {
+        if(Ward == null)
+            return;
+
+        sb.AppendLine();
+        sb.Append("망자의 가호 : 쓰러져도 사라지지 않는다 (1회)");
     }
     internal void ClearPlacement()
     {
         Owner = null;
+    }
+    internal void SetWard(OrbInfo ward)
+    {
+        if(!CanWard)
+            return;
+
+        Ward = ward;
+    }
+
+    internal void BreakWard()
+    {
+        Ward = null;
     }
 }

@@ -114,11 +114,6 @@ public class TowerProgress
         return !IsFreeMode && fallen.Contains(info.Id);
     }
 
-    public bool MarkCleared(TowerInfo tower)
-    {
-        return cleared.Add(tower.Id);
-    }
-
     public ConquestResult Conquer(TowerInfo tower, ClassInfo hero)
     {
         if(tower.IsEndless || IsCollapsed(tower))
@@ -158,5 +153,15 @@ public class TowerProgress
         collapsed.Clear();
         fallen.Clear();
         OriginBestFloor = 0;
+    }
+    public TowerInfo FindEnterable()
+    {
+        foreach(TowerInfo tower in towers)
+        {
+            if(CanEnter(tower))
+                return tower;
+        }
+
+        return null;
     }
 }

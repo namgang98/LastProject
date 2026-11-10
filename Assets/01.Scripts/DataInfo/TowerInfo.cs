@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 public enum TowerKind
 {
@@ -17,6 +18,10 @@ public class TowerInfo
     public string Description { get; }
     public int TopFloor { get; }
     public int AbyssFloor { get; }
+
+    public int LevelOffset { get; }
+    public int RampStart { get; }
+    public int RampEnd { get; }
     public TowerKind Kind { get; }
 
     public bool IsPrologue => Kind == TowerKind.Prologue;
@@ -27,7 +32,7 @@ public class TowerInfo
     public IReadOnlyList<int> StageSources => stageSources;
     public IReadOnlyList<TowerRuleInfo> Rules => rules;
 
-    public TowerInfo(int id, string name, string description, int topFloor, int abyssFloor, TowerKind kind, List<TowerRuleInfo> rules = null)
+    public TowerInfo(int id, string name, string description, int topFloor, int abyssFloor, TowerKind kind, List<TowerRuleInfo> rules = null, int levelOffset = 0, int rampStart = 1, int rampEnd = 11)
     {
         Id = id;
         Name = name;
@@ -35,12 +40,21 @@ public class TowerInfo
         TopFloor = topFloor;
         AbyssFloor = abyssFloor;
         Kind = kind;
+        LevelOffset = levelOffset;
+        RampStart = rampStart;
+        RampEnd = Mathf.Max(rampStart, rampEnd);
         this.rules = rules ?? new List<TowerRuleInfo>();
     }
 
     public bool UsesStagesOf(int towerId)
     {
         return stageSources.Contains(towerId);
+    }
+
+    public int ToScalingFloor(int floor)
+    {
+        float ramp = RampEnd <= RampStart ? (floor >= RampStart ? 1f : 0f) : Mathf.Clamp01((floor - RampStart) / (float)(RampEnd - RampStart));
+        return floor + Mathf.RoundToInt(LevelOffset * ramp);
     }
 
     public int ToStageFloor(int floor)

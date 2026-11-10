@@ -56,3 +56,7 @@ MonoBehaviour:
     target: {fileID: 4900000, guid: ead78a7e86f647718104bbd63e4aac8e, type: 3}
   - gid: 527314555
     target: {fileID: 4900000, guid: c963e9e1562f4195a67476a50be34d56, type: 3}
+  - gid: 872235091
+    target: {fileID: 4900000, guid: 8750dd7405944f2689113c9bf07ebfb0, type: 3}
+  - gid: 1603762648
+    target: {fileID: 4900000, guid: 287c62661af24b66b1fbe753a3588b49, type: 3}

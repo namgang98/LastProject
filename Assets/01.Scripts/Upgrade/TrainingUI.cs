@@ -41,6 +41,7 @@ public class TrainingUI : MonoBehaviour
     private Wallet wallet;
     private ClassCardView selected;
 
+    #region 초기화
     private void Awake()
     {
         closeButton.onClick.AddListener(Close);
@@ -71,7 +72,9 @@ public class TrainingUI : MonoBehaviour
     {
         Unsubscribe();
     }
+    #endregion
 
+    #region 열기/닫기
     public void Open()
     {
         GameSession session = GameSession.instance;
@@ -101,6 +104,7 @@ public class TrainingUI : MonoBehaviour
         training.Changed -= HandleTrainingChanged;
         training = null;
     }
+    #endregion
 
     #region 카드
     private void BuildCards()
@@ -289,6 +293,7 @@ public class TrainingUI : MonoBehaviour
     }
     #endregion
 
+    #region 이벤트
     private void HandleTrainingChanged(ClassInfo changed)
     {
         RefreshCards();
@@ -302,4 +307,5 @@ public class TrainingUI : MonoBehaviour
 
         RefreshDetail();
     }
+    #endregion
 }

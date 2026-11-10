@@ -14,6 +14,11 @@ public class TowerFrontView : MonoBehaviour
     [SerializeField] RectTransform zoomTarget;
     [SerializeField] TMP_Text nameText;
 
+    [Header("배경")]
+    [SerializeField] Image background;
+    [SerializeField] Sprite defaultFront;
+    [SerializeField] Sprite originFront;
+
     [Header("문 연출")]
     [SerializeField] float openTime = 0.8f;
     [SerializeField] Color openedTint = new(0.35f, 0.3f, 0.3f, 1f);
@@ -39,6 +44,7 @@ public class TowerFrontView : MonoBehaviour
     {
         root.SetActive(true);
         nameText.text = tower != null ? tower.Name : string.Empty;
+        background.sprite = GetFront(tower);
         ResetDoors();
     }
 
@@ -89,7 +95,13 @@ public class TowerFrontView : MonoBehaviour
         door.rectTransform.localScale = Vector3.one;
         door.color = Color.white;
     }
+    private Sprite GetFront(TowerInfo tower)
+    {
+        if(tower != null && tower.IsEndless && originFront != null)
+            return originFront;
 
+        return defaultFront;
+    }
     private void HandleDoorClick()
     {
         DoorClicked?.Invoke();

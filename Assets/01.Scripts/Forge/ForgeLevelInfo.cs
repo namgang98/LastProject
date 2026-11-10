@@ -9,8 +9,9 @@ public class ForgeLevelInfo
     public float Bonus { get; }
     public bool Downgrade { get; }
     public IReadOnlyList<ItemCost> Materials { get; }
+    public WeaponType? Weapon { get; }
 
-    public ForgeLevelInfo(int id, int level, int cost, float chance, float bonus, bool downgrade, List<ItemCost> materials)
+    public ForgeLevelInfo(int id, int level, int cost, float chance, float bonus, bool downgrade, List<ItemCost> materials, WeaponType? weapon = null)
     {
         Id = id;
         Level = level;
@@ -19,5 +20,6 @@ public class ForgeLevelInfo
         Bonus = bonus;
         Downgrade = downgrade;
         Materials = materials ?? new List<ItemCost>();
+        Weapon = weapon;
     }
 }

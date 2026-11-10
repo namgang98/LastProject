@@ -6,7 +6,7 @@ public class ClassSelection
     private readonly TowerProgress towers;
 
     public ClassInfo Current { get; private set; }
-
+    public bool HasPlayable => GetAvailability(Current) == ClassAvailability.Available;
     public ClassSelection(ClassTraining training, TowerProgress towers, ClassInfo saved, ClassInfo fallback)
     {
         this.training = training;
@@ -52,5 +52,20 @@ public class ClassSelection
             if(Select(info))
                 return;
         }
+    }
+    public ClassInfo FindNewcomer()
+    {
+        ClassInfo newcomer = null;
+
+        foreach(ClassInfo info in DataManager.instance.Classes)
+        {
+            if(GetAvailability(info) != ClassAvailability.Locked)
+                continue;
+
+            if(newcomer == null || info.Id < newcomer.Id)
+                newcomer = info;
+        }
+
+        return newcomer;
     }
 }

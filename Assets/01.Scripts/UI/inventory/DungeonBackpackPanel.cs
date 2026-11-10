@@ -2,6 +2,8 @@
 
 public class DungeonBackpackPanel : BackpackPanelBase
 {
+    [SerializeField, Min(0f)] protected float labelSpace = 40f;
+    public float LabelSpace => labelSpace;
     protected override void Layout(bool hasPouch)
     {
         float slotColumn = SlotColumnWidth;
@@ -20,11 +22,21 @@ public class DungeonBackpackPanel : BackpackPanelBase
 
         if(!hasPouch)
             return;
+
         PlaceGrid(pouchView, pouchLeft + slotColumn, top);
     }
 
     protected virtual float GetRowTop()
     {
-        return bagView.PixelSize.y * 0.5f;
+        return (GetRowHeight() - labelSpace) * 0.5f;
+    }
+    private float GetRowHeight()
+    {
+        float height = Mathf.Max(bagView.PixelSize.y, BagSlotRect.rect.height);
+
+        if(pouchView.gameObject.activeSelf)
+            height = Mathf.Max(height, pouchView.PixelSize.y);
+
+        return height;
     }
 }

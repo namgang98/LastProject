@@ -4,7 +4,7 @@ using UnityEngine;
 public class SaveService
 {
     private readonly ISaveStorage storage;
-
+    public bool HasSave => storage.Exists;
     public SaveService(ISaveStorage storage)
     {
         this.storage = storage;

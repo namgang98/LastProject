@@ -124,7 +124,6 @@ public class RunController : MonoBehaviour, IPlayerStatsSource
     private void ApplyFloorPoison(int floor)
     {
         int damage = towerRules.GetFloorDamage(floor, player.Health.MaxHp);
-        damage = Mathf.Min(damage, player.Health.CurrentHP - 1);
 
         if(damage <= 0)
             return;

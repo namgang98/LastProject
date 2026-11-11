@@ -13,7 +13,8 @@ public class DamageTextSpawner : MonoBehaviour
     [SerializeField] Color fireColor = new(1f, 0.55f, 0.15f);
     [SerializeField] Color reviveColor = new(0.7f, 0.5f, 1f);
     [SerializeField] Color dodgeColor = new(0.6f, 0.9f, 1f);
-
+    [SerializeField] Color skillColor = new(1f, 0.3f, 0.2f);
+    
     [Header("배치")]
     [SerializeField] DamageText prefab;
     [SerializeField] float jitterX = 0.3f;
@@ -21,6 +22,7 @@ public class DamageTextSpawner : MonoBehaviour
     [SerializeField] float stackWindow = 0.2f;
     [SerializeField] float critScale = 1.4f;
     [SerializeField] float reviveScale = 1.4f;
+    [SerializeField] float skillScale = 1.3f;
 
     [Header("합치기")]
     [SerializeField] float mergeWindow = 0.25f;
@@ -56,6 +58,7 @@ public class DamageTextSpawner : MonoBehaviour
         EventManager.instance.AddListener<OnUnitBlocked>(HandleUnitBlocked);
         EventManager.instance.AddListener<OnUnitRevived>(HandleUnitRevived);
         EventManager.instance.AddListener<OnUnitDodged>(HandleUnitDodged);
+        EventManager.instance.AddListener<OnUnitSkill>(HandleUnitSkill);
     }
 
     private void OnDisable()
@@ -68,6 +71,7 @@ public class DamageTextSpawner : MonoBehaviour
         EventManager.instance.RemoveListener<OnUnitBlocked>(HandleUnitBlocked);
         EventManager.instance.RemoveListener<OnUnitRevived>(HandleUnitRevived);
         EventManager.instance.RemoveListener<OnUnitDodged>(HandleUnitDodged);
+        EventManager.instance.RemoveListener<OnUnitSkill>(HandleUnitSkill);
     }
 
     private void HandleUnitDamaged(OnUnitDamaged e)
@@ -109,6 +113,10 @@ public class DamageTextSpawner : MonoBehaviour
     private void HandleUnitDodged(OnUnitDodged e)
     {
         Spawn("회피", dodgeColor, e.Position, 1f);
+    }
+    private void HandleUnitSkill(OnUnitSkill e)
+    {
+        Spawn("강타!", skillColor, e.Position, skillScale);
     }
     private DamageText Spawn(string value, Color color, Vector3 pos, float scale)
     {

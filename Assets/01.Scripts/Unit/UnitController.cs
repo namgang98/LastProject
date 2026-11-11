@@ -18,9 +18,11 @@ public class UnitController : MonoBehaviour
     [SerializeField] SfxType skillSfx = SfxType.None;
     [SerializeField] SfxType hurtSfx = SfxType.None;
     [SerializeField] SfxType deathSfx = SfxType.None;
+    [SerializeField] SfxType criticalSfx = SfxType.None;
     [SerializeField] float hurtSfxCooldown = 0.25f;
     private float nextHurtSfxTime;
     public float AttackWindup => attackWindup;
+    private Vector3 HeadPosition => headPoint != null ? headPoint.position : transform.position;
     private void Reset()
     {
         health = GetComponent<UnitHealth>();
@@ -63,16 +65,34 @@ public class UnitController : MonoBehaviour
     {
         PlayAttackMotion(true);
     }
+    public void PlayCriticalAttack()
+    {
+        if(!BeginAttackMotion())
+            return;
+
+        animator.CriticalAni();
+        Sfx.Play(criticalSfx != SfxType.None ? criticalSfx : attackSfx);
+    }
+
+    private bool BeginAttackMotion()
+    {
+        if(animator == null || health.IsDead)
+            return false;
+
+        attackLockUntil = Time.time + attackLock;
+        return true;
+    }
 
     private void PlayAttackMotion(bool isSkill)
     {
-        if(animator == null || health.IsDead)
+        if(!BeginAttackMotion())
             return;
 
-        attackLockUntil = Time.time + attackLock;
-
         if(isSkill)
+        {
             animator.SkillAni();
+            EventManager.instance.PostNotification(new OnUnitSkill(HeadPosition));
+        }
         else
             animator.AttackAni();
 
@@ -81,10 +101,9 @@ public class UnitController : MonoBehaviour
     }
     private void HandleHit(DamageInfo info)
     {
-        Vector3 pos = headPoint != null ? headPoint.position : transform.position;
-
-        EventManager.instance.PostNotification(new OnUnitDamaged(pos, info, GetInstanceID()));
+        EventManager.instance.PostNotification(new OnUnitDamaged(HeadPosition, info, GetInstanceID()));
         PlayHurtSfx(info);
+
         if(animator == null || info.IsTick || health.CurrentHP <= 0)
             return;
 

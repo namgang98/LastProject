@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PotionUser
+public class PotionUser : IDeathGuard
 {
     private readonly Backpack backpack;
     private readonly UnitHealth health;
@@ -22,6 +22,7 @@ public class PotionUser
         this.cooldown = cooldown;
         this.potionPower = potionPower;
         health.OnHit += RecordHit;
+        health.AddDeathGuard(this);
     }
 
     public void OnBattleStart(bool isBoss)
@@ -45,9 +46,27 @@ public class PotionUser
         if(!backpack.TryTakeConsumable(ConsumeType.Heal, out ConsumableInfo potion))
             return false;
 
-        health.Heal(Mathf.RoundToInt(health.MaxHp * potion.Value / 100f * (1f + potionPower)));
+        health.Heal(HealAmount(potion));
         Sfx.Play(SfxType.PotionDrink);
         return true;
+    }
+
+    public bool TryPreventDeath(out int reviveHp)
+    {
+        reviveHp = 0;
+
+        if(!backpack.TryTakeConsumable(ConsumeType.Heal, out ConsumableInfo potion))
+            return false;
+
+        reviveHp = HealAmount(potion);
+        healTimer = cooldown;
+        Sfx.Play(SfxType.PotionDrink);
+        return true;
+    }
+
+    private int HealAmount(ConsumableInfo potion)
+    {
+        return Mathf.RoundToInt(health.MaxHp * potion.Value / 100f * (1f + potionPower));
     }
 
     private bool TryCure()
@@ -80,8 +99,8 @@ public class PotionUser
     public void Dispose()
     {
         health.OnHit -= RecordHit;
+        health.RemoveDeathGuard(this);
     }
-
     private void RecordHit(DamageInfo info)
     {
         if(info.IsTick)

@@ -3,6 +3,18 @@ guid: 88073eefe4684fd6b801a0065e7b6690
 TextureImporter:
   internalIDToNameTable:
   - first:
+      213: 3040744345006408815
+    second: Mage_Attack2_3
+  - first:
+      213: -1529930293856387566
+    second: Mage_Attack2_2
+  - first:
+      213: -4605339252312314915
+    second: Mage_Attack2_1
+  - first:
+      213: -538817081367076860
+    second: Mage_Attack2_0
+  - first:
       213: 7405873641031249857
     second: Mage_packed_0
   - first:
@@ -1022,6 +1034,94 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Mage_Attack2_0
+      rect:
+        serializedVersion: 2
+        x: 1914
+        y: 220
+        width: 319
+        height: 220
+      alignment: 9
+      pivot: {x: 0.44, y: 0.0227}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86c39f1872544614963b20809be39c46
+      internalID: -538817081367076860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Attack2_1
+      rect:
+        serializedVersion: 2
+        x: 2233
+        y: 220
+        width: 319
+        height: 220
+      alignment: 9
+      pivot: {x: 0.44, y: 0.0227}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0b8a6649d994e429f368d2899b5ff9a
+      internalID: -4605339252312314915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Attack2_2
+      rect:
+        serializedVersion: 2
+        x: 2552
+        y: 220
+        width: 319
+        height: 220
+      alignment: 9
+      pivot: {x: 0.44, y: 0.0227}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27150c706cbd45a08c0041f19de8c07c
+      internalID: -1529930293856387566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mage_Attack2_3
+      rect:
+        serializedVersion: 2
+        x: 2871
+        y: 220
+        width: 319
+        height: 220
+      alignment: 9
+      pivot: {x: 0.44, y: 0.0227}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2e8e74a53964c2a8dd0e27e3c0afdad
+      internalID: 3040744345006408815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1038,6 +1138,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":319.0,"y":220.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.4399999976158142,"y":0.024000000208616258},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      Mage_Attack2_3: 3040744345006408815
+      Mage_Attack2_2: -1529930293856387566
+      Mage_Attack2_1: -4605339252312314915
+      Mage_Attack2_0: -538817081367076860
       Mage_packed_0: 7405873641031249857
       Mage_packed_1: 8429877408597061239
       Mage_packed_10: -8428397288049164342

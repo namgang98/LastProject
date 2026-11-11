@@ -149,9 +149,18 @@ public struct OnStatusRemoved : IGameEvent
         Element = element;
     }
 }
-    #endregion
+public struct OnUnitSkill : IGameEvent
+{
+    public Vector3 Position;
 
-    #region 아이템 / 가방
+    public OnUnitSkill(Vector3 pos)
+    {
+        Position = pos;
+    }
+}
+#endregion
+
+#region 아이템 / 가방
 public struct OnItemDropped : IGameEvent
 {
     public ItemInstance Item;

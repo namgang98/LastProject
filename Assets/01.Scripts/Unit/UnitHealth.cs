@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
+using System.Collections.Generic;
 public interface IHealable
 {
     void Heal(int value);
@@ -14,10 +14,11 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
     public int CurrentHP => nowHP;
     public int MaxHp => maxHP;
 
-
     private bool isDead;
     protected virtual bool IsInvulnerable => false;
     public bool IsDead => isDead;
+
+    private readonly List<IDeathGuard> deathGuards = new();
 
     public event Action<DamageInfo> OnHit;
     public event Action OnDie;
@@ -61,6 +62,13 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
         }
 
         int amount = Mathf.Max(1, ReduceDamage(info.Amount));
+
+        if(!CanBeKilledBy(info))
+            amount = Mathf.Min(amount, nowHP - 1);
+
+        if(amount <= 0)
+            return 0;
+
         int before = nowHP;
         nowHP = Mathf.Max(nowHP - amount, 0);
         int dealt = before - nowHP;
@@ -69,6 +77,9 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
         OnHpChanged?.Invoke(nowHP, maxHP);
 
         if(nowHP > 0)
+            return dealt;
+
+        if(TryGuardDeath())
             return dealt;
 
         if(TryCheatDeath())
@@ -110,6 +121,10 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
         return nowHP >= maxHP;
     }
     protected abstract void Die();
+    protected virtual bool CanBeKilledBy(DamageInfo info)
+    {
+        return true;
+    }
     public void AddShield(int count)
     {
         if(isDead || count <= 0)
@@ -131,5 +146,32 @@ public abstract class UnitHealth : MonoBehaviour, IHealable
     {
         nowHP = Mathf.Clamp(hp, 1, maxHP);
         OnHpChanged?.Invoke(nowHP, maxHP);
+    }
+    public void AddDeathGuard(IDeathGuard guard)
+    {
+        if (guard == null || deathGuards.Contains(guard))
+            return;
+
+        deathGuards.Add(guard);
+    }
+
+    public void RemoveDeathGuard(IDeathGuard guard)
+    {
+        deathGuards.Remove(guard);
+    }
+
+    private bool TryGuardDeath()
+    {
+        foreach(IDeathGuard guard in deathGuards)
+        {
+            if(!guard.TryPreventDeath(out int reviveHp))
+                continue;
+
+            ReviveTo(reviveHp);
+            OnHealed?.Invoke(nowHP);
+            return true;
+        }
+
+        return false;
     }
 }

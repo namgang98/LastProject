@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
-
-public class AttackEffect : IBattleEffect
+public interface ICriticalEffect
+{
+    bool RollCritical();
+}
+public class AttackEffect : IBattleEffect, ICriticalEffect
 {
     private readonly UnitHealth target;
     private readonly AttackData data;
     private readonly StatusEffects statuses;
     private readonly IAttackRules rules;
     private int hitCount;
+
+    private bool hasRolled;
+    private bool rolledCritical;
 
     public AttackEffect(UnitHealth target, AttackData data, StatusEffects statuses, IAttackRules rules = null)
     {
@@ -20,7 +26,9 @@ public class AttackEffect : IBattleEffect
     {
         hitCount++;
 
-        bool isCritical = IsForcedCrit() || Random.value < data.CritChance;
+        bool isCritical = hasRolled ? rolledCritical : IsForcedCrit(hitCount) || Random.value < data.CritChance;
+        hasRolled = false;
+
         float rate = rules != null ? rules.GetDamageRate(target) : 1f;
         float raw = data.Damage * rate * (isCritical ? data.CritMultiplier : 1f);
         int damage = Mathf.Max(1, Mathf.RoundToInt(raw));
@@ -37,11 +45,18 @@ public class AttackEffect : IBattleEffect
             statuses.Apply(status);
     }
 
-    private bool IsForcedCrit()
+    private bool IsForcedCrit(int count)
     {
-        if(rules == null || rules.CritEvery <= 0)
+        if (rules == null || rules.CritEvery <= 0)
             return false;
 
-        return hitCount % rules.CritEvery == 0;
+        return count % rules.CritEvery == 0;
     }
+    public bool RollCritical()
+    {
+        rolledCritical = IsForcedCrit(hitCount + 1) || Random.value < data.CritChance;
+        hasRolled = true;
+        return rolledCritical;
+    }
+
 }

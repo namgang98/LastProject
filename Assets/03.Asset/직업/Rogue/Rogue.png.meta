@@ -3,6 +3,15 @@ guid: 3b86e4a557c04114b356f790ed9b1f89
 TextureImporter:
   internalIDToNameTable:
   - first:
+      213: 1217861520540083237
+    second: Rogue_Attack2_2
+  - first:
+      213: -7945007024769366828
+    second: Rogue_Attack2_1
+  - first:
+      213: 8795544806451151035
+    second: Rogue_Attack2_0
+  - first:
       213: -5309443303283051917
     second: Rogue_packed_0
   - first:
@@ -1047,6 +1056,72 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Rogue_Attack2_0
+      rect:
+        serializedVersion: 2
+        x: 2268
+        y: 207
+        width: 324
+        height: 207
+      alignment: 9
+      pivot: {x: 0.44, y: 0.0242}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d75a61d487e1455d806216d687d6bc1c
+      internalID: 8795544806451151035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue_Attack2_1
+      rect:
+        serializedVersion: 2
+        x: 2592
+        y: 207
+        width: 324
+        height: 207
+      alignment: 9
+      pivot: {x: 0.44, y: 0.0242}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dcb396d0d7043f39f85885d1f1af6bf
+      internalID: -7945007024769366828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue_Attack2_2
+      rect:
+        serializedVersion: 2
+        x: 2916
+        y: 207
+        width: 324
+        height: 207
+      alignment: 9
+      pivot: {x: 0.44, y: 0.0242}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b600058146544e2a23b8457d9e4d6df
+      internalID: 1217861520540083237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1063,6 +1138,9 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":324.0,"y":207.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.4399999976158142,"y":0.024000000208616258},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      Rogue_Attack2_2: 1217861520540083237
+      Rogue_Attack2_1: -7945007024769366828
+      Rogue_Attack2_0: 8795544806451151035
       Rogue_packed_0: -5309443303283051917
       Rogue_packed_1: -9004421435854739629
       Rogue_packed_10: 8785236358440021610

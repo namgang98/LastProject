@@ -69,7 +69,8 @@ public class BattleController : MonoBehaviour
             {
                 AttackData attack = item is ForgeableInstance forged ? forged.ApplyTo(weapon.Attack) : weapon.Attack;
                 var data = rules.ApplyElement(stats.Apply(weapon.Type, attack));
-                var weaponAction = AddAction(new AttackEffect(monster.Health, data, statuses, rules), data.Cooldown, player.AttackWindup, player.Health, player.PlayAttack);
+                var attackEffect = new AttackEffect(monster.Health, data, statuses, rules);
+                var weaponAction = AddAction(attackEffect, data.Cooldown, player.AttackWindup, player.Health, () => PlayPlayerAttack(attackEffect));
                 weaponAction.Advance(firstStrike);
                 OnActionReady?.Invoke(item, weaponAction);
                 continue;
@@ -171,7 +172,16 @@ public class BattleController : MonoBehaviour
 
         monster.PlayAttack();
     }
+    private void PlayPlayerAttack(ICriticalEffect effect)
+    {
+        if(effect.RollCritical())
+        {
+            player.PlayCriticalAttack();
+            return;
+        }
 
+        player.PlayAttack();
+    }
     private void HandlePlayerHit(DamageInfo info)
     {
         float thorns = runBonus.Sum(BlessingStat.Thorns);

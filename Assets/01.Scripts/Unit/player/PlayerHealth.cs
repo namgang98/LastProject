@@ -6,6 +6,7 @@ public class PlayerHealth : UnitHealth, IRevivable
     [SerializeField] float reviveInvulnerableTime = 1f;
     [SerializeField, Range(0f, 0.9f)] float maxReduction = 0.75f;
     [SerializeField, Range(0f, 0.9f)] float maxDodge = 0.5f;
+    [SerializeField, Range(0f, 1f)] float sturdyRate = 0.5f;
 
     private float damageReduction;
     private float dodgeChance;
@@ -49,7 +50,16 @@ public class PlayerHealth : UnitHealth, IRevivable
         OnRevived?.Invoke();
         return true;
     }
+    protected override bool CanBeKilledBy(DamageInfo info)
+    {
+        if(info.IsTick && (info.Element == DamageElement.Poison || info.Element == DamageElement.Fire))
+            return false;
 
+        if(!info.IsTick && nowHP >= maxHP * sturdyRate)
+            return false;
+
+        return true;
+    }
     protected override void Die()
     {
     }

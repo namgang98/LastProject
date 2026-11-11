@@ -19187,7 +19187,7 @@ MonoBehaviour:
   panel: {fileID: 1161429208}
   continueButton: {fileID: 459294581}
   speedCon: {fileID: 0}
-  titleButton: {fileID: 0}
+  titleButton: {fileID: 2016167865}
 --- !u!1 &643116440
 GameObject:
   m_ObjectHideFlags: 0
@@ -64536,11 +64536,10 @@ GameObject:
   - component: {fileID: 2016167863}
   - component: {fileID: 2016167868}
   - component: {fileID: 2016167867}
-  - component: {fileID: 2016167866}
   - component: {fileID: 2016167865}
   - component: {fileID: 2016167864}
   m_Layer: 5
-  m_Name: ReturnButton
+  m_Name: TitleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64623,20 +64622,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2016167866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016167862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e39c88a2bc43c8945b8ad863b2227410, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopupCloseButton
-  closeButton: {fileID: 2016167865}
-  targetPopup: {fileID: 1161429208}
 --- !u!114 &2016167867
 MonoBehaviour:
   m_ObjectHideFlags: 0
